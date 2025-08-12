@@ -28,6 +28,7 @@
     "@medusajs/dashboard": "2.8.8",
     "@medusajs/framework": "2.8.8",
     "@medusajs/icons": "^2.8.8",
+    "@medusajs/js-sdk": "^2.8.8",
     "@medusajs/medusa": "2.8.8",
     "@medusajs/types": "^2.8.8",
     "@medusajs/ui": "^4.0.18",
