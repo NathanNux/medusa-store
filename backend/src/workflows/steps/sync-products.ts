@@ -8,7 +8,7 @@ export type SyncProductsStepInput = {
 }
 
 export const syncProductsStep = createStep(
-  "sync-products",
+  "algolia-sync-products",
   async ({ products }: SyncProductsStepInput, { container }) => {
     const algoliaModuleService: AlgoliaModuleService = container.resolve(ALGOLIA_MODULE)
     const existingProducts = (await algoliaModuleService.retrieveFromIndex(

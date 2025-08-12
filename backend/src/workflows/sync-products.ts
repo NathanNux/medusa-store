@@ -9,7 +9,7 @@ type SyncProductsWorkflowInput = {
 }
 
 export const syncProductsWorkflow = createWorkflow(
-  "sync-products",
+  "algolia-sync-products",
   ({ filters, limit, offset }: SyncProductsWorkflowInput) => {
     const { data, metadata } = useQueryGraphStep({
       entity: "product",
