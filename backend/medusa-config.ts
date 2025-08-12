@@ -200,8 +200,8 @@ module.exports = defineConfig({
       resolve: '@rokmohar/medusa-plugin-meilisearch',
       options: {
         config: {
-          host: process.env.MEILISEARCH_HOST ?? '',
-          apiKey: process.env.MEILISEARCH_API_KEY ?? '',
+          host: MEILISEARCH_HOST ?? '',
+          apiKey: MEILISEARCH_ADMIN_KEY ?? '',
         },
         settings: {
           // The key is used as the index name in Meilisearch
