@@ -100,3 +100,15 @@ export const WORKER_MODE =
  * Disable Admin
  */
 export const SHOULD_DISABLE_ADMIN = process.env.MEDUSA_DISABLE_ADMIN === 'true'
+
+
+// Additional constants not in the constants file
+export const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '7d';
+export const STORE_FRONTEND_URL = process.env.STORE_FRONTEND_URL || process.env.FRONTEND_URL || 'http://localhost:3000';
+export const SANITY_API_TOKEN = process.env.SANITY_API_TOKEN;
+export const SANITY_PROJECT_ID = process.env.SANITY_PROJECT_ID;
+export const SANITY_STUDIO_URL = process.env.SANITY_STUDIO_URL;
+export const SEGMENT_WRITE_KEY = process.env.SEGMENT_WRITE_KEY;
+export const ALGOLIA_APP_ID = process.env.ALGOLIA_APP_ID;
+export const ALGOLIA_API_KEY = process.env.ALGOLIA_API_KEY;
+export const ALGOLIA_PRODUCT_INDEX_NAME = process.env.ALGOLIA_PRODUCT_INDEX_NAME;
