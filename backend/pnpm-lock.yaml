@@ -92,6 +92,9 @@ importers:
       pg:
         specifier: ^8.13.0
         version: 8.16.3
+      react-router-dom:
+        specifier: ^7.8.0
+        version: 7.8.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       resend:
         specifier: ^4.7.0
         version: 4.8.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -141,6 +144,9 @@ importers:
       '@types/react-dom':
         specifier: ^18.3.5
         version: 18.3.7(@types/react@18.3.23)
+      '@types/react-router-dom':
+        specifier: ^5.3.3
+        version: 5.3.3
       '@types/uuid':
         specifier: ^10.0.0
         version: 10.0.0
@@ -4569,6 +4575,9 @@ packages:
   '@types/graceful-fs@4.1.9':
     resolution: {integrity: sha512-olP3sd1qOEe5dXTSaFvQG+02VdRXcdytWLAZsAq1PecU8uqQAhkrnbli7DagjtXKW/Bl7YJbUsa8MPcuc8LHEQ==}
 
+  '@types/history@4.7.11':
+    resolution: {integrity: sha512-qjDJRrmvBMiTx+jyLxvLfJU7UznFuokDv4f3WRuriHKERccVpFU+8XMQUAbDzoiJCsmexxRExQeMwwCdamSKDA==}
+
   '@types/http-errors@2.0.5':
     resolution: {integrity: sha512-r8Tayk8HJnX0FztbZN7oVqGccWgw98T/0neJphO91KkmOzug1KkofZURD4UaD5uH8AqcFLfdPErnBod0u71/qg==}
 
@@ -4635,6 +4644,12 @@ packages:
     resolution: {integrity: sha512-4fSQ8vWFkg+TGhePfUzVmat3eC14TXYSsiiDSLI0dVLsrm9gZFABjPy/Qu6TKgl1tq1Bu1yDsuQgY3A3DOjCcg==}
     peerDependencies:
       '@types/react': ^19.0.0
+
+  '@types/react-router-dom@5.3.3':
+    resolution: {integrity: sha512-kpqnYK4wcdm5UaWI3fLcELopqLrHgLqNsdpHauzlQktfkHL3npOSwtj1Uz9oKBAzs7lFtVkV8j83voAz2D8fhw==}
+
+  '@types/react-router@5.1.20':
+    resolution: {integrity: sha512-jGjmu/ZqS7FjSH6owMcD5qpq19+1RS9DeVRqfl1FeBMxTDQAGwlMWOcs52NDoXaNKyG3d1cYQFMs9rCrb88o9Q==}
 
   '@types/react@18.3.23':
     resolution: {integrity: sha512-/LDXMQh55EzZQ0uVAZmKKhfENivEvWz6E+EYzh+/MCjMhNsotd+ZHhBGIjFDTi6+fz0OhQQQLbTgdQIxxCsC0w==}
@@ -5307,6 +5322,10 @@ packages:
   cookie@0.7.2:
     resolution: {integrity: sha512-yki5XnKuf750l50uGTllt6kKILY4nQ1eNIQatoXEByZ5dWgnKqbnqmTrBE5B4N7lrMJKQ2ytWMiTO2o0v6Ew/w==}
     engines: {node: '>= 0.6'}
+
+  cookie@1.0.2:
+    resolution: {integrity: sha512-9Kr/j4O16ISv8zBBhJoi4bXOYNTkFLOqSL3UDB0njXxCXNezjeyVrJyGOWtgfs/q2km1gwBcfH8q1yEGoMYunA==}
+    engines: {node: '>=18'}
 
   copy-to-clipboard@3.3.3:
     resolution: {integrity: sha512-2KV8NhB5JqC3ky0r9PMCAZKbUHSwtEo4CwCs0KXgruG43gX5PMqDEBbVU4OUzw2MuAWUfsuFmWvEKG5QRfSnJA==}
@@ -7498,11 +7517,28 @@ packages:
       react: '>=16.8'
       react-dom: '>=16.8'
 
+  react-router-dom@7.8.0:
+    resolution: {integrity: sha512-ntInsnDVnVRdtSu6ODmTQ41cbluak/ENeTif7GBce0L6eztFg6/e1hXAysFQI8X25C8ipKmT9cClbJwxx3Kaqw==}
+    engines: {node: '>=20.0.0'}
+    peerDependencies:
+      react: '>=18'
+      react-dom: '>=18'
+
   react-router@6.20.1:
     resolution: {integrity: sha512-ccvLrB4QeT5DlaxSFFYi/KR8UMQ4fcD8zBcR71Zp1kaYTC5oJKYAp1cbavzGrogwxca+ubjkd7XjFZKBW8CxPA==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       react: '>=16.8'
+
+  react-router@7.8.0:
+    resolution: {integrity: sha512-r15M3+LHKgM4SOapNmsH3smAizWds1vJ0Z9C4mWaKnT9/wD7+d/0jYcj6LmOvonkrO4Rgdyp4KQ/29gWN2i1eg==}
+    engines: {node: '>=20.0.0'}
+    peerDependencies:
+      react: '>=18'
+      react-dom: '>=18'
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
 
   react-stately@3.40.0:
     resolution: {integrity: sha512-Icg2q1pxTskx2dph3cFUu9RUQcInq25WZfUcKroX1Kl4jWxBobnfMvuxvJHHkysJh77IsnLmhF3+8If5oCoMFQ==}
@@ -7701,6 +7737,9 @@ packages:
 
   set-blocking@2.0.0:
     resolution: {integrity: sha512-KiKBS8AnWGEyLzofFfmvKwpdPzqiy16LvQfK3yv/fVH7Bj13/wl3JSR1J+rfgRE9q7xUJK4qvgS8raSOeLUehw==}
+
+  set-cookie-parser@2.7.1:
+    resolution: {integrity: sha512-IOc8uWeOZgnb3ptbCURJWNjWUPcO3ZnTTdzsurqERrP6nPyv+paC55vJM0LpOlT2ne+Ix+9+CRG1MNLlyZ4GjQ==}
 
   set-function-length@1.2.2:
     resolution: {integrity: sha512-pgRc4hJ4/sNjWCSS9AmnS40x3bNMDTknHgL5UaMBTMyJnU90EgWh1Rz+MC9eFu4BuN/UwZjKQuY/1v3rM7HMfg==}
@@ -14219,6 +14258,8 @@ snapshots:
     dependencies:
       '@types/node': 20.19.10
 
+  '@types/history@4.7.11': {}
+
   '@types/http-errors@2.0.5': {}
 
   '@types/istanbul-lib-coverage@2.0.6': {}
@@ -14282,6 +14323,17 @@ snapshots:
   '@types/react-dom@19.0.4(@types/react@19.0.10)':
     dependencies:
       '@types/react': 19.0.10
+
+  '@types/react-router-dom@5.3.3':
+    dependencies:
+      '@types/history': 4.7.11
+      '@types/react': 18.3.23
+      '@types/react-router': 5.1.20
+
+  '@types/react-router@5.1.20':
+    dependencies:
+      '@types/history': 4.7.11
+      '@types/react': 18.3.23
 
   '@types/react@18.3.23':
     dependencies:
@@ -15111,6 +15163,8 @@ snapshots:
   cookie@0.7.1: {}
 
   cookie@0.7.2: {}
+
+  cookie@1.0.2: {}
 
   copy-to-clipboard@3.3.3:
     dependencies:
@@ -17624,10 +17678,24 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
       react-router: 6.20.1(react@18.3.1)
 
+  react-router-dom@7.8.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+    dependencies:
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      react-router: 7.8.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+
   react-router@6.20.1(react@18.3.1):
     dependencies:
       '@remix-run/router': 1.13.1
       react: 18.3.1
+
+  react-router@7.8.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+    dependencies:
+      cookie: 1.0.2
+      react: 18.3.1
+      set-cookie-parser: 2.7.1
+    optionalDependencies:
+      react-dom: 18.3.1(react@18.3.1)
 
   react-stately@3.40.0(react@18.3.1):
     dependencies:
@@ -17893,6 +17961,8 @@ snapshots:
       - supports-color
 
   set-blocking@2.0.0: {}
+
+  set-cookie-parser@2.7.1: {}
 
   set-function-length@1.2.2:
     dependencies:
