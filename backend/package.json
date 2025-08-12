@@ -18,10 +18,7 @@
     "ib": "init-backend",
     "start": "init-backend && cd .medusa/server && medusa start --verbose",
     "dev": "medusa develop",
-    "test:integration:http": "TEST_TYPE=integration:http NODE_OPTIONS=--experimental-vm-modules jest --silent=false --runInBand --forceExit",
-    "test:integration:modules": "TEST_TYPE=integration:modules NODE_OPTIONS=--experimental-vm-modules jest --silent=false --runInBand --forceExit",
-    "test:unit": "TEST_TYPE=unit NODE_OPTIONS=--experimental-vm-modules jest --silent --runInBand --forceExit",
-    "dev:email": "email dev --dir ./src/modules/resend/emails"
+    "email:dev": "email dev --dir=./src/modules/resend/templates --port=3002"
   },
   "dependencies": {
     "@medusajs/admin-sdk": "2.8.8",
@@ -85,7 +82,9 @@
     "vite": "^5.4.11",
     "yalc": "^1.0.0-pre.53"
   },
+  "packageManager": "pnpm@9.10.0",
   "engines": {
-    "node": ">=20"
+    "node": "22.x",
+    "npm": "10.x"
   }
 }
