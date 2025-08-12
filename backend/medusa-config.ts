@@ -30,6 +30,7 @@ import {
   SEGMENT_WRITE_KEY
 } from './src/lib/constants';
 
+
 loadEnv(process.env.NODE_ENV, process.cwd());
 
 // Type definition for Meilisearch plugin options
