@@ -1,91 +1,48 @@
 import { loadEnv, Modules, defineConfig } from '@medusajs/utils';
-import {
-  ADMIN_CORS,
-  AUTH_CORS,
-  BACKEND_URL,
-  COOKIE_SECRET,
-  DATABASE_URL,
-  JWT_SECRET,
-  REDIS_URL,
-  RESEND_API_KEY,
-  RESEND_FROM_EMAIL,
-  SENDGRID_API_KEY,
-  SENDGRID_FROM_EMAIL,
-  SHOULD_DISABLE_ADMIN,
-  STORE_CORS,
-  STRIPE_API_KEY,
-  STRIPE_WEBHOOK_SECRET,
-  WORKER_MODE,
-  MINIO_ENDPOINT,
-  MINIO_ACCESS_KEY,
-  MINIO_SECRET_KEY,
-  MINIO_BUCKET,
-  MEILISEARCH_HOST,
-  MEILISEARCH_ADMIN_KEY,
-  STORE_FRONTEND_URL,
-  JWT_EXPIRES_IN,
-  SANITY_API_TOKEN,
-  SANITY_PROJECT_ID,
-  SANITY_STUDIO_URL,
-  SEGMENT_WRITE_KEY
-} from './src/lib/constants';
+import { MeilisearchPluginOptions } from '@rokmohar/medusa-plugin-meilisearch'
+import { ADMIN_CORS, ALGOLIA_API_KEY, ALGOLIA_APP_ID, ALGOLIA_PRODUCT_INDEX_NAME, AUTH_CORS, BACKEND_URL, COOKIE_SECRET, DATABASE_URL, JWT_EXPIRES_IN, JWT_SECRET, MEILISEARCH_ADMIN_KEY, MEILISEARCH_HOST, MINIO_ACCESS_KEY, MINIO_BUCKET, MINIO_ENDPOINT, MINIO_PORT, MINIO_SECRET_KEY, REDIS_URL, RESEND_API_KEY, RESEND_FROM_EMAIL, SANITY_API_TOKEN, SANITY_PROJECT_ID, SANITY_STUDIO_URL, SEGMENT_WRITE_KEY, SENDGRID_API_KEY, SENDGRID_FROM_EMAIL, SHOULD_DISABLE_ADMIN, STORE_CORS, STORE_FRONTEND_URL, STRIPE_API_KEY, STRIPE_WEBHOOK_SECRET, WORKER_MODE } from './src/lib/constants';
 
 
-loadEnv(process.env.NODE_ENV, process.cwd());
+loadEnv(process.env.NODE_ENV || 'development', process.cwd())
 
-// Type definition for Meilisearch plugin options
-interface MeilisearchPluginOptions {
-  config: {
-    host: string;
-    apiKey: string;
-  };
-  settings: {
-    products: {
-      type: string;
-      enabled: boolean;
-      fields: string[];
-      indexSettings: {
-        searchableAttributes: string[];
-        displayedAttributes: string[];
-        filterableAttributes: string[];
-      };
-      primaryKey: string;
-    };
-  };
-  i18n: {
-    strategy: 'separate-index' | 'field-suffix';
-    languages: string[];
-    defaultLanguage: string;
-    translatableFields: string[];
-  };
-}
-
-const medusaConfig = {
+module.exports = defineConfig({
+  admin: {
+    storefrontUrl: BACKEND_URL,
+    backendUrl: STORE_FRONTEND_URL,
+    disable: SHOULD_DISABLE_ADMIN,
+  },
   projectConfig: {
+    
     databaseUrl: DATABASE_URL,
     databaseLogging: false,
     redisUrl: REDIS_URL,
     workerMode: WORKER_MODE,
     http: {
-      adminCors: ADMIN_CORS,
-      authCors: AUTH_CORS,
-      storeCors: STORE_CORS,
-      jwtSecret: JWT_SECRET,
-      cookieSecret: COOKIE_SECRET,
-      jwtExpiresIn: JWT_EXPIRES_IN,
-    },
-    build: {
-      rollupOptions: {
-        external: ["@medusajs/dashboard"]
-      }
+      storeCors: STORE_CORS!,
+      adminCors: ADMIN_CORS!,
+      authCors: AUTH_CORS!,
+      jwtSecret: JWT_SECRET!,
+      jwtExpiresIn: JWT_EXPIRES_IN!,
+      cookieSecret: COOKIE_SECRET!,
     }
   },
-  admin: {
-    backendUrl: BACKEND_URL,
-    frontendUrl: STORE_FRONTEND_URL,
-    disable: SHOULD_DISABLE_ADMIN,
-  },
   modules: [
+    {
+      resolve: "@medusajs/medusa/payment",
+      options: {
+        providers: [
+          {
+            resolve: "./src/modules/comgate",
+            id: "comgate",
+          },
+        ],
+        merchant: "497113",
+        secret: "VnQ7tNhYZZCQRJeuUb6MDDqfNmnmYzIo",
+        test: true,
+        country: "CZ",
+        curr: "CZK",
+      }
+    },
     {
       key: Modules.FILE,
       resolve: '@medusajs/file',
@@ -96,9 +53,11 @@ const medusaConfig = {
             id: 'minio',
             options: {
               endPoint: MINIO_ENDPOINT,
+              port: Number(MINIO_PORT) || 9000,
               accessKey: MINIO_ACCESS_KEY,
               secretKey: MINIO_SECRET_KEY,
-              bucket: MINIO_BUCKET // Optional, default: medusa-media
+              bucket: MINIO_BUCKET,
+              useSSL: false, // for local dev
             }
           }] : [{
             resolve: '@medusajs/file-local',
@@ -153,38 +112,6 @@ const medusaConfig = {
         ]
       }
     }] : []),
-    ...(STRIPE_API_KEY && STRIPE_WEBHOOK_SECRET ? [{
-      key: Modules.PAYMENT,
-      resolve: '@medusajs/payment',
-      options: {
-        providers: [
-          {
-            resolve: '@medusajs/payment-stripe',
-            id: 'stripe',
-            options: {
-              apiKey: STRIPE_API_KEY,
-              webhookSecret: STRIPE_WEBHOOK_SECRET,
-            },
-          },
-        ],
-      },
-    }] : []),
-    {
-      resolve: "@medusajs/medusa/payment",
-      options: {
-        providers: [
-          {
-            resolve: "./src/modules/comgate",
-            id: "comgate",
-          },
-        ],
-        merchant: "497113",
-        secret: "VnQ7tNhYZZCQRJeuUb6MDDqfNmnmYzIo",
-        test: true,
-        country: "CZ",
-        curr: "CZK",
-      }
-    },
     {
       resolve: "./src/modules/sanity",
       options: {
@@ -253,6 +180,22 @@ const medusaConfig = {
     {
       resolve: "./src/modules/bundled-product",
     },
+    ...(STRIPE_API_KEY && STRIPE_WEBHOOK_SECRET ? [{
+      key: Modules.PAYMENT,
+      resolve: '@medusajs/payment',
+      options: {
+        providers: [
+          {
+            resolve: '@medusajs/payment-stripe',
+            id: 'stripe',
+            options: {
+              apiKey: STRIPE_API_KEY,
+              webhookSecret: STRIPE_WEBHOOK_SECRET,
+            },
+          },
+        ],
+      },
+    }] : [])
   ],
   plugins: [
   ...(MEILISEARCH_HOST && MEILISEARCH_ADMIN_KEY ? [{
@@ -306,7 +249,4 @@ const medusaConfig = {
       } satisfies MeilisearchPluginOptions
     }] : [])
   ]
-};
-
-console.log(JSON.stringify(medusaConfig, null, 2));
-export default defineConfig(medusaConfig);
+})
