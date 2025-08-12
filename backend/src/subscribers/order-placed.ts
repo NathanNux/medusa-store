@@ -1,7 +1,7 @@
 import { SubscriberArgs, type SubscriberConfig } from "@medusajs/framework"
 import { trackOrderPlacedWorkflow } from "../workflows/track-order-placed"
 
-export default async function orderPlacedTrackingHandler({
+export default async function orderPlacedHandler({
   event: { data },
   container,
 }: SubscriberArgs<{ id: string }>) {
