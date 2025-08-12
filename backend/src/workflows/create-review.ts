@@ -16,7 +16,7 @@ type CreateReviewInput = {
   status?: "čeká na schválení" | "schváleno" | "zamítnuto"
 }
 
-export const createReviewWorkflow = createWorkflow(
+export const createReviewWorkflow: any = createWorkflow(
   "create-review",
   (input: CreateReviewInput) => {
     // Check product exists

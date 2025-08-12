@@ -49,7 +49,7 @@ const getCartMetadataStep = createStep(
 )
 
 // Tohle je to správné volání createWorkflow s 3 parametry
-const CartMetadataWorkflow = createWorkflow(
+const CartMetadataWorkflow: any = createWorkflow(
   "product-count",
   (input:CartMetadataInput) => {
     const metadata = getCartMetadataStep(input)

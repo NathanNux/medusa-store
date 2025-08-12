@@ -9,7 +9,7 @@ export type UpdateReviewInput = {
   status: "čeká na schválení" | "schváleno" | "zamítnuto"
 }[]
 
-export const updateReviewWorkflow = createWorkflow(
+export const updateReviewWorkflow: any = createWorkflow(
   "update-review",
   (input: UpdateReviewInput) => {
     const reviews = updateReviewsStep(input)

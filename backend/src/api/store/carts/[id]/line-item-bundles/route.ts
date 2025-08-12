@@ -8,7 +8,7 @@ export const PostCartsBundledLineItemsSchema = z.object({
   items: z.array(z.object({
     item_id: z.string(),
     variant_id: z.string()
-  }))
+  })).min(1)
 })
 
 type PostCartsBundledLineItemsSchema = z.infer<typeof PostCartsBundledLineItemsSchema>
@@ -23,7 +23,7 @@ export async function POST(
         cart_id: req.params.id,
         bundle_id: req.validatedBody.bundle_id,
         quantity: req.validatedBody.quantity || 1,
-        items: req.validatedBody.items
+        items: req.validatedBody.items as { item_id: string; variant_id: string; }[]
       }
     })
 
