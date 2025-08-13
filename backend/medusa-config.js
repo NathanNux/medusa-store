@@ -133,6 +133,14 @@ const medusaConfig = {
         ],
       },
     },
+    {
+      resolve: "./src/modules/algolia",
+      options: {
+        appId: useConstants ? env.getAlgoliaAppId() : env.ALGOLIA_APP_ID,
+        apiKey: useConstants ? env.getAlgoliaApiKey() : env.ALGOLIA_API_KEY,
+        productIndexName: useConstants ? env.getAlgoliaProductIndexName() : env.ALGOLIA_PRODUCT_INDEX_NAME,
+      }
+    },
     ...(REDIS_URL ? [{
       key: Modules.EVENT_BUS,
       resolve: '@medusajs/event-bus-redis',
