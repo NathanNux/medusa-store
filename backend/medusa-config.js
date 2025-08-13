@@ -75,6 +75,64 @@ const medusaConfig = {
         ]
       }
     },
+    {
+      resolve: "@medusajs/medusa/payment",
+      options: {
+        providers: [
+          {
+            resolve: "./src/modules/comgate",
+            id: "comgate",
+          },
+        ],
+        merchant: "497113",
+        secret: "VnQ7tNhYZZCQRJeuUb6MDDqfNmnmYzIo",
+        test: true,
+        country: "CZ",
+        curr: "CZK",
+      }
+    },
+    {
+      resolve: "@medusajs/medusa/fulfillment",
+      options: {
+        providers: [
+          {
+            resolve: "./src/modules/ceskaPostaFulfillment",
+            id: "ceska-posta-fulfillment",
+            options: {
+              // Add any specific options for the fulfillment provider here
+            },
+          },
+          {
+            resolve: "./src/modules/zasilkovnaFulfillment",
+            id: "packeta",
+            options: {
+              // Add any specific options for the fulfillment provider here
+            },
+          },
+        ],
+      },
+    },
+    {
+      resolve: "@medusajs/medusa/fulfillment",
+      options: {
+        providers: [
+          {
+            resolve: "./src/modules/ceskaPostaFulfillment",
+            id: "ceska-posta-fulfillment",
+            options: {
+              // Add any specific options for the fulfillment provider here
+            },
+          },
+          {
+            resolve: "./src/modules/zasilkovnaFulfillment",
+            id: "packeta",
+            options: {
+              // Add any specific options for the fulfillment provider here
+            },
+          },
+        ],
+      },
+    },
     ...(REDIS_URL ? [{
       key: Modules.EVENT_BUS,
       resolve: '@medusajs/event-bus-redis',
