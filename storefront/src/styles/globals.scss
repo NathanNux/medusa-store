@@ -1,6 +1,33 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+// @use './styles.scss' as *;
+// @use './vars.scss' as *;
+
+@use "tailwindcss/base" as *;
+@use "tailwindcss/components" as *;
+@use "tailwindcss/utilities" as *;
+// This file is used to define global styles for the application without using import style.scss from .
+
+// --- Fonts definitions and import into the project ---
+@import url('../../public/fonts/Sentient/css/sentient.css');
+@import url('../../public/fonts/Sansation/css/sansation.css');
+@import url('../../public/fonts/Oooh_Baby/css/ooohBaby.css');
+
+.select {
+  @apply appearance-none border-none bg-no-repeat pr-4;
+  background-image: url('data:image/svg+xml,<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.6666 10L7.99994 13.3333L11.3333 10" stroke="%239CA3AF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M4.6666 5.99993L7.99994 2.6666L11.3333 5.99993" stroke="%239CA3AF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+  background-size: 16px;
+  background-position: right top 50%;
+  background-color: transparent;
+}
+
+
+//WIP redo all of the text fonts to 
+// small text 1.3rem, 
+// subheadings 1.8rem,
+// h4 2.5rem,
+// h3 4rem,
+// h2 6rem,
+// h1 10rem, 
+
 
 @layer utilities {
   /* Chrome, Safari and Opera */
@@ -109,4 +136,14 @@
   .text-3xl-semi {
     @apply text-[32px] leading-[44px] font-semibold;
   }
+}
+
+
+body {
+  font-family: "Sansation-Regular";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height: fit-content;
+  width: 100vw;
+  position: relative;
 }

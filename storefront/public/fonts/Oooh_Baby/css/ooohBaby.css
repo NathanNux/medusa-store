@@ -1,0 +1,11 @@
+/**
+* oooh_Baby Regular 
+*/
+
+@font-face {
+  font-family: 'ooohBaby-Regular';
+  src: url('../fonts/OoohBaby-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}

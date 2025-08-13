@@ -1,0 +1,57 @@
+/**
+* Sansation Font Family
+
+* Sansation Light 
+* Sansation LightItalic 
+* Sansation Regular 
+* Sansation Italic 
+* Sansation Bold 
+* Sansation BoldItalic 
+
+*
+*/
+@font-face {
+  font-family: 'Sansation-Light';
+  src: url('../fonts/Sansation-Light.ttf') format('truetype');
+  font-weight: 200;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Sansation-LightItalic';
+  src: url('../fonts/Sansation-LightItalic.ttf') format('truetype');
+  font-weight: 300;
+  font-display: swap;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Sansation-Regular';
+  src:  url('../fonts/Sansation-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Sansation-Italic';
+  src: url('../fonts/Sansation-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Sansation-Bold';
+  src: url('../fonts/Sansation-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Sansation-BoldItalic';
+  src: url('../fonts/Sansation-BoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  font-display: swap;
+  font-style: italic;
+}

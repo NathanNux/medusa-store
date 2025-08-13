@@ -1,0 +1,45 @@
+// Common styles 
+//=============================================================
+@use '../../src/modules/common/components/RotatingText/style.scss' as wRotatingText;
+@use '../../src/modules/common/components/Buttons/hashtagButton/style.scss' as HashTagButtons;
+@use '../../src/modules/common/components/Buttons/LinkButton/style.scss' as LinkButton;
+@use '../../src/modules/common/components/Buttons/ClickButton/style.scss' as ClickButton;
+@use '../../src/modules/common/components/Buttons/ScrollLink/styles.module.scss' as ScrollLink;
+
+// Anim Styles
+//=============================================================
+@use '../modules/common/components/MouseAnim/style.scss' as MouseAnim;
+
+// Global styles 
+//=============================================================
+@use '../modules/layout/templates/Footer/style.scss' as wFooter;
+@use '../modules/layout/templates/Navbar/style.scss' as wNav;
+
+// Web styles 
+//=============================================================
+@use '../modules/home/components/Hero/AboutHero/style.scss' as wHeroAbout;
+@use '../modules/home/components/Hero/IntroHero/style.scss' as wHeroIntro;
+
+@use '../modules/home/components/E-com/Intro/style.scss' as wEComIntro;
+@use '../modules/home/components/E-com/Entry/style.scss' as wEComEntry;
+@use '../modules/home/components/E-com/Desc/style.scss' as wEComDesc;
+@use '../modules/home/components/E-com/CTA/style.scss' as wEComCTA;
+
+@use '../modules/home/components/Kurzy/style.scss' as wKurzy;
+
+@use '../modules/home/components/Info/Mapa/styles.scss' as wInfoMapa;
+@use '../modules/home/components/Info/Kontakt/styles.scss' as wInfoContact;
+
+// E-Commerce styles
+//=============================================================
+
+// E-Shop styles 
+//=============================================================
+@use '../modules/store/Shop/style.scss' as eShop;
+
+// E-Shop Product styles
+//=============================================================
+@use '../../src/modules/products/ProductPage/details/style.scss' as eProductDetails;
+@use '../../src/modules/products/ProductPage/product/style.scss' as eProductProduct;
+@use '../../src/modules/products/ProductPage/Sold/style.scss' as eProductSold;
+
