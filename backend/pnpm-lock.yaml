@@ -53,6 +53,9 @@ importers:
       awilix:
         specifier: ^8.0.1
         version: 8.0.1
+      axios:
+        specifier: ^1.11.0
+        version: 1.11.0
       medusajs-launch-utils:
         specifier: ^0.0.17
         version: 0.0.17
@@ -68,6 +71,9 @@ importers:
       ulid:
         specifier: ^2.3.0
         version: 2.4.0
+      xml2js:
+        specifier: ^0.6.2
+        version: 0.6.2
     devDependencies:
       '@medusajs/test-utils':
         specifier: 2.8.8
