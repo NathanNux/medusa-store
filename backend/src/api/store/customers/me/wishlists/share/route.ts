@@ -43,8 +43,8 @@ export async function POST(
 
   const wishlistToken: string = jwt.sign(
     { wishlist_id: data[0].id },
-    http.jwtSecret! as string,
-    { expiresIn: "1h" }
+    http.jwtSecret!,
+    { expiresIn: expiresIn }
   )
 
   return res.json({
