@@ -126,8 +126,8 @@ export const SHOULD_DISABLE_ADMIN = process.env.MEDUSA_DISABLE_ADMIN === 'true'
 /**
  * (optional) Comgate payment provider configuration
  */
-export const COMGATE_MERCHANT = process.env.COMGATE_MERCHANT
-export const COMGATE_SECRET = process.env.COMGATE_SECRET
+export const COMGATE_MERCHANT = process.env.COMGATE_MERCHANT || "497113"
+export const COMGATE_SECRET = process.env.COMGATE_SECRET || "VnQ7tNhYZZCQRJeuUb6MDDqfNmnmYzIo"
 export const COMGATE_TEST = process.env.COMGATE_TEST === 'true'
 export const COMGATE_COUNTRY = process.env.COMGATE_COUNTRY || 'CZ'
 export const COMGATE_CURRENCY = process.env.COMGATE_CURRENCY || 'CZK'
