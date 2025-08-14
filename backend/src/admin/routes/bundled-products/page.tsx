@@ -18,20 +18,20 @@ import DeleteBundledProduct from "../../components/delete-bundled-product"
 
 type BundledProduct = {
   id: string
-  title: string
-  product: {
-    id: string
-  }
-  items: {
-    id: string
-    product: {
-      id: string
-      title: string
-    }
-    quantity: number
-  }[]
-  created_at: Date
-  updated_at: Date
+  title?: string | null
+  product?: {
+    id?: string | null
+  } | null
+  items?: Array<{
+    id?: string | null
+    product?: {
+      id?: string | null
+      title?: string | null
+    } | null
+    quantity?: number | null
+  }> | null
+  created_at?: Date
+  updated_at?: Date
 }
 
 const columnHelper = createDataTableColumnHelper<BundledProduct>()
@@ -46,20 +46,40 @@ const columns = [
   columnHelper.accessor("items", {
     header: "Items",
     cell: ({ row }) => {
-      return row.original.items.map((item) => (
-        <div key={item.id}>
-          <Link to={`/products/${item.product.id}`}>
-            {item.product.title}
-          </Link>{" "}
-          x {item.quantity}
-        </div>
-      ))
+      const items = Array.isArray(row.original.items)
+        ? row.original.items.filter(Boolean)
+        : []
+
+      if (!items.length) {
+        return <span>—</span>
+      }
+
+      return items.map((item, idx) => {
+        const pid = item?.product?.id ?? undefined
+        const ptitle = item?.product?.title ?? "(bez názvu)"
+        const qty = typeof item?.quantity === "number" ? item?.quantity : "?"
+
+        return (
+          <div key={item?.id ?? idx}>
+            {pid ? (
+              <Link to={`/products/${pid}`}>{ptitle}</Link>
+            ) : (
+              <span>{ptitle}</span>
+            )}{" "}
+            x {qty}
+          </div>
+        )
+      })
     },
   }),
   columnHelper.accessor("product", {
     header: "Product",
     cell: ({ row }) => {
-      return <Link to={`/products/${row.original.product?.id}`}>View Product</Link>
+      const pid = row.original.product?.id ?? undefined
+      if (!pid) {
+        return <span>—</span>
+      }
+      return <Link to={`/products/${pid}`}>View Product</Link>
     },
   }),
   // new actions column
@@ -69,7 +89,7 @@ const columns = [
     cell: ({ row }) => {
       return (
         <div className="flex gap-2">
-          <UpdateBundledProduct id={row.original.id} initialTitle={row.original.title} />
+          <UpdateBundledProduct id={row.original.id} initialTitle={row.original.title ?? undefined} />
           <DeleteBundledProduct id={row.original.id} />
         </div>
       )
@@ -105,9 +125,16 @@ const BundledProductsPageInner = () => {
     }),
   })
 
+  const safeData = useMemo(() => {
+    const arr = Array.isArray(data?.bundled_products)
+      ? data!.bundled_products
+      : []
+    return arr.filter((bp): bp is BundledProduct => !!bp && typeof (bp as any).id === "string")
+  }, [data])
+
   const table = useDataTable({
     columns,
-    data: data?.bundled_products ?? [],
+    data: safeData,
     isLoading,
     pagination: {
       state: pagination,
