@@ -1,10 +1,10 @@
 // Common styles 
 //=============================================================
-@use '../../src/modules/common/components/RotatingText/style.scss' as wRotatingText;
-@use '../../src/modules/common/components/Buttons/hashtagButton/style.scss' as HashTagButtons;
-@use '../../src/modules/common/components/Buttons/LinkButton/style.scss' as LinkButton;
-@use '../../src/modules/common/components/Buttons/ClickButton/style.scss' as ClickButton;
-@use '../../src/modules/common/components/Buttons/ScrollLink/styles.module.scss' as ScrollLink;
+@use '../modules/common/components/RotatingText/style.scss' as wRotatingText;
+@use '../modules/common/components/Buttons/hashtagButton/style.scss' as HashTagButtons;
+@use '../modules/common/components/Buttons/LinkButton/style.scss' as LinkButton;
+@use '../modules/common/components/Buttons/ClickButton/style.scss' as ClickButton;
+@use '../modules/common/components/Buttons/ScrollLink/styles.module.scss' as ScrollLink;
 
 // Anim Styles
 //=============================================================
@@ -17,18 +17,18 @@
 
 // Web styles 
 //=============================================================
-@use '../modules/home/Hero/AboutHero/style.scss' as wHeroAbout;
-@use '../modules/home/Hero/IntroHero/style.scss' as wHeroIntro;
+@use '../../src/modules/home/Hero/AboutHero/style.scss' as wHeroAbout;
+@use '../../src/modules/home/Hero/IntroHero/style.scss' as wHeroIntro;
 
-@use '../modules/home/E-com/Intro/style.scss' as wEComIntro;
-@use '../modules/home/E-com/Entry/style.scss' as wEComEntry;
-@use '../modules/home/E-com/Desc/style.scss' as wEComDesc;
-@use '../modules/home/E-com/CTA/style.scss' as wEComCTA;
+@use '../../src/modules/home/E-com/Intro/style.scss' as wEComIntro;
+@use '../../src/modules/home/E-com/Entry/style.scss' as wEComEntry;
+@use '../../src/modules/home/E-com/Desc/style.scss' as wEComDesc;
+@use '../../src/modules/home/E-com/CTA/style.scss' as wEComCTA;
 
-@use '../modules/home/Kurzy/style.scss' as wKurzy;
+@use '../../src/modules/home/Kurzy/style.scss' as wKurzy;
 
-@use '../modules/home/Info/Mapa/styles.scss' as wInfoMapa;
-@use '../modules/home/Info/Kontakt/styles.scss' as wInfoContact;
+@use '../../src/modules/home/Info/Mapa/styles.scss' as wInfoMapa;
+@use '../../src/modules/home/Info/Kontakt/styles.scss' as wInfoContact;
 
 // E-Commerce styles
 //=============================================================
@@ -39,7 +39,7 @@
 
 // E-Shop Product styles
 //=============================================================
-@use '../../src/modules/products/ProductPage/details/style.scss' as eProductDetails;
-@use '../../src/modules/products/ProductPage/product/style.scss' as eProductProduct;
-@use '../../src/modules/products/ProductPage/Sold/style.scss' as eProductSold;
+@use '../modules/products/ProductPage/details/style.scss' as eProductDetails;
+@use '../modules/products/ProductPage/product/style.scss' as eProductProduct;
+@use '../modules/products/ProductPage/Sold/style.scss' as eProductSold;
 
