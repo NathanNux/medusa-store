@@ -14,7 +14,7 @@ import {
   DataTablePaginationState
 } from "@medusajs/ui"
 import { useQuery, QueryClient, QueryClientProvider } from "@tanstack/react-query"
-import { Link } from "react-router-dom"
+// Použijeme obyčejný <a> místo Link, abychom nevyžadovali Router kontext
 import { useMemo, useState } from "react"
 import { sdk } from "../../lib/sdk"
 import { HttpTypes } from "@medusajs/framework/types"
@@ -67,9 +67,9 @@ const columns = [
     header: "Product",
     cell: ({ row }) => {
       return (
-        <Link to={`/products/${row.original.product_id}`}>
+        <a href={`/products/${row.original.product_id}`}>
           {row.original.product?.title}
-        </Link>
+        </a>
       )
     }
   }),

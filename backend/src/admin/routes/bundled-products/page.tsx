@@ -9,7 +9,7 @@ import {
   DataTablePaginationState,
 } from "@medusajs/ui"
 import { useQuery, QueryClient, QueryClientProvider } from "@tanstack/react-query"
-import { Link } from "react-router-dom"
+// Použijeme obyčejný <a> místo Link, abychom nevyžadovali Router kontext
 import { useMemo, useState } from "react"
 import { sdk } from "../../lib/sdk"
 import CreateBundledProduct from "../../components/create-bundled-product"
@@ -62,7 +62,7 @@ const columns = [
         return (
           <div key={item?.id ?? idx}>
             {pid ? (
-              <Link to={`/products/${pid}`}>{ptitle}</Link>
+              <a href={`/products/${pid}`}>{ptitle}</a>
             ) : (
               <span>{ptitle}</span>
             )}{" "}
@@ -79,7 +79,7 @@ const columns = [
       if (!pid) {
         return <span>—</span>
       }
-      return <Link to={`/products/${pid}`}>View Product</Link>
+      return <a href={`/products/${pid}`}>View Product</a>
     },
   }),
   // new actions column
