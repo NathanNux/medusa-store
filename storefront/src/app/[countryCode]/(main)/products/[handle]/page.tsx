@@ -137,27 +137,27 @@ export default async function ProductPage(props: Props) {
   console.log("pricedProductID", pricedProduct.id)
 
   return (
-    <ProductTemplate
-      product={pricedProduct}
-      region={region}
-      countryCode={params.countryCode}
-      bundle={bundleProduct?.bundle_product}
-    />
-    // <main>
-    //  <Product
-    //     product={pricedProduct}
-    //     region={region}
-    //     countryCode={params.countryCode}
-    //     categories={productCategories}
-    //   />
-    //   {ENABLE_BUNDLES && bundleProduct && (
-    //     <BundleActions 
-    //       bundle={bundleProduct?.bundle_product}
-    //     />
-    //   )}
-    //   <Details product={pricedProduct} />
-    //   <ProductReviews productId={pricedProduct.id} initialReviews={reviewsData.reviews} initialRating={reviewsData.average_rating} initialCount={reviewsData.count} />
-    //   <SoldProducts />
-    // </main>
+    // <ProductTemplate
+    //   product={pricedProduct}
+    //   region={region}
+    //   countryCode={params.countryCode}
+    //   bundle={bundleProduct?.bundle_product}
+    // />
+    <main>
+     <Product
+        product={pricedProduct}
+        region={region}
+        countryCode={params.countryCode}
+        categories={productCategories}
+      />
+      {ENABLE_BUNDLES && bundleProduct && (
+        <BundleActions 
+          bundle={bundleProduct?.bundle_product}
+        />
+      )}
+      <Details product={pricedProduct} />
+      <ProductReviews productId={pricedProduct.id} initialReviews={reviewsData.reviews} initialRating={reviewsData.average_rating} initialCount={reviewsData.count} />
+      <SoldProducts />
+    </main>
   )
 }
