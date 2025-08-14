@@ -14,6 +14,9 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  sassOptions: {
+    includePaths: [path.join(__dirname, 'src')],
+  },
   webpack: (config) => {
     config.resolve = config.resolve || {}
     config.resolve.alias = {
