@@ -11,6 +11,7 @@ import {
 import { useQuery } from "@tanstack/react-query"
 import { useMemo, useState } from "react"
 import { sdk } from "../../lib/sdk"
+import { Link } from "react-router-dom"
 import CreateBundledProduct from "../../components/create-bundled-product"
 
 type BundledProduct = {
@@ -45,9 +46,9 @@ const columns = [
     cell: ({ row }) => {
       return row.original.items.map((item) => (
         <div key={item.id}>
-          <a href={`/products/${item.product.id}`}>
+          <Link to={`/products/${item.product.id}`}>
             {item.product.title}
-          </a>{" "}
+          </Link>{" "}
           x {item.quantity}
         </div>
       ))
@@ -56,7 +57,7 @@ const columns = [
   columnHelper.accessor("product", {
     header: "Product",
     cell: ({ row }) => {
-      return <a href={`/products/${row.original.product?.id}`}>View Product</a>
+      return <Link to={`/products/${row.original.product?.id}`}>View Product</Link>
     },
   }),
 ]

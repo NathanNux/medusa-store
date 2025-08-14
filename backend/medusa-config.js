@@ -142,45 +142,45 @@ const medusaConfig = {
         ],
       },
     },
-    // {
-    //   resolve: "./src/modules/sanity",
-    //   options: {
-    //     api_token: SANITY_API_TOKEN,
-    //     project_id: SANITY_PROJECT_ID,
-    //     api_version: new Date().toISOString().split("T")[0],
-    //     dataset: "production",
-    //     studio_url: SANITY_STUDIO_URL,
-    //     type_map: {
-    //       product: "product",
-    //     },
-    //   },
-    // },
-    // {
-    //   resolve: "./src/modules/wishlist",
-    // },
-    // {
-    //   resolve: "@medusajs/medusa/analytics",
-    //   options: {
-    //     providers: [
-    //       {
-    //         resolve: "./src/modules/segment",
-    //         id: "segment",
-    //         options: {
-    //           writeKey: SEGMENT_WRITE_KEY,
-    //         },
-    //       },
-    //     ],
-    //   },
-    // }, 
-    // {
-    //   resolve: "./src/modules/product-review",
-    // },
-    // {
-    //   resolve: "./src/modules/restock"
-    // },
-    // {
-    //   resolve: "./src/modules/bundled-product",
-    // },
+    {
+      resolve: "./src/modules/sanity",
+      options: {
+        api_token: SANITY_API_TOKEN,
+        project_id: SANITY_PROJECT_ID,
+        api_version: new Date().toISOString().split("T")[0],
+        dataset: "production",
+        studio_url: SANITY_STUDIO_URL,
+        type_map: {
+          product: "product",
+        },
+      },
+    },
+    {
+      resolve: "./src/modules/wishlist",
+    },
+    {
+      resolve: "@medusajs/medusa/analytics",
+      options: {
+        providers: [
+          {
+            resolve: "./src/modules/segment",
+            id: "segment",
+            options: {
+              writeKey: SEGMENT_WRITE_KEY,
+            },
+          },
+        ],
+      },
+    }, 
+    {
+      resolve: "./src/modules/product-review",
+    },
+    {
+      resolve: "./src/modules/restock"
+    },
+    {
+      resolve: "./src/modules/bundled-product",
+    },
     ...(REDIS_URL ? [{
       key: Modules.EVENT_BUS,
       resolve: '@medusajs/event-bus-redis',
