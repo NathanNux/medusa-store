@@ -29,6 +29,13 @@ import {
   SANITY_STUDIO_URL,
   SEGMENT_WRITE_KEY
 } from 'lib/constants';
+import {
+  COMGATE_MERCHANT,
+  COMGATE_SECRET,
+  COMGATE_TEST,
+  COMGATE_COUNTRY,
+  COMGATE_CURRENCY,
+} from 'lib/constants';
 
 loadEnv(process.env.NODE_ENV, process.cwd());
 
@@ -92,22 +99,7 @@ const medusaConfig = {
         ]
       }
     },
-    {
-      resolve: "@medusajs/medusa/payment",
-      options: {
-        providers: [
-          {
-            resolve: "./src/modules/comgate",
-            id: "comgate",
-          },
-        ],
-        merchant: "497113",
-        secret: "VnQ7tNhYZZCQRJeuUb6MDDqfNmnmYzIo",
-        test: true,
-        country: "CZ",
-        curr: "CZK",
-      }
-    },
+    // Fulfillment providers
     {
       resolve: "@medusajs/medusa/fulfillment",
       options: {
@@ -115,37 +107,12 @@ const medusaConfig = {
           {
             resolve: "./src/modules/ceskaPostaFulfillment",
             id: "ceska-posta-fulfillment",
-            options: {
-              // Add any specific options for the fulfillment provider here
-            },
+            options: {},
           },
           {
             resolve: "./src/modules/zasilkovnaFulfillment",
             id: "packeta",
-            options: {
-              // Add any specific options for the fulfillment provider here
-            },
-          },
-        ],
-      },
-    },
-    {
-      resolve: "@medusajs/medusa/fulfillment",
-      options: {
-        providers: [
-          {
-            resolve: "./src/modules/ceskaPostaFulfillment",
-            id: "ceska-posta-fulfillment",
-            options: {
-              // Add any specific options for the fulfillment provider here
-            },
-          },
-          {
-            resolve: "./src/modules/zasilkovnaFulfillment",
-            id: "packeta",
-            options: {
-              // Add any specific options for the fulfillment provider here
-            },
+            options: {},
           },
         ],
       },
@@ -231,22 +198,36 @@ const medusaConfig = {
         ]
       }
     }] : []),
-    ...(STRIPE_API_KEY && STRIPE_WEBHOOK_SECRET ? [{
+    // Payment providers (single registration with multiple providers)
+    {
       key: Modules.PAYMENT,
       resolve: '@medusajs/payment',
       options: {
         providers: [
-          {
+          // Custom Comgate provider
+          ...(COMGATE_MERCHANT && COMGATE_SECRET ? [{
+            resolve: './src/modules/comgate',
+            id: 'comgate',
+            options: {
+              merchant: COMGATE_MERCHANT,
+              secret: COMGATE_SECRET,
+              test: COMGATE_TEST,
+              country: COMGATE_COUNTRY,
+              curr: COMGATE_CURRENCY,
+            },
+          }] : []),
+          // Stripe provider (conditionally enabled if env present)
+          ...(STRIPE_API_KEY && STRIPE_WEBHOOK_SECRET ? [{
             resolve: '@medusajs/payment-stripe',
             id: 'stripe',
             options: {
               apiKey: STRIPE_API_KEY,
               webhookSecret: STRIPE_WEBHOOK_SECRET,
             },
-          },
+          }] : []),
         ],
       },
-    }] : [])
+    },
   ],
   plugins: [
   ...(MEILISEARCH_HOST && MEILISEARCH_ADMIN_KEY ? [{
@@ -274,5 +255,4 @@ const medusaConfig = {
   ]
 };
 
-console.log(JSON.stringify(medusaConfig, null, 2));
 export default defineConfig(medusaConfig);
