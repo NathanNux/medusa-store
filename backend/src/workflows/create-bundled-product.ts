@@ -20,6 +20,7 @@ export type CreateBundledProductWorkflowInput = {
 export const createBundledProductWorkflow = createWorkflow(
   "create-bundled-product",
   ({ bundle: bundleData }: CreateBundledProductWorkflowInput) => {
+    console.log("Creating bundled product with data:", bundleData)
     const bundle = createBundleStep({
       title: bundleData.title,
     })
