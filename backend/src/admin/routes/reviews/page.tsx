@@ -13,7 +13,7 @@ import {
   toast,
   DataTablePaginationState
 } from "@medusajs/ui"
-import { useQuery, QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { useQuery } from "@tanstack/react-query"
 import { Link } from "react-router-dom"
 import { useMemo, useState } from "react"
 import { sdk } from "../../lib/sdk"
@@ -125,7 +125,7 @@ const useCommands = (refetch: () => void) => {
 
 const limit = 15
 
-const queryClient = new QueryClient()
+//const queryClient = new QueryClient()
 
 const ReviewsPageInner = () => {
   const [pagination, setPagination] = useState<DataTablePaginationState>({
@@ -191,9 +191,7 @@ const ReviewsPageInner = () => {
 }
 
 const ReviewsPage = () => (
-  <QueryClientProvider client={queryClient}>
     <ReviewsPageInner />
-  </QueryClientProvider>
 )
 
 export const config = defineRouteConfig({

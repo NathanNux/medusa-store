@@ -3,13 +3,12 @@ import { AdminProduct, DetailWidgetProps } from "@medusajs/types"
 import { ArrowUpRightOnBox } from "@medusajs/icons";
 import { Button, CodeBlock, Container, StatusBadge, toast } from "@medusajs/ui";
 import { useState } from "react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   useSanityDocument,
   useTriggerSanityProductSync,
 } from "../hooks/sanity";
 
-const queryClientProvider = new QueryClient()
+//const queryClientProvider = new QueryClient()
 
 const ProductWidgetInner = ({ data }: DetailWidgetProps<AdminProduct>) => {
   const { mutateAsync, isPending } = useTriggerSanityProductSync(data.id);
@@ -88,9 +87,7 @@ const ProductWidgetInner = ({ data }: DetailWidgetProps<AdminProduct>) => {
 };
 
 const ProductWidget = (props: DetailWidgetProps<AdminProduct>) => (
-  <QueryClientProvider client={queryClientProvider}>
     <ProductWidgetInner {...props} />
-  </QueryClientProvider>
 )
 
 // The widget's configurations

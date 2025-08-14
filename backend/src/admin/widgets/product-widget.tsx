@@ -1,6 +1,6 @@
 import { defineWidgetConfig } from "@medusajs/admin-sdk"
 import { Container, Heading, Text } from "@medusajs/ui"
-import { useQuery, QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { useQuery } from "@tanstack/react-query"
 import { sdk } from "../lib/sdk"
 import { 
   DetailWidgetProps, 
@@ -11,7 +11,7 @@ type WishlistResponse = {
   count: number
 }
 
-const queryClient = new QueryClient()
+//const queryClient = new QueryClient()
 
 const ProductWidgetInner = ({ data: product }: DetailWidgetProps<AdminProduct>) => {
   const { data, isLoading } = useQuery<WishlistResponse>({
@@ -34,9 +34,7 @@ const ProductWidgetInner = ({ data: product }: DetailWidgetProps<AdminProduct>) 
 }
 
 const ProductWidget = (props: DetailWidgetProps<AdminProduct>) => (
-  <QueryClientProvider client={queryClient}>
     <ProductWidgetInner {...props} />
-  </QueryClientProvider>
 )
 
 
