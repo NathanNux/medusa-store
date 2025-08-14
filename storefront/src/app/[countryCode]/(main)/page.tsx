@@ -8,8 +8,7 @@ import ScrollToTopOnReload from "@lib/helpers/scrollToTopOnReload"
 import ECom from "@modules/home/components/E-com"
 import Kurzy from "@modules/home/components/Kurzy"
 import Info from "@modules/home/components/Info"
-import IntroHero from "@modules/home/components/Hero/IntroHero"
-import AboutHero from "@modules/home/components/Hero/AboutHero"
+import HeroSection from "@modules/home/components/Hero/hero"
 
 
 export const metadata: Metadata = {
@@ -39,8 +38,7 @@ export default async function Home(props: {
   return (
     <>
       <ScrollToTopOnReload />
-      {/* <IntroHero />
-      <AboutHero /> */}
+      <HeroSection />
       <ECom />
       <Kurzy />
       <Info />
