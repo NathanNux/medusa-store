@@ -49,6 +49,7 @@ const medusaConfig = {
   admin: {
     storefrontUrl: STOREFRONT_URL,
     backendUrl: BACKEND_URL,
+    
     disable: SHOULD_DISABLE_ADMIN,
   },
   modules: [
@@ -135,14 +136,6 @@ const medusaConfig = {
         ],
       },
     },
-    {
-      resolve: "./src/modules/algolia",
-      options: {
-        appId: useConstants ? env.getAlgoliaAppId() : env.ALGOLIA_APP_ID,
-        apiKey: useConstants ? env.getAlgoliaApiKey() : env.ALGOLIA_API_KEY,
-        productIndexName: useConstants ? env.getAlgoliaProductIndexName() : env.ALGOLIA_PRODUCT_INDEX_NAME,
-      }
-    },
     ...(REDIS_URL ? [{
       key: Modules.EVENT_BUS,
       resolve: '@medusajs/event-bus-redis',
@@ -174,7 +167,7 @@ const medusaConfig = {
             }
           }] : []),
           ...(RESEND_API_KEY && RESEND_FROM_EMAIL ? [{
-            resolve: './src/modules/email-notifications',
+            resolve: './src/modules/resend',
             id: 'resend',
             options: {
               channels: ['email'],
