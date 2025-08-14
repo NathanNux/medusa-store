@@ -10,9 +10,9 @@ type StoreProductReview = {
   // ...other fields
 }
 
-const queryClientProvider = new QueryClient();
+const queryClientProvider = new QueryClient()
 
-const ProductReviewsWidget = ({ data: product }: DetailWidgetProps<AdminProduct>) => {
+const ProductReviewsWidgetInner = ({ data: product }: DetailWidgetProps<AdminProduct>) => {
   const { data: response, isLoading } = useQuery<{ reviews: StoreProductReview[] }>({
     queryFn: () =>
       sdk.client.fetch(`/admin/reviews`, {
@@ -31,22 +31,26 @@ const ProductReviewsWidget = ({ data: product }: DetailWidgetProps<AdminProduct>
       : null
 
   return (
-    <QueryClientProvider client={queryClientProvider}>
-      <Container className="divide-y p-0">
-        <div className="flex items-center justify-between px-6 py-4">
-          <Heading level="h2">Recenze</Heading>
-        </div>
-        <Text className="px-6 py-4">
-          {isLoading
-            ? "Načítání..."
-            : count > 0
-            ? `Celkový počet recenzí: ${count}\n\nPrůměrné hodnocení: ${average_rating?.toFixed(2) ?? "-"}`
-            : "Žádná data o recenzích nenalezena."}
-        </Text>
-      </Container>
-    </QueryClientProvider>
+    <Container className="divide-y p-0">
+      <div className="flex items-center justify-between px-6 py-4">
+        <Heading level="h2">Recenze</Heading>
+      </div>
+      <Text className="px-6 py-4">
+        {isLoading
+          ? "Načítání..."
+          : count > 0
+          ? `Celkový počet recenzí: ${count}\n\nPrůměrné hodnocení: ${average_rating?.toFixed(2) ?? "-"}`
+          : "Žádná data o recenzích nenalezena."}
+      </Text>
+    </Container>
   )
 }
+
+const ProductReviewsWidget = (props: DetailWidgetProps<AdminProduct>) => (
+  <QueryClientProvider client={queryClientProvider}>
+    <ProductReviewsWidgetInner {...props} />
+  </QueryClientProvider>
+)
 
 export const config = defineWidgetConfig({
   zone: "product.details.before",

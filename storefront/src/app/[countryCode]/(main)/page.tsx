@@ -39,8 +39,8 @@ export default async function Home(props: {
   return (
     <>
       <ScrollToTopOnReload />
-      <IntroHero />
-      <AboutHero />
+      {/* <IntroHero />
+      <AboutHero /> */}
       <ECom />
       <Kurzy />
       <Info />

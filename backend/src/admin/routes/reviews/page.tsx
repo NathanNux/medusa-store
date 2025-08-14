@@ -125,9 +125,9 @@ const useCommands = (refetch: () => void) => {
 
 const limit = 15
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient()
 
-const ReviewsPage = () => {
+const ReviewsPageInner = () => {
   const [pagination, setPagination] = useState<DataTablePaginationState>({
     pageSize: limit,
     pageIndex: 0
@@ -174,23 +174,27 @@ const ReviewsPage = () => {
   })
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <Container>
-        <DataTable instance={table}>
-          <DataTable.Toolbar className="flex flex-col items-start justify-between gap-2 md:flex-row md:items-center">
-            <Heading>
-              Recenze
-            </Heading>
-          </DataTable.Toolbar>
-          <DataTable.Table />
-          <DataTable.Pagination />
-          <DataTable.CommandBar selectedLabel={(count) => `${count} vybráno`} />
-        </DataTable>
-        <Toaster />
-      </Container>
-    </QueryClientProvider>
+    <Container>
+      <DataTable instance={table}>
+        <DataTable.Toolbar className="flex flex-col items-start justify-between gap-2 md:flex-row md:items-center">
+          <Heading>
+            Recenze
+          </Heading>
+        </DataTable.Toolbar>
+        <DataTable.Table />
+        <DataTable.Pagination />
+        <DataTable.CommandBar selectedLabel={(count) => `${count} vybráno`} />
+      </DataTable>
+      <Toaster />
+    </Container>
   )
 }
+
+const ReviewsPage = () => (
+  <QueryClientProvider client={queryClient}>
+    <ReviewsPageInner />
+  </QueryClientProvider>
+)
 
 export const config = defineRouteConfig({
   label: "Rezenze",

@@ -11,31 +11,33 @@ type WishlistResponse = {
   count: number
 }
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient()
 
-const ProductWidget = ({ 
-  data: product,
-}: DetailWidgetProps<AdminProduct>) => {
+const ProductWidgetInner = ({ data: product }: DetailWidgetProps<AdminProduct>) => {
   const { data, isLoading } = useQuery<WishlistResponse>({
     queryFn: () => sdk.client.fetch(`/admin/products/${product.id}/wishlist`),
     queryKey: [["products", product.id, "wishlist"]],
   })
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <Container className="divide-y p-0">
-        <div className="flex items-center justify-between px-6 py-4">
-          <Heading level="h2">Seznam Přání</Heading>
-        </div>
-        <Text className="px-6 py-4">
-          {isLoading ? 
-            "Načítání..." : `Tento produkt je v ${data?.count} seznamech přání.`
-          }
-        </Text>
-      </Container>
-    </QueryClientProvider>
+    <Container className="divide-y p-0">
+      <div className="flex items-center justify-between px-6 py-4">
+        <Heading level="h2">Seznam Přání</Heading>
+      </div>
+      <Text className="px-6 py-4">
+        {isLoading ?
+          "Načítání..." : `Tento produkt je v ${data?.count} seznamech přání.`
+        }
+      </Text>
+    </Container>
   )
 }
+
+const ProductWidget = (props: DetailWidgetProps<AdminProduct>) => (
+  <QueryClientProvider client={queryClient}>
+    <ProductWidgetInner {...props} />
+  </QueryClientProvider>
+)
 
 
 export const config = defineWidgetConfig({

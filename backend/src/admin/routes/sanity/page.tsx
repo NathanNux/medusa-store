@@ -12,9 +12,9 @@ import {
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useSanitySyncs, useTriggerSanitySync } from "../../hooks/sanity";
 
-const queryClientProvider = new QueryClient();
+const queryClientProvider = new QueryClient()
 
-const SanityRoute = () => {
+const SanityRouteInner = () => {
   const { mutateAsync, isPending } = useTriggerSanitySync();
   const { workflow_executions, refetch } = useSanitySyncs();
 
@@ -44,72 +44,76 @@ const SanityRoute = () => {
   };
 
   return (
-    <QueryClientProvider client={queryClientProvider}>
-      <Container className="flex flex-col p-0 overflow-hidden">
-        <div className="p-6 flex justify-between">
-          <Heading className="font-sans font-medium h1-core">
-            Sanity Synchronizace:
-          </Heading>
-          <div className="flex items-center gap-2">
-            <Button
-              variant="secondary"
-              size="small"
-              onClick={handleSync}
-              disabled={isPending}
-            >
-              Synchronizovat
+    <Container className="flex flex-col p-0 overflow-hidden">
+      <div className="p-6 flex justify-between">
+        <Heading className="font-sans font-medium h1-core">
+          Sanity Synchronizace:
+        </Heading>
+        <div className="flex items-center gap-2">
+          <Button
+            variant="secondary"
+            size="small"
+            onClick={handleSync}
+            disabled={isPending}
+          >
+            Synchronizovat
+          </Button>
+          <a href="http://localhost:8000/studio/"
+            target="_blank"
+            rel="noopener noreferrer"
+            // WIP: update latter with the actual URL of the Sanity Studio
+          >
+            <Button variant="secondary" size="small">
+              Otevřít Studio
             </Button>
-            <a href="http://localhost:8000/studio/"
-              target="_blank"
-              rel="noopener noreferrer"
-              // WIP: update latter with the actual URL of the Sanity Studio
-            >
-              <Button variant="secondary" size="small">
-                Otevřít Studio
-              </Button>
-            </a>
-          </div>
+          </a>
         </div>
-        <Table>
-          <Table.Header>
-            <Table.Row>
-              <Table.HeaderCell>Sync ID</Table.HeaderCell>
-              <Table.HeaderCell>Status</Table.HeaderCell>
-              <Table.HeaderCell>Created At</Table.HeaderCell>
-              <Table.HeaderCell>Updated At</Table.HeaderCell>
-            </Table.Row>
-          </Table.Header>
+      </div>
+      <Table>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell>Sync ID</Table.HeaderCell>
+            <Table.HeaderCell>Status</Table.HeaderCell>
+            <Table.HeaderCell>Created At</Table.HeaderCell>
+            <Table.HeaderCell>Updated At</Table.HeaderCell>
+          </Table.Row>
+        </Table.Header>
 
-          <Table.Body>
-            {(workflow_executions || []).map((execution) => (
-              <Table.Row
-                key={execution.id}
-                className="cursor-pointer"
-                onClick={() =>
-                  (window.location.href = `/app/sanity/${execution.id}`)
-                }
-              >
-                <Table.Cell>{execution.id}</Table.Cell>
-                <Table.Cell>
-                  <Badge
-                    rounded="full"
-                    size="2xsmall"
-                    color={getBadgeColor(execution.state)}
-                  >
-                    {execution.state}
-                  </Badge>
-                </Table.Cell>
-                <Table.Cell>{execution.created_at}</Table.Cell>
-                <Table.Cell>{execution.updated_at}</Table.Cell>
-              </Table.Row>
-            ))}
-          </Table.Body>
-        </Table>
-      </Container>
-      <Toaster />
-    </QueryClientProvider>
+        <Table.Body>
+          {(workflow_executions || []).map((execution) => (
+            <Table.Row
+              key={execution.id}
+              className="cursor-pointer"
+              onClick={() =>
+                (window.location.href = `/app/sanity/${execution.id}`)
+              }
+            >
+              <Table.Cell>{execution.id}</Table.Cell>
+              <Table.Cell>
+                <Badge
+                  rounded="full"
+                  size="2xsmall"
+                  color={getBadgeColor(execution.state)}
+                >
+                  {execution.state}
+                </Badge>
+              </Table.Cell>
+              <Table.Cell>{execution.created_at}</Table.Cell>
+              <Table.Cell>{execution.updated_at}</Table.Cell>
+            </Table.Row>
+          ))}
+        </Table.Body>
+      </Table>
+    </Container>
   );
 };
+
+const SanityRoute = () => (
+  <QueryClientProvider client={queryClientProvider}>
+    <SanityRouteInner />
+    <Toaster />
+  </QueryClientProvider>
+)
 
 export const config = defineRouteConfig({
   label: "Sanity CMS",

@@ -64,9 +64,9 @@ const columns = [
 
 const limit = 15
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient()
 
-const BundledProductsPage = () => {
+const BundledProductsPageInner = () => {
   const [pagination, setPagination] = useState<DataTablePaginationState>({
     pageSize: limit,
     pageIndex: 0,
@@ -102,20 +102,24 @@ const BundledProductsPage = () => {
   })
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <Container className="divide-y p-0">
-        <DataTable instance={table}>
-          <DataTable.Toolbar className="flex items-start justify-between gap-2 md:flex-row md:items-center">
-            <Heading>Balíčky Produktů</Heading>
-            <CreateBundledProduct />
-          </DataTable.Toolbar>
-          <DataTable.Table />
-          <DataTable.Pagination />
-        </DataTable>
-      </Container>
-    </QueryClientProvider>
+    <Container className="divide-y p-0">
+      <DataTable instance={table}>
+        <DataTable.Toolbar className="flex items-start justify-between gap-2 md:flex-row md:items-center">
+          <Heading>Balíčky Produktů</Heading>
+          <CreateBundledProduct />
+        </DataTable.Toolbar>
+        <DataTable.Table />
+        <DataTable.Pagination />
+      </DataTable>
+    </Container>
   )
 }
+
+const BundledProductsPage = () => (
+  <QueryClientProvider client={queryClient}>
+    <BundledProductsPageInner />
+  </QueryClientProvider>
+)
 
 export const config = defineRouteConfig({
   label: "Balíčky Produktů",
