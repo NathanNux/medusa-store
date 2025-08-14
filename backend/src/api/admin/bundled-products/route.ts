@@ -26,6 +26,7 @@ export async function POST(
   req: AuthenticatedMedusaRequest<PostBundledProductsSchema>,
   res: MedusaResponse
 ) {
+  console.log("Creating bundled product with data (validatedBody):", req.validatedBody)
   const { result: bundledProduct } = await createBundledProductWorkflow(req.scope)
     .run({
       input: {
