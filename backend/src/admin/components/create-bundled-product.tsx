@@ -8,9 +8,11 @@ import {
   toast
 } from "@medusajs/ui"
 import { useState, useRef, useCallback, useMemo } from "react"
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
+import { useQuery, useMutation, useQueryClient, QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { sdk } from "../lib/sdk"
 import { HttpTypes } from "@medusajs/framework/types"
+
+const queryClientProvider = new QueryClient();
 
 const CreateBundledProduct = () => {
   const [open, setOpen] = useState(false)
@@ -105,70 +107,72 @@ const CreateBundledProduct = () => {
   }
 
   return (
-    <FocusModal open={open} onOpenChange={setOpen}>
-      <FocusModal.Trigger asChild>
-        <Button variant="primary">Create</Button>
-      </FocusModal.Trigger>
-      <FocusModal.Content>
-        <FocusModal.Header>
-          <div className="flex items-center justify-end gap-x-2">
-            <Heading level={"h1"}>Create Bundled Product</Heading>
-          </div>
-        </FocusModal.Header>
-        <FocusModal.Body>
-          <div className="flex flex-1 flex-col items-center overflow-y-auto">
-            <div className="mx-auto flex w-full max-w-[720px] flex-col gap-y-8 px-2 py-16">
-              <div>
-                <Label>Bundle Title</Label>
-                <Input
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                />
-              </div>
-              <div>
-                <Heading level={"h2"}>Bundle Items</Heading>
-                {items.map((item, index) => (
-                  <BundledProductItem
-                    key={index}
-                    item={item}
-                    index={index}
-                    setItems={setItems}
-                    products={products}
-                    fetchMoreProducts={fetchMoreProducts}
-                    hasNextPage={hasNextPage}
+    <QueryClientProvider client={queryClientProvider}>
+      <FocusModal open={open} onOpenChange={setOpen}>
+        <FocusModal.Trigger asChild>
+          <Button variant="primary">Create</Button>
+        </FocusModal.Trigger>
+        <FocusModal.Content>
+          <FocusModal.Header>
+            <div className="flex items-center justify-end gap-x-2">
+              <Heading level={"h1"}>Create Bundled Product</Heading>
+            </div>
+          </FocusModal.Header>
+          <FocusModal.Body>
+            <div className="flex flex-1 flex-col items-center overflow-y-auto">
+              <div className="mx-auto flex w-full max-w-[720px] flex-col gap-y-8 px-2 py-16">
+                <div>
+                  <Label>Bundle Title</Label>
+                  <Input
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
                   />
-                ))}
-                <Button
-                  variant="secondary"
-                  onClick={() =>
-                    setItems([
-                      ...items,
-                      { product_id: undefined, quantity: 1 },
-                    ])
-                  }
-                >
-                  Add Item
-                </Button>
+                </div>
+                <div>
+                  <Heading level={"h2"}>Bundle Items</Heading>
+                  {items.map((item, index) => (
+                    <BundledProductItem
+                      key={index}
+                      item={item}
+                      index={index}
+                      setItems={setItems}
+                      products={products}
+                      fetchMoreProducts={fetchMoreProducts}
+                      hasNextPage={hasNextPage}
+                    />
+                  ))}
+                  <Button
+                    variant="secondary"
+                    onClick={() =>
+                      setItems([
+                        ...items,
+                        { product_id: undefined, quantity: 1 },
+                      ])
+                    }
+                  >
+                    Add Item
+                  </Button>
+                </div>
               </div>
             </div>
-          </div>
-        </FocusModal.Body>
-        <FocusModal.Footer>
-          <div className="flex items-center justify-end gap-x-2">
-            <Button variant="secondary" onClick={() => setOpen(false)}>
-              Cancel
-            </Button>
-            <Button
-              variant="primary"
-              onClick={handleCreate}
-              isLoading={isCreating}
-            >
-              Create Bundle
-            </Button>
-          </div>
-        </FocusModal.Footer>
-      </FocusModal.Content>
-    </FocusModal>
+          </FocusModal.Body>
+          <FocusModal.Footer>
+            <div className="flex items-center justify-end gap-x-2">
+              <Button variant="secondary" onClick={() => setOpen(false)}>
+                Cancel
+              </Button>
+              <Button
+                variant="primary"
+                onClick={handleCreate}
+                isLoading={isCreating}
+              >
+                Create Bundle
+              </Button>
+            </div>
+          </FocusModal.Footer>
+        </FocusModal.Content>
+      </FocusModal>
+    </QueryClientProvider>
   )
 }
 

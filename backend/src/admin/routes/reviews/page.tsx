@@ -13,11 +13,11 @@ import {
   toast,
   DataTablePaginationState
 } from "@medusajs/ui"
-import { useQuery } from "@tanstack/react-query"
+import { useQuery, QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { Link } from "react-router-dom"
 import { useMemo, useState } from "react"
 import { sdk } from "../../lib/sdk"
 import { HttpTypes } from "@medusajs/framework/types"
-import { Link } from "react-router-dom"
 
 type Review = {
   id: string
@@ -67,9 +67,7 @@ const columns = [
     header: "Product",
     cell: ({ row }) => {
       return (
-        <Link
-          to={`/products/${row.original.product_id}`}
-        >
+        <Link to={`/products/${row.original.product_id}`}>
           {row.original.product?.title}
         </Link>
       )
@@ -127,6 +125,8 @@ const useCommands = (refetch: () => void) => {
 
 const limit = 15
 
+const queryClient = new QueryClient();
+
 const ReviewsPage = () => {
   const [pagination, setPagination] = useState<DataTablePaginationState>({
     pageSize: limit,
@@ -174,19 +174,21 @@ const ReviewsPage = () => {
   })
 
   return (
-    <Container>
-      <DataTable instance={table}>
-        <DataTable.Toolbar className="flex flex-col items-start justify-between gap-2 md:flex-row md:items-center">
-          <Heading>
-            Recenze
-          </Heading>
-        </DataTable.Toolbar>
-        <DataTable.Table />
-        <DataTable.Pagination />
-        <DataTable.CommandBar selectedLabel={(count) => `${count} vybráno`} />
-      </DataTable>
-      <Toaster />
-    </Container>
+    <QueryClientProvider client={queryClient}>
+      <Container>
+        <DataTable instance={table}>
+          <DataTable.Toolbar className="flex flex-col items-start justify-between gap-2 md:flex-row md:items-center">
+            <Heading>
+              Recenze
+            </Heading>
+          </DataTable.Toolbar>
+          <DataTable.Table />
+          <DataTable.Pagination />
+          <DataTable.CommandBar selectedLabel={(count) => `${count} vybráno`} />
+        </DataTable>
+        <Toaster />
+      </Container>
+    </QueryClientProvider>
   )
 }
 

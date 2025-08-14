@@ -8,10 +8,10 @@ import {
   createDataTableColumnHelper,
   DataTablePaginationState,
 } from "@medusajs/ui"
-import { useQuery } from "@tanstack/react-query"
+import { useQuery, QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { Link } from "react-router-dom"
 import { useMemo, useState } from "react"
 import { sdk } from "../../lib/sdk"
-import { Link } from "react-router-dom"
 import CreateBundledProduct from "../../components/create-bundled-product"
 
 type BundledProduct = {
@@ -64,6 +64,8 @@ const columns = [
 
 const limit = 15
 
+const queryClient = new QueryClient();
+
 const BundledProductsPage = () => {
   const [pagination, setPagination] = useState<DataTablePaginationState>({
     pageSize: limit,
@@ -100,16 +102,18 @@ const BundledProductsPage = () => {
   })
 
   return (
-    <Container className="divide-y p-0">
-      <DataTable instance={table}>
-        <DataTable.Toolbar className="flex items-start justify-between gap-2 md:flex-row md:items-center">
-          <Heading>Balíčky Produktů</Heading>
-          <CreateBundledProduct />
-        </DataTable.Toolbar>
-        <DataTable.Table />
-        <DataTable.Pagination />
-      </DataTable>
-    </Container>
+    <QueryClientProvider client={queryClient}>
+      <Container className="divide-y p-0">
+        <DataTable instance={table}>
+          <DataTable.Toolbar className="flex items-start justify-between gap-2 md:flex-row md:items-center">
+            <Heading>Balíčky Produktů</Heading>
+            <CreateBundledProduct />
+          </DataTable.Toolbar>
+          <DataTable.Table />
+          <DataTable.Pagination />
+        </DataTable>
+      </Container>
+    </QueryClientProvider>
   )
 }
 
