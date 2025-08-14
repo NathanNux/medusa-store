@@ -89,6 +89,18 @@ export const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY;
 export const SENDGRID_FROM_EMAIL = process.env.SENDGRID_FROM_EMAIL || process.env.SENDGRID_FROM;
 
 /**
+ * (optional) Sanity API Key - for CMS tool for the project
+ */
+export const SANITY_API_TOKEN = process.env.SANITY_API_TOKEN;
+export const SANITY_PROJECT_ID = process.env.SANITY_PROJECT_ID;
+export const SANITY_STUDIO_URL = process.env.SANITY_STUDIO_URL;
+
+/**
+ * (optional) Segment Writing API Key - For tracking user events and important data for the commerce
+ */
+export const SEGMENT_WRITE_KEY = process.env.SEGMENT_WRITE_KEY;
+
+/**
  * (optional) Stripe API key and webhook secret
  */
 export const STRIPE_API_KEY = process.env.STRIPE_API_KEY;
