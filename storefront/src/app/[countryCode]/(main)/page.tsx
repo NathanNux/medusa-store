@@ -5,10 +5,10 @@ import { Metadata } from "next"
 import { listCollections } from "@lib/data/collections"
 import { getRegion } from "@lib/data/regions"
 import ScrollToTopOnReload from "@lib/helpers/scrollToTopOnReload"
-import ECom from "../../../modules/home/components/Hero/index"
-import Kurzy from "../../../modules/home/components/Kurzy/index"
-import Info from "../../../modules/home/components/Info/index"
-import HeroSection from "../../../modules/home/components/Hero/index"
+import ECom from "@modules/home/components/E-com"
+import Kurzy from "@modules/home/components/Kurzy"
+import Info from "@modules/home/components/Info"
+import HeroSection from "@modules/home/components/Hero"
 
 
 export const metadata: Metadata = {
