@@ -17,7 +17,6 @@ import { useQuery } from "@tanstack/react-query"
 import { useMemo, useState } from "react"
 import { sdk } from "../../lib/sdk"
 import { HttpTypes } from "@medusajs/framework/types"
-import { Link } from "react-router-dom"
 
 type Review = {
   id: string
@@ -67,11 +66,11 @@ const columns = [
     header: "Product",
     cell: ({ row }) => {
       return (
-        <Link
-          to={`/products/${row.original.product_id}`}
+        <a
+          href={`/products/${row.original.product_id}`}
         >
           {row.original.product?.title}
-        </Link>
+        </a>
       )
     }
   }),
