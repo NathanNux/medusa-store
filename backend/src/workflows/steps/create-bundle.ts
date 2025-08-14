@@ -9,6 +9,7 @@ type CreateBundleStepInput = {
 export const createBundleStep = createStep(
   "create-bundle",
   async ({ title }: CreateBundleStepInput, { container }) => {
+    console.log("Creating bundle step with title:", title)
     const bundledProductModuleService: BundledProductModuleService =
       container.resolve(BUNDLED_PRODUCT_MODULE)
 
