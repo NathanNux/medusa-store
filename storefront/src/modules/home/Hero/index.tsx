@@ -1,5 +1,5 @@
-import AboutHero from "./AboutHero/about-hero";
-import IntroHero from "./IntroHero/intro-hero";
+import AboutHero from "./AboutHero";
+import IntroHero from "./IntroHero";
 
 
 
