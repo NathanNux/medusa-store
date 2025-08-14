@@ -1,17 +1,17 @@
-import { useFormState } from "react-dom"
-
+import { login } from "@lib/data/customer"
 import { LOGIN_VIEW } from "@modules/account/templates/login-template"
-import Input from "@modules/common/components/input"
 import ErrorMessage from "@modules/checkout/components/error-message"
 import { SubmitButton } from "@modules/checkout/components/submit-button"
-import { login } from "@lib/data/customer"
+import Input from "@modules/common/components/input"
+import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import { useActionState } from "react"
 
 type Props = {
   setCurrentView: (view: LOGIN_VIEW) => void
 }
 
 const Login = ({ setCurrentView }: Props) => {
-  const [message, formAction] = useFormState(login, null)
+  const [message, formAction] = useActionState(login, null)
 
   return (
     <div
@@ -58,6 +58,13 @@ const Login = ({ setCurrentView }: Props) => {
         </button>
         .
       </span>
+      <div className="text-center text-ui-fg-base text-small-regular mt-2">
+        <button>
+          <LocalizedClientLink href="/forgot-password" className="underline">
+            Forgot your password?
+          </LocalizedClientLink>
+        </button>
+      </div>
     </div>
   )
 }

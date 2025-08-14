@@ -8,7 +8,7 @@ import ProfilePassword from "@modules/account/components/profile-password"
 
 import { notFound } from "next/navigation"
 import { listRegions } from "@lib/data/regions"
-import { getCustomer } from "@lib/data/customer"
+import { retrieveCustomer } from "@lib/data/customer"
 
 export const metadata: Metadata = {
   title: "Profile",
@@ -16,12 +16,14 @@ export const metadata: Metadata = {
 }
 
 export default async function Profile() {
-  const customer = await getCustomer()
+  const customer = await retrieveCustomer()
   const regions = await listRegions()
 
   if (!customer || !regions) {
     notFound()
   }
+
+  // WIP: add password change functionality to the profile page
 
   return (
     <div className="w-full" data-testid="profile-page-wrapper">
@@ -40,8 +42,8 @@ export default async function Profile() {
         <Divider />
         <ProfilePhone customer={customer} />
         <Divider />
-        <ProfilePassword customer={customer} />
-        <Divider />
+        {/* <ProfilePassword customer={customer} />
+        <Divider /> */}
         <ProfileBillingAddress customer={customer} regions={regions} />
       </div>
     </div>
@@ -51,3 +53,4 @@ export default async function Profile() {
 const Divider = () => {
   return <div className="w-full h-px bg-gray-200" />
 }
+;``

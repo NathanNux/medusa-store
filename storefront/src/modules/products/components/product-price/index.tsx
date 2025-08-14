@@ -6,9 +6,11 @@ import { HttpTypes } from "@medusajs/types"
 export default function ProductPrice({
   product,
   variant,
+  className,
 }: {
   product: HttpTypes.StoreProduct
   variant?: HttpTypes.StoreProductVariant
+  className?: string
 }) {
   const { cheapestPrice, variantPrice } = getProductPrice({
     product,
@@ -21,12 +23,16 @@ export default function ProductPrice({
     return <div className="block w-32 h-9 bg-gray-100 animate-pulse" />
   }
 
+
+  // WIP add this to the custom product price component
+  // if the price is not set, return a placeholder
+
   return (
     <div className="flex flex-col text-ui-fg-base">
       <span
         className={clx("text-xl-semi", {
           "text-ui-fg-interactive": selectedPrice.price_type === "sale",
-        })}
+        }, className)}
       >
         {!variant && "From "}
         <span

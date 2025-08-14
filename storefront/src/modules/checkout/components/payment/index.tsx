@@ -1,19 +1,17 @@
 "use client"
 
-import { useCallback, useContext, useEffect, useMemo, useState } from "react"
-import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { RadioGroup } from "@headlessui/react"
-import ErrorMessage from "@modules/checkout/components/error-message"
-import { CheckCircleSolid, CreditCard } from "@medusajs/icons"
-import { Button, Container, Heading, Text, Tooltip, clx } from "@medusajs/ui"
-import { CardElement } from "@stripe/react-stripe-js"
-import { StripeCardElementOptions } from "@stripe/stripe-js"
-
-import Divider from "@modules/common/components/divider"
-import PaymentContainer from "@modules/checkout/components/payment-container"
-import { isStripe as isStripeFunc, paymentInfoMap } from "@lib/constants"
-import { StripeContext } from "@modules/checkout/components/payment-wrapper"
+import { isStripe as isStripeFunc, paymentInfoMap, isComgate } from "@lib/constants"
 import { initiatePaymentSession } from "@lib/data/cart"
+import { CheckCircleSolid, CreditCard } from "@medusajs/icons"
+import { Button, Container, Heading, Text, clx } from "@medusajs/ui"
+import ErrorMessage from "@modules/checkout/components/error-message"
+import PaymentContainer, {
+  StripeCardContainer,
+} from "@modules/checkout/components/payment-container"
+import Divider from "@modules/common/components/divider"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import { useCallback, useEffect, useState } from "react"
 
 const Payment = ({
   cart,
@@ -40,31 +38,35 @@ const Payment = ({
 
   const isOpen = searchParams.get("step") === "payment"
 
-  const isStripe = isStripeFunc(activeSession?.provider_id)
-  const stripeReady = useContext(StripeContext)
+  const isStripe = isStripeFunc(selectedPaymentMethod)
+  const [comgateUrl, setComgateUrl] = useState<string>("")
+
+  console.log("availablePaymentMethods:", availablePaymentMethods)
+  console.log("CartID:", cart?.region?.id)
+  console.log("CartObject:", cart)
+
+  const setPaymentMethod = async (method: string) => {
+    setError(null)
+    setSelectedPaymentMethod(method)
+    if (isStripeFunc(method)) {
+      const response = await initiatePaymentSession(cart, {
+        provider_id: method,
+      })
+      console.log("response:", response)
+    }
+    else if (isComgate(method)) {
+      const response = await initiatePaymentSession(cart, {
+        provider_id: method,
+      })
+      console.log("Comgate response:", response)
+    }
+  }
 
   const paidByGiftcard =
     cart?.gift_cards && cart?.gift_cards?.length > 0 && cart?.total === 0
 
   const paymentReady =
     (activeSession && cart?.shipping_methods.length !== 0) || paidByGiftcard
-
-  const useOptions: StripeCardElementOptions = useMemo(() => {
-    return {
-      style: {
-        base: {
-          fontFamily: "Inter, sans-serif",
-          color: "#424270",
-          "::placeholder": {
-            color: "rgb(107 114 128)",
-          },
-        },
-      },
-      classes: {
-        base: "pt-3 pb-1 block w-full h-11 px-4 mt-0 bg-ui-bg-field border rounded-md appearance-none focus:outline-none focus:ring-0 focus:shadow-borders-interactive-with-active border-ui-border-base hover:bg-ui-bg-field-hover transition-all duration-300 ease-in-out",
-      },
-    }
-  }, [])
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
@@ -88,7 +90,11 @@ const Payment = ({
       const shouldInputCard =
         isStripeFunc(selectedPaymentMethod) && !activeSession
 
-      if (!activeSession) {
+      const checkActiveSession =
+        activeSession?.provider_id === selectedPaymentMethod
+
+
+      if (!checkActiveSession) {
         await initiatePaymentSession(cart, {
           provider_id: selectedPaymentMethod,
         })
@@ -112,6 +118,40 @@ const Payment = ({
   useEffect(() => {
     setError(null)
   }, [isOpen])
+
+  useEffect(() => {
+  const listener = (event: MessageEvent) => {
+    if (!event?.data) return;
+
+    const { scope, action, value } = event.data;
+
+    if (
+      scope === "comgate-to-eshop" &&
+      action === "status" &&
+      value?.status
+    ) {
+      const { status, id, refId } = value;
+
+      if (["PAID", "AUTHORIZED"].includes(status)) {
+        // Např. rovnou zavoláš placeOrder()
+        handleSubmit()
+          .then(() => {
+            console.log("Order placed after Comgate payment")
+            // třeba redirect na thank you page
+          })
+          .catch(console.error);
+      } else if (status === "CANCELLED") {
+        // zobrazíš chybovou hlášku nebo zavřeš iframe
+      }
+    }
+  }
+
+  window.addEventListener("message", listener)
+  return () => window.removeEventListener("message", listener)
+}, [])
+
+
+
 
   return (
     <div className="bg-white">
@@ -147,42 +187,29 @@ const Payment = ({
             <>
               <RadioGroup
                 value={selectedPaymentMethod}
-                onChange={(value: string) => setSelectedPaymentMethod(value)}
+                onChange={(value: string) => setPaymentMethod(value)}
               >
-                {availablePaymentMethods
-                  .sort((a, b) => {
-                    return a.provider_id > b.provider_id ? 1 : -1
-                  })
-                  .map((paymentMethod) => {
-                    return (
+                {availablePaymentMethods.map((paymentMethod) => (
+                  <div key={paymentMethod.id}>
+                    {isStripeFunc(paymentMethod.id) ? (
+                      <StripeCardContainer
+                        paymentProviderId={paymentMethod.id}
+                        selectedPaymentOptionId={selectedPaymentMethod}
+                        paymentInfoMap={paymentInfoMap}
+                        setCardBrand={setCardBrand}
+                        setError={setError}
+                        setCardComplete={setCardComplete}
+                      />
+                    ) : (
                       <PaymentContainer
                         paymentInfoMap={paymentInfoMap}
                         paymentProviderId={paymentMethod.id}
-                        key={paymentMethod.id}
                         selectedPaymentOptionId={selectedPaymentMethod}
                       />
-                    )
-                  })}
+                    )}
+                  </div>
+                ))}
               </RadioGroup>
-              {isStripe && stripeReady && (
-                <div className="mt-5 transition-all duration-150 ease-in-out">
-                  <Text className="txt-medium-plus text-ui-fg-base mb-1">
-                    Enter your card details:
-                  </Text>
-
-                  <CardElement
-                    options={useOptions as StripeCardElementOptions}
-                    onChange={(e) => {
-                      setCardBrand(
-                        e.brand &&
-                          e.brand.charAt(0).toUpperCase() + e.brand.slice(1)
-                      )
-                      setError(e.error?.message || null)
-                      setCardComplete(e.complete)
-                    }}
-                  />
-                </div>
-              )}
             </>
           )}
 
@@ -233,8 +260,8 @@ const Payment = ({
                   className="txt-medium text-ui-fg-subtle"
                   data-testid="payment-method-summary"
                 >
-                  {paymentInfoMap[selectedPaymentMethod]?.title ||
-                    selectedPaymentMethod}
+                  {paymentInfoMap[activeSession?.provider_id]?.title ||
+                    activeSession?.provider_id}
                 </Text>
               </div>
               <div className="flex flex-col w-1/3">
@@ -274,6 +301,17 @@ const Payment = ({
         </div>
       </div>
       <Divider className="mt-8" />
+
+    {comgateUrl && (
+      <div id="comgate-container">
+    <iframe
+      id="comgate-iframe"
+      src={comgateUrl}
+      allow="payment"
+      frameBorder="0"
+    />
+  </div>
+    )}
     </div>
   )
 }

@@ -1,0 +1,245 @@
+@use "../../../../styles/mixins.scss" as *;
+
+.details{
+    width: 100vw;
+    min-height: 50vh;
+    padding: 10vh 0vw 5vh 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    background-color: var(--OliveBg);
+    gap: 1.5vh;
+
+    @include respond-to-h(xs){
+        height: 80vh;
+    }
+    @include respond-to-h(xxs){
+        height: 80vh;
+    }
+    @include respond-to-v(lg){
+        height: 50vh;
+    }
+    @include respond-to-v(md){
+        height: 60vh;
+    }
+
+    .details__title{
+        width: 100%;
+        height: 7.5vh;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 0 2.5vw;
+
+        @include respond-to-h(mdt){
+            height: 5vh;
+        }
+
+        @include respond-to-h(xs){
+            height: 15vh;
+        }
+        @include respond-to-h(xxs){
+            height: 15vh;
+        }
+
+        h2{
+            font-family: "OoohBaby-Regular";
+            position: relative;
+            z-index: 1;
+            font-size: 5rem;
+            color: var(--Wtext);
+            font-weight: 300;
+            margin: 0;
+
+            @include respond-to-h(md){
+                font-size: 4rem;
+            }
+             @include respond-to-h(mdt){
+                font-size: 4rem;
+            }
+            @include respond-to-h(sm){
+                font-size: 3.5rem;
+            }
+            @include respond-to-h(xs){
+                font-size: 3rem;
+            }
+            @include respond-to-h(xxs){
+                font-size: 3rem;
+            }
+            @include respond-to-v(md){
+                font-size: 4rem;
+            }
+            @include respond-to-v(s){
+                font-size: 4rem;
+            }
+             @include respond-to-v(sm){
+                font-size: 4rem;
+            }
+             @include respond-to-v(xs){
+                font-size: 3rem;
+            }
+        }
+    }
+
+    .details__content{
+        width: 100%;
+        height: 60vh;
+        position: relative;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        flex-direction: column;
+        @include respond-to-h(sm){
+            height: 80vh;
+        }
+
+        .details__content__list{
+            width: 100%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            flex-direction: column;
+
+            .details__content__list__item{
+                width: 60%;
+                height: fit-content;
+                position: relative;
+                display: flex;
+                align-items: space-between;
+                justify-content: center;
+                flex-direction: column;
+                border-top: 1px solid var(--WhiteBg);
+                padding: 0 2.5vw;
+                @include respond-to-v(s){
+                    width: 90%;
+                }
+                @include respond-to-v(sm){
+                    width: 90%;
+                }
+                @include respond-to-v(xs){
+                    width: 90%;
+                }
+
+                .details__content__list__item__main{
+                    width: 100%;
+                    height: fit-content;
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    flex-direction: row;
+                    padding: 1vh 0;
+
+                    h3{
+                        font-family: "Sansation-Light";
+                        position: relative;
+                        z-index: 1;
+                        font-size: 1.5rem;
+                        color: var(--Wtext);
+                        font-weight: 300;
+                        margin: 0;
+                        @include respond-to-h(sm){
+                            font-size: 1.3rem;
+                        }
+                        @include respond-to-h(xs){
+                            font-size: 1.3rem;
+                        }
+                        @include respond-to-h(xxs){
+                            font-size: 1.3rem;
+                        }
+                        @include respond-to-v(md){
+                            font-size: 1.3rem;
+                        }
+                        @include respond-to-v(s){
+                            font-size: 1.3rem;
+                        }
+                        @include respond-to-v(sm){
+                            font-size: 1.3rem;
+                        }
+                        @include respond-to-v(xs){
+                            font-size: 1.2rem;
+                        }
+                    }
+
+                    .details__content__list__item__main__button{
+                        width: 1.5rem;
+                        height: 1.5rem;
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        cursor: pointer;
+
+                        @include respond-to-h(sm){
+                            width: 1.3rem;
+                            height: 1.3rem;
+                        }
+                        @include respond-to-h(xs){
+                            width: 1.3rem;
+                            height: 1.3rem;
+                        }
+                        @include respond-to-h(xxs){
+                            width: 1.3rem;
+                            height: 1.3rem;
+                        }
+                        @include respond-to-v(md){
+                            width: 1.3rem;
+                            height: 1.3rem;
+                        }
+                        @include respond-to-v(s){
+                            width: 1.3rem;
+                            height: 1.3rem;
+                        }
+                        @include respond-to-v(sm){
+                            width: 1.3rem;
+                            height: 1.3rem;
+                        }
+                        @include respond-to-v(xs){
+                            width: 1.3rem;
+                            height: 1.3rem;
+                        }
+                    }
+                }
+
+                .details__content__list__item__inner{
+                    width: 100%;
+                    height: fit-content;
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-start;
+                    border-top: 0.5px solid var(--WhiteBg);
+
+                    p{
+                        font-family: "Sansation-Light";
+                        position: relative;
+                        z-index: 1;
+                        font-size: 1rem;
+                        color: var(--Wtext);
+                        font-weight: 300;
+                        margin: 0;
+                        text-align: left;
+                        padding: 1vh 0 2.5vh 0;
+                        @include respond-to-h(sm){
+                            font-size: 0.9rem;
+                        }
+                        @include respond-to-h(xs){
+                            font-size: 0.9rem;
+                        }
+                        @include respond-to-h(xxs){
+                            font-size: 0.9rem;
+                        }
+                        @include respond-to-v(xs){
+                            font-size: 0.9rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

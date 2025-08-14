@@ -1,0 +1,602 @@
+@use "../../../../styles/mixins.scss" as *;
+
+.Navbar{
+    width: 100vw;
+    height: 6vh;
+    position: fixed;
+    top: -0.5vh;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5vh 4vw 0 5vw;
+    z-index: 1000;
+    background-color: var(--WhiteBg);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+
+
+    @include respond-to-h(mdt){
+        height: 7vh;
+    }
+    @include respond-to-h(md){
+        height: 8vh;
+    }
+    @include respond-to-h(xs){
+        height: 12vh;
+    }
+
+    @include respond-to-v(lg){
+        height: 6vh;
+    }
+    @include respond-to-v(md){
+        height: 6vh;
+    }
+    @include respond-to-v(s){
+        height: 6vh;
+    }
+    @include respond-to-v(sm){
+        height: 7vh;
+    }
+     @include respond-to-v(xs){
+        height: 8.5vh;
+    }
+
+    .Navbar__Links{
+        width: 100%;
+        height: 100%;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        
+        ul{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            list-style: none;
+            gap: 1vw;
+
+            li{
+                .ScrollLink{
+                    .button{
+                        width: 80px;
+                        height: 30px;
+                        .slider{
+                            .el{
+                                cursor: pointer;
+                                .perspectiveText{
+                                    .Navbar__Links__Title{
+                                        font-size: 1.3rem;
+                                        font-family: "Sansation-Regular";
+                                        text-transform: capitalize;
+                                        @include respond-to-h(lg){
+                                            font-size: 1.1rem;
+                                        }
+                                        @include respond-to-h(mdt){
+                                            font-size: 1.1rem;
+                                        }
+                                        @include respond-to-h(md){
+                                            font-size: 1rem;
+                                        }
+                                        @include respond-to-h(sm){
+                                            font-size: 1rem;
+                                        }
+                                        @include respond-to-h(xs){
+                                            font-size: 0.9rem;
+                                        }
+                                        @include respond-to-h(xxs){
+                                            font-size: 0.9rem;
+                                        }
+                                        &:nth-of-type(2){
+                                            color: var(--ChText);
+                                            transform: rotateX(-90deg) translateY(15px);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .LinkButton{
+                    .button{
+                        width: 100px;
+                        height: 40px;
+                        @include respond-to-h(lg){
+                            width: 90px;
+                            height: 35px;
+                        }
+                        @include respond-to-h(mdt){
+                            width: 90px;
+                            height: 35px;
+
+                        }
+
+                        @include respond-to-h(md){
+                            width: 80px;
+                            height: 30px;
+                        }
+                        @include respond-to-h(sm){
+                            width: 80px;
+                            height: 30px;
+                        }
+                        @include respond-to-h(xs){
+                            width: 75px;
+                            height: 30px;
+                        }
+                        @include respond-to-h(xxs){
+                            width: 75px;
+                            height: 25px;
+                        }
+                        .slider{
+                            .el{
+                                cursor: pointer;
+                                .perspectiveText{
+                                    p{
+                                        font-size: 1.3rem;
+                                        font-family: "Sansation-Regular";
+                                        text-transform: capitalize;
+                                        @include respond-to-h(lg){
+                                            font-size: 1.1rem;
+                                        }
+                                        @include respond-to-h(mdt){
+                                            font-size: 1.1rem;
+                                        }
+                                        @include respond-to-h(md){
+                                            font-size: 1rem;
+                                        }
+                                        @include respond-to-h(sm){
+                                            font-size: 1rem;
+                                        }
+                                        @include respond-to-h(xs){
+                                            font-size: 0.9rem;
+                                        }
+                                        @include respond-to-h(xxs){
+                                            font-size: 0.9rem;
+                                        }
+                                    }
+                                }
+
+                                &:nth-of-type(2){
+                                    p{
+                                        color: var(--ChText);    
+                                        &:nth-of-type(2){
+                                            color: var(--ChText);
+                                            transform: rotateX(-90deg) translateY(15px);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .Navbar__Logo{
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 10vw;
+        height: 10vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2;
+
+        @include respond-to-v(s){
+            width: 20vw;
+            height: 20vw;
+        }
+        @include respond-to-v(sm){
+            width: 20vw;
+            height: 20vw;
+        }
+        @include respond-to-v(xs){
+            width: 20vw;
+            height: 20vw;
+        }
+
+        a{
+            width: 7.5vw;
+            height: 7.5vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            position: relative;
+            transition: all 0.3s ease-in-out;
+            @include respond-to-h(md){
+                width: 8vw;
+                height: 8vh;
+            }
+            @include respond-to-h(mdt){
+                width: 9vw;
+                height: 9vh;
+            }
+            @include respond-to-h(sm){
+                width: 9vw;
+                height: 9vh;
+            }
+            @include respond-to-h(xs){
+                width: 20vw;
+                height: 20vh;
+            }
+            @include respond-to-h(xxs){
+                width: 20vw;
+                height: 20vh;
+            }
+
+            @include respond-to-v(s){
+                width: 20vw;
+                height: 20vw;
+            }
+            @include respond-to-v(sm){
+                width: 20vw;
+                height: 20vw;
+            }
+            @include respond-to-v(xs){
+                width: 20vw;
+                height: 20vw;
+            }
+            
+
+            img{
+                width: 100%;
+                height: 100%;
+            }
+            
+
+            &:hover{
+                transform: scale(1.05);
+                filter: brightness(0.8);
+            }
+        }
+    }
+
+    .Navbar__Icons{
+        width: 100%;
+        height: 100%;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        
+        ul{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            list-style: none;
+            gap: 0.5vw;
+            @include respond-to-h(mdt){
+                gap: 1vw;
+            }
+            @include respond-to-h(sm){
+                gap: 1vw;
+            }
+            @include respond-to-h(xs){
+                gap: 0;
+            }
+            @include respond-to-h(xxs){
+                gap: 0;
+            }
+
+            li{
+                color: var(--ChText);
+                cursor: pointer;
+
+                a{
+                    img{
+                        width: 3vw;
+                        height: 3vh;
+                        transition: all 0.3s ease-in-out;
+
+                        &:hover{
+                            transform: scale(1.1);
+                            filter: brightness(0.8);
+                        }
+                        @include respond-to-h(lg){
+                            width: 3.5vw;
+                            height: 3.5vh;
+                        }
+                        @include respond-to-h(md){
+                            width: 3.5vw;
+                            height: 3.5vh;
+                        }
+                        @include respond-to-h(sm){
+                            width: 3.5vw;
+                            height: 3.5vh;
+                        }
+                        @include respond-to-h(xs){
+                            width: 6vw;
+                            height: 6vh;
+                        }
+                        @include respond-to-h(xxs){
+                            width: 6vw;
+                            height: 6vh;
+                        }
+                    }
+                }
+
+                .magnetic{
+                    display: flex;
+                    align-items: flex-start;
+                    justify-content: center;
+                    gap: 2.5px;
+                    .text__cart__count{
+                        font-size: 1rem;
+                        color: var(--Otext)
+                    }
+                }
+
+                .LinkButton{
+                    .button{
+                        width: 250px;
+                        height: 40px;
+                        @include respond-to-h(lg){
+                            width: 180px;
+                            height: 45px;
+                        }
+                        @include respond-to-h(mdt){
+                            width: 180px;
+                            height: 45px;
+
+                        }
+
+                        @include respond-to-h(md){
+                            width: 160px;
+                            height: 40px;
+                        }
+                        @include respond-to-h(sm){
+                            width: 160px;
+                            height: 40px;
+                        }
+                        @include respond-to-h(xs){
+                            width: 150px;
+                            height: 40px;
+                        }
+                        @include respond-to-h(xxs){
+                            width: 150px;
+                            height: 40px;
+                        }
+                        .slider{
+                            .el{
+                                cursor: pointer;
+                                .perspectiveText{
+                                    p{
+                                        color: var(--Wtext);
+                                        font-size: 1.3rem;
+                                        font-family: "Sansation-Regular";
+                                        text-transform: capitalize;
+                                        @include respond-to-h(lg){
+                                            font-size: 1.1rem;
+                                        }
+                                        @include respond-to-h(mdt){
+                                            font-size: 1.1rem;
+                                        }
+                                        @include respond-to-h(md){
+                                            font-size: 1rem;
+                                        }
+                                        @include respond-to-h(sm){
+                                            font-size: 1rem;
+                                        }
+                                        @include respond-to-h(xs){
+                                            font-size: 0.9rem;
+                                        }
+                                        @include respond-to-h(xxs){
+                                            font-size: 0.9rem;
+                                        }
+                                    }
+                                }
+
+                                &:nth-of-type(2){
+                                    p{
+                                        color: var(--ChText);    
+                                        &:nth-of-type(2){
+                                            color: var(--ChText);
+                                            transform: rotateX(-90deg) translateY(15px);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                .Navbar__Icons__Search{
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                     img{
+                        width: 3vw;
+                        height: 3vh;
+                        transition: all 0.3s ease-in-out;
+
+                        &:hover{
+                            transform: scale(1.1);
+                            filter: brightness(0.8);
+                        }
+                        @include respond-to-h(lg){
+                            width: 3.5vw;
+                            height: 3.5vh;
+                        }
+                        @include respond-to-h(md){
+                            width: 3.5vw;
+                            height: 3.5vh;
+                        }
+                        @include respond-to-h(sm){
+                            width: 3.5vw;
+                            height: 3.5vh;
+                        }
+                        @include respond-to-h(xs){
+                            width: 6vw;
+                            height: 6vh;
+                        }
+                        @include respond-to-h(xxs){
+                            width: 6vw;
+                            height: 6vh;
+                        }
+                    }
+                }
+                &:nth-of-type(4){
+                    a{
+                        img{
+                            width: 3.5vw;
+                            height: 3.5vh;
+                            @include respond-to-h(lg){
+                                width: 4vw;
+                                height: 4vh;
+                            }
+                            @include respond-to-h(md){
+                                width: 4vw;
+                                height: 4vh;
+                            }
+                            @include respond-to-h(sm){
+                                width: 4vw;
+                                height: 4vh;
+                            }
+                            @include respond-to-h(xs){
+                                width: 6.5vw;
+                                height: 6.5vh;
+                            }
+                            @include respond-to-h(xxs){
+                                width: 6.5vw;
+                                height: 6.5vh;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .Navbar__Mobile{
+        width: 30%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 2;
+
+        .Navbar__Mobile__Menu{
+            width: 400px;
+            height: 600px;
+            background-color:var(--OliveBg);
+            border-radius: 25px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            display: flex;
+        }
+    }
+}
+
+.Navbar__News{
+    position: fixed;
+    top: 6vh;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40%;
+    height: 4vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 900;
+    mix-blend-mode: difference;
+
+
+    .Navbar__News__RotatingBar{
+        width: 100%;
+        height: 100%;
+        position: relative;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+
+        .NavbarNews__rotating__bar{
+            width: 100%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .NavbarNews__rotating__bar__inner{
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 2.5vw;
+                p{
+                    font-size: 1.5rem;
+                    color: var(--Wtext);
+                    font-weight: 300;
+                    text-transform: uppercase;
+                    mix-blend-mode: difference;
+                    white-space: nowrap;
+                }
+            }
+        }
+    }
+}
+.Navbar__subFooter{
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background-color: var(--WhiteBg);
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+
+    .Navbar__Icons{
+        width: 100%;
+        height: 100%;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        
+        ul{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            list-style: none;
+            gap: 0.5vw;
+
+            li{
+                color: var(--ChText);
+                cursor: pointer;
+
+                img{
+                    width: 10vw;
+                    height: 10vh;
+                    transition: all 0.3s ease-in-out;
+
+                    &:hover{
+                        transform: scale(1.1);
+                        filter: brightness(0.8);
+                    }
+                }
+                &:nth-of-type(4){
+                    img{
+                        
+                        
+                    }
+                }
+            }
+        }
+    }
+}

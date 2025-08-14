@@ -1,0 +1,1957 @@
+@use "../../../styles/mixins.scss" as *;
+
+.ecom{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100vw;
+    min-height: 80vh;
+    background-color: var(--OliveBg);
+
+    .search__bar{
+        width: 100vw;
+        height: 10vh;
+        position: absolute;
+        top: 25vh;
+        left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 5vw;
+        z-index: 20;
+
+
+        @include respond-to-v(lg){
+            height: 5vh;
+        }
+        @include respond-to-v(md){
+            height: 5vh;
+        }
+        @include respond-to-v(s){
+            height: 7.5vh;
+            width: 100vw;
+            left: 0vw;
+            padding: 0 2.5vw;
+        }
+        @include respond-to-v(sm){
+            height: 7.5vh;
+            width: 100vw;
+            left: 0vw;
+            padding: 0 2.5vw;
+        }
+        @include respond-to-v(xs){
+            height: 65px;
+            width: 100vw;
+            left: 0vw;
+            padding: 0 2.5vw;
+        }
+        
+        .search__bar__container{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            background-color: var(--WhiteBg);
+            border-radius: 50px;
+            padding: 2.5vh 5vw;
+            z-index: 2;
+            @include respond-to-v(lg){
+                padding: 1vh 1.5vw;
+            }
+            @include respond-to-v(md){
+                padding: 1vh 1.5vw;
+            }
+            @include respond-to-v(s){
+                padding: 1vh 2.5vw 1vh 15vw;
+            }
+             @include respond-to-v(sm){
+                padding: 1vh 2.5vw 1vh 15vw;
+            }
+             @include respond-to-v(xs){
+                padding: 1vh 2.5vw 1vh 15vw;
+            }
+
+            .search__bar__container__categories{
+                width: 30%;
+                height: 100%;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-evenly;
+
+                @include respond-to-v(s){
+                    width: 75%;
+                }
+                @include respond-to-v(sm){
+                    width: 75%;
+                }
+                @include respond-to-v(xs){
+                    width: 75%;
+                }
+
+                .search__bar__container__main{
+                    width: 25%;
+                    height: 100%;
+                    position: relative;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+
+                    @include respond-to-v(s){
+                        width: 25%;
+                    }
+                    @include respond-to-v(sm){
+                        width: 25%;
+                    }
+                    @include respond-to-v(xs){
+                        width: 25%;
+                    }
+
+                    .dropdown__button{
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 0.5vw;
+                        background-color: transparent;
+                        box-shadow: none;
+                        border: none;
+                        @include respond-to-v(s){
+                            justify-content: space-between;
+                        }
+                        @include respond-to-v(sm){
+                            justify-content: space-between;
+                        }
+                        @include respond-to-v(xs){
+                            justify-content: space-between;
+                        }
+                        
+                        p{
+                            font-size: 1.3rem;
+                            color: var(--ChText);
+                            font-weight: 500;
+
+                            @include respond-to-h(md){
+                                font-size: 1.2rem;
+                            }
+
+                            @include respond-to-h(sm){
+                                font-size: 1.1rem;
+                            }
+                            @include respond-to-h(xs){
+                                font-size: 1.1rem;
+                            }
+                            @include respond-to-h(xxs){
+                                font-size: 1rem;
+                            }
+                            @include respond-to-v(lg){
+                               font-size: 1.2rem;
+                            }
+                            @include respond-to-v(md){
+                               font-size: 1.1rem;
+                            }
+                            @include respond-to-v(s){
+                               font-size: 1.1rem;
+                            }
+                            @include respond-to-v(sm){
+                               font-size: 1.1rem;
+                            }
+                            @include respond-to-v(xs){
+                               font-size: 1rem;
+                            }
+                        }
+
+                        .arrow__container{
+                            width: 1.5vw;
+                            height: 1.5vw;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            border: 1px solid var(--ButtonBorder);
+                            border-radius: 50%;
+
+                            @include respond-to-h(xs){
+                                img{
+                                    width: 1.5vw;
+                                    height: 1.5vw;
+                                }
+                            }
+                            @include respond-to-h(xxs){
+                                img{
+                                    width: 1.5vw;
+                                    height: 1.5vw;
+                                }
+                            }
+                            @include respond-to-v(md){
+                                img{
+                                    width: 1.5vw;
+                                    height: 1.5vw;
+                                }
+                            }
+                            @include respond-to-v(s){
+                                width: 4vw;
+                                height: 4vw;
+                                img{
+                                    width: 4vw;
+                                    height: 4vw;
+                                }
+                            }
+                            @include respond-to-v(sm){
+                                width: 4vw;
+                                height: 4vw;
+                                img{
+                                    width: 4vw;
+                                    height: 4vw;
+                                }
+                            }
+                            @include respond-to-v(xs){
+                                width: 4vw;
+                                height: 4vw;
+                                img{
+                                    width: 4vw;
+                                    height: 4vw;
+                                }
+                            }
+                        }
+                    }
+
+                    .dropdown__menu{
+                        position: absolute;
+                        top: 90%;
+                        left: 0;
+                        width: 10vw;
+                        height: auto;
+                        background-color: var(--WhiteBg);
+                        border: 1px solid var(--ButtonBorder);
+                        border-radius: 10px;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+                        gap: 0.5vh;
+                        padding: 1.5vh 0;
+                        transform-origin: top center;
+                        @include respond-to-v(lg){
+                            width: 15vw;
+                            left: -50%;
+                        } 
+                        @include respond-to-v(md){
+                            width: 15vw;
+                            left: -50%;
+                        } 
+                         @include respond-to-v(s){
+                            width: 30vw;
+                            left: -50%;
+                        } 
+                         @include respond-to-v(sm){
+                            width: 35vw;
+                            left: -50%;
+                        } 
+                         @include respond-to-v(xs){
+                            width: 35vw;
+                            left: -50%;
+                        } 
+                        
+
+                        .dropdown__menu__item{
+                            width: 100%;
+                            height: 2.5vh;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            flex-direction: column;
+                            background-color: transparent;
+                            cursor: pointer;
+                            transition: border 0.3s ease;
+                            border: none;
+                            transform-origin: top center;
+
+                            p{
+                                font-size: 1.3rem;
+                                color: var(--ChText);
+                                font-weight: 500;
+
+                                @include respond-to-h(md){
+                                    font-size: 1.2rem;
+                                }
+
+                                @include respond-to-h(sm){
+                                    font-size: 1.1rem;
+                                }
+                                @include respond-to-h(xs){
+                                    font-size: 1.1rem;
+                                }
+                                @include respond-to-h(xxs){
+                                    font-size: 1rem;
+                                }
+
+                                @include respond-to-v(lg){
+                                    font-size: 1.2rem;
+                                }  
+                                @include respond-to-v(md){
+                                    font-size: 1.1rem;
+                                } 
+                                @include respond-to-v(s){
+                                    font-size: 1.1rem;
+                                }  
+                                @include respond-to-v(sm){
+                                    font-size: 1.1rem;
+                                }  
+                                @include respond-to-v(xs){
+                                    font-size: 1rem;
+                                }  
+                            }
+
+                            .divider{
+                                width: 100%;
+                                height: 1px;
+                                background-color: var(--ButtonBorder);
+                                opacity: 0.5;
+                            }
+
+                            &:hover{
+                                border-top: 1px solid rgb(33, 34, 34, 0.5);
+                                border-bottom: 1px solid rgb(33, 34, 34, 0.5);
+                            }
+                            &.active{
+                                background-color: var(--OliveBg);
+                            }
+                        }
+                    }
+
+                    .filter__button{
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 0.5vw;
+                        background-color: transparent;
+                        box-shadow: none;
+                        border: none;
+                        cursor: pointer;
+                        
+                        p{
+                            font-size: 1.3rem;
+                            color: var(--ChText);
+                            font-weight: 500;
+                            transition: color 0.3s ease;
+
+                            &:hover{
+                                color: var(--OButton);
+                            }
+
+                            @include respond-to-h(md){
+                                font-size: 1.2rem;
+                            }
+
+                            @include respond-to-h(sm){
+                                font-size: 1.1rem;
+                            }
+
+                            @include respond-to-h(xs){
+                                font-size: 1.1rem;
+                            }
+                            @include respond-to-h(xxs){
+                                font-size: 1rem;
+                            }
+                            @include respond-to-v(lg){
+                               font-size: 1.2rem;
+                            }
+                            @include respond-to-v(md){
+                               font-size: 1.1rem;
+                            }
+                            @include respond-to-v(s){
+                               font-size: 1.1rem;
+                            }
+                            @include respond-to-v(sm){
+                               font-size: 1.1rem;
+                            }
+                            @include respond-to-v(xs){
+                               font-size: 1rem;
+                            }
+                        }
+
+                        &.active{
+                            p{
+                                color: var(--OButton);
+                            }
+                        }
+                    }
+                }
+            }
+
+            .search__bar__container__search{
+                width: 50%;
+                height: 100%;
+                position: relative;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                @include respond-to-v(s){
+                    width: 20%;
+                    position: absolute;
+                    right: 2.5vw;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    transform-origin: right center;
+                    padding: 1vh 2.5vw;
+                }
+                @include respond-to-v(sm){
+                    width: 20%;
+                    position: absolute;
+                    right: 2.5vw;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    transform-origin: right center;
+                    padding: 1vh 2.5vw;
+                }
+                @include respond-to-v(xs){
+                   width: 20%;
+                    position: absolute;
+                    right: 2.5vw;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    transform-origin: right center;
+                    padding: 1vh 2.5vw;
+                }
+
+                .search__bar__subcontainer__search{
+                    width: 100%;
+                    height: 100%;
+                    position: relative;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: space-evenly;
+                    background-color: var(--WhiteBg);
+                    border-radius: 50px;
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                    gap: 1vw;
+                    padding: 0 1vw;
+                    @include respond-to-v(s){
+                        padding: 0 2vw 0 5vw;
+                    }
+                    @include respond-to-v(sm){
+                        padding: 0 2vw 0 5vw;
+                    }
+                    @include respond-to-v(xs){
+                        padding: 0 2vw 0 5vw;
+                    }
+
+                    .search__input{
+                        width: 80%;
+                        height: 100%;
+                        background-color: transparent;
+                        border: none;
+                        outline: none;
+                        font-size: 1.3rem;
+                        color: var(--ChText);
+
+                        @include respond-to-v(s){
+                            width: 60%;
+                        }
+                        @include respond-to-v(sm){
+                            width: 60%;
+                        }
+                        @include respond-to-v(xs){
+                            width: 60%;
+                        }
+
+                        &::placeholder{
+                            color: var(--Placeholder);
+                            font-weight: 400;
+                            font-size: 1.3rem;
+
+                            @include respond-to-h(md){
+                                font-size: 1.2rem;
+                            }
+
+                            @include respond-to-h(sm){
+                                font-size: 1.1rem;
+                            }
+                            @include respond-to-h(xs){
+                                font-size: 1rem;
+                            }
+                            @include respond-to-h(xxs){
+                                font-size: 0.9rem;
+                            }
+                            @include respond-to-v(lg){
+                               font-size: 1.2rem;
+                            }
+                            @include respond-to-v(md){
+                               font-size: 1.1rem;
+                            }
+                            @include respond-to-v(s){
+                               font-size: 1.1rem;
+                            }
+                            @include respond-to-v(sm){
+                               font-size: 1.1rem;
+                            }
+                            @include respond-to-v(xs){
+                               font-size: 1.1rem;
+                            }
+                        }
+
+                        @include respond-to-h(md){
+                            font-size: 1.2rem;
+                        }
+
+                        @include respond-to-h(sm){
+                            font-size: 1.1rem;
+                        }
+                        @include respond-to-h(xs){
+                            font-size: 1rem;
+                        }
+                         @include respond-to-h(xxs){
+                            font-size: 0.9rem;
+                        }
+                        @include respond-to-v(lg){
+                            font-size: 1.2rem;
+                        }
+                        @include respond-to-v(md){
+                            font-size: 1.1rem;
+                        }
+                        @include respond-to-v(s){
+                            font-size: 1.1rem;
+                        }
+                        @include respond-to-v(sm){
+                            font-size: 1.1rem;
+                        }
+                        @include respond-to-v(xs){
+                            font-size: 1rem;
+                        }
+                    }
+
+
+                    .search__icon__close{
+                        width: 5vw;
+                        height: 100%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        cursor: pointer;
+                        position: relative;
+                        z-index: 1;
+                        @include respond-to-v(s){
+                            display: none;
+                        }
+                        @include respond-to-v(sm){
+                            display: none;
+                        }
+                        @include respond-to-v(xs){
+                            display: none;
+                        }
+
+                        .close__icon__container{
+                            width: 100%;
+                            height: 100%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            gap: 0.5vw;
+
+                            @include respond-to-v(lg){
+                                img{
+                                    width: 15px;
+                                    height: 15px;
+                                }
+                            }
+                            @include respond-to-v(md){
+                                img{
+                                    width: 12px;
+                                    height: 12px;
+                                }
+                            }
+                            @include respond-to-v(s){
+                                gap: 1vw;
+                                img{
+                                    width: 15px;
+                                    height: 15px;
+                                }
+                            }
+                            @include respond-to-v(sm){
+                                gap: 1vw;
+                                img{
+                                    width: 15px;
+                                    height: 15px;
+                                }
+                            }
+                            @include respond-to-v(xs){
+                                gap: 1vw;
+                                img{
+                                    width: 15px;
+                                    height: 15px;
+                                }
+                            }
+
+                            p{
+                                font-size: 1.3rem;
+                                color: var(--Placeholder);
+                                margin: 0;
+                                
+                                @include respond-to-h(md){
+                                    font-size: 1.2rem;
+                                }
+                                @include respond-to-h(sm){
+                                    font-size: 1.1rem;
+                                }
+                                @include respond-to-h(xs){
+                                    font-size: 1rem;
+                                }
+                                @include respond-to-h(xxs){
+                                    font-size: 0.9rem;
+                                }
+                                @include respond-to-v(lg){
+                                 font-size: 1.1rem;
+                                }
+                                @include respond-to-v(md){
+                                 font-size: 1rem;
+                                }
+                                @include respond-to-v(s){
+                                 font-size: 1.3rem;
+                                }
+                                @include respond-to-v(sm){
+                                 font-size: 1.2rem;
+                                }
+                                @include respond-to-v(xs){
+                                 font-size: 1.1rem;
+                                }
+                            }
+                        }
+                        
+                        
+                    }
+
+                    .search__icon{
+                        width: 2vw;
+                        height: 2vw;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        cursor: pointer;
+                        background: transparent;
+                        box-shadow: none;
+                        border: none;
+                        position: relative;
+                        z-index: 3;
+
+                        @include respond-to-v(s){
+                            height: 7vw;
+                            width: 7vw;
+                            position: absolute;
+                            left: 4vw;
+                            top: 50%;
+                            transform: translateY(-50%);
+                        }
+                        @include respond-to-v(sm){
+                            height: 7.5vw;
+                            width: 7.5vw;
+                            position: absolute;
+                            left: 4vw;
+                            top: 50%;
+                            transform: translateY(-50%);
+                        }
+                        @include respond-to-v(xs){
+                            height: 7.5vw;
+                            width: 7.5vw;
+                            position: absolute;
+                            left: 4vw;
+                            top: 50%;
+                            transform: translateY(-50%);
+                        }
+                        
+                        .search__icon__image{
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                        }
+                    }
+
+                    .current__category__text{
+                        position: absolute;
+                        top: 150%;
+                        left: 0;
+                        width: 50%;
+                        height: 5vh;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        background-color: var(--WhiteBg);
+                        border: 1px solid var(--ButtonBorder);
+                        border-radius: 10px;
+                        font-size: 1.3rem;
+                        color: var(--ChText);
+                        opacity: 0.2;
+
+                        @include respond-to-h(md){
+                            font-size: 1.2rem;
+                        }
+                        @include respond-to-h(sm){
+                            font-size: 1.1rem;
+                        }
+                         @include respond-to-h(xs){
+                            font-size: 1rem;
+                        }
+                         @include respond-to-h(xxs){
+                            font-size: 0.9rem;
+                        }
+
+                        @include respond-to-v(md){
+                            font-size: 1.1rem;
+                        }
+                        @include respond-to-v(s){
+                            font-size: 1.1rem;
+                        }
+                        @include respond-to-v(sm){
+                            font-size: 1.1rem;
+                        }
+                        @include respond-to-v(xs){
+                            font-size: 1rem;
+                        }
+                    }
+                }
+
+                .search__bar__container__search__container{
+                    position: absolute;
+                    top: 100%;
+                    left: 10%;
+                    width: 60%;
+                    height: auto;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    .search-bar-container__search__container{
+                        width: 100%;
+                        height: auto;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        background-color: var(--WhiteBg);
+                        border: 1px solid var(--ButtonBorder);
+                        border-radius: 10px;
+                        padding: 1.5vh 0;
+                        transform-origin: top center;
+                        perspective: 100px;
+
+                        
+                        ul{
+                            width: 100%;
+                            height: auto;
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: center;
+                            gap: 1vh;
+
+                            li{
+                                width: 100%;
+                                height: 2.5vh;
+                                display: flex;
+                                align-items: center;
+                                justify-content: flex-start;
+                                background-color: transparent;
+                                cursor: pointer;
+                                transition: background-color 0.3s ease;
+                                padding: 0.5vh 1vw;
+                                @include respond-to-v(s){
+                                    padding: 1vh 2.5vw;
+                                }
+                                 @include respond-to-v(sm){
+                                    padding: 1vh 2.5vw;
+                                }
+                                 @include respond-to-v(xs){
+                                    padding: 1vh 2.5vw;
+                                }
+
+                                p{
+                                    font-size: 1.3rem;
+                                    color: var(--ChText);
+
+                                    @include respond-to-h(md){
+                                        font-size: 1.2rem;
+                                    }
+
+                                    @include respond-to-h(sm){
+                                        font-size: 1.1rem;
+                                    }
+                                    @include respond-to-h(xs){
+                                        font-size: 1rem;
+                                    }
+                                    @include respond-to-h(xxs){
+                                        font-size: 0.9rem;
+                                    }
+                                    @include respond-to-v(md){
+                                        font-size: 1.1rem;
+                                    }
+                                    @include respond-to-v(s){
+                                        font-size: 1.1rem;
+                                    }
+                                    @include respond-to-v(sm){
+                                        font-size: 1.1rem;
+                                    }
+                                    @include respond-to-v(xs){
+                                        font-size: 1rem;
+                                    }
+                                }
+
+                                &:hover{
+                                    background-color: var(--OliveBg);
+                                }
+                            }
+                            .active{
+                                background-color: var(--OliveBg);
+                                p{
+                                    font-size: 1.3rem;
+                                    color: var(--ChText);
+                                    
+                                    @include respond-to-h(md){
+                                        font-size: 1.2rem;
+                                    }
+
+                                    @include respond-to-h(sm){
+                                        font-size: 1.1rem;
+                                    }
+
+                                    @include respond-to-h(xs){
+                                        font-size: 1rem;
+                                    }
+                                     @include respond-to-h(xxs){
+                                        font-size: 0.9rem;
+                                    }
+
+
+                                    @include respond-to-v(md){
+                                        font-size: 1.1rem;
+                                    }
+                                     @include respond-to-v(s){
+                                        font-size: 1.1rem;
+                                    }
+                                    @include respond-to-v(sm){
+                                        font-size: 1.1rem;
+                                    }
+                                    @include respond-to-v(xs){
+                                        font-size: 1rem;
+                                    }
+                                }
+                            }
+                        }li.highlighted {
+                            background-color: var(--OliveBg);
+                        }
+                        
+                    }
+                }
+            }
+        }
+
+        .active__filters__bar {
+            position: absolute;
+            top: 90%;
+            left: 10vw;
+            width: 100%;
+            height: auto;
+            display: flex;
+            gap: 1rem;
+            margin: 1rem 0 0 0;
+            flex-wrap: wrap;
+            z-index: 1;
+
+            .active__filter {
+                display: flex;
+                align-items: center;
+                background: var(--WhiteBg);
+                border-radius: 20px;
+                padding: 0.3em 0.8em;
+                font-size: 1rem;
+                color: var(--ChText);
+                box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+
+                .filter__close__icon {
+                    margin-left: 0.5em;
+                    cursor: pointer;
+                    opacity: 0.7;
+                    transition: opacity 0.2s;
+                    
+                    &:hover {
+                        opacity: 1;
+                    }
+
+                    @include respond-to-v(lg){
+                        width: 10px;
+                        height: 10px;
+                    }
+                    @include respond-to-v(md){
+                        width: 10px;
+                        height: 10px;
+                    }
+                    @include respond-to-v(s){
+                        width: 12.5px;
+                        height: 12.5px;
+                    }
+                    @include respond-to-v(sm){
+                        width: 12.5px;
+                        height: 12.5px;
+                    }
+                    @include respond-to-v(xs){
+                        width: 12.5px;
+                        height: 12.5px;
+                    }
+                }
+            }
+        }
+    }
+
+    .categories{
+        width: 5vw;
+        height: 10vh;
+        position: absolute;
+        top: 25vh;
+        left: 5vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--CharcoalBg);
+        border-radius: 60px;
+        padding: 5vh 0;
+        z-index: 20;
+
+        @include respond-to-h(md){
+            width: 15vw;
+            border-radius: 50px;
+        }
+        @include respond-to-h(mdt){
+            width: 17.5vw;
+            border-radius: 50px;
+        }
+        @include respond-to-h(sm){
+            width: 17.5vw;
+            border-radius: 50px;
+        }
+        @include respond-to-h(xs){
+            padding: 5vh 2.5vw;
+            width: 17.5vw;
+            border-radius: 50px;
+            height: 75vh;
+        }
+         @include respond-to-h(xxs){
+            padding: 5vh 1.5vw;
+            width: 17.5vw;
+            border-radius: 30px;
+            height: 70vh;
+        }
+
+        @include respond-to-v(lg){
+            height: 40vh;
+            width: 17.5vw;
+        }
+         @include respond-to-v(md){
+            height: 40vh;
+            width: 17.5vw;
+            border-radius: 30px;
+        }
+        @include respond-to-v(s){
+            height: 7.5vh;
+            padding: 2.5vw 2.5vw;
+            left: 2.5vw;
+            background-color: transparent;
+        }
+        @include respond-to-v(sm){
+            height: 7.5vh;
+            padding: 2.5vw 2.5vw;
+            left: 2.5vw;
+            background-color: transparent;
+        }
+        @include respond-to-v(xs){
+            height: 10vh;
+            padding: 2.5vw 2.5vw;
+            left: 2.5vw;
+            background-color: transparent;
+        }
+
+
+        .categories__mobile{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            .categories__mobile__menu{
+                width: 400px;
+                height: 600px;
+                background-color:var(--OliveBg);
+                border-radius: 25px;
+                position: absolute;
+                top: 0;
+                right: 0;
+                display: flex;
+
+                .categories__mobile__button__confirm{
+                    position: absolute;
+                    bottom: 2.5vh;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    width: 80%;
+                    height: 5vh;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    .confirm__button{
+                        width: 100px;
+                        height: 35px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        background-color: var(--WhiteBg);
+                        border-radius: 20px;
+
+                        p{
+                            font-size: 1.1rem;
+                            color: var(--ChText);
+                            font-weight: 300;
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .product__list{
+        width: 100vw;
+        min-height: 60vh; 
+        margin-left: 0vw;
+        margin-top: 40vh;
+        height: auto;
+        position: relative;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        padding: 0 5vw;
+        overflow: hidden;
+
+        @include respond-to-v(lg){
+            margin-top: 35vh;
+        }
+        @include respond-to-v(md){
+            margin-top: 35vh;
+            margin-left: 12.5vw;
+        }
+        @include respond-to-v(s){
+            width: 95vw;
+            margin-left: 0;
+            padding: 0;
+            margin-top: 40vh;
+        }
+        @include respond-to-v(sm){
+            width: 95vw;
+            margin-left: 0;
+            padding: 0;
+            margin-top: 40vh;
+        }
+        @include respond-to-v(xs){
+            width: 95vw;
+            margin-left: 0;
+            padding: 0;
+            margin-top: 40vh;
+        }
+
+        .product__list__items {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            width: 100%;
+            height: auto;
+            @include respond-to-v(md){
+                gap: 0.25rem;
+            }
+            @include respond-to-v(s){
+                grid-template-columns: repeat(2, 1fr);
+                gap: 5vw;
+            }
+            @include respond-to-v(sm){
+                grid-template-columns: repeat(2, 1fr);
+                gap: 5vw;
+            }
+            @include respond-to-v(xs){
+                grid-template-columns: repeat(2, 1fr);
+                gap: 5vw;
+            }
+
+            .product__list__item{
+                width: 20vw;
+                height: 40vh;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                background-color: var(--WhiteBg);
+                border-radius: 50px;
+                padding: 0.05vh 0.05vh;
+
+                @include respond-to-h(md){
+                    width: 20vw;
+                    height: 50vh;
+                }
+                @include respond-to-h(mdt){
+                    width: 20vw;
+                    height: 35vh;
+                }
+                @include respond-to-h(sm){
+                    width: 20vw;
+                    height: 40vh;
+                }
+                 @include respond-to-h(xs){
+                    width: 20vw;
+                    height: 60vh;
+                    border-radius: 35px;
+                }
+                  @include respond-to-h(xxs){
+                    width: 20vw;
+                    height: 55vh;
+                    border-radius: 35px;
+                }
+
+                @include respond-to-v(lg){
+                    height: 25vh;
+                    border-radius: 30px;
+                }
+                @include respond-to-v(md){
+                    height: 30vh;
+                    width: 22.5vw;
+                    border-radius: 30px;
+                }
+                @include respond-to-v(s){
+                    height: 30vh;
+                    width: 45vw;
+                    border-radius: 25px;
+                }
+                 @include respond-to-v(sm){
+                    height: 30vh;
+                    width: 45vw;
+                    border-radius: 25px;
+                }
+                 @include respond-to-v(xs){
+                    height: 35vh;
+                    width: 45vw;
+                    border-radius: 25px;
+                }
+
+                .product__link{
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    text-decoration: none;
+                    color: var(--ChText);
+
+                    @include respond-to-h(md){
+                        justify-content: space-between;
+                        padding-bottom: 2.5vh;
+                    }
+
+                    @include respond-to-h(sm){
+                        justify-content: space-between;
+                        padding-bottom: 2.5vh;
+                    }
+                    @include respond-to-h(xs){
+                        justify-content: space-between;
+                        padding-bottom: 2.5vh;
+                    }
+                    @include respond-to-h(xxs){
+                        justify-content: space-between;
+                        padding-bottom: 2.5vh;
+                    }
+                    @include respond-to-v(md){
+                        justify-content: space-between;
+                        padding-bottom: 0.5vh;
+                    }
+
+
+                    .product__image__container{
+                        width: 100%;
+                        height: 25vh;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        border-radius: 50px;
+                        overflow: hidden;
+                        @include respond-to-h(md){
+                            height: 27.5vh;
+                        }
+                        @include respond-to-h(mdt){
+                            height: 20vh;
+                        }
+                        @include respond-to-h(sm){
+                            height: 20vh;
+                        }
+                        @include respond-to-h(xs){
+                            height: 30vh;
+                            border-radius: 35px;
+                        }
+                        @include respond-to-h(xxs){
+                            height: 25vh;
+                            border-radius: 35px;
+                        }
+
+                        @include respond-to-v(lg){
+                            height: 15vh;
+                            border-radius: 30px;
+                        }
+                        @include respond-to-v(md){
+                            height: 12.5vh;
+                            border-radius: 30px;
+                        }
+                        @include respond-to-v(s){
+                            height: 20vh;
+                            border-radius: 25px;
+                        }
+                        @include respond-to-v(sm){
+                            height: 20vh;
+                            border-radius: 25px;
+                        }
+                        @include respond-to-v(xs){
+                            height: 20vh;
+                            border-radius: 25px;
+                        }
+                        
+
+                        .product__image{
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                        }
+                    }
+
+                    .product__title__color_container{
+                        width: 100%;
+                        height: 5vh;
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 0.5vh;
+                        font-family: "Sansation-Light";
+                        padding: 0 1.5vw;
+
+                        .product__name{
+                            width: 70%;
+                            font-size: 1.5rem;
+                            color: var(--ChText);
+                            font-weight: 300;
+                            text-align: left;
+
+                            @include respond-to-h(md){
+                               font-size: 1.3rem;
+                            }
+                            @include respond-to-h(sm){
+                                font-size: 1.3rem;
+                            }
+                            @include respond-to-h(xs){
+                                font-size: 1.1rem;
+                            }
+                            @include respond-to-h(xxs){
+                                font-size: 1.1rem;
+                            }
+                            @include respond-to-v(md){
+                                font-size: 1.3rem;
+                            }
+                            @include respond-to-v(s){
+                                font-size: 1.3rem;
+                            }
+                            @include respond-to-v(sm){
+                                font-size: 1.3rem;
+                            }
+                            @include respond-to-v(xs){
+                                font-size: 1.3rem;
+                            }
+                        }
+
+                        .product__color__container{
+                            width: 30%;
+                            height: 2vh;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            gap: 0.05vw;
+
+                            .product__color{
+                                width: 1.5vw;
+                                height: 1.5vw;
+                                border-radius: 50%;
+                                border: 1px solid var(--ButtonBorder);
+                                background-color: var(--ChText);
+                                cursor: pointer;
+                                @include respond-to-h(md){
+                                    width: 1.3vw;
+                                    height: 1.3vw;
+                                }
+
+                                @include respond-to-h(sm){
+                                    width: 1.3vw;
+                                    height: 1.3vw;
+                                }
+                                @include respond-to-h(xs){
+                                    width: 1.5vw;
+                                    height: 1.5vw;
+                                }
+                                @include respond-to-h(xxs){
+                                    width: 1.5vw;
+                                    height: 1.5vw;
+                                }
+                                @include respond-to-v(s){
+                                    width: 3vw;
+                                    height: 3vw;
+                                }
+                                @include respond-to-v(sm){
+                                    width: 3vw;
+                                    height: 3vw;
+                                }
+                                @include respond-to-v(xs){
+                                    width: 3vw;
+                                    height: 3vw;
+                                }
+
+                                &.active{
+                                    border: 2px solid var(--OButton);
+                                }
+                            }
+                            
+                        }
+
+                    }
+
+                    .product__desc__container{
+                        width: 100%;
+                        height: 5vh;
+                        display: flex;
+                        align-items: flex-start;
+                        justify-content: center;
+                        flex-direction: column-reverse;
+                        padding: 0 1.5vw;
+
+                        @include respond-to-h(sm){
+                            height: 7.5vh;
+                        }
+                        @include respond-to-h(xs){
+                            height: 10vh;
+                        }
+                        @include respond-to-h(xxs){
+                            height: 15vh;
+                        }
+                        @include respond-to-v(md){
+                            height: 7.5vh;
+                        }
+
+                        .product__new{
+                            font-size: 1.1rem;
+                            color: var(--OButton);
+                            font-weight: 400;
+
+                            @include respond-to-h(sm){
+                               font-size: 1rem;
+                            }
+                            @include respond-to-h(xs){
+                               font-size: 0.9rem;
+                            }
+                            @include respond-to-h(xxs){
+                               font-size: 0.8rem;
+                            }
+                            @include respond-to-v(md){
+                                font-size: 1rem;
+                            }
+                            @include respond-to-v(md){
+                                font-size: 1rem;
+                            }
+                            @include respond-to-v(s){
+                                font-size: 1rem;
+                            }
+                            @include respond-to-v(sm){
+                                font-size: 1rem;
+                            }
+                            @include respond-to-v(xs){
+                                font-size: 0.9rem;
+                            }
+                        }
+
+                        p{
+                            font-size: 1.1rem;
+                            color: var(--ChText);
+                            font-weight: 400;
+                            text-align: left;
+                            line-height: 1.5;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            display: -webkit-box;
+                            -webkit-line-clamp: 3; /* number of lines to show */
+                            -webkit-box-orient: vertical;
+
+                            @include respond-to-h(md){
+                               font-size: 0.9rem;
+                            }
+                            @include respond-to-h(sm){
+                                font-size: 0.9rem;
+                            }
+                            @include respond-to-h(xs){
+                                font-size: 0.8rem;
+                            }
+                            @include respond-to-h(xxs){
+                                font-size: 0.7rem;
+                            }
+                            @include respond-to-v(md){
+                                font-size: 1rem;
+                            }
+                            @include respond-to-v(s){
+                                font-size: 0.9rem;
+                            }
+                            @include respond-to-v(sm){
+                                font-size: 0.9rem;
+                            }
+                            @include respond-to-v(xs){
+                                font-size: 0.8rem;
+                            }
+
+                        }
+                    }
+
+                    .product__price__container{
+                        width: 100%;
+                        height: 5vh;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        flex-direction: row-reverse;
+                        padding: 0 1.5vw;
+                        z-index: 10;
+
+                        @include respond-to-v(s){
+                            padding: 0 2.5vw;
+                        }
+
+                        .product__price{
+                            font-size: 1.5rem;
+                            color: var(--ChText);
+                            font-weight: 500;
+                            text-align: left;
+                            @include respond-to-h(md){
+                               font-size: 1.3rem;
+                            }
+                            @include respond-to-h(sm){
+                                font-size: 1.3rem;
+                            }
+                            @include respond-to-h(xs){
+                                font-size: 1.1rem;
+                            }
+                            @include respond-to-h(xxs){
+                                font-size: 1rem;
+                            }
+                            @include respond-to-v(md){
+                                font-size: 1.3rem;
+                            }
+                            @include respond-to-v(s){
+                                font-size: 1.3rem;
+                            }
+                             @include respond-to-v(sm){
+                                font-size: 1.2rem;
+                            }
+                             @include respond-to-v(xs){
+                                font-size: 1.1rem;
+                            }
+                        }
+
+                        .product__sale__container{
+                            width: 35%;
+                            height: 100%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: flex-start;
+                            flex-direction: row;
+                            gap: 0.5vw;
+                            @include respond-to-v(s){
+                                gap: 2.5vw;
+                            }
+                            @include respond-to-v(sm){
+                                gap: 2.5vw;
+                            }
+                            @include respond-to-v(xs){
+                                gap: 2.5vw;
+                            }
+
+                            .add__to__cart__button{
+                                width: 2vw;
+                                height: 2vw;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                background-color: transparent;
+                                border: none;
+                                cursor: pointer;
+                                transition: transform 0.3s ease;
+                                .add__to__cart__icon{
+                                    width: 100%;
+                                    height: 100%;
+                                    object-fit: cover;
+                                }
+                                &:hover{
+                                    transform: scale(1.05);  
+                                }
+                                @include respond-to-v(md){
+                                    width: 3.5vw;
+                                    height: 3.5vw;
+                                }
+                                @include respond-to-v(s){
+                                    width: 6vw;
+                                    height: 6vw;
+                                }
+                                 @include respond-to-v(sm){
+                                    width: 6vw;
+                                    height: 6vw;
+                                }
+                                 @include respond-to-v(xs){
+                                    width: 6vw;
+                                    height: 6vw;
+                                }
+                            }
+                        }
+                        
+                    }
+                }
+            }
+        }
+    }
+
+    .newsletter{
+        width: 100%;
+        height: 150vh;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        margin-top: 25vh;
+        gap: 5vh;
+        position: relative;
+
+        @include respond-to-v(lg){
+            height: 30vh;
+        }
+        @include respond-to-v(md){
+            height: 40vh;
+        }
+        @include respond-to-v(s){
+            height: 50vh;
+        }
+        @include respond-to-v(sm){
+            height: 50vh;
+        }
+        @include respond-to-v(xs){
+            height: 50vh;
+        }
+
+        .newsletter__sticky{
+            width: 100%;
+            height: 75vh;
+            padding: 5vh 5vw;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: sticky;
+            top: 0;
+            border-top: 1px solid var(--ButtonBorder);
+            overflow: hidden;
+
+            .newsletter__title{
+                width: 100%;
+                height: 10vh;
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                h3{
+                    font-family: "Sansation-Light";
+                    font-size: 2.5rem;
+                    color: var(--Wtext);
+                    font-weight: 300;
+                    width: 50%;
+
+                    @include respond-to-h(md){
+                        font-size: 2rem;
+                    }
+                    @include respond-to-h(sm){
+                        font-size: 2rem;
+                    }
+                    @include respond-to-h(xs){
+                        font-size: 1.8rem;
+                    }
+                    @include respond-to-h(xxs){
+                        font-size: 1.5rem;
+                    }
+
+                    @include respond-to-v(lg){
+                        font-size: 2rem;
+                        width: 60%;
+                    }
+                    @include respond-to-v(md){
+                        font-size: 1.5rem;
+                        width: 60%;
+                    }
+                    @include respond-to-v(s){
+                        font-size: 1.5rem;
+                        width: 100%;
+                    }
+                    @include respond-to-v(sm){
+                        font-size: 1.5rem;
+                        width: 100%;
+                    }
+                    @include respond-to-v(xs){
+                        font-size: 1.3rem;
+                        width: 100%;
+                    }
+                }
+            }
+
+            .newsletter__input__container{
+                width: 100%;
+                height: 15vh;
+                display: flex;
+                align-items: flex-end;
+                justify-content: center;
+                flex-direction: column;
+                padding: 0 1vw;
+                @include respond-to-h(md){
+                    height: 17.5vh;
+                }
+                @include respond-to-h(sm){
+                    height: 12.5vh;
+                }
+                @include respond-to-h(xs){
+                    height: 20vh;
+                }
+                @include respond-to-h(xxs){
+                    height: 20vh;
+                }
+
+                @include respond-to-v(lg){
+                    height: 12.5vh;
+                }
+                @include respond-to-v(md){
+                    height: 12.5vh;
+                }
+                @include respond-to-v(s){
+                    height: 12.5vh;
+                }
+                @include respond-to-v(sm){
+                    height: 12.5vh;
+                }
+                @include respond-to-v(xs){
+                    height: 12.5vh;
+                }
+
+
+                .newsletter__input{
+                    width: 70%;
+                    height: 50%;
+                    border: none;
+                    outline: none;
+                    color: var(--ChText);
+                    background-color: var(--WhiteBg);
+                    border-radius: 50px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    padding: 1vh 1vh;
+
+                    @include respond-to-v(lg){
+                        padding: 0.25vh 0.5vw;
+                    }
+                    @include respond-to-v(md){
+                        padding: 0.25vh 0.5vw;
+                    }
+                    @include respond-to-v(s){
+                        width: 100%;
+                    }
+                    @include respond-to-v(sm){
+                        width: 100%;
+                    }
+                    @include respond-to-v(xs){
+                        width: 100%;
+                    }
+
+
+                    .newsletter__input__field{
+                        width: 80%;
+                        height: 100%;
+                        padding: 0 2vw;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 1.3rem;
+                        color: var(--ChText);
+                        font-weight: 300;
+                        box-sizing: border-box; // optional, for layout consistency
+                        background: none !important;
+                        border: none !important;
+                        outline: none !important;
+                        box-shadow: none !important;
+                        margin: 0 !important;
+                        @include respond-to-h(md){
+                            font-size: 1.2rem;
+                        }
+                        @include respond-to-h(sm){
+                            font-size: 1.1rem;
+                        }
+                        @include respond-to-h(xs){
+                            font-size: 1.1rem;
+                        }
+                        @include respond-to-h(xxs){
+                            font-size: 1rem;
+                        }
+                        @include respond-to-v(md){
+                            font-size: 1.2rem;
+                        }
+                        @include respond-to-v(s){
+                            font-size: 1.2rem;
+                        }
+                        @include respond-to-v(sm){
+                            font-size: 1.2rem;
+                        }
+                        @include respond-to-v(xs){
+                            font-size: 1.1rem;
+                        }
+                        
+
+                        &::placeholder{
+                            color: var(--Placeholder);
+                            font-size: 1.3rem;
+                            font-weight: 300;
+
+                            @include respond-to-h(md){
+                                font-size: 1.2rem;
+                            }
+                            @include respond-to-h(sm){
+                                font-size: 1.1rem;
+                            }
+                            @include respond-to-h(xs){
+                                font-size: 1.1rem;
+                            }
+                            @include respond-to-h(xxs){
+                                font-size: 1rem;
+                            }
+
+                            @include respond-to-v(md){
+                                font-size: 1.1rem;
+                            }
+                            @include respond-to-v(s){
+                                font-size: 1.1rem;
+                            }
+                            @include respond-to-v(sm){
+                                font-size: 1.1rem;
+                            }
+                            @include respond-to-v(xs){
+                                font-size: 1rem;
+                            }
+                        }
+
+                        &:focus{
+                            outline: none;
+                            background-color: transparent;
+                        }
+                    
+                    }
+
+                    .newsletter__input__button{
+                        width: 10vw;
+                        height: 100%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        background-color: var(--OButton);
+                        border: 1px solid var(--ButtonBorder);
+                        border-radius: 50px;
+                        cursor: pointer;
+
+                        @include respond-to-h(sm){
+                            width: 12.5vw;
+                        }
+                        @include respond-to-h(xs){
+                            width: 15vw;
+                        }
+
+                        @include respond-to-h(xxs){
+                            width: 15vw;
+                        }
+
+                        @include respond-to-v(lg){
+                            width: 12.5vw;
+                        }
+                        @include respond-to-v(md){
+                            width: 12.5vw;
+                        }
+                        @include respond-to-v(s){
+                            width: 30vw;
+                        }
+                        @include respond-to-v(sm){
+                            width: 30vw;
+                        }
+                        @include respond-to-v(xs){
+                            width: 30vw;
+                        }
+
+                        p{
+                            font-size: 1.3rem;
+                            color: var(--Wtext);
+                            font-weight: 500;
+
+                            @include respond-to-h(md){
+                                font-size: 1.2rem;
+                            }
+                            @include respond-to-h(sm){
+                                font-size: 1.1rem;
+                            }
+                            @include respond-to-h(xs){
+                                font-size: 1.1rem;
+                            }
+                            @include respond-to-h(xxs){
+                                font-size: 1rem;
+                            }
+                            @include respond-to-v(lg){
+                                font-size: 1.2rem;
+                            }
+                            @include respond-to-v(md){
+                                font-size: 1.1rem;
+                            }
+                            @include respond-to-v(s){
+                                font-size: 1.1rem;
+                            }
+                            @include respond-to-v(sm){
+                                font-size: 1.1rem;
+                            }
+                            @include respond-to-v(xs){
+                                font-size: 1rem;
+                            }
+                        }
+                    }
+                }
+
+                .newsletter__input__message{
+                    width: 100%;
+                    height: 5vh;
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-end;
+                    font-size: 1.3rem;
+                    color: var(--ChText);
+                    font-weight: 300;
+
+                    .newsletter__input__message p {
+                        opacity: 0;
+                        transition: opacity 0.5s;
+                    }
+                    .newsletter__input__message p.show {
+                        opacity: 1;
+                    }
+
+                    @include respond-to-h(xs){
+                        font-size: 1.1rem;
+                    }
+                    @include respond-to-h(xxs){
+                        font-size: 1rem;
+                    }
+
+                    @include respond-to-v(s){
+                        font-size: 1.1rem;
+                    }
+                    @include respond-to-v(sm){
+                        font-size: 1.1rem;
+                    }
+                    @include respond-to-v(xs){
+                        font-size: 1rem;
+                    }
+                    
+                }
+            }
+        }
+
+    }
+
+    .ecom__scroll__to__top{
+        position: fixed;
+        bottom: 5vh;
+        right: 1.5vw;
+        width: 3.5vw;
+        height: 3.5vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--OButton);
+        border: 0.5px solid var(--WhiteBg);
+        border-radius: 50%;
+        cursor: pointer;
+        z-index: 100;
+        transition: background-color 0.3s ease;
+        @include respond-to-v(s){
+            width: 10vw;
+            height: 10vw;
+        }
+        @include respond-to-v(sm){
+            width: 10vw;
+            height: 10vw;
+        }
+        @include respond-to-v(xs){
+            width: 10vw;
+            height: 10vw;
+        }
+
+        &:hover{
+            background-color: var(--Wbutton);
+        }
+
+        .scroll__to__top__button{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &:hover{
+                transform: scale(1.1);
+            }
+
+            .scroll__to__top__icon{
+                width: 1.25vw;
+                height: 1.25vw;
+                object-fit: cover;
+                @include respond-to-v(s){
+                    width: 5vw;
+                    height: 5vw;
+                }
+                @include respond-to-v(sm){
+                    width: 5vw;
+                    height: 5vw;
+                }
+                @include respond-to-v(xs){
+                    width: 5vw;
+                    height: 5vw;
+                }
+            }
+        }
+    }
+} 

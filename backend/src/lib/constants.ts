@@ -13,6 +13,11 @@ export const IS_DEV = process.env.NODE_ENV === 'development'
  * Public URL for the backend
  */
 export const BACKEND_URL = process.env.BACKEND_PUBLIC_URL ?? process.env.RAILWAY_PUBLIC_DOMAIN_VALUE ?? 'http://localhost:9000'
+/**
+ * Public URL for the storefront
+ */
+export const STOREFRONT_URL = process.env.STOREFRONT_PUBLIC_URL ?? process.env.RAILWAY_PUBLIC_DOMAIN_VALUE ?? 'http://localhost:3000'
+
 
 /**
  * Database URL for Postgres instance used by the backend
@@ -49,6 +54,11 @@ export const JWT_SECRET = assertValue(
   process.env.JWT_SECRET,
   'Environment variable for JWT_SECRET is not set',
 )
+
+/**
+ * JWT Expires In
+ */
+export const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN! || '7d'
 
 /**
  * Cookie secret used for signing cookies

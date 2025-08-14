@@ -1,0 +1,602 @@
+@use "../../../../../styles/mixins.scss" as *;
+
+.About {
+  width: 100vw;
+  height: 120vh;
+  position: relative;
+  background-color: var(--WhiteBg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @include respond-to-h(xs) {
+    height: 150vh;
+  }
+  @include respond-to-h(xxs) {
+    height: 180vh;
+  }
+
+  @include respond-to-v(lg){
+    height: 100vh;
+  }
+  @include respond-to-v(md){
+    height: 100vh;
+  }
+  @include respond-to-v(s){
+    height: 100vh;
+    overflow: hidden;
+  }
+   @include respond-to-v(sm){
+    height: 100vh;
+    overflow: hidden;
+  }
+   @include respond-to-v(xs){
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .About__Images {
+    position: relative;
+    width: 90%;
+    height: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+
+    @include respond-to-h(xs) {
+      height: 130vh;
+    }
+    @include respond-to-h(xxs) {
+      height: 140vh;
+    }
+
+
+    @include respond-to-v(lg){
+      height: 80vh;
+    }
+    @include respond-to-v(md){
+      height: 80vh;
+    }
+    @include respond-to-v(s){
+      height: 80vh;
+    }
+    @include respond-to-v(sm){
+      height: 80vh;
+    }
+    @include respond-to-v(xs){
+      height: 80vh;
+    }
+
+    .About__Images__Layer__static__layer{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+
+
+      .About__Images__Item{
+        position: absolute;
+        top: 45%;
+        left: 50%;
+        width: 25vw;
+        height: 60vh;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        pointer-events: none;
+
+        .About__Images__Item__layer__static{
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+          border-radius: 25px;
+          position: relative;
+        }
+
+        @include respond-to-h(mdt){
+          width: 25vw;
+          height: 50vh;
+        }
+        @include respond-to-h(sm){
+          width: 25vw;
+          height: 45vh;
+        }
+        @include respond-to-h(xs){
+          width: 25vw;
+          height: 70vh;
+        }
+        @include respond-to-h(xxs){
+          width: 25vw;
+          height: 60vh;
+        }
+
+        @include respond-to-v(lg){
+          height: 40vh;
+          width: 35vw;
+        }
+
+        @include respond-to-v(md){
+          height: 40vh;
+          width: 35vw;
+        }
+        @include respond-to-v(s){
+          height: 40vh;
+          width: 60vw;
+        }
+        @include respond-to-v(sm){
+          height: 40vh;
+          width: 60vw;
+        }
+        @include respond-to-v(xs){
+          height: 40vh;
+          width: 60vw;
+        }
+      }
+    }
+
+    .About__Images__Layer__animated__layer{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+
+      &:nth-of-type(2) {
+        .About__Images__Item {
+          &:nth-of-type(1) {
+            top: 30%;
+            left: 71%;
+            width: 20vw;
+            height: 20vh;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            @include respond-to-h(mdt){
+              width: 22.5vw;
+              height: 17.5vh;
+            }
+            @include respond-to-h(sm){
+              width: 20vw;
+              height: 17.5vh;
+            }
+            @include respond-to-h(xs){
+              width: 20vw;
+              height: 25vh;
+            }
+            @include respond-to-h(xxs){
+              width: 22.5vw;
+              height: 25vh;
+            }
+
+            @include respond-to-v(lg){
+              height: 12.5vh;
+              width: 25vw;
+              left: 77.5%;
+            }
+
+            @include respond-to-v(md){
+              height: 12.5vh;
+              width: 25vw;
+              left: 77.5%;
+            }
+            @include respond-to-v(s){
+              height: 10vh;
+              width: 35vw;
+              left: 90%;
+            }
+            @include respond-to-v(sm){
+              height: 10vh;
+              width: 35vw;
+              left: 90%;
+            }
+            @include respond-to-v(xs){
+              height: 12.5vh;
+              width: 35vw;
+              left: 90%;
+            }
+          }
+
+          // 2nd image: horizontal, bottom right
+          &:nth-of-type(2) {
+            top: 60%;
+            left: 72.5%;
+            width: 15vw;
+            height: 30vh;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            @include respond-to-h(mdt){
+              width: 17.5vw;
+              height: 30vh;
+            }
+            @include respond-to-h(sm){
+              width: 17.5vw;
+              height: 30vh;
+            }
+            @include respond-to-h(xs){
+              width: 12.5vw;
+              height: 35vh;
+            }
+            @include respond-to-h(xxs){
+              width: 15vw;
+              height: 35vh;
+            }
+
+            @include respond-to-v(lg){
+              height: 20vh;
+              width: 20vw;
+              left: 80%;
+            }
+
+            @include respond-to-v(md){
+              height: 20vh;
+              width: 20vw;
+              left: 80%;
+            }
+
+            @include respond-to-v(s){
+              height: 22.5vh;
+              width: 35vw;
+              left: 90%;
+            }
+            @include respond-to-v(sm){
+              height: 22.5vh;
+              width: 35vw;
+              left: 90%;
+            }
+            @include respond-to-v(xs){
+              height: 22.5vh;
+              width: 30vw;
+              left: 90%;
+            }
+          }
+        }
+      }
+
+      .About__Images__Item {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        border-radius: 10px;
+        border: 1px solid var(--ChText);
+        pointer-events: none;
+
+        // 2nd image: bottom center
+        &:nth-of-type(1) {
+          top: 80%;
+          left: 50%;
+          width: 20vw;
+          height: 20vh;
+          transform: translate(-50%, -50%);
+          z-index: 2;
+          @include respond-to-h(mdt){
+            width: 22.5vw;
+            height: 17.5vh;
+          }
+          @include respond-to-h(sm){
+            width: 20vw;
+            height: 17.5vh;
+          }
+          @include respond-to-h(xs){
+            width: 20vw;
+            height: 25vh;
+          }
+          @include respond-to-h(xxs){
+            top: 75%;
+            width: 20vw;
+            height: 22.5vh;
+          }
+
+          @include respond-to-v(lg){
+            height: 12.5vh;
+            width: 25vw;
+          }
+          @include respond-to-v(md){
+            height: 12.5vh;
+            width: 25vw;
+          }
+          @include respond-to-v(s){
+            height: 12.5vh;
+            width: 45vw;
+          }
+          @include respond-to-v(sm){
+            height: 12.5vh;
+            width: 45vw;
+          }
+          @include respond-to-v(xs){
+            height: 13vh;
+            width: 40vw;
+          }
+        }
+
+        // 3rd image: vertical, top left
+        &:nth-of-type(2) {
+          top: 40%;
+          left: 27.5%;
+          width: 15vw;
+          height: 30vh;
+          transform: translate(-50%, -50%);
+          z-index: 2;
+          @include respond-to-h(mdt){
+            width: 17.5vw;
+            height: 30vh;
+          }
+          @include respond-to-h(sm){
+            width: 17.5vw;
+            height: 30vh;
+          }
+          @include respond-to-h(xs){
+            width: 12.5vw;
+            height: 35vh;
+          }
+          @include respond-to-h(xxs){
+            width: 15vw;
+            height: 35vh; 
+          }
+
+          @include respond-to-v(lg){
+            height: 20vh;
+            width: 20vw;
+            left: 20%;
+          }
+          @include respond-to-v(md){
+            height: 20vh;
+            width: 20vw;
+            left: 20%;
+          }
+          @include respond-to-v(s){
+            height: 22.5vh;
+            width: 35vw;
+            left: 5%;
+          }
+          @include respond-to-v(sm){
+            height: 22.5vh;
+            width: 35vw;
+            left: 5%;
+          }
+          @include respond-to-v(xs){
+            height: 22.5vh;
+            width: 30vw;
+            left: 5%;
+          }
+        }
+
+        // 4th image: horizontal, bottom left
+        &:nth-of-type(3) {
+          top: 70%;
+          left: 29%;
+          width: 20vw;
+          height: 20vh;
+          transform: translate(-50%, -50%);
+          z-index: 2;
+          @include respond-to-h(mdt){
+            width: 22.5vw;
+            height: 17.5vh;
+          }
+          @include respond-to-h(sm){
+            width: 20vw;
+            height: 17.5vh;
+          }
+          @include respond-to-h(xs){
+            width: 20vw;
+            height: 25vh;
+          }
+          @include respond-to-h(xxs){
+            width: 22.5vw;
+            height: 25vh;
+          }
+
+          @include respond-to-v(lg){
+            height: 12.5vh;
+            width: 25vw;
+            left: 22.5%;
+          }
+          @include respond-to-v(md){
+            height: 12.5vh;
+            width: 25vw;
+            left: 22.5%;
+          }
+          @include respond-to-v(s){
+            height: 10vh;
+            width: 35vw;
+            left: 12.5%;
+          }
+          @include respond-to-v(sm){
+            height: 10vh;
+            width: 35vw;
+            left: 12.5%;
+          }
+            @include respond-to-v(xs){
+            height: 12.5vh;
+            width: 35vw;
+            left: 12.5%;
+          }
+        }
+      }
+    }
+  }
+
+  .About__Text {
+    position: absolute;
+    top: 10vh;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 5vh 5vw;
+    z-index: 1;
+    @include respond-to-v(lg){
+      height: 90vh;
+    }
+
+    @include respond-to-h(xxs) {
+      height: 160vh;
+      padding: 10vh 5vw;
+    }
+
+    @include respond-to-v(md){
+      height: 90vh;
+       padding: 5vh 5vw 2.5vh 5vw;
+    }
+    @include respond-to-v(s){
+      height: 90vh;
+    }
+    @include respond-to-v(sm){
+      height: 90vh;
+    }
+     @include respond-to-v(xs){
+      height: 90vh;
+    }
+
+    .About__Text__Header{
+      width: 100%;
+      height: 50%;
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      p{
+        width: 30%;
+        display: flex;
+        flex-wrap: wrap;
+        line-height: 1.4;
+        span{
+          font-size: 1.5rem;
+          line-height: 1.2;
+          color: var(--ChText);
+          opacity: 0.8;
+          text-align: left;
+          margin-right: 0.25rem;
+          display: inline-block;
+          white-space: nowrap;
+
+          @include respond-to-h(lg){
+            font-size: 1.3rem;
+          }
+          @include respond-to-h(md){
+            font-size: 1.1rem;
+            width: 35%;
+          }
+          @include respond-to-h(mdt){
+            font-size: 1.3rem;
+            width: 35%;
+          }
+          @include respond-to-h(sm){
+            font-size: 1.1rem;
+            width: 40%;
+          }
+          @include respond-to-h(xs){
+            font-size: 1rem;
+            width: 40%;
+          }
+          @include respond-to-h(xxs){
+            font-size: 1rem;
+            width: 40%;
+          }
+
+          @include respond-to-v(md){
+            font-size: 1.3rem;
+            width: 55%;
+          }
+          @include respond-to-v(s){
+            font-size: 1.3rem;
+            width: 95%;
+          }
+
+          @include respond-to-v(sm){
+            font-size: 1.3rem;
+            width: 95%;
+          }
+          @include respond-to-v(xs){
+            font-size: 1.1rem;
+            width: 95%;
+          }
+        }
+      }
+    }
+
+    .About__Text__Content{
+      width: 100%;
+      height: 50%;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+      p{
+        width: 30%;
+        display: flex;
+        flex-wrap: wrap;
+        line-height: 1.4;
+        justify-content: flex-end;
+        span{
+          font-size: 1.5rem;
+          line-height: 1.2;
+          color: var(--ChText);
+          opacity: 0.8;
+          text-align: left;
+          margin-right: 0.25rem;
+          display: inline-block;
+          white-space: nowrap;
+
+          @include respond-to-h(lg){
+            font-size: 1.3rem;
+          }
+          @include respond-to-h(md){
+            font-size: 1.1rem;
+            width: 35%;
+          }
+          @include respond-to-h(mdt){
+            font-size: 1.3rem;
+            width: 35%;
+          }
+          @include respond-to-h(sm){
+            font-size: 1.1rem;
+            width: 40%;
+          }
+          @include respond-to-h(xs){
+            font-size: 1rem;
+            width: 40%;
+          }
+          @include respond-to-h(xxs){
+            font-size: 1rem;
+            width: 40%;
+          }
+
+          @include respond-to-v(md){
+            font-size: 1.3rem;
+            width: 55%;
+          }
+          @include respond-to-v(s){
+            font-size: 1.3rem;
+            width: 95%;
+          }
+
+          @include respond-to-v(sm){
+            font-size: 1.3rem;
+            width: 95%;
+          }
+          @include respond-to-v(xs){
+            font-size: 1.1rem;
+            width: 95%;
+          }
+        }
+      }
+    }
+  }
+}

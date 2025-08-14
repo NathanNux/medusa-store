@@ -1,0 +1,17 @@
+.product__details{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 220vh;
+    .product__details__sticky{
+        position: sticky;
+        top: 0vh;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+}

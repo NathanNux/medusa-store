@@ -1,0 +1,1242 @@
+@use "../../../../../styles/mixins.scss" as *;
+
+.kontakt{
+    width: 100vw;
+    height: 160vh;
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+
+    @include respond-to-h(xs){
+        height: 160vh;
+        padding: 20vh 5vw;   
+    }
+    @include respond-to-h(xxs){
+        height: 160vh;
+        padding: 20vh 5vw;   
+    }
+    @include respond-to-v(lg){
+        flex-direction: column-reverse;
+        height: 70vh;
+        padding: 5vh 5vw 10vh 5vw;
+    }
+    @include respond-to-v(md){
+        flex-direction: column-reverse;
+        height: 70vh;
+        padding: 5vh 5vw 10vh 5vw;
+    }
+    @include respond-to-v(s){
+        flex-direction: column-reverse;
+    }
+    @include respond-to-v(sm){
+        flex-direction: column-reverse;
+    }
+    @include respond-to-v(xs){
+        flex-direction: column-reverse;
+    }
+
+    .kontakt__wraper{
+        width: 100vw;
+        height: 100vh;
+        position: sticky;
+        top: 0;
+        overflow: hidden;
+        background-color: var(--WhiteBg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+        gap: 5vw;
+        padding: 10vh 5vw;
+        .kontakt__Newsletter{
+            width: 50%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 5vh;
+            z-index: 2;
+            @include respond-to-h(md){
+                width: 45%;
+            }
+            @include respond-to-h(sm){
+                width: 45%;
+            }
+            @include respond-to-h(xs){
+                width: 45%;
+                margin-top: 25vh;
+            }
+            @include respond-to-h(xxs){
+                width: 45%;
+                margin-top: 25vh;
+            }
+            @include respond-to-v(lg){
+                width: 80%;
+                align-items: flex-start;
+                justify-content: flex-end;
+                height: 30%;
+            }
+            @include respond-to-v(md){
+                width: 80%;
+                align-items: flex-start;
+                justify-content: space-evenly;
+                height: 30%;
+
+            }
+            @include respond-to-v(s){
+                width: 100%;
+            }
+            @include respond-to-v(sm){
+                width: 100%;
+            }
+            @include respond-to-v(xs){
+                width: 100%;
+            }
+
+
+            h3{
+                font-family: "Sansation-Light";
+                font-size: 2.5rem;
+                color: var(--CharcoalBg);
+                font-weight: 300;
+                text-align: left;
+                margin: 0;
+
+                @include respond-to-h(lg){
+                    font-size: 2rem;
+                }
+                @include respond-to-h(mdt){
+                    font-size: 2rem;
+                }
+                @include respond-to-h(md){
+                    font-size: 1.8rem;
+                } 
+                @include respond-to-h(sm){
+                    font-size: 1.8rem;
+                }
+                @include respond-to-h(xs){
+                    font-size: 1.5rem;
+                }
+                @include respond-to-h(xxs){
+                    font-size: 1.3rem;
+                }
+                @include respond-to-v(lg){
+                    font-size: 2rem;
+                    width: 80%;
+                }
+                @include respond-to-v(md){
+                    font-size: 1.5rem;
+                    width: 80%;
+                }
+                @include respond-to-v(s){
+                    font-size: 1.5rem;
+                }
+                @include respond-to-v(sm){
+                    font-size: 1.3rem;
+                }
+                @include respond-to-v(xs){
+                    font-size: 1.3rem;
+                }
+
+            }
+
+            .kontakt__Newsletter__Input{
+                width: 100%;
+                height: 7.5vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 2vw;
+                position: relative;
+                border: 0.5px solid var(--ButtonBorder);
+                border-radius: 50px;
+                padding: 1vh 1vh;
+                @include respond-to-h(mdt){
+                    height: 5vh;
+                }
+                @include respond-to-h(xs){
+                    height: 10vh;
+                    padding: 1vh 1vh;
+                }
+                @include respond-to-h(xxs){
+                    height: 10vh;
+                    padding: 1vh 1vh;
+                }
+                @include respond-to-v(lg){
+                    height: 4vh;
+                    padding: 0.5vh 0.5vw;
+                }
+                @include respond-to-v(md){
+                    height: 5vh;
+                    padding: 0.5vh 0.5vw;
+                }
+                @include respond-to-v(s){
+                    height: 5vh;
+                    padding: 0.5vh 0.5vw 0.5vh 2.5vw;
+                }
+                @include respond-to-v(sm){
+                    height: 5vh;
+                    padding: 0.5vh 0.5vw 0.5vh 2.5vw;
+                }
+                @include respond-to-v(xs){
+                    height: 5vh;
+                    padding: 0.5vh 0.5vw 0.5vh 2.5vw;;
+                }
+
+                input{
+                    width: 100%;
+                    height: 100%;
+                    background-color: transparent;
+                    border: none;
+                    outline: none;
+                    padding: 0 1vw;
+                    font-size: 1.5rem;
+                    color: var(--ChText);
+                    font-weight: 300;
+                    &::placeholder{
+                        opacity: 0.8;
+                    }
+
+                    @include respond-to-h(lg){
+                        font-size: 1.3rem;
+                    }
+                    @include respond-to-h(mdt){
+                        font-size: 1.3rem;
+                    }
+                    @include respond-to-h(md){
+                        font-size: 1.1rem;
+                    }
+                    @include respond-to-h(sm){
+                        font-size: 1.1rem;
+                    }
+                    @include respond-to-h(xs){
+                        font-size: 1rem;
+                    }
+                    @include respond-to-h(xxs){
+                        font-size: 0.9rem;
+                    }
+                    @include respond-to-v(lg){
+                        font-size: 1.2rem;
+                    }
+                    @include respond-to-v(md){
+                        font-size: 1.1rem;
+                    }
+                    @include respond-to-v(s){
+                        font-size: 1.1rem;
+                    }
+                    @include respond-to-v(sm){
+                        font-size: 1.1rem;
+                    }
+                    @include respond-to-v(xs){
+                        font-size: 1rem;
+                    }
+                }
+
+                .ClickButton{
+                    .button{
+                        width: 160px;
+                        height: 45px;
+                        @include respond-to-h(lg){
+                            width: 150px !important;
+                            height: 40px !important;
+                        }
+                        @include respond-to-h(mdt){
+                            width: 150px !important;
+                            height: 40px !important;
+                        }
+                        @include respond-to-h(md){
+                            width: 150px !important;
+                            height: 40px !important;
+                        }
+                        @include respond-to-h(sm){
+                            width: 150px !important;
+                            height: 40px !important;
+                        }
+                        @include respond-to-h(xs){
+                            width: 150px !important;
+                            height: 40px !important;
+                        }
+                        @include respond-to-h(xxs){
+                            width: 150px !important;
+                            height: 40px !important;
+                        }
+                        @include respond-to-v(md){
+                            width: 150px !important;
+                            height: 40px !important;
+                        }
+                        @include respond-to-v(s){
+                            width: 150px !important;
+                            height: 40px !important;
+                        }
+                        @include respond-to-v(sm){
+                            width: 150px !important;
+                            height: 40px !important;
+                        }
+                        @include respond-to-v(xs){
+                            width: 150px !important;
+                            height: 40px !important;
+                        }
+                        .slider{
+                            .el{
+                                
+                                p{
+                                    font-family: "Sansation-Light";
+                                    text-transform: capitalize;
+                                    font-size: 1.5rem;
+                                    color: var(--WhiteBg);
+                                    font-weight: 300;
+                                    margin: 0;
+
+                                    @include respond-to-h(lg){
+                                        font-size: 1.3rem;
+                                    }
+                                    @include respond-to-h(mdt){
+                                        font-size: 1.3rem;
+                                    }
+                                    @include respond-to-h(md){
+                                        font-size: 1.1rem;
+                                    }
+                                    @include respond-to-h(sm){
+                                        font-size: 1.1rem;
+                                    }
+                                    @include respond-to-h(xs){
+                                        font-size: 1rem;
+                                    }
+                                    @include respond-to-h(xxs){
+                                        font-size: 1rem;
+                                    }
+                                    @include respond-to-v(lg){
+                                        font-size: 1.3rem;
+                                    }
+                                    @include respond-to-v(md){
+                                        font-size: 1.1rem;
+                                    }
+                                    @include respond-to-v(s){
+                                        font-size: 1.1rem;
+                                    }
+                                    @include respond-to-v(sm){
+                                        font-size: 1.1rem;
+                                    }
+                                    @include respond-to-v(xs){
+                                        font-size: 1rem;
+                                    }
+                                }
+                            }
+                        }
+
+                        @include respond-to-h(lg){
+                            width: 200px;
+                            height: 50px;
+                        }
+                        @include respond-to-h(md){
+                            width: 180px;
+                            height: 45px;
+                        }
+                        @include respond-to-h(mdt){
+                            width: 200px;
+                            height: 50px;
+                        }
+                        @include respond-to-h(sm){
+                            width: 180px;
+                            height: 45px;
+                        }
+                        @include respond-to-h(xs){
+                            width: 180px;
+                            height: 45px;
+                        }
+                        @include respond-to-h(xxs){
+                            width: 180px;
+                            height: 45px;
+                        }
+                        @include respond-to-v(lg){
+                            width: 200px;
+                            height: 50px;
+                        }
+                        @include respond-to-v(md){
+                            width: 180px;
+                            height: 45px;
+                        }
+                        @include respond-to-v(s){
+                            width: 180px;
+                            height: 45px;
+                        }
+                        @include respond-to-v(sm){
+                            width: 180px;
+                            height: 45px;
+                        }
+                        @include respond-to-v(xs){
+                            width: 160px;
+                            height: 40px;
+                        }
+                    }
+
+                }
+            }
+        }
+
+        .kontakt__Contact{
+            width: 50%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            flex-direction: column;
+            gap: 1vh;
+            z-index: 1;
+            margin-bottom: 10vh;
+            @include respond-to-h(md){
+                width: 55%;
+            }
+            @include respond-to-h(sm){
+                width: 55%;
+            }
+            @include respond-to-h(xs){
+                width: 55%;
+            }
+            @include respond-to-h(xxs){
+                width: 55%;
+            }
+            @include respond-to-v(lg){
+                width: 80%;
+                align-items: flex-start;
+                margin-bottom: 2.5vh;
+            }
+            @include respond-to-v(md){
+                width: 80%;
+                align-items: flex-start;
+                margin-bottom: 2.5vh;
+            }
+            @include respond-to-v(s){
+                width: 100%;
+                margin-bottom: 5vh;
+            }
+            @include respond-to-v(sm){
+                width: 100%;
+            }
+            @include respond-to-v(xs){
+                width: 100%;
+            }
+
+
+            .kontakt__Contact__Title{
+                display: flex;
+                align-items: flex-end;
+                justify-content: center;
+                flex-direction: column;
+                width: 100%;
+                height: 7.5vh;
+                gap: 0.5vh;
+
+                @include respond-to-h(xs){
+                    height: 10vh;
+                }
+                @include respond-to-h(xxs){
+                    height: 10vh;
+                }
+                @include respond-to-v(lg){
+                    height: 5vh;
+                }
+                @include respond-to-v(md){
+                    height: 5vh;
+                }
+                @include respond-to-v(s){
+                    height: 5vh;
+                }
+
+                .divider{
+                    width: 100%;
+                    height: 0.5px;
+                    background-color: var(--CharcoalBg);
+                    &:nth-of-type(2){
+                        width: 98%;
+                    }
+                }
+                h3{
+                    font-family: "Sansation-Light";
+                    font-size: 2.5rem;
+                    color: var(--CharcoalBg);
+                    font-weight: 300;
+                    text-align: left;
+                    margin: 0;
+
+                    @include respond-to-h(lg){
+                        font-size: 2rem;
+                    }
+                    @include respond-to-h(mdt){
+                        font-size: 2rem;
+                    }
+                    @include respond-to-h(md){
+                        font-size: 1.8rem;
+                    }
+                    @include respond-to-h(sm){
+                        font-size: 1.8rem;
+                    }
+                    @include respond-to-h(xs){
+                        font-size: 1.5rem;
+                    }
+                    @include respond-to-h(xxs){
+                        font-size: 1.3rem;
+                    }
+                    @include respond-to-v(lg){
+                        font-size: 2rem;
+                    }
+                    @include respond-to-v(md){
+                        font-size: 1.8rem;
+                    }
+                    @include respond-to-v(s){
+                        font-size: 1.8rem;
+                    }
+                    @include respond-to-v(sm){
+                        font-size: 1.5rem;
+                    }
+                    @include respond-to-v(xs){
+                        font-size: 1.3rem;
+                    }
+                }
+
+            }
+            .kontakt__Contact__Form{
+                width: 100%;
+                height: 50%;
+                position: relative;
+                display: flex;
+                align-items: flex-end;
+                justify-content: center;
+                flex-direction: column;
+                gap: 2vh;
+                border-bottom: 1px solid var(--ButtonBorder);
+
+                @include respond-to-h(md){
+                    height: 55%;
+                }
+                @include respond-to-v(lg){
+                    height: 80%;
+                }
+                @include respond-to-v(md){
+                    height: 100%;
+                }
+                @include respond-to-v(s){
+                    height: 100%;
+                }
+                @include respond-to-v(sm){
+                    height: 100%;
+                }
+                @include respond-to-v(xs){
+                    height: 100%;
+                }
+                    
+
+                .kontakt__Contact__Form__Pillar{
+                    position: absolute;
+                    top: 0;
+                    left: -40%;
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    z-index: 0;
+                    @include respond-to-v(s){
+                        display: none;
+                    }
+                    @include respond-to-v(sm){
+                        display: none;
+                    }
+                    @include respond-to-v(xs){
+                        display: none;
+                    }
+                }
+
+                form{
+                    width: 80%;
+                    height: 100%;
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    flex-direction: column;
+                    gap: 1vh;
+                    z-index: 1;
+                    @include respond-to-v(s){
+                        width: 100%;
+                    }
+                    @include respond-to-v(sm){
+                        width: 100%;
+                    }
+                    @include respond-to-v(xs){
+                        width: 100%;
+                    }
+                    .kontakt__Contact__Form__Inputs{
+                        width: 100%;
+                        height: 30%;
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        flex-direction: column;
+                        z-index: 1;
+
+                        .kontakt__Contact__Form__Inputs__inner{
+                            width: 100%;
+                            height: 5vh;
+                            position: relative;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            flex-direction: row;
+                            gap: 1vw;
+                            border-top: 0.5px solid var(--ButtonBorder);
+                            padding: 0 1vw;
+                            @include respond-to-h(xs){
+                                height: 8vh;
+                            }
+                            @include respond-to-h(xxs){
+                                height: 7.5vh;
+                            }
+                            @include respond-to-v(lg){
+                                height: 3vh;
+                            }
+                            @include respond-to-v(md){
+                                height: 3.5vh;
+                            }
+                            @include respond-to-v(s){
+                                height: 4.5vh;
+                            }
+                            @include respond-to-v(sm){
+                                height: 4.5vh;
+                            }
+                            @include respond-to-v(xs){
+                                height: 5vh;
+                            }
+
+                            p{
+                                font-size: 1.3rem;
+                                color: var(--CharcoalBg);
+                                font-weight: 300;
+                                margin: 0;
+                                white-space: nowrap;
+                                width: 11%;
+
+                                @include respond-to-h(lg){
+                                    font-size: 1.2rem;
+                                    width: 10%;
+                                }
+                                @include respond-to-h(mdt){
+                                    font-size: 1.2rem;
+                                    width: 10%;
+                                }
+                                @include respond-to-h(md){
+                                    font-size: 1.1rem;
+                                }
+                                @include respond-to-h(sm){
+                                    font-size: 1.1rem;
+                                }
+                                @include respond-to-h(xs){
+                                    font-size: 1rem;
+                                    width: 13%;
+                                }
+                                @include respond-to-h(xxs){
+                                    font-size: 0.9rem;
+                                    width: 13%;
+                                }
+                                @include respond-to-v(lg){
+                                    font-size: 1.2rem;
+                                }
+                                @include respond-to-v(md){
+                                    font-size: 1.2rem;
+                                    width: 12%;
+                                }
+                                @include respond-to-v(s){
+                                    font-size: 1.2rem;
+                                    width: 20%;
+                                }
+                                @include respond-to-v(sm){
+                                    font-size: 1.2rem;
+                                    width: 20%;
+                                }@include respond-to-v(xs){
+                                    font-size: 1.1rem;
+                                    width: 20%;
+                                }
+                            }
+
+                            input{
+                                width: 100%;
+                                height: 5vh;
+                                padding: 0.25vh 1vw;
+                                background-color: transparent;
+                                border: none;
+                                font-size: 1.3rem;
+                                color: var(--ChText);
+                                font-weight: 300;
+                                &::placeholder{
+                                    opacity: 0.8;
+                                    @include respond-to-h(lg){
+                                        font-size: 1.1rem;
+                                    }
+                                    @include respond-to-h(md){
+                                        font-size: 1rem;
+                                    }
+                                    @include respond-to-h(sm){
+                                        font-size: 1rem;
+                                    }
+                                    @include respond-to-h(xs){
+                                        font-size: 0.9rem;
+                                    }
+                                    @include respond-to-h(xs){
+                                        font-size: 0.8rem;
+                                    }
+                                    @include respond-to-v(lg){
+                                        font-size: 1.1rem;
+                                    }
+                                    @include respond-to-v(md){
+                                        font-size: 1.1rem;
+                                    }
+                                    @include respond-to-v(s){
+                                        font-size: 1.1rem;
+                                    }
+                                    @include respond-to-v(sm){
+                                        font-size: 1.1rem;
+                                    }
+                                    @include respond-to-v(xs){
+                                        font-size: 1rem;
+                                    }
+
+                                }
+                                &:focus{
+                                    outline: none;
+                                }
+
+                                @include respond-to-h(lg){
+                                    font-size: 1.1rem;
+                                }
+                                @include respond-to-h(mdt){
+                                    font-size: 1.1rem;
+                                }
+                                @include respond-to-h(md){
+                                    font-size: 1rem;
+                                }
+                                @include respond-to-h(sm){
+                                    font-size: 1rem;
+                                }
+                                @include respond-to-h(xs){
+                                    font-size: 0.9rem;
+                                }
+                                @include respond-to-h(xxs){
+                                    font-size: 0.8rem;
+                                }
+                                @include respond-to-v(lg){
+                                    font-size: 1.1rem;
+                                }
+                                @include respond-to-v(md){
+                                    font-size: 1.1rem;
+                                }
+                                @include respond-to-v(s){
+                                    font-size: 1.1rem;
+                                }
+                                @include respond-to-v(sm){
+                                    font-size: 1.1rem;
+                                }
+                                @include respond-to-v(xs){
+                                    font-size: 1rem;
+                                }
+                            }
+                        }
+                    }
+
+                    .kontakt__Contact__Form__Message{
+                        width: 100%;
+                        height: 40%;
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        flex-direction: row;
+                        gap: 0.5vh;
+                        border-top: 0.5px solid var(--ButtonBorder);
+                        z-index: 2;
+
+                        .kontakt__Contact__Form__Message__Text{
+                            width: 100%;
+                            height: 100%;
+                            position: relative;
+                            display: flex;
+                            align-items: flex-start;
+                            justify-content: center;
+                            flex-direction: column;
+                            z-index: 1;
+
+                            .kontakt__Contact__Form__Message__Text__inner{
+                                width: 100%;
+                                height: 100%;
+                                position: relative;
+                                display: flex;
+                                align-items: flex-start;
+                                justify-content: center;
+                                flex-direction: column;
+                                gap: 1vh;
+                                padding: 0 1vw;
+                                font-family: "Sansation-Regular";
+                                padding: 1vh 1vw;
+
+                                p{
+                                    font-size: 1.3rem;
+                                    color: var(--CharcoalBg);
+                                    font-weight: 300;
+                                    margin: 0;
+                                    text-align: left;
+
+                                    @include respond-to-h(lg){
+                                        font-size: 1.2rem;
+                                    }
+                                    @include respond-to-h(mdt){
+                                        font-size: 1.2rem;
+                                    }
+                                    @include respond-to-h(md){
+                                        font-size: 1.1rem;
+                                    }
+                                    @include respond-to-h(sm){
+                                        font-size: 1.1rem;
+                                    }
+                                    @include respond-to-h(xs){
+                                        font-size: 1rem;
+                                    }
+                                    @include respond-to-h(xxs){
+                                        font-size: 0.9rem;
+                                    }
+                                    @include respond-to-v(lg){
+                                        font-size: 1.2rem;
+                                    }
+                                    @include respond-to-v(md){
+                                        font-size: 1.2rem;
+                                    }
+                                    @include respond-to-v(s){
+                                        font-size: 1.2rem;
+                                    }
+                                    @include respond-to-v(s){
+                                        font-size: 1.2rem;
+                                    }
+                                    @include respond-to-v(s){
+                                        font-size: 1.2rem;
+                                    }
+                                    @include respond-to-v(sm){
+                                        font-size: 1.2rem;
+                                    }
+                                    @include respond-to-v(s){
+                                        font-size: 1.2rem;
+                                    }
+                                    @include respond-to-v(sm){
+                                        font-size: 1.2rem;
+                                    }
+                                    @include respond-to-v(xs){
+                                        font-size: 1.1rem;
+                                    }
+                                }
+
+                                textarea{
+                                    width: 100%;
+                                    height: 100%;
+                                    padding: 0.25vh 1vw;
+                                    background-color: transparent;
+                                    border: none;
+                                    font-size: 1.3rem;
+                                    color: var(--ChText);
+                                    font-weight: 300;
+                                    font-family: "Sansation-Light";
+
+                                    &::placeholder{
+                                        opacity: 0.8;
+
+                                        @include respond-to-h(lg){
+                                            font-size: 1.1rem;
+                                        }
+                                        @include respond-to-h(mdt){
+                                            font-size: 1.1rem;
+                                        }
+                                        @include respond-to-h(md){
+                                            font-size: 1rem;
+                                        }
+                                        @include respond-to-h(sm){
+                                            font-size: 1rem;
+                                        }
+                                        @include respond-to-h(xs){
+                                            font-size: 0.9rem;
+                                        }
+                                        @include respond-to-h(xxs){
+                                            font-size: 0.8rem;
+                                        }
+                                        @include respond-to-v(lg){
+                                            font-size: 1.1rem;
+                                        }
+                                        @include respond-to-v(md){
+                                            font-size: 1.1rem;
+                                        }
+                                        @include respond-to-v(s){
+                                            font-size: 1.1rem;
+                                        }
+                                        @include respond-to-v(sm){
+                                            font-size: 1.1rem;
+                                        }
+                                        @include respond-to-v(xs){
+                                            font-size: 1rem;
+                                        }
+                                    }
+                                    &:focus{
+                                        outline: none;
+                                    }
+
+                                    @include respond-to-h(lg){
+                                        font-size: 1.1rem;
+                                    }
+                                    @include respond-to-h(mdt){
+                                        font-size: 1.1rem;
+                                    }
+                                    @include respond-to-h(md){
+                                        font-size: 1rem;
+                                    }
+                                    @include respond-to-h(sm){
+                                        font-size: 1rem;
+                                    }
+                                    @include respond-to-h(xs){
+                                        font-size: 0.9rem;
+                                    }
+                                    @include respond-to-h(xxs){
+                                        font-size: 0.8rem;
+                                    }
+                                    @include respond-to-v(lg){
+                                        font-size: 1.1rem;
+                                    }
+                                    @include respond-to-v(md){
+                                        font-size: 1.1rem;
+                                    }
+                                    @include respond-to-v(s){
+                                        font-size: 1.1rem;
+                                    }
+                                    @include respond-to-v(sm){
+                                        font-size: 1.1rem;
+                                    }
+                                    @include respond-to-v(xs){
+                                        font-size: 1rem;
+                                    }
+                                }
+
+                            }
+
+                            .kontakt__Contact__Form__Message__Text__Button{
+                                width: 100%;
+                                height: 5vh;
+                                position: relative;
+                                display: flex;
+                                align-items: center;
+                                justify-content: flex-start;
+                                padding-left: 1vw;
+
+
+                                .ClickButton{
+                                    .button{
+                                        width: 120px;
+                                        height: 40px;
+                                        @include respond-to-h(lg){
+                                            width: 110px !important;
+                                            height: 40px !important;
+                                        }
+                                        @include respond-to-h(mdt){
+                                            width: 110px !important;
+                                            height: 40px !important;
+                                        }
+                                        @include respond-to-h(md){
+                                            width: 100px !important;
+                                            height: 35px !important;
+                                        }
+                                        @include respond-to-h(sm){
+                                            width: 100px !important;
+                                            height: 35px !important;
+                                        }
+                                        @include respond-to-h(xs){
+                                            width: 100px !important;
+                                            height: 35px !important;
+                                        }
+                                        @include respond-to-h(xxs){
+                                            width: 80px !important;
+                                            height: 30px !important;
+                                        }
+                                        @include respond-to-v(md){
+                                            width: 110px !important;
+                                            height: 35px !important;
+                                        }
+                                        @include respond-to-v(s){
+                                            width: 120px !important;
+                                            height: 40px !important;
+                                        }
+                                        @include respond-to-v(sm){
+                                            width: 110px !important;
+                                            height: 35px !important;
+                                        }
+                                        @include respond-to-v(xs){
+                                            width: 110px !important;
+                                            height: 35px !important;
+                                        }
+                                        .slider{
+                                            .el{
+                                                
+                                                p{
+                                                    font-family: "Sansation-Light";
+                                                    text-transform: capitalize;
+                                                    font-size: 1.5rem;
+                                                    color: var(--WhiteBg);
+                                                    font-weight: 300;
+                                                    margin: 0;
+
+                                                    @include respond-to-h(lg){
+                                                        font-size: 1.3rem;
+                                                    }
+                                                    @include respond-to-h(mdt){
+                                                        font-size: 1.3rem;
+                                                    }
+                                                    @include respond-to-h(md){
+                                                        font-size: 1.1rem;
+                                                    }
+                                                    @include respond-to-h(sm){
+                                                        font-size: 1.1rem;
+                                                    }
+                                                    @include respond-to-h(xs){
+                                                        font-size: 1rem;
+                                                    }
+                                                    @include respond-to-h(xxs){
+                                                        font-size: 1rem;
+                                                    }
+                                                    @include respond-to-v(lg){
+                                                        font-size: 1.3rem;
+                                                    }
+                                                    @include respond-to-v(md){
+                                                        font-size: 1.1rem;
+                                                    }
+                                                    @include respond-to-v(s){
+                                                        font-size: 1.1rem;
+                                                    }
+                                                    @include respond-to-v(sm){
+                                                        font-size: 1.1rem;
+                                                    }
+                                                    @include respond-to-v(xs){
+                                                        font-size: 1rem;
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        @include respond-to-h(lg){
+                                            width: 200px;
+                                            height: 50px;
+                                        }
+                                        @include respond-to-h(md){
+                                            width: 180px;
+                                            height: 45px;
+                                        }
+                                        @include respond-to-h(mdt){
+                                            width: 200px;
+                                            height: 50px;
+                                        }
+                                        @include respond-to-h(sm){
+                                            width: 180px;
+                                            height: 45px;
+                                        }
+                                        @include respond-to-h(xs){
+                                            width: 180px;
+                                            height: 45px;
+                                        }
+                                        @include respond-to-h(xxs){
+                                            width: 180px;
+                                            height: 45px;
+                                        }
+                                        @include respond-to-v(lg){
+                                            width: 200px;
+                                            height: 50px;
+                                        }
+                                        @include respond-to-v(md){
+                                            width: 180px;
+                                            height: 45px;
+                                        }
+                                        @include respond-to-v(s){
+                                            width: 180px;
+                                            height: 45px;
+                                        }
+                                        @include respond-to-v(sm){
+                                            width: 180px;
+                                            height: 45px;
+                                        }
+                                        @include respond-to-v(xs){
+                                            width: 160px;
+                                            height: 40px;
+                                        }
+                                    }
+
+                                }
+                            
+                            }
+
+                        }
+
+                        .kontakt__Contact__Form__Message__HashTag{
+                            width: 100%;
+                            height: 100%;
+                            position: relative;
+                            display: flex;
+                            align-items: flex-end;
+                            justify-content: center;
+                            flex-direction: column;
+                            gap: 0.25vh;
+                            padding-top: 2.5vh;
+                            z-index: 2;
+
+
+                            .HashtagButton{
+                                .button{
+                                    width: 140px;
+                                    height: 30px;
+                                    @include respond-to-h(lg){
+                                        width: 140px !important;
+                                        height: 30px !important;
+                                    }
+                                    @include respond-to-h(mdt){
+                                        width: 120px !important;
+                                        height: 30px !important;
+                                    }
+                                    @include respond-to-h(md){
+                                        width: 120px !important;
+                                        height: 30px !important;
+                                    }
+                                    @include respond-to-h(sm){
+                                        width: 100px !important;
+                                        height: 30px !important;
+                                    }
+                                    @include respond-to-h(xs){
+                                        width: 100px !important;
+                                        height: 30px !important;
+                                    }
+                                    @include respond-to-h(xxs){
+                                        width: 80px !important;
+                                        height: 25px !important;
+                                    }
+                                    @include respond-to-v(md){
+                                        width: 110px !important;
+                                        height: 30px !important;
+                                    }
+                                    @include respond-to-v(s){
+                                        width: 110px !important;
+                                        height: 30px !important;
+                                    }
+                                    @include respond-to-v(sm){
+                                        width: 110px !important;
+                                        height: 30px !important;
+                                    }
+                                    @include respond-to-v(xs){
+                                        width: 110px !important;
+                                        height: 30px !important;
+                                    }
+                                    .slider{
+                                        .el{
+                                            
+                                            p{
+                                                font-family: "Sansation-Light";
+                                                text-transform: capitalize;
+                                                font-size: 1.2rem;
+                                                color: var(--WhiteBg);
+                                                font-weight: 300;
+                                                margin: 0;
+
+                                                @include respond-to-h(lg){
+                                                    font-size: 1rem;
+                                                }
+                                                @include respond-to-h(mdt){
+                                                    font-size: 1rem;
+                                                }
+                                                @include respond-to-h(md){
+                                                    font-size: 1rem;
+                                                }
+                                                @include respond-to-h(sm){
+                                                    font-size: 1rem;
+                                                }
+                                                @include respond-to-h(xs){
+                                                    font-size: 1rem;
+                                                }
+                                                @include respond-to-h(xxs){
+                                                    font-size: 1rem;
+                                                }
+                                                @include respond-to-v(lg){
+                                                    font-size: 1.3rem;
+                                                }
+                                                @include respond-to-v(md){
+                                                    font-size: 1.1rem;
+                                                }
+                                                @include respond-to-v(s){
+                                                    font-size: 1.1rem;
+                                                }
+                                                @include respond-to-v(sm){
+                                                    font-size: 1.1rem;
+                                                }
+                                                @include respond-to-v(xs){
+                                                    font-size: 1rem;
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    @include respond-to-h(lg){
+                                        width: 200px;
+                                        height: 50px;
+                                    }
+                                    @include respond-to-h(md){
+                                        width: 180px;
+                                        height: 45px;
+                                    }
+                                    @include respond-to-h(mdt){
+                                        width: 200px;
+                                        height: 50px;
+                                    }
+                                    @include respond-to-h(sm){
+                                        width: 180px;
+                                        height: 45px;
+                                    }
+                                    @include respond-to-h(xs){
+                                        width: 180px;
+                                        height: 45px;
+                                    }
+                                    @include respond-to-h(xxs){
+                                        width: 180px;
+                                        height: 45px;
+                                    }
+                                    @include respond-to-v(lg){
+                                        width: 200px;
+                                        height: 50px;
+                                    }
+                                    @include respond-to-v(md){
+                                        width: 180px;
+                                        height: 45px;
+                                    }
+                                    @include respond-to-v(s){
+                                        width: 180px;
+                                        height: 45px;
+                                    }
+                                    @include respond-to-v(sm){
+                                        width: 180px;
+                                        height: 45px;
+                                    }
+                                    @include respond-to-v(xs){
+                                        width: 160px;
+                                        height: 40px;
+                                    }
+                                }
+
+                                }
+                        }
+                    }
+                }
+
+            }
+        
+        }
+    }
+}

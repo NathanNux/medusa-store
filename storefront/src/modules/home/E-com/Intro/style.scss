@@ -1,0 +1,385 @@
+@use "../../../../../styles/mixins.scss" as *;
+
+.ECom__Intro{
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--OliveBg);
+    padding: 10vh 5vw;
+    gap: 10%;
+
+    @include respond-to-h(xs){
+       height: 140vh;
+       padding: 20vh 5vw;
+    }
+    @include respond-to-h(xxs){
+       height: 140vh;
+       padding: 20vh 5vw;
+    }
+
+    @include respond-to-v(lg){
+       height: 80vh;
+       padding: 10vh 5vw;
+    }
+    @include respond-to-v(md){
+       height: 80vh;
+       padding: 10vh 5vw;
+    }
+
+    @include respond-to-v(s){
+       height: 90vh;
+       padding: 10vh 5vw;
+    }
+    @include respond-to-v(sm){
+       height: 90vh;
+       padding: 10vh 5vw;
+    }
+    @include respond-to-v(xs){
+       height: 100vh;
+       padding: 10vh 5vw;
+    }
+
+    .ECom__Intro__Details{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 0;
+        overflow: hidden;
+
+        .ECom__Intro__Gradient{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: -10vh;
+            left: 5vw;
+            z-index: 0;
+
+            svg{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transform: scale(2);
+                opacity: 1;
+
+                g{
+                    width: 50vw;
+                    height: 50vh;
+                }
+            }
+        }
+    }
+    .ECom__Intro__Title{
+        width: 100%;
+        height: 55%;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        z-index: 1;
+
+         @include respond-to-v(lg){
+            height: 100%;
+        }
+        @include respond-to-v(md){
+            height: 100%;
+        }
+         @include respond-to-v(s){
+            height: 40%;
+        }
+          @include respond-to-v(sm){
+            height: 40%;
+        }
+          @include respond-to-v(xs){
+            height: 40%;
+        }
+
+
+        h2{
+            font-family: "Sansation-Light";
+            color: var(--Wtext);
+            font-size: 10rem;
+            text-align: left;
+            line-height: 1.1;
+
+            .precise__char{
+                color: inherit;
+                font-size: inherit;
+                display: inline-block;
+                white-space: nowrap;
+            }
+
+            @include respond-to-h(lg){
+                font-size: 8rem;
+            }
+
+            @include respond-to-h(md){
+              font-size: 6rem;
+            }
+            @include respond-to-h(mdt){
+                font-size: 8rem;
+            }
+            @include respond-to-h(sm){
+              font-size: 6rem;
+            }
+            @include respond-to-h(xs){
+              font-size: 4rem;
+            }
+            @include respond-to-h(xxs){
+              font-size: 4rem;
+            }
+
+            @include respond-to-v(lg){
+              font-size: 7rem;
+            }
+            @include respond-to-v(md){
+              font-size: 5rem;
+            }
+            @include respond-to-v(s){
+              font-size: 4rem;
+            }
+             @include respond-to-v(sm){
+              font-size: 3.5rem;
+            }
+             @include respond-to-v(xs){
+              font-size: 3rem;
+            }
+        }
+
+        .Hero__Intro__Container{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 5vw;
+            h2{
+                font-family: "Sansation-Light";
+                color: var(--Wtext);
+                font-size: 10rem;
+                text-align: left;   
+
+                @include respond-to-h(lg){
+                    font-size: 8rem;
+                }
+
+                @include respond-to-h(md){
+                    font-size: 6rem;
+                }
+                @include respond-to-h(mdt){
+                    font-size: 8rem;
+                }
+                @include respond-to-h(sm){
+                    font-size: 6rem;
+                }
+                @include respond-to-h(xs){
+                    font-size: 4rem;
+                }
+                @include respond-to-h(xxs){
+                    font-size: 4rem;
+                }
+
+                @include respond-to-v(lg){
+                    font-size: 7rem;
+                }
+                @include respond-to-v(md){
+                    font-size: 5rem;
+                }
+                @include respond-to-v(s){
+                    font-size: 4rem;
+                }
+                @include respond-to-v(sm){
+                    font-size: 3.5rem;
+                }
+                @include respond-to-v(xs){
+                    font-size: 3rem;
+                }
+            }
+            .Hero__Intro__Img__Container{
+                position: relative;
+                width: 15vw;
+                height: 15vh;
+                border: 1px solid var(--ChText);
+
+                .Hero__Intro__Img__Container__inner{
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                @include respond-to-h(mdt){
+                    width: 20vw;
+                    height: 15vh;
+                }
+                @include respond-to-h(sm){
+                    width: 20vw;
+                    height: 15vh;
+                }
+                @include respond-to-h(xs){
+                    width: 15vw;
+                    height: 17.5vh;
+                }
+                @include respond-to-h(xxs){
+                    width: 15vw;
+                    height: 17.5vh;
+                }
+
+
+                @include respond-to-v(lg){
+                    width: 25vw;
+                    height: 10vh;
+                }
+                @include respond-to-v(md){
+                    width: 25vw;
+                    height: 10vh;
+                }
+                @include respond-to-v(s){
+                    display: none;
+                }
+                @include respond-to-v(sm){
+                    display: none;
+                }
+                @include respond-to-v(xs){
+                    display: none;
+                }
+                
+            }
+        }
+
+    }   
+
+    .ECom__Intro__Content{
+        width: 100%;
+        height: 40%;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        text-align: center;
+        z-index: 1;
+
+        @include respond-to-v(lg){
+            height: 100%;
+        }
+        @include respond-to-v(md){
+            height: 100%;
+        }
+        @include respond-to-v(s){
+            height: 100%;
+            align-items: flex-start;
+        }
+        @include respond-to-v(sm){
+            height: 100%;
+            align-items: flex-start;
+        }
+        @include respond-to-v(xs){
+            height: 100%;
+            align-items: flex-start;
+        }
+
+        p{
+            font-family: "Sentient-Light";
+            width: 35%;
+            display: flex;
+            flex-wrap: wrap;
+            line-height: 1.4;
+
+            &:nth-of-type(2){
+                text-align: right;
+                width: 25%;
+                margin-top: 10vh;
+                justify-content: flex-end;
+            }
+
+            span{
+                color: var(--Wtext);
+                font-size: 1.8rem;
+                opacity: 0.8;
+                line-height: 1.2;
+                text-align: left;
+                display: inline-block;
+                white-space: nowrap;
+                margin-right: 0.25rem;
+                @include respond-to-h(lg){
+                    font-size: 1.5rem;
+                }
+
+                @include respond-to-h(md){
+                    font-size: 1.3rem;
+                }
+                @include respond-to-h(mdt){
+                    font-size: 1.5rem;
+                }
+                @include respond-to-h(sm){
+                    font-size: 1.3rem;
+                }
+                @include respond-to-h(xs){
+                    font-size: 1.2rem;
+                }
+                @include respond-to-h(xxs){
+                    font-size: 1.2rem;
+                }
+
+                @include respond-to-v(lg){
+                    font-size: 1.5rem;
+                }
+
+                @include respond-to-v(md){
+                    font-size: 1.3rem;
+                }
+
+
+                @include respond-to-v(s){
+                    font-size: 1.3rem;
+                }
+                @include respond-to-v(sm){
+                    font-size: 1.2rem;
+                }
+                @include respond-to-v(xs){
+                    font-size: 1.1rem;
+                }
+            }
+
+            @include respond-to-v(md){
+                width: 45%;
+                
+                &:nth-of-type(2){
+                    width: 40%;
+                }
+            }
+
+
+            @include respond-to-v(s){
+                width: 100%;
+                &:nth-of-type(2){
+                    width: 100%;
+                    margin-top: 25vh;
+                }
+            }
+            @include respond-to-v(sm){
+                width: 100%;
+                &:nth-of-type(2){
+                    width: 100%;
+                    margin-top: 25vh;
+                }
+            }
+            @include respond-to-v(xs){
+                width: 100%;
+                &:nth-of-type(2){
+                    width: 100%;
+                    margin-top: 25vh;
+                }
+            }
+        }
+
+    }
+}

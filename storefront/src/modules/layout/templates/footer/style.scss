@@ -1,0 +1,1606 @@
+@use "../../../../styles/mixins.scss" as *;
+
+.footer{
+    width: 100vw;
+    height: 75vh;
+    position: relative;
+    // position: absolute;
+    // bottom: 0;
+    // left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    background-color: var(--WhiteBg);
+    overflow: visible;
+    z-index: 100;
+
+    @include respond-to-h(mdt){
+        height: 50vh;
+    }
+    @include respond-to-h(sm){
+        height: 50vh;
+    }
+    @include respond-to-h(xs){
+        height: 80vh;
+    }
+    @include respond-to-h(xxs){
+        height: 80vh;
+    }
+
+
+    @include respond-to-v(lg){
+        height: 35vh;
+    }
+    @include respond-to-v(md){
+        height: 40vh;
+    }
+    @include respond-to-v(s){
+        height: 50vh;
+    }
+    @include respond-to-v(sm){
+        height: 50vh;
+    }
+    @include respond-to-v(xs){
+        height: 60vh;
+    }
+
+
+    //NOTE: You can still use font weight to change the custom fonts
+
+
+    .footer__background{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        overflow: hidden;
+
+        .footer__gradient{
+            position: absolute;
+            top: 0%;
+            left: 0%;
+            width: 100%;
+            height: 100%;
+
+            svg{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                scale: 2;
+                opacity: 0.5;
+            }
+        }
+    }       
+
+    .footer__head{
+        width: 100%;
+        height: 20%;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        @include respond-to-v(s){
+            height: 17.5%;
+        }
+        @include respond-to-v(sm){
+            height: 17.5%;
+        }
+        @include respond-to-v(xs){
+            height: 20%;
+        }
+
+        .footer__head__bg{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: -1;
+            .divider{
+                // width: 100%;
+                // height: 0.5px;
+                position: absolute;
+                left: 0;
+                z-index: 1;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                &:nth-of-type(1){
+                    top: 0vh;
+                }
+                // &:nth-of-type(2){
+                //     top: 47.5%;
+                //     left: 50%;
+                //     transform: translate(-50%, -50%);
+                //     width: 10vw;
+                //     height: 10vw;
+                //     border-radius: 50%;
+                //     overflow: visible;
+
+                //     defs{
+                //         mask{
+                //             circle {
+                //                 border-radius: 50%;
+                //             }
+                //         }
+                //     }
+                // }
+                &:nth-of-type(2){
+                    bottom: 0vh;
+                }
+            }
+
+
+            .footer__head__bg__overlay{
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 10vw;
+                height: 10vw;
+                opacity: 0.5;
+                overflow: hidden;
+                border-radius: 50%;
+                z-index: 2;
+            }
+        }
+
+        .footer__head__logo{
+            position: absolute;
+            top: -10%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10vw;
+            height: 10vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 0.5px solid var(--ButtonBorder);
+            border-radius: 50%;
+            z-index: 2;
+            overflow: hidden;
+
+            img{
+                width: 10vw;
+                height: 10vw;
+                object-fit: contain;
+            }
+            @include respond-to-h(xl){
+                width: 10vw;
+                height: 10vw;
+                top: -2.5%;
+            }
+            @include respond-to-h(md){
+                width: 9vw;
+                height: 9vw;
+            }
+            @include respond-to-h(sm){
+                top: 5%;
+            }
+            @include respond-to-h(xxs){
+                width: 12vw;
+                height: 12vw;
+            }
+
+            @include respond-to-v(lg){
+                width: 10vw;
+                height: 10vw;
+                top: 5%;
+            }
+            @include respond-to-v(md){
+                width: 11vw;
+                height: 11vw;
+                top: 10%;
+            }
+
+            @include respond-to-v(s){
+                width: 20vw;
+                height: 20vw;
+                top: 5%;
+                img{ 
+                    width: 20vw;
+                    height: 20vw;
+                }
+            }
+            @include respond-to-v(sm){
+                width: 17.5vw;
+                height: 17.5vw;
+                top: 5%;
+                img{ 
+                    width: 17.5vw;
+                    height: 17.5vw;
+                }
+            }
+            @include respond-to-v(xs){
+                width: 20vw;
+                height: 20vw;
+                top: 5%;
+                img{ 
+                    width: 20vw;
+                    height: 20vw;
+                }
+            }
+        }
+
+        .footer__head__socials{
+            position: absolute;
+            width: 30%;
+            top: 50%;
+            left: 50%;
+            height: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12.5vw;
+            z-index: 2;
+            @include respond-to-v(s){
+                gap: 30vw;
+                width: 80%;
+            }
+            @include respond-to-v(sm){
+                gap: 30vw;
+                width: 80%;
+            }
+            @include respond-to-v(xs){
+                gap: 30vw;
+                width: 80%;
+            }
+
+            a{
+                width: 5vw;
+                height: 5vw;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                .footer__head__socials__icon{
+                    width: 75px;
+                    height: 75px;
+
+                    @include respond-to-h(lg){
+                        width: 65px;
+                        height: 65px;
+                    }
+                    @include respond-to-h(mdt){
+                        width: 60px;
+                        height: 60px;
+                    }
+                    @include respond-to-h(md){
+                        width: 55px;
+                        height: 55px;
+                    }
+                    @include respond-to-h(sm){
+                        width: 50px;
+                        height: 50px;
+                    }
+                    @include respond-to-h(xs){
+                        width: 40px;
+                        height: 40px;
+                    }
+                    @include respond-to-h(xxs){
+                        width: 35px;
+                        height: 35px;
+                    }
+
+
+                    @include respond-to-v(lg){
+                        width: 50px;
+                        height: 50px;
+                    }
+                     @include respond-to-v(md){
+                        width: 45px;
+                        height: 45px;
+                    }
+                    @include respond-to-v(s){
+                        width: 50px;
+                        height: 50px;
+                    }
+                    @include respond-to-v(sm){
+                        width: 40px;
+                        height: 40px;
+                    }
+                    @include respond-to-v(xs){
+                        width: 45px;
+                        height: 45px;
+                    }
+                }
+            }
+        }
+
+        .footer__head__Titles{
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5vw;
+            z-index: 1;
+
+            @include respond-to-v(s){
+                display: none;
+            }
+            @include respond-to-v(sm){
+                display: none;
+            }
+            @include respond-to-v(xs){
+                display: none;
+            }
+
+            h3{
+                font-family: "ooohBaby-Regular";
+                color: var(--ChText);
+                font-size: 4rem;
+                opacity: 0.8;
+                font-weight: 300;
+
+                @include respond-to-h(lg){
+                    font-size: 3rem;
+                }
+                @include respond-to-h(mdt){
+                    font-size: 3rem;
+                }
+                @include respond-to-h(md){
+                    font-size: 3rem;
+                }
+                @include respond-to-h(sm){
+                    font-size: 2.5rem;
+                }
+                @include respond-to-h(xs){
+                    font-size: 2rem;
+                }
+                @include respond-to-h(xxs){
+                    font-size: 1.8rem;
+                }
+
+
+                @include respond-to-v(lg){
+                    font-size: 2.5rem;
+                }
+                @include respond-to-v(md){
+                    font-size: 2rem;
+                }
+            }
+        }
+    }
+
+    .footer__content{
+        width: 100%;
+        height: 50%;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center; 
+        flex-direction: row;
+        padding: 5vh 5vw;
+
+        @include respond-to-v(md){
+            height: 50%;
+        }
+        @include respond-to-v(s){
+            height: 45%;
+        }
+        @include respond-to-v(sm){
+            height: 45%;
+        }
+        @include respond-to-v(xs){
+            height: 45%;
+        }
+
+        .footer__content__info{
+            width: 50%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 1.5rem;
+
+            @include respond-to-h(lg){
+                gap: 0.25rem;
+                height: 90%;
+            }
+            @include respond-to-h(mdt){
+                gap: 0.5rem;
+                height: 90%;
+            }
+            @include respond-to-h(md){
+                gap: 0.5rem;
+                height: 90%;
+            }
+            @include respond-to-h(sm){
+                gap: 0.5rem;
+                height: 90%;
+            }
+            @include respond-to-h(xs){
+                gap: 0.5rem;
+                height: 90%;
+            }
+            @include respond-to-h(xxs){
+                gap: 0.5rem;
+                height: 75%;
+            }
+
+
+            @include respond-to-v(lg){
+                gap: 1rem;
+                height: 90%;
+            }
+            @include respond-to-v(md){
+                gap: 1rem;
+                height: 90%;
+            }
+            @include respond-to-v(s){
+                gap: 1rem;
+                height: 60%;
+            }
+             @include respond-to-v(sm){
+                gap: 1rem;
+                height: 60%;
+            }
+             @include respond-to-v(xs){
+                gap: 1rem;
+                height: 60%;
+            }
+            
+
+            h3{
+                font-family: "Sansation-Light";
+                color: var(--ChText);
+                font-size: 2rem;
+                opacity: 0.8;
+                font-weight: 300;
+                margin: 0;
+
+                @include respond-to-h(lg){
+                    font-size: 1.8rem;
+                }
+                @include respond-to-h(mdt){
+                    font-size: 1.8rem;
+                }
+                 @include respond-to-h(md){
+                    font-size: 1.8rem;
+                }
+                @include respond-to-h(sm){
+                    font-size: 1.8rem;
+                }
+                @include respond-to-h(xs){
+                    font-size: 1.5rem;
+                }
+                @include respond-to-h(xxs){
+                    font-size: 1.3rem;
+                }
+
+
+                @include respond-to-v(lg){
+                    font-size: 1.8rem;
+                }
+                @include respond-to-v(md){
+                    font-size: 1.5rem;
+                }
+                @include respond-to-v(s){
+                    font-size: 1.5rem;
+                }
+                 @include respond-to-v(sm){
+                    font-size: 1.3rem;
+                }
+                 @include respond-to-v(xs){
+                    font-size: 1.3rem;
+                }
+            }
+
+            ul{
+                width: 100%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: center;
+                list-style: none;
+                gap: 1rem;
+                font-family: "Sansation-Regular";
+                color: var(--ChText);
+                opacity: 0.8;
+                text-align: left;
+                @include respond-to-h(xxs){
+                    gap: 0.25rem;
+                }
+
+
+                @include respond-to-v(lg){
+                    gap: 0.5rem;
+                }
+                @include respond-to-v(md){
+                    gap: 0.5rem;
+                }
+                @include respond-to-v(s){
+                    gap: 0.5rem;
+                }
+                @include respond-to-v(sm){
+                    gap: 0.5rem;
+                }
+                @include respond-to-v(xs){
+                    gap: 0.5rem;
+                }
+
+                li{
+                    font-family: "Sansation-Regular";
+                    color: var(--ChText);
+                    font-size: 1.3rem;
+                    opacity: 0.8;
+                    text-align: left;
+
+                    @include respond-to-h(lg){
+                        font-size: 1.1rem;
+                    }
+                    @include respond-to-h(mdt){
+                        font-size: 1.1rem;
+                    }
+
+                    @include respond-to-h(md){
+                        font-size: 1.1rem;
+                    }
+                    @include respond-to-h(sm){
+                        font-size: 1.1rem;
+                    }
+                    @include respond-to-h(xs){
+                        font-size: 1rem;
+                    }
+                    @include respond-to-h(xxs){
+                        font-size: 0.9rem;
+                    }
+
+                    @include respond-to-v(lg){
+                        font-size: 1.1rem;
+                    }
+                    @include respond-to-v(md){
+                        font-size: 1.1rem;
+                    }
+                    @include respond-to-v(s){
+                        font-size: 1rem;
+                    }
+                     @include respond-to-v(sm){
+                        font-size: 0.9rem;
+                    }
+                     @include respond-to-v(xs){
+                        font-size: 0.9rem;
+                    }
+                }
+            }
+        }
+
+        .footer__content__products{
+            width: 50%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 1.5rem;
+
+            @include respond-to-h(lg){
+                gap: 0.25rem;
+                height: 90%;
+            }
+            @include respond-to-h(mdt){
+                gap: 0.5rem;
+                height: 90%;
+            }
+            @include respond-to-h(md){
+                gap: 0.5rem;
+                height: 90%;
+            }
+            @include respond-to-h(sm){
+                gap: 0.5rem;
+                height: 90%;
+            }
+            @include respond-to-h(xs){
+                gap: 0.5rem;
+                height: 90%;
+            }
+            @include respond-to-h(xxs){
+                gap: 0.5rem;
+                height: 75%;
+            }
+
+
+            @include respond-to-v(lg){
+                gap: 1rem;
+                height: 90%;
+            }
+            @include respond-to-v(md){
+                gap: 1rem;
+                height: 90%;
+            }
+            @include respond-to-v(s){
+                gap: 1rem;
+                height: 60%;
+            }
+            @include respond-to-v(sm){
+                gap: 1rem;
+                height: 60%;
+            }
+            @include respond-to-v(xs){
+                gap: 1rem;
+                height: 60%;
+            }
+
+            h3{
+                font-family: "Sansation-Light";
+                color: var(--ChText);
+                font-size: 2rem;
+                opacity: 0.8;
+                font-weight: 300;
+                @include respond-to-h(lg){
+                    font-size: 1.8rem;
+                }
+                @include respond-to-h(mdt){
+                    font-size: 1.8rem;
+                }
+                @include respond-to-h(md){
+                    font-size: 1.8rem;
+                }
+                @include respond-to-h(sm){
+                    font-size: 1.8rem;
+                }
+                @include respond-to-h(xs){
+                    font-size: 1.5rem;
+                }
+                @include respond-to-h(xxs){
+                    font-size: 1.3rem;
+                }
+
+                @include respond-to-v(lg){
+                    font-size: 1.8rem;
+                }
+                @include respond-to-v(md){
+                    font-size: 1.8rem;
+                }
+                @include respond-to-v(s){
+                    font-size: 1.5rem;
+                }
+                @include respond-to-v(sm){
+                    font-size: 1.3rem;
+                }
+                @include respond-to-v(xs){
+                    font-size: 1.3rem;
+                }
+            }
+
+            ul{
+                width: 100%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                justify-content: center;
+                list-style: none;
+                gap: 1rem;
+                font-family: "Sansation-Regular";
+                color: var(--ChText);
+                opacity: 0.8;
+                text-align: left;
+
+                @include respond-to-h(xxs){
+                    gap: 0.25rem;
+                }
+
+                @include respond-to-v(lg){
+                    gap: 0.5rem;
+                }
+                @include respond-to-v(md){
+                    gap: 0.5rem;
+                }
+                 @include respond-to-v(s){
+                    gap: 0.5rem;
+                }
+                 @include respond-to-v(sm){
+                    gap: 0.5rem;
+                }
+                 @include respond-to-v(xs){
+                    gap: 0.5rem;
+                }
+
+                li{
+                    font-family: "Sansation-Regular";
+                    color: var(--ChText);
+                    font-size: 1.3rem;
+                    opacity: 0.8;
+                    text-align: left;
+
+                    @include respond-to-h(lg){
+                        font-size: 1.1rem;
+                    }
+                    @include respond-to-h(mdt){
+                        font-size: 1.1rem;
+                    }
+                    @include respond-to-h(md){
+                        font-size: 1.1rem;
+                    }
+                    @include respond-to-h(sm){
+                        font-size: 1.1rem;
+                    }
+                    @include respond-to-h(xs){
+                        font-size: 1rem;
+                    }
+                    @include respond-to-h(xxs){
+                        font-size: 0.9rem;
+                    }
+
+                    @include respond-to-v(lg){
+                        font-size: 1.1rem;
+                    }
+                    @include respond-to-v(md){
+                        font-size: 1.1rem;
+                    }
+                    @include respond-to-v(s){
+                        font-size: 1rem;
+                    }
+                    @include respond-to-v(sm){
+                        font-size: 0.9rem;
+                    }
+                    @include respond-to-v(xs){
+                        font-size: 0.9rem;
+                    }
+                }
+            }
+        }
+    }
+
+    .footer__pillar{
+        position: absolute;
+        top: 55%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        height: 10%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .footer__pillar__img{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+
+            .footer__pillar__img__container{
+                width: 300px;
+                height: 300px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                z-index: 1;
+
+                .footer__pillar__img__icon{
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                }
+            }
+        }
+
+        @include respond-to-h(lg){
+            top: 52.5%;
+            .footer__pillar__img{
+                .footer__pillar__img__container{
+                    width: 280px;
+                    height: 280px;
+                }
+            }
+        }
+        @include respond-to-h(mdt){
+            top: 52.5%;
+            .footer__pillar__img{
+                .footer__pillar__img__container{
+                    width: 280px;
+                    height: 280px;
+                }
+            }
+        }
+        @include respond-to-h(md){
+            top: 55%;
+            .footer__pillar__icon{
+                width: 200px;
+                height: 200px;
+            }
+        }
+        @include respond-to-h(sm){
+            top: 55%;
+            .footer__pillar__img{
+                .footer__pillar__img__container{
+                    width: 200px;
+                    height: 200px;
+                }
+            }
+        }
+        @include respond-to-h(xs){
+            top: 55%;
+            .footer__pillar__img{
+                .footer__pillar__img__container{
+                    width: 150px;
+                    height: 150px;
+                }
+            }
+        }
+        @include respond-to-h(xxs){
+            top: 55%;
+            .footer__pillar__img{
+                .footer__pillar__img__container{
+                    width: 150px;
+                    height: 150px;
+                }
+            }
+        }
+
+        @include respond-to-v(lg){
+            top: 52.5%;
+            .footer__pillar__img{
+                .footer__pillar__img__container{
+                    width: 260px;
+                    height: 260px;
+                }
+            }
+        }
+        @include respond-to-v(md){
+            top: 52.5%;
+            .footer__pillar__img{
+                .footer__pillar__img__container{
+                    width: 200px;
+                    height: 200px;
+                }
+            }
+        }
+
+        @include respond-to-v(s){
+            top: 42.5%;
+            .footer__pillar__img{
+                .footer__pillar__img__container{
+                    width: 200px;
+                    height: 200px;
+                }
+            }
+        }
+         @include respond-to-v(sm){
+            top: 42.5%;
+            .footer__pillar__img{
+                .footer__pillar__img__container{
+                    width: 180px;
+                    height: 180px;
+                }
+            }
+        }
+         @include respond-to-v(xs){
+            top: 45%;
+            .footer__pillar__img{
+                .footer__pillar__img__container{
+                    width: 170px;
+                    height: 170px;
+                }
+            }
+        }
+    }
+
+    .footer__bottom{
+        position: relative;
+        width: 100%;
+        height: 60px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+
+        .divider{
+            display: none;
+
+            @include respond-to-v(s){
+                display: block;
+                top: 50%;
+                position: absolute;
+                left: 0;
+                transform: translateY(-50%);
+                width: 100%;
+                height: 0.5px;
+            }
+            @include respond-to-v(sm){
+                display: block;
+                top: 50%;
+                position: absolute;
+                left: 0;
+                transform: translateY(-50%);
+                width: 100%;
+                height: 0.5px;
+            }
+            @include respond-to-v(xs){
+                display: block;
+                top: 50%;
+                position: absolute;
+                left: 0;
+                transform: translateY(-50%);
+                width: 100%;
+                height: 0.5px;
+                background-color: var(--CharcoalBg);
+            }
+
+        }
+
+        @include respond-to-v(s){
+           height: 25%;
+           flex-direction: column;
+            justify-content: flex-end;
+        }
+        @include respond-to-v(sm){
+           height: 25%;
+           flex-direction: column;
+            justify-content: flex-end;
+        }
+        @include respond-to-v(xs){
+           height: 25%;
+           flex-direction: column;
+            justify-content: flex-end;
+        }
+        
+        
+        .footer__bottom__links__left{
+            width: 50%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 0 5vw;
+            gap: 2.5vw;
+
+            @include respond-to-h(xxs){
+                gap: 1vw;
+            }
+
+            @include respond-to-v(md){
+                gap: 1.5vw;
+            }
+            @include respond-to-v(s){
+                gap: 5vw;
+                justify-content: center;
+                height: 25%;
+            }
+            @include respond-to-v(sm){
+                gap: 5vw;
+                justify-content: center;
+                height: 25%;
+            }
+            @include respond-to-v(xs){
+                gap: 5vw;
+                justify-content: center;
+                height: 25%;
+            }
+            .ScrollLink{
+                width: fit-content;
+                .button{
+                    width: 100%;
+                    .slider{
+                        .el{
+                            .perspectiveText{
+                                .footer__bottom__links__left__title{
+                                    font-family: "Sansation-Regular";
+                                    font-size: 1.3rem;
+                                    opacity: 0.8;
+                                    text-transform: capitalize;
+
+                                    &:nth-of-type(2){
+                                        transform: rotateX(-90deg) translateY(15px);
+                                    }
+
+                                    @include respond-to-h(lg){
+                                        font-size: 1.2rem;
+                                    }
+                                    @include respond-to-h(mdt){
+                                        font-size: 1.2rem;
+                                    }
+                                    @include respond-to-h(md){
+                                        font-size: 1.1rem;
+                                    }
+                                    @include respond-to-h(sm){
+                                        font-size: 1rem;
+                                    }
+                                    @include respond-to-h(xs){
+                                        font-size: 0.8rem;
+                                    }
+                                    @include respond-to-h(xxs){
+                                        font-size: 0.7rem;
+                                    }
+
+
+                                    @include respond-to-v(lg){
+                                        font-size: 1rem;
+                                    }
+                                    @include respond-to-v(md){
+                                        font-size: 0.8rem;
+                                    }
+                                    @include respond-to-v(s){
+                                        font-size: 1rem;
+                                    }
+                                    @include respond-to-v(sm){
+                                        font-size: 0.9rem;
+                                    }
+                                    @include respond-to-v(xs){
+                                        font-size: 0.9rem;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .footer__bottom__links__center{
+            width: 40%;
+            height: 100%;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 2.5vw;
+            @include respond-to-h(sm){
+                width: 45%;
+            }
+            @include respond-to-h(xs){
+                width: 45%;
+            }
+            @include respond-to-h(xxs){
+                width: 45%;
+            }
+
+
+            @include respond-to-v(md){
+                width: 45%;
+            }
+            @include respond-to-v(s){
+                width: 90%;
+                height: 50%;
+                top: 0;
+
+            }
+            @include respond-to-v(sm){
+                width: 90%;
+                height: 50%;
+                top: 0;
+
+            }
+            @include respond-to-v(xs){
+                width: 90%;
+                height: 50%;
+                top: 0;
+
+            }
+
+            .ScrollLink{
+                .button{
+                    width: fit-content;
+                    height: 60px;
+
+                    .slider{
+                        .el{
+                            .perspectiveText{
+                                padding: 0 0.5vw;
+                                height: 100%;
+
+                                .footer__bottom__links__center__title{
+                                    font-family: "ooohBaby-Regular";
+                                    color: var(--ChText);
+                                    font-size: 2rem;
+                                    opacity: 0.8;
+                                    padding: 0 0.5vw;
+                                    text-transform: none;
+                                    font-weight: 300;
+
+                                    &:nth-of-type(2){
+                                        transform: rotateX(-90deg) translateY(22px);
+                                    }
+
+                                    @include respond-to-h(lg){
+                                        font-size: 1.8rem;
+                                    }
+                                    @include respond-to-h(mdt){
+                                        font-size: 1.8rem;
+                                    }
+                                    @include respond-to-h(md){
+                                        font-size: 1.8rem;
+                                    }
+                                    @include respond-to-h(sm){
+                                        font-size: 1.8rem;
+                                    }
+                                    @include respond-to-h(xs){
+                                        font-size: 1.5rem;
+                                    }
+                                    @include respond-to-h(xxs){
+                                        font-size: 1.3rem;
+                                    }
+
+                                    @include respond-to-v(lg){
+                                        font-size: 1.5rem;
+                                    }
+                                    @include respond-to-v(md){
+                                        font-size: 1.3rem;
+                                    }
+                                    @include respond-to-v(s){
+                                        font-size: 1.8rem;
+                                    }
+                                    @include respond-to-v(sm){
+                                        font-size: 1.5rem;
+                                    }
+                                    @include respond-to-v(xs){
+                                        font-size: 1.5rem;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            a{
+                text-decoration: none;
+                border-right: 0.5px solid var(--ButtonBorder);
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                
+
+                p{
+                    font-family: "ooohBaby-Regular";
+                    color: var(--ChText);
+                    font-size: 2rem;
+                    opacity: 0.8;
+                    @include respond-to-h(lg){
+                        font-size: 1.8rem;
+                    }
+                    @include respond-to-h(mdt){
+                        font-size: 1.8rem;
+                    }
+                    @include respond-to-h(md){
+                        font-size: 1.8rem;
+                    }
+                    @include respond-to-h(sm){
+                        font-size: 1.8rem;
+                    }
+                    @include respond-to-h(xs){
+                        font-size: 1.5rem;
+                    }
+                    @include respond-to-h(xxs){
+                        font-size: 1.3rem;
+                    }
+
+                    @include respond-to-v(lg){
+                        font-size: 1.5rem;
+                    }
+                    @include respond-to-v(md){
+                        font-size: 1.3rem;
+                    }
+                    @include respond-to-v(s){
+                        font-size: 1.8rem;
+                    }
+                    @include respond-to-v(sm){
+                        font-size: 1.5rem;
+                    }
+                     @include respond-to-v(xs){
+                        font-size: 1.5rem;
+                    }
+                }
+
+                &:nth-of-type(1){
+                    border-left: 0.5px solid var(--ButtonBorder);
+                }
+            }
+
+
+        }
+
+        .footer__bottom__links__right{
+            width: 50%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 0 5vw;
+            gap: 2.5vw;
+
+            @include respond-to-h(xxs){
+                gap: 1vw;
+            }
+            @include respond-to-v(md){
+                gap: 1.5vw;
+            }
+            @include respond-to-v(s){
+                gap: 5vw;
+                justify-content: center;
+                height: 25%;
+            }
+             @include respond-to-v(sm){
+                gap: 5vw;
+                justify-content: center;
+                height: 25%;
+            }
+             @include respond-to-v(xs){
+                gap: 5vw;
+                justify-content: center;
+                height: 25%;
+            }
+
+            .ScrollLink{
+                width: fit-content;
+                .button{
+                    width: 100%;
+                    .slider{
+                        .el{
+                            .perspectiveText{
+                                .footer__bottom__links__right__title{
+                                    font-family: "Sansation-Regular";
+                                    color: var(--ChText);
+                                    font-size: 1.3rem;
+                                    opacity: 0.8;
+                                    text-transform: capitalize;
+
+                                    &:nth-of-type(2){
+                                        transform: rotateX(-90deg) translateY(15px);
+                                    }
+
+                                    @include respond-to-h(lg){
+                                        font-size: 1.2rem;
+                                    }
+                                    @include respond-to-h(mdt){
+                                        font-size: 1.2rem;
+                                    }
+                                    @include respond-to-h(md){
+                                        font-size: 1.1rem;
+                                    }
+                                    @include respond-to-h(sm){
+                                        font-size: 1rem;
+                                    }
+                                    @include respond-to-h(xs){
+                                        font-size: 0.8rem;
+                                    }
+                                    @include respond-to-h(xxs){
+                                        font-size: 0.7rem;
+                                    }
+
+
+                                    @include respond-to-v(lg){
+                                        font-size: 1rem;
+                                    }
+                                    @include respond-to-v(md){
+                                        font-size: 0.8rem;
+                                    }
+                                    @include respond-to-v(s){
+                                        font-size: 1rem;
+                                    }
+                                    @include respond-to-v(sm){
+                                        font-size: 0.9rem;
+                                    }
+                                    @include respond-to-v(xs){
+                                        font-size: 0.9rem;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            
+        }
+    }
+    .footer__bottom__upper{
+        position: relative;
+        width: 100%;
+        height: 60px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 5vw;
+
+        .divider{
+            display: none;
+
+            @include respond-to-v(s){
+                display: block;
+                top: 50%;
+                position: absolute;
+                left: 0;
+                transform: translateY(-50%);
+                width: 100%;
+                height: 0.5px;
+            }
+            @include respond-to-v(sm){
+                display: block;
+                top: 50%;
+                position: absolute;
+                left: 0;
+                transform: translateY(-50%);
+                width: 100%;
+                height: 0.5px;
+            }
+            @include respond-to-v(xs){
+                display: block;
+                top: 50%;
+                position: absolute;
+                left: 0;
+                transform: translateY(-50%);
+                width: 100%;
+                height: 0.5px;
+                background-color: var(--CharcoalBg);
+            }
+
+        }
+
+        @include respond-to-v(s){
+           height: 25%;
+           flex-direction: column;
+            justify-content: flex-end;
+        }
+        @include respond-to-v(sm){
+           height: 25%;
+           flex-direction: column;
+            justify-content: flex-end;
+        }
+        @include respond-to-v(xs){
+           height: 25%;
+           flex-direction: column;
+            justify-content: flex-end;
+        }
+        
+        
+        .footer__bottom__links{
+            width: 50%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 0 5vw;
+            gap: 2.5vw;
+
+            @include respond-to-h(xxs){
+                gap: 1vw;
+            }
+
+            @include respond-to-v(md){
+                gap: 1.5vw;
+            }
+            @include respond-to-v(s){
+                gap: 5vw;
+                justify-content: center;
+                height: 25%;
+            }
+            @include respond-to-v(sm){
+                gap: 5vw;
+                justify-content: center;
+                height: 25%;
+            }
+            @include respond-to-v(xs){
+                gap: 5vw;
+                justify-content: center;
+                height: 25%;
+            }
+            .ScrollLink{
+                width: fit-content;
+                .button{
+                    width: 100%;
+                    .slider{
+                        .el{
+                            .perspectiveText{
+                                p{
+                                    font-family: "Sansation-Regular";
+                                    color: var(--ChText);
+                                    font-size: 1.3rem;
+                                    opacity: 0.8;
+                                    text-transform: capitalize;
+
+                                    &:nth-of-type(2){
+                                        transform: rotateX(-90deg) translateY(15px);
+                                    }
+
+                                    @include respond-to-h(lg){
+                                        font-size: 1.2rem;
+                                    }
+                                    @include respond-to-h(mdt){
+                                        font-size: 1.2rem;
+                                    }
+                                    @include respond-to-h(md){
+                                        font-size: 1.1rem;
+                                    }
+                                    @include respond-to-h(sm){
+                                        font-size: 1rem;
+                                    }
+                                    @include respond-to-h(xs){
+                                        font-size: 0.8rem;
+                                    }
+                                    @include respond-to-h(xxs){
+                                        font-size: 0.7rem;
+                                    }
+
+
+                                    @include respond-to-v(lg){
+                                        font-size: 1rem;
+                                    }
+                                    @include respond-to-v(md){
+                                        font-size: 0.8rem;
+                                    }
+                                    @include respond-to-v(s){
+                                        font-size: 1rem;
+                                    }
+                                    @include respond-to-v(sm){
+                                        font-size: 0.9rem;
+                                    }
+                                    @include respond-to-v(xs){
+                                        font-size: 0.9rem;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .footer__bottom__Icons{
+            width: 50%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5vw;
+            gap: 2.5vw;
+
+            @include respond-to-h(xxs){
+                gap: 1vw;
+            }
+
+            @include respond-to-v(md){
+                gap: 1.5vw;
+            }
+            @include respond-to-v(s){
+                gap: 5vw;
+                justify-content: center;
+                height: 25%;
+            }
+            @include respond-to-v(sm){
+                gap: 5vw;
+                justify-content: center;
+                height: 25%;
+            }
+            @include respond-to-v(xs){
+                gap: 5vw;
+                justify-content: center;
+                height: 25%;
+            }
+
+            .footer__bottom__Icons__Item{
+                width: 75px;
+                height: 50px;
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+
+                .magnetic{
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    position: relative;
+                    cursor: pointer;
+
+                    .footer__bottom__Icons__link{
+                        width: 100%;
+                        height: 100%;
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        text-decoration: none;
+                        cursor: pointer;
+
+                        .footer__bottom__Icons__icon{
+                            width: 100%;
+                            height: 100%;
+                            object-fit: contain;
+                            pointer-events: none;
+                        }
+                    }
+                }
+
+                &:nth-of-type(1){
+                    width: 150px;
+                }
+                &:nth-of-type(2){
+                    width: 100px;
+                }
+            }
+        }
+    }
+
+    .footer__trademark{
+        position: relative;
+        width: 100%;
+        height: 5%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 5vw;
+        @include respond-to-v(s){
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 0.25rem;
+            height: 7.5%;
+        }
+        @include respond-to-v(sm){
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 0.25rem;
+            height: 7.5%;
+        }
+        @include respond-to-v(xs){
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 0.25rem;
+            height: 7.5%;
+        }
+
+        p{
+            font-family: "Sansation-Regular";
+            color: var(--ChText);
+            font-size: 1rem;
+            opacity: 0.8;
+            @include respond-to-h(md){
+                font-size: 0.9rem;
+            }
+            @include respond-to-h(sm){
+                font-size: 0.9rem;
+            }
+            @include respond-to-h(xs){
+                font-size: 0.8rem;
+            }
+            @include respond-to-h(xxs){
+                font-size: 0.7rem;
+            }
+
+
+            @include respond-to-v(lg){
+                font-size: 0.9rem;
+            }
+            @include respond-to-v(md){
+                font-size: 0.8rem;
+            }
+            @include respond-to-v(s){
+                font-size: 0.8rem;
+            }
+             @include respond-to-v(sm){
+                font-size: 0.8rem;
+            }
+             @include respond-to-v(xs){
+                font-size: 0.8rem;
+            }
+        }
+    }
+}

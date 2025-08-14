@@ -166,3 +166,9 @@ const getProfileCompletion = (customer: HttpTypes.StoreCustomer | null) => {
 }
 
 export default Overview
+
+
+
+// WIP: need to add whislist component to show profile completion
+// WIP: need to add payment methods component to show profile completion
+// WIP: ADD here all other components that will contribute to UX 

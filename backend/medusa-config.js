@@ -37,6 +37,7 @@ const medusaConfig = {
       authCors: AUTH_CORS,
       storeCors: STORE_CORS,
       jwtSecret: JWT_SECRET,
+      jwtExpiresIn: JWT_EXPIRES_IN,
       cookieSecret: COOKIE_SECRET
     },
     build: {
@@ -46,6 +47,7 @@ const medusaConfig = {
     }
   },
   admin: {
+    storefrontUrl: STOREFRONT_URL,
     backendUrl: BACKEND_URL,
     disable: SHOULD_DISABLE_ADMIN,
   },

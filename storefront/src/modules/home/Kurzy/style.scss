@@ -1,0 +1,1640 @@
+@use "../../../../styles/mixins.scss" as *;
+
+.kurzy{
+    width: 100vw;
+    min-height: 400vh;
+    background-color: var(--CharcoalBg);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    @include respond-to-h(sm){
+        height: 450vh;
+    }
+    @include respond-to-h(xs){
+        height: 550vh;
+    }
+    @include respond-to-h(xxs){
+        height: 550vh;
+    }
+    @include respond-to-v(lg){
+        height: 450vh;
+        padding: 15vh 0;
+    }
+    @include respond-to-v(md){
+        height: 400vh;
+        padding: 15vh 0;
+    }
+    @include respond-to-v(s){
+        height: 400vh;
+        padding: 15vh 0;
+    }
+    @include respond-to-v(sm){
+        height: 400vh;
+        padding: 15vh 0;
+    }
+    @include respond-to-v(xs){
+        height: 450vh;
+        padding: 15vh 0;
+    }
+
+    .kurzy__intro{
+        width: 100%;
+        height: 250vh;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 15vh 5vw;
+
+        @include respond-to-h(mdt){
+            height: 100vh;
+        }
+        @include respond-to-h(sm){
+            height: 120vh;
+            padding-top: 40vh;
+        }
+        @include respond-to-h(xs){
+            height: 200vh;
+        }
+        @include respond-to-h(xxs){
+            height: 200vh;
+        }
+
+        @include respond-to-v(lg){
+            height: 120vh;
+            justify-content: flex-start;
+            gap: 5vh;
+        }
+        @include respond-to-v(md){
+            height: 100vh;
+            justify-content: flex-start;
+            gap: 5vh;
+        }
+        @include respond-to-v(s){
+            height: 120vh;
+            justify-content: flex-start;
+            gap: 5vh;
+        }
+        @include respond-to-v(sm){
+            height: 120vh;
+            justify-content: flex-start;
+            gap: 5vh;
+        }
+        @include respond-to-v(xs){
+            height: 150vh;
+            justify-content: flex-start;
+            gap: 5vh;
+            margin-bottom: 25vh;
+        }
+
+        .kurzy__intro__bgImages{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+
+            .kurzy__intro__Gradient{
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: -85vh;
+                left: 5vw;
+                z-index: 0;
+
+                svg{
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    transform: scale(2);
+                    opacity: 1;
+
+                    g{
+                        width: 50vw;
+                        height: 50vh;
+                    }
+                }
+
+                &:nth-of-type(2){
+                    top: -45vh;
+                    left: -10vw;
+
+                    svg{
+                        transform: scale(1.5);
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+
+        .kurzy__intro__sticky{
+            width: 100%;
+            height: 150vh;
+            position: sticky;
+            top: -40vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+            gap: 20vh;
+
+            .kurzy__intro__title{
+                width: 100%;
+                height: 60vh;
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+
+                @include respond-to-h(mdt){
+                    height: 30vh;
+                }
+                @include respond-to-h(sm){
+                    height: 30vh;
+                }
+                @include respond-to-h(xs){
+                    height: 80vh;
+                }
+                @include respond-to-h(xxs){
+                    height: 80vh;
+                }
+                @include respond-to-v(s){
+                    height: 40vh;
+                }
+                @include respond-to-v(sm){
+                    height: 40vh;
+                }
+                @include respond-to-v(xs){
+                    height: 40vh;
+                }
+
+
+                .kurzy__intro__title__details{
+                    position: relative;
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: center;
+                    
+                    .kurzy__intro__title__details__title{
+                        width: fit-content;
+                        height: 100%;
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+
+                        span{
+                            font-family: "Sansation-Light";
+                            font-size: 15rem;
+                            // color: var(--ChText);
+                            // WIP: under this text needs to be the cream gradient
+                            color: var(--ChText);
+                            text-align: center;
+                            padding: 0;
+                            margin: 0;
+                            line-height: 1;
+
+                            @include respond-to-h(lg){
+                                font-size: 12rem;
+                            }
+                            @include respond-to-h(md){
+                                font-size: 10rem;
+                            }
+                            @include respond-to-h(mdt){
+                                font-size: 12rem;
+                            }
+                            @include respond-to-h(sm){
+                                font-size: 10rem;
+                            }
+                            @include respond-to-h(xs){
+                                font-size: 8rem;
+                            }
+                            @include respond-to-h(xxs){
+                                font-size: 6rem;
+                            }
+                            @include respond-to-v(md){
+                                font-size: 10rem;
+                            }
+                            @include respond-to-v(s){
+                                font-size: 6rem;
+                            }
+                            @include respond-to-v(sm){
+                                font-size: 6rem;
+                            }
+                            @include respond-to-v(xs){
+                                font-size: 5rem;
+                            }
+                        }
+
+                    }
+                    .kurzy__intro__title__details__img__inner{
+                        position: relative;
+                        width: 17.5;
+                        height: 20vh;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+
+                        img{
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                        }
+                    }
+                }
+            }
+
+            .kurzy__intro__content{
+                width: 100%;
+                height: 60vh;
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                gap: 5vh;
+
+                .kurzy__intro__content__text{
+                    display: flex;
+                    height: 60vh;
+                    width: 80%;
+                    position: relative;
+                    top: 0;
+                    justify-content: center;
+                    align-items: center;
+                    flex-direction: column;
+                    
+                    p{
+                        font-family: "Sansation-Light";
+                        font-size: 2rem;
+                        color: var(--Wtext);
+                        text-align: center;
+                        padding: 0 10vw;
+                        margin: 0;
+                        line-height: 1.5;
+                        @include respond-to-h(lg){
+                            font-size: 1.5rem;
+                        }
+                        @include respond-to-h(md){
+                            font-size: 1.3rem;
+                        }
+                        @include respond-to-h(mdt){
+                            font-size: 1.5rem;
+                        }
+                        @include respond-to-h(sm){
+                            font-size: 1.3rem;
+                        }
+                        @include respond-to-h(xs){
+                            font-size: 1.1rem;
+                        }
+                        @include respond-to-h(xxs){
+                            font-size: 1.1rem;
+                        }
+                        @include respond-to-v(md){
+                            font-size: 1.3rem;
+                        }
+                        @include respond-to-v(s){
+                            font-size: 1.3rem;
+                        }
+                        @include respond-to-v(sm){
+                            font-size: 1.2rem;
+                        }
+                        @include respond-to-v(xs){
+                            font-size: 1.1rem;
+                        }
+                    }
+
+                    .kurzy__intro__content__mouse{
+                        width: 10vw;
+                        height: 10vw;
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                    @include respond-to-h(lg){
+                        width: 85%;;
+                    }
+                    @include respond-to-h(md){
+                        width: 82.5%;
+                    }
+                    @include respond-to-h(sm){
+                        width: 95%;
+                    }
+                    @include respond-to-h(xs){
+                        width: 95%;
+                    }
+                    @include respond-to-h(xxs){
+                        width: 95%;
+                    }
+                }
+
+            }
+        }
+    }
+
+    .about{
+        width: 100%;
+        height: 220vh;
+        position: relative; 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 0vh 5vw;
+
+        // WIP: this section needs to have animations and gradients in the bg correctly - to be done
+        @include respond-to-h(mdt){
+            height: 200vh;
+        }
+        @include respond-to-h(sm){
+            height: 200vh;
+        }
+        @include respond-to-h(xs){
+            height: 260vh;
+        }
+        @include respond-to-h(xxs){
+            height: 260vh;
+        }
+
+        @include respond-to-v(lg){
+            height: 200vh;
+        }
+        @include respond-to-v(md){
+            height: 200vh;
+        }
+        @include respond-to-v(s){
+            height: 250vh;
+        }
+        @include respond-to-v(sm){
+            height: 250vh;
+        }
+        @include respond-to-v(xs){
+            height: 300vh;
+        }
+
+        .about__container__bgImages{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+
+            .about__Gradient{
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: -95vh;
+                left: 15vw;
+                z-index: 0;
+                overflow: hidden;
+
+
+                svg{
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    transform: scale(2);
+                    opacity: 1;
+
+                    g{
+                        width: 50vw;
+                        height: 50vh;
+                    }
+                }
+
+                &:nth-of-type(2){
+                    top: 25vh;
+                    left: -10vw;
+
+                    svg{
+                        transform: scale(2);
+                        opacity: 1;
+                    }
+                }
+                &:nth-of-type(3){
+                    top: -40vh;
+                    left: -30vw;
+
+                    svg{
+                        transform: scale(2);
+                        opacity: 1;
+                    }
+                }
+                &:nth-of-type(4){
+                    top: 85vh;
+                    left: -20vw;
+
+                    svg{
+                        transform: scale(2);
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+
+        .about__container__sticky{
+            height: 250vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            flex-direction: column;
+            gap: 5vw;
+            .about__container__about{
+                position: relative;
+                width: 100%;
+                height: 50vh;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 5vw;
+                z-index: 1;
+
+                @include respond-to-h(xs){
+                    height: 60vh;
+                }
+                @include respond-to-h(xxs){
+                    height: 60vh;
+                }
+                @include respond-to-v(s){
+                    flex-direction: column;
+                    gap: 0;
+                }
+                @include respond-to-v(sm){
+                    flex-direction: column;
+                    gap: 0;
+                }
+                @include respond-to-v(xs){
+                    flex-direction: column;
+                    gap: 0;
+                    height: 60vh;
+                }
+                
+                .about__container__about__content{
+                    width: 50%;
+                    height: 100%;
+                    position: relative;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    justify-content: center;
+                    gap: 1.5vh;
+
+                    @include respond-to-v(s){
+                        width: 100%;
+                    }
+                    @include respond-to-v(sm){
+                        width: 100%;
+                    }
+                    @include respond-to-v(xs){
+                        width: 100%;
+                    }
+
+                    h4{
+                        font-family: "Sansation-Light";
+                        font-size: 2.5rem;
+                        color: var(--ChText);
+                        text-align: left;
+                        padding: 0;
+                        margin: 0;
+                        line-height: 1.5;
+
+                        @include respond-to-h(lg){
+                            font-size: 2rem;
+                        }
+                        @include respond-to-h(md){
+                            font-size: 1.8rem;
+                        }
+                        @include respond-to-h(mdt){
+                            font-size: 2rem;
+                        }
+                        @include respond-to-h(sm){
+                            font-size: 1.8rem;
+                        }
+                        @include respond-to-h(xs){
+                            font-size: 1.5rem;
+                        }
+                        @include respond-to-h(xxs){
+                            font-size: 1.5rem;
+                        }
+                        @include respond-to-v(lg){
+                            font-size: 2rem;
+                        }
+                        @include respond-to-v(md){
+                            font-size: 1.8rem;
+                        }
+                        @include respond-to-v(s){
+                            font-size: 1.8rem;
+                        }
+                        @include respond-to-v(sm){
+                            font-size: 1.5rem;
+                        }
+                        @include respond-to-v(xs){
+                            font-size: 1.3rem;
+                        }
+                    }
+
+                    p{
+                        font-family: "Sentient-Light";
+                        font-size: 1.8rem;
+                        color: var(--ChText);
+                        text-align: left;
+                        margin: 0;
+                        line-height: 1.5;
+
+                        @include respond-to-h(lg){
+                            font-size: 1.3rem;
+                        }
+                        @include respond-to-h(md){
+                            font-size: 1.1rem;
+                            width: 80%;
+                        }
+                        @include respond-to-h(mdt){
+                            font-size: 1.3rem;
+                        }
+                        @include respond-to-h(sm){
+                            font-size: 1.1rem;
+                            width: 80%;
+                        }
+                        @include respond-to-h(xs){
+                            font-size: 1rem;
+                            width: 80%;
+                        }
+                        @include respond-to-h(xxs){
+                            font-size: 1rem;
+                            width: 80%;
+                        }
+                        @include respond-to-v(lg){
+                            font-size: 1.5rem;
+                        }
+                        @include respond-to-v(md){
+                            font-size: 1.3rem;
+                        }
+                        @include respond-to-v(s){
+                            font-size: 1.3rem;
+                        }
+                        @include respond-to-v(sm){
+                            font-size: 1.2rem;
+                        }
+                        @include respond-to-v(xs){
+                            font-size: 1.1rem;
+                        }
+                    }
+                }
+
+                .about__container__about__image{
+                    width: 40vw;
+                    height: 40vh;
+                    position: relative;
+                    display: flex;
+                    align-items: flex-end;
+                    justify-content: center;
+                    @include respond-to-h(mdt){
+                        height: 35vh;
+                    }
+                    @include respond-to-h(sm){
+                        height: 35vh;
+                    }
+                    @include respond-to-h(xs){
+                        height: 55vh;
+                    }
+                    @include respond-to-h(xxs){
+                        height: 55vh;
+                    }
+                    @include respond-to-v(s){
+                        height: 45vh;
+                        width: 90vw;
+                    }
+                    @include respond-to-v(sm){
+                        height: 45vh;
+                        width: 90vw;
+                    }
+                    @include respond-to-v(xs){
+                        height: 55vh;
+                        width: 90vw;
+                    }
+
+                    .about__container__about__image__inner{
+                        width: 100%;
+                        height: 100%;
+                        transform-origin: bottom center;
+                        display: flex;
+                        align-items: flex-end;
+                        justify-content: center;
+                        overflow: hidden;
+                        position: relative;
+
+                        .about__container__about__image__inner__img{
+                            width: 100%;
+                            height: 100%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            scale: 1.1;
+                            position: absolute;
+                            bottom: 0;
+                            left: 0;
+                            img{
+                                width: 100%;
+                                height: 100%;
+                                object-fit: cover;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .about__container__images{
+                width: 100%;
+                height: 50vh;
+                display: flex;
+                flex-direction: row;
+                align-items: flex-end;
+                justify-content: flex-start;
+                gap: 2.5vw;
+                z-index: 1;
+                
+                @include respond-to-h(mdt){
+                    height: 45vh;
+                }
+                @include respond-to-h(sm){
+                    height: 45vh;
+                }
+
+                @include respond-to-h(md){
+                    gap: 1.5vw;
+                }
+                @include respond-to-h(xs){
+                    height: 70vh;
+                }
+                @include respond-to-h(xxs){
+                    height: 70vh;
+                }
+
+                @include respond-to-v(s){
+                    height: 30vh;
+                    margin-bottom: 10vh;
+                }
+                @include respond-to-v(sm){
+                    height: 30vh;
+                    margin-bottom: 10vh;
+                }
+                @include respond-to-v(xs){
+                    height: 35vh;
+                    margin-bottom: 10vh;
+                }
+
+                .about__container__images__image{
+                    width: 25vw;
+                    height: 50vh;
+                    position: relative;
+                    display: flex;
+                    align-items: flex-end;
+                    justify-content: center;
+                    @include respond-to-h(md){
+                        width: 22.5vw;
+                        height: 52.5vh;
+                    }
+                    @include respond-to-h(mdt){
+                        width: 30vw;
+                    }
+                    @include respond-to-h(sm){
+                        width: 27.5vw;
+                    }
+                    @include respond-to-h(xs){
+                        width: 25vw;
+                        height: 70vh;
+                    }
+                    @include respond-to-h(xxs){
+                        width: 25vw;
+                        height: 70vh;
+                    }
+                    @include respond-to-v(lg){
+                        height: 40vh;
+                        width: 40vw;
+                    }
+                    @include respond-to-v(md){
+                        height: 40vh;
+                        width: 40vw;
+                    }
+                    @include respond-to-v(s){
+                        height: 25vh;
+                        width: 40vw;
+                    }
+                    @include respond-to-v(sm){
+                        height: 25vh;
+                        width: 40vw;
+                    }
+                    @include respond-to-v(xs){
+                        height: 30vh;
+                        width: 40vw;
+                    }
+
+                    .about__container__images__image__inner{
+                        width: 100%;
+                        height: 100%;
+                        transform-origin: bottom center;
+                        display: flex;
+                        align-items: flex-end;
+                        justify-content: center;
+                        overflow: hidden;
+                        position: relative;
+
+                        .about__container__images__image__inner__img{
+                            position: absolute;
+                            bottom: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            scale: 1.1;
+                            
+                            img{
+                                width: 100%;
+                                height: 100%;
+                                object-fit: cover;
+                            }
+                        }
+                    }
+
+                    &:nth-child(2){
+                        width: 40vw;
+                        height: 40vh;
+                        @include respond-to-h(md){
+                            width: 37.5vw;
+                        }
+                        @include respond-to-h(mdt){
+                            height: 35vh;
+                        }
+                        @include respond-to-h(sm){
+                            height: 35vh;
+                        }
+                        @include respond-to-h(xs){
+                            height: 45vh;
+                            width: 35vw;
+                        }
+                        @include respond-to-h(xxs){
+                            height: 45vh;
+                            width: 35vw;
+                        }
+
+                        @include respond-to-v(lg){
+                            height: 25vh;
+                            width: 50vw;
+                        }
+                        @include respond-to-v(md){
+                            height: 25vh;
+                            width: 50vw;
+                        }
+                        @include respond-to-v(s){
+                            height: 15vh;
+                            width: 50vw;
+                        }
+                        @include respond-to-v(sm){
+                            height: 15vh;
+                            width: 50vw;
+                        }
+                        @include respond-to-v(xs){
+                            height: 17.5vh;
+                            width: 50vw;
+                        }
+                    }
+                }
+            }
+
+            .about__container__text__container{
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: flex-start;
+                justify-content: center;
+                z-index: 1;
+
+                .about__container__text{
+                    width: 100%;
+                    height: 50vh;
+                    position: sticky;
+                    top: 25vh;
+                    left: 0;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 5vw;
+                    z-index: 1;
+
+                    @include respond-to-h(mdt){
+                        height: 40vh;
+                    }
+                    @include respond-to-h(sm){
+                        height: 40vh;
+                    }
+                    @include respond-to-h(xs){
+                        height: 60vh;
+                    }
+                    @include respond-to-h(xxs){
+                        height: 60vh;
+                    }
+
+                    @include respond-to-v(s){
+                        flex-direction: column;
+                        height: 80vh;
+                        gap: 0;
+                        margin-bottom: 15vh;
+                    }
+                    @include respond-to-v(sm){
+                        flex-direction: column;
+                        height: 80vh;
+                        gap: 0;
+                        margin-bottom: 15vh;
+                    }
+                    @include respond-to-v(xs){
+                        flex-direction: column;
+                        height: 120vh;
+                        gap: 0;
+                        margin-bottom: 15vh;
+                    }
+                    
+                    .about__container__text__content{
+                        width: 50%;
+                        height: 100%;
+                        position: relative;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: flex-start;
+                        justify-content: center;
+                        gap: 1.5vh;
+
+                        @include respond-to-h(xs){
+                            padding-top: 25vh;
+                        }
+                        @include respond-to-h(xxs){
+                            padding-top: 25vh;
+                        }
+
+                        @include respond-to-v(s){
+                            width: 100%;
+                            justify-content: flex-start;
+                            height: 50%;
+                        }
+                        @include respond-to-v(sm){
+                            width: 100%;
+                            justify-content: flex-start;
+                            height: 50%;
+                        }
+                        @include respond-to-v(xs){
+                            width: 100%;
+                            justify-content: flex-start;
+                            height: 50%;
+                        }
+
+                        h4{
+                            font-family: "Sansation-Light";
+                            font-size: 2.5rem;
+                            color: var(--ChText);
+                            text-align: left;
+                            padding: 0;
+                            margin: 0;
+                            line-height: 1.5;
+
+                            @include respond-to-h(lg){
+                                font-size: 2rem;
+                            }
+                            @include respond-to-h(md){
+                                font-size: 1.8rem;
+                            }
+                            @include respond-to-h(mdt){
+                                font-size: 2rem;
+                            }
+                            @include respond-to-h(sm){
+                                font-size: 1.8rem;
+                            }
+                            @include respond-to-h(xs){
+                                font-size: 1.5rem;
+                            }
+                            @include respond-to-h(xxs){
+                                font-size: 1.5rem;
+                            }
+                            @include respond-to-v(lg){
+                                font-size: 2rem;
+                            }
+                            @include respond-to-v(md){
+                                font-size: 1.8rem;
+                            }
+                            @include respond-to-v(s){
+                                font-size: 1.8rem;
+                            }
+                            @include respond-to-v(sm){
+                                font-size: 1.5rem;
+                            }
+                            @include respond-to-v(xs){
+                                font-size: 1.3rem;
+                            }
+                        }
+
+                        p{
+                            font-family: "Sentient-Light";
+                            font-size: 1.5rem;
+                            color: var(--ChText);
+                            text-align: left;
+                            margin: 0;
+                            line-height: 1.5;
+
+                            @include respond-to-h(lg){
+                                font-size: 1.3rem;
+                            }
+                            @include respond-to-h(md){
+                                font-size: 1.1rem;
+                            }
+                            @include respond-to-h(mdt){
+                                font-size: 1.3rem;
+                            }
+                            @include respond-to-h(sm){
+                                font-size: 1.1rem;
+                            }
+                            @include respond-to-h(xs){
+                                font-size: 1rem;
+                            }
+                            @include respond-to-h(xxs){
+                                font-size: 1rem;
+                            }
+                            @include respond-to-v(lg){
+                                font-size: 1.5rem;
+                            }
+                            @include respond-to-v(md){
+                                font-size: 1.3rem;
+                            }
+                            @include respond-to-v(s){
+                                font-size: 1.3rem;
+                            }
+                            @include respond-to-v(sm){
+                                font-size: 1.2rem;
+                            }
+                            @include respond-to-v(xs){
+                                font-size: 1.1rem;
+                            }
+                        }
+                    }
+
+                    .about__container__text__image{
+                        width: 40vw;
+                        height: 40vh;
+                        position: relative;
+                        display: flex;
+                        align-items: flex-end;
+                        justify-content: center;
+                        @include respond-to-h(mdt){
+                            height: 35vh;
+                        }
+                        @include respond-to-h(sm){
+                            height: 35vh;
+                        }
+                        @include respond-to-h(xs){
+                            height: 55vh;
+                        }
+                        @include respond-to-h(xxs){
+                            height: 55vh;
+                        }
+
+                        @include respond-to-v(s){
+                            height: 25vh;
+                            width: 90vw;
+                        }
+                        @include respond-to-v(sm){
+                            height: 25vh;
+                            width: 90vw;
+                        }
+                        @include respond-to-v(xs){
+                            height: 30vh;
+                            width: 90vw;
+                        }
+
+                        .about__container__text__image__inner{
+                            width: 100%;
+                            height: 100%;
+                            transform-origin: bottom center;
+                            display: flex;
+                            align-items: flex-end;
+                            justify-content: center;
+                            overflow: hidden;
+                            position: relative;
+
+                            .about__container__text__image__inner__img{
+                                position: absolute;
+                                bottom: 0;
+                                left: 0;
+                                width: 100%;
+                                height: 100%;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                scale: 1.1;
+                                img{
+                                    width: 100%;
+                                    height: 100%;
+                                    object-fit: cover;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+      
+
+        
+
+        
+    }
+
+    .kurzy__cta{
+        width: 100%;
+        height: 100vh;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        margin-top: 25vh;
+
+        @include respond-to-h(xs){
+            height: 160vh;
+        }
+        @include respond-to-h(xxs){
+            height: 160vh;
+        }
+        @include respond-to-v(xs){
+            height: 80vh;
+        }
+        @include respond-to-v(lg){
+            height: 70vh;
+            overflow: hidden;
+        }
+        @include respond-to-v(md){
+            height: 80vh;
+            overflow: hidden;
+        }
+
+        .kurzy__cta__gradients{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+
+            .kurzy__Gradient{
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: -5vh;
+                left: 0;
+                z-index: 0;
+
+                svg{
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    transform: scale(2);
+                    opacity: 0.8;
+
+                    g{
+                        width: 50vw;
+                        height: 50vh;
+                    }
+                }
+
+                &:nth-of-type(2){
+                    top: 15vh;
+                    left: 0vw;
+
+                    svg{
+                        transform: scale(1.8);
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+
+        .kurzy__cta__content{
+            width: 50%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2vh;
+            z-index: 4;
+            @include respond-to-h(md){
+                justify-content: flex-start;
+                padding-top: 10vh;
+                gap: 10vh;
+            }
+            @include respond-to-h(sm){
+                justify-content: flex-start;
+                padding-top: 15vh;
+                gap: 7.5vh;
+            }
+            @include respond-to-h(xs){
+                justify-content: flex-start;
+                padding-top: 15vh;
+                gap: 20vh;
+            }
+            @include respond-to-h(xxs){
+                justify-content: flex-start;
+                padding-top: 15vh;
+                gap: 20vh;
+            }
+
+            @include respond-to-v(s){
+                width: 100%;
+                justify-content: flex-end;
+            }
+            @include respond-to-v(sm){
+                width: 100%;
+                justify-content: flex-end;
+            }
+            @include respond-to-v(xs){
+                width: 100%;
+                justify-content: flex-end;
+            }
+            @include respond-to-v(lg){
+                justify-content: flex-start;
+            }
+            @include respond-to-v(md){
+                justify-content: flex-start;
+            }
+            .kurzy__cta__content__title{
+                width: 100%;
+                height: 30%;
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                gap: 2vh;
+
+
+                @include respond-to-v(s){
+                    height: 50%;
+                }
+                @include respond-to-v(sm){
+                    width: 100%;
+                    justify-content: flex-end;
+                }
+                @include respond-to-v(xs){
+                    width: 100%;
+                    justify-content: flex-end;
+                }
+                @include respond-to-v(lg){
+                    height: 40%;
+                }
+                @include respond-to-v(md){
+                    height: 40%;
+                }
+                h2{
+                    font-family: "ooohBaby-regular";
+                    font-size: 5rem;
+                    color: var(--Wtext);
+                    text-align: center;
+                    padding: 0;
+                    margin: 0;
+                    line-height: 1;
+                    font-weight: 300;
+
+                    @include respond-to-h(lg){
+                        font-size: 4rem;
+                    }
+                    @include respond-to-h(md){
+                        font-size: 3.5rem;
+                    }
+                    @include respond-to-h(mdt){
+                        font-size: 4rem;
+                    }
+                    @include respond-to-h(sm){
+                        font-size: 3.5rem;
+                    }
+                    @include respond-to-h(xs){
+                        font-size: 3rem;
+                    }
+                    @include respond-to-h(xxs){
+                        font-size: 3rem;
+                    }
+
+                    @include respond-to-v(lg){
+                        font-size: 5rem;
+                    }
+                    @include respond-to-v(md){
+                        font-size: 3.5rem;
+                    }
+                    @include respond-to-v(s){
+                        font-size: 3.5rem;
+                    }
+                     @include respond-to-v(sm){
+                        font-size: 3rem;
+                    }
+                     @include respond-to-v(xs){
+                        font-size: 2.5rem;
+                    }
+                }
+
+                p{
+                    font-family: "Sentient-Light";
+                    text-align: center;
+                    margin: 0;
+
+                    span{
+                        font-family: "Sentient-Light";
+                        font-size: 1.5rem;
+                        color: var(--Wtext);
+                        line-height: 1.5;
+
+                        @include respond-to-h(lg){
+                            font-size: 1.3rem;
+                        }
+                        @include respond-to-h(md){
+                            font-size: 1.1rem;
+                        }
+                        @include respond-to-h(mdt){
+                            font-size: 1.3rem;
+                        }
+                        @include respond-to-h(sm){
+                            font-size: 1.1rem;
+                        }
+                        @include respond-to-h(xs){
+                            font-size: 1rem;
+                        }
+                        @include respond-to-h(xxs){
+                            font-size: 1rem;
+                        }
+
+                        @include respond-to-v(lg){
+                            font-size: 1.5rem;
+                        }
+                        @include respond-to-v(md){
+                            font-size: 1.2rem;
+                        }
+                        @include respond-to-v(s){
+                            font-size: 1.3rem;
+                        }
+                        @include respond-to-v(sm){
+                            font-size: 1.2rem;
+                        }
+                        @include respond-to-v(xs){
+                            font-size: 1.1rem;
+                        }
+                    }
+                }
+                @include respond-to-h(lg){
+                    width: 100%;
+                    height: 35%;
+                }
+            }
+
+            .kurzy__cta__content__CTA{
+                width: 100%;
+                height: 30%;
+                position: relative;
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                justify-content: center;
+                gap: 2vh;
+
+                @include respond-to-h(lg){
+                    width: 100%;
+                    height: 40%;
+                }
+                @include respond-to-h(md){
+                    width: 100%;
+                    height: 40%;
+                }
+                
+                
+                .kurzy__cta__content__CTA__button{
+                    width: 100%;
+                    height: 40%;
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                     .LinkButton{
+                        .button{
+                            width: 250px;
+                            height: 60px;
+                            .slider{
+                                .el{
+                                    &:nth-of-type(2){
+                                        background-color: var(--WhiteBg) !important;
+                                        p{
+                                            color: var(--ChText);
+                                            &:nth-of-type(2){
+                                                transform: rotateX(-90deg) translateY(20px) !important;
+                                            }
+                                        }
+                                    }
+                                    p{
+                                        font-family: "Sentient-Light";
+                                        font-size: 1.5rem;
+                                        text-transform: capitalize;
+                                        font-weight: 300;
+                                        @include respond-to-h(lg){
+                                            font-size: 1.3rem;
+                                        }
+                                        @include respond-to-h(md){
+                                            font-size: 1.1rem;
+                                        }
+                                        @include respond-to-h(mdt){
+                                            font-size: 1.3rem;
+                                        }
+                                        @include respond-to-h(sm){
+                                            font-size: 1.1rem;
+                                        }
+                                        @include respond-to-h(xs){
+                                            font-size: 1rem;
+                                        }
+                                        @include respond-to-h(xxs){
+                                            font-size: 1rem;
+                                        }
+                                        @include respond-to-v(lg){
+                                            font-size: 1.3rem;
+                                        }
+                                        @include respond-to-v(md){
+                                            font-size: 1.1rem;
+                                        }
+                                        @include respond-to-v(s){
+                                            font-size: 1.1rem;
+                                        }
+                                        @include respond-to-v(sm){
+                                            font-size: 1.1rem;
+                                        }
+                                        @include respond-to-v(xs){
+                                            font-size: 1rem;
+                                        }
+
+                                        &:nth-of-type(2){
+                                            &:nth-of-type(2){
+                                                transform: rotateX(-90deg) translateY(15px);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            @include respond-to-h(lg){
+                                width: 200px;
+                                height: 50px;
+                            }
+                            @include respond-to-h(md){
+                                width: 180px;
+                                height: 45px;
+                            }
+                            @include respond-to-h(mdt){
+                                width: 200px;
+                                height: 50px;
+                            }
+                            @include respond-to-h(sm){
+                                width: 180px;
+                                height: 45px;
+                            }
+                            @include respond-to-h(xs){
+                                width: 180px;
+                                height: 45px;
+                            }
+                            @include respond-to-h(xxs){
+                                width: 180px;
+                                height: 45px;
+                            }
+                            @include respond-to-v(lg){
+                                width: 200px;
+                                height: 50px;
+                            }
+                            @include respond-to-v(md){
+                                width: 180px;
+                                height: 45px;
+                            }
+                            @include respond-to-v(s){
+                                width: 180px;
+                                height: 45px;
+                            }
+                            @include respond-to-v(sm){
+                                width: 180px;
+                                height: 45px;
+                            }
+                            @include respond-to-v(xs){
+                                width: 160px;
+                                height: 40px;
+                            }
+                        }
+
+                    }
+                }
+
+                .kurzy__cta__content__CTA__image{
+                    width: 100%;
+                    height: 100%;
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 2vh;
+                
+                    .kurzy__cta__content__CTA__image__img{
+                        width: 25vw;
+                        height: 25vh;  
+
+                        @include respond-to-h(xs){
+                            width: 30vw;
+                            height: 30vh;
+                        }
+                        @include respond-to-h(xxs){
+                            width: 30vw;
+                            height: 30vh;
+                        }
+                    }
+                }
+            }
+
+            
+        }
+
+        .kurzy__cta__images{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 0;
+            @include respond-to-v(s){
+                display: none;
+            }
+            @include respond-to-v(sm){
+                display: none;
+            }
+            @include respond-to-v(xs){
+                display: none;
+            }
+
+
+
+            .kurzy__cta__images__left{
+                width: 50%;
+                height: 100%;
+                position: relative;
+                
+                .kurzy__cta__images__left__image{
+                    width: 22.5vw;
+                    height: 50vh;
+                    position: absolute;
+                    top: 70%;
+                    left: 40%;
+                    transform: translate(-50%, -50%);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    @include respond-to-h(md){
+                        width: 20vw;
+                    }
+                    @include respond-to-h(mdt){
+                        height: 42.5vh;
+                    }
+                    @include respond-to-h(sm){
+                        height: 40vh;
+                    }
+                    @include respond-to-h(xs){
+                        height: 60vh;
+                    }
+                    @include respond-to-v(lg){
+                        height: 30vh;
+                        width: 30vw;
+                        top: 75%;
+                    }
+                    @include respond-to-v(md){
+                        height: 30vh;
+                        width: 30vw;
+                        top: 75%;
+                    }
+                    .kurzy__cta__images__left__image__wrapper{
+                        width: 100%;
+                        height: 100%;
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        overflow: hidden;
+                        
+                        .kurzy__cta__images__left__image__img__container{
+                            width: 100%;
+                            height: 100%;
+                            position: relative;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            scale: 1.05;
+                            img{
+                                width: 100%;
+                                height: 100%;
+                                object-fit: cover;
+                            }
+                        }
+                    }
+
+                    &:nth-child(2){
+                        top: 30%;
+                        left: 20%;
+                    }
+                }
+            }
+
+            .kurzy__cta__images__right{
+                width: 50%;
+                height: 100%;
+                position: relative;
+                
+                .kurzy__cta__images__right__image{
+                    width: 22.5vw;
+                    height: 50vh;
+                    position: absolute;
+                    top: 70%;
+                    left: 60%;
+                    transform: translate(-50%, -50%);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    @include respond-to-h(md){
+                        width: 20vw;
+                    }
+                    @include respond-to-h(mdt){
+                        height: 42.5vh;
+                    }
+                    @include respond-to-h(sm){
+                        height: 40vh;
+                    }
+                    @include respond-to-h(xs){
+                        height: 60vh;
+                    }
+                    @include respond-to-v(lg){
+                        height: 30vh;
+                        width: 30vw;
+                        top: 75%;
+                    }
+                    @include respond-to-v(md){
+                        height: 30vh;
+                        width: 30vw;
+                        top: 75%;
+                    }
+                    .kurzy__cta__images__right__image__wrapper{
+                        width: 100%;
+                        height: 100%;
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        overflow: hidden;
+
+                        .kurzy__cta__images__right__image__img__container{
+                            width: 100%;
+                            height: 100%;
+                            position: relative;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            scale: 1.05;
+                            img{
+                                width: 100%;
+                                height: 100%;
+                                object-fit: cover;
+                            }
+                        }
+                    }
+
+                    &:nth-child(2){
+                        top: 30%;
+                        left: 80%;
+                    }
+                }
+            }
+        }
+    }
+}

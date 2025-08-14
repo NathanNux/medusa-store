@@ -1,0 +1,31 @@
+.rotating-text{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    will-change: transform;
+    font-family: "Sansation-Light";
+
+    .rotating-text__text{
+        position: relative;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: var(--Wtext);
+        pointer-events: none; 
+
+        .circle-text__letter {
+            position: absolute;
+            font-size: 1rem;
+            top: calc(50%);
+            left: calc(50%);
+            transform-origin: 0 0; 
+        }
+    }
+}

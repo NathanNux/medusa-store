@@ -1,5 +1,6 @@
-import { getProductsById } from "@lib/data/products"
+import { BundleProduct, listProducts } from "@lib/data/products"
 import { HttpTypes } from "@medusajs/types"
+import BundleActions from "@modules/products/components/bundle-actions"
 import ProductActions from "@modules/products/components/product-actions"
 
 /**
@@ -8,18 +9,25 @@ import ProductActions from "@modules/products/components/product-actions"
 export default async function ProductActionsWrapper({
   id,
   region,
+  bundle,
 }: {
   id: string
   region: HttpTypes.StoreRegion
+  bundle?: BundleProduct
 }) {
-  const [product] = await getProductsById({
-    ids: [id],
+  const product = await listProducts({
+    queryParams: { id: [id] },
     regionId: region.id,
-  })
+  }).then(({ response }) => response.products[0])
 
   if (!product) {
     return null
   }
+
+  if (bundle) {
+    return <BundleActions bundle={bundle} />
+  }
+
 
   return <ProductActions product={product} region={region} />
 }

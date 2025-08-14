@@ -1,0 +1,111 @@
+@use "../../../../../styles/mixins.scss" as *;
+.nav{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10vh 10vw 2.5vh 10vw;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    .header{
+        position: absolute;
+        top: 2.5vh;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80vw;
+        height: 15vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        @include respond-to-v(xs){
+            height: 15vh;
+            gap: 2vh;
+        }
+        .logo{
+            width: 10vw;
+            height: 5vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            @include respond-to-v(xs){
+                width: 8vw;
+                height: 4vh;
+            }
+        }
+        .logoTitle{
+            width: 100%;
+            height: 5vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            h3{
+                font-size: 1.1rem;
+                color: var(--ChText);
+                font-weight: 300;
+
+                @include respond-to-v(xs){
+                    font-size: 1rem;
+                }
+            }
+        }
+    }
+    .body{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        gap: 2.5rem;
+        @include respond-to-v(xs){
+            gap: 2rem;
+        }
+        .linkContainer{
+            width: 80vw;
+            height: 4vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            a{
+                text-decoration: none;
+                p{
+                    color: var(--ChText);
+                    font-size: 2.5rem;
+                    text-align: center;
+                    font-weight: 300;
+
+                @include respond-to-v(xs){
+                    font-size: 2.2rem;
+                }       
+                }
+            }
+        }
+    }
+    .footer{
+        display: flex;
+        flex-direction: row;
+        gap: 10vw;
+        .a{
+            width: 50%;
+            margin-top: 5px;
+            font-size: 1.3rem;
+            @include respond-to-v(xs){
+                font-size: 1.2rem;
+            }
+        }
+    }
+
+    .country__Select{
+        width: 100%;
+        height: 5vh;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        position: relative;
+    }
+}

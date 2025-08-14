@@ -1,0 +1,728 @@
+@use "../../../../../styles/mixins.scss" as *;
+.Hero__Intro{
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;    
+    background-color: var(--WhiteBg);
+    padding: 0 5vw;
+    overflow: hidden;
+    z-index: 1;
+
+    @include respond-to-h(sm){
+        padding: 0 2.5vw;
+    }
+    @include respond-to-h(xs){
+        padding: 0 2.5vw;
+    }
+    @include respond-to-h(xxs){
+        padding: 0 2.5vw;
+    }
+    @include respond-to-v(s){
+        height: 100vh;
+    }
+    @include respond-to-v(sm){
+        height: 100vh;
+    }
+    @include respond-to-v(xs){
+        height: 100vh;
+    }
+
+    .Hero__Intro__Image__wrapper{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+
+        .Hero__Intro__Cover{
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            img{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
+            }
+
+        }
+    }
+
+    .Hero__Intro__Img{
+        position: absolute;
+        top: 55%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 45vh;
+        height: 65vh;
+        // border: 1px solid var(--ChText);        
+        @include respond-to-v(lg){
+            width: 35vh;
+            height: 50vh;
+        }
+        @include respond-to-v(md){
+            width: 32.5vh;
+            height: 45vh;
+        }
+        @include respond-to-v(s){
+            width: 35vh;
+            height: 50vh;
+            top: 45%;
+        }
+         @include respond-to-v(sm){
+            width: 35vh;
+            height: 50vh;
+            top: 45%;
+        }
+         @include respond-to-v(xs){
+            width: 35vh;
+            height: 50vh;
+            top: 45%;
+        }
+
+        .Hero__Intro__Img__inner{
+            width: 100%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+
+            img{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
+                mix-blend-mode: difference;
+            }
+        }
+    }
+
+    .Hero__Intro__Header{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        width: 80%;
+        height: 50%;
+        font-family: "ooohBaby-Regular";
+        gap: 10vw;
+
+        @include respond-to-v(lg){
+            top: 45%;
+        }
+        @include respond-to-v(md){
+            top: 45%;
+        }
+        @include respond-to-v(s){
+            top: 35%;
+            flex-direction: column;
+            height: 70%;
+            width: 95%;
+        }
+        @include respond-to-v(sm){
+            top: 35%;
+            flex-direction: column;
+            height: 70%;
+            width: 95%;
+        }
+         @include respond-to-v(xs){
+            top: 35%;
+            flex-direction: column;
+            height: 70%;
+            width: 95%;
+        }
+
+        .Hero__Intro__Header__Title{
+            width: 50%;
+            height: 85%;
+            position: relative;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-bottom: 15%;
+            padding-right: 5%;
+            @include respond-to-v(s){
+                justify-content: flex-start;
+                align-items: flex-end;
+                width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            @include respond-to-v(sm){
+                justify-content: flex-start;
+                align-items: flex-end;
+                width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            @include respond-to-v(xs){
+                justify-content: flex-start;
+                align-items: flex-end;
+                width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            
+            h1{
+                color: var(--Wtext);
+                font-size: 10rem;
+                opacity: 0.8;
+                font-weight: 300;
+                mix-blend-mode: difference;
+
+                @include respond-to-h(lg){
+                    font-size: 8rem;
+                }
+                @include respond-to-h(md){
+                    font-size: 6rem;
+                }
+                @include respond-to-h(mdt){
+                    font-size: 8rem;
+                }
+                @include respond-to-h(sm){
+                    font-size: 6rem;
+                }
+                @include respond-to-h(xs){
+                    font-size: 4.5rem;
+                }
+                @include respond-to-h(xxs){
+                    font-size: 4rem;
+                }
+
+                @include respond-to-v(lg){
+                    font-size: 8rem;
+                } 
+                 @include respond-to-v(md){
+                    font-size: 6rem;
+                }
+                @include respond-to-v(s){
+                    font-size: 6rem;
+                }
+                @include respond-to-v(sm){
+                    font-size: 5.5rem;
+                }
+                @include respond-to-v(xs){
+                    font-size: 5rem;
+                }
+            }
+        }
+
+        .Hero__Intro__Header__Subtitle{
+            width: 50%;
+            height: 90%;
+            position: relative;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            margin-top: 5%;
+
+            @include respond-to-v(lg){
+                padding-top: 35%;
+            } 
+            @include respond-to-v(md){
+                padding-top: 25%;
+            }  
+
+            @include respond-to-v(s){
+               align-items: flex-end;
+               height: 5%;
+            }
+            @include respond-to-v(sm){
+               align-items: flex-end;
+               height: 5%;
+            }
+            @include respond-to-v(xs){
+               align-items: flex-end;
+               height: 5%;
+            }
+            h1{
+                color: var(--Wtext);
+                font-size: 10rem;
+                opacity: 0.8;
+                font-weight: 300;
+                mix-blend-mode: difference;
+
+                @include respond-to-h(lg){
+                    font-size: 8rem;
+                }
+                @include respond-to-h(md){
+                    font-size: 6rem;
+                }
+                @include respond-to-h(mdt){
+                    font-size: 8rem;
+                }
+                @include respond-to-h(sm){
+                    font-size: 6rem;
+                }
+                @include respond-to-h(xs){
+                    font-size: 4.5rem;
+                }
+                @include respond-to-h(xxs){
+                    font-size: 4rem;
+                }
+
+                @include respond-to-v(lg){
+                    font-size: 8rem;
+                } 
+                @include respond-to-v(md){
+                    font-size: 6rem;
+                } 
+                @include respond-to-v(s){
+                    font-size: 6rem;
+                }
+                @include respond-to-v(sm){
+                    font-size: 5.5rem;
+                }
+                @include respond-to-v(xs){
+                    font-size: 5rem;
+                }
+            }
+            @include respond-to-h(md){
+                margin-left: 5%;
+            }
+            @include respond-to-h(mdt){
+                margin-left: 10%;
+            }
+            @include respond-to-h(sm){
+                margin-left: 10%;
+            }
+            @include respond-to-h(xs){
+                margin-left: 5%;
+                align-self: flex-end;
+                height: 100%;
+            }
+            @include respond-to-h(xxs){
+                margin-left: 5%;
+                align-self: flex-end;
+                height: 100%;
+            }
+
+            @include respond-to-v(lg){
+                margin-left: 10%;
+                align-self: flex-end;
+            } 
+            @include respond-to-v(md){
+                margin-left: 10%;
+                align-self: flex-end;
+            } 
+        }
+    }
+
+    .Hero__Intro__Content{
+        position: relative;
+        width: 90%;
+        height: 35%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 1.5rem;
+        padding: 0 2.5vw;
+        @include respond-to-h(sm){
+            width: 100%;
+        }
+        @include respond-to-h(xs){
+            width: 100%;
+        }
+        @include respond-to-h(xxs){
+            width: 100%;
+        }
+
+         @include respond-to-v(lg){
+            width: 100%;
+        }
+         @include respond-to-v(md){
+            height: 30%;
+            padding: 10% 0 0 0;
+            width: 100%;
+        }
+         @include respond-to-v(s){
+            height: 30%;
+            padding: 10% 0 0 0;
+            width: 100%;
+            align-items: flex-start;
+        }
+        @include respond-to-v(sm){
+            height: 30%;
+            padding: 10% 0 0 0;
+            width: 100%;
+            align-items: flex-start;
+        }
+        @include respond-to-v(xs){
+            height: 30%;
+            padding: 10% 0 0 0;
+            width: 100%;
+            align-items: flex-start;
+        }
+
+
+        .Hero__Intro__Content__Text{
+            width: 100%;
+            height: 20%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            text-align: flex-end;
+            font-family: "Sentient-Regular";
+
+            p{
+                width: 30%;
+                margin-bottom: 1rem;
+                font-size: 1.3rem;
+                line-height: 1.2;
+                opacity: 0.8;
+                color: var(--Wtext);
+                text-align: left;
+                // Add these properties for word wrapping
+                display: flex;
+                flex-wrap: wrap;
+                word-spacing: 0.5rem; // Adjust space between words
+
+
+                @include respond-to-h(lg){
+                    font-size: 1.2rem;
+                    width: 32.5%;
+                }
+                @include respond-to-h(md){
+                    font-size: 1.1rem;
+                    width: 35%;
+                }
+                @include respond-to-h(mdt){
+                    font-size: 1.2rem;
+                    width: 35%;
+                }
+                @include respond-to-h(sm){
+                    font-size: 1.1rem;
+                    width: 37.5%;
+                }
+                @include respond-to-h(xs){
+                    font-size: 0.9rem;
+                    width: 37.5%;
+                }
+                @include respond-to-h(xxs){
+                    font-size: 0.8rem;
+                    width: 40%;
+                }
+
+                @include respond-to-v(lg){
+                    width: 45%;
+                }
+                @include respond-to-v(md){
+                    font-size: 1.1rem;
+                    width: 50%;
+                }
+                @include respond-to-v(s){
+                    font-size: 1.1rem;
+                    width: 100%;
+                }
+                @include respond-to-v(sm){
+                    font-size: 1.1rem;
+                    width: 100%;
+                }
+                @include respond-to-v(xs){
+                    font-size: 1.1rem;
+                    width: 100%;
+                }
+
+                span{
+                    font-size: inherit;
+                    line-height: inherit;
+                    display: inline-block;
+                    margin-right: 0.25rem;
+                }
+            }
+
+            
+        }
+
+        .Hero__Intro__Content__Button{
+            width: 70%;
+            height: 15%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            margin-top: 1rem;
+
+            @include respond-to-v(lg){
+                width: 55%;
+            }
+            @include respond-to-v(md){
+                width: 55%;
+            }
+            @include respond-to-h(mdt){
+                width: 65%;
+            }
+            @include respond-to-h(sm){
+                width: 65%;
+            }
+            @include respond-to-h(xs){
+                width: 65%;
+            }
+            @include respond-to-h(xxs){
+                width: 65%;
+            }
+            @include respond-to-v(s){
+                width: 55%;
+                justify-content: flex-start;
+            }
+            @include respond-to-v(sm){
+                width: 55%;
+                justify-content: flex-start;
+            }
+            @include respond-to-v(xs){
+                width: 55%;
+                justify-content: flex-start;
+            }
+
+            .LinkButton{
+                .button{
+                    width: 200px;
+                    height: 50px;
+                    @include respond-to-h(lg){
+                        width: 180px;
+                        height: 45px;
+                    }
+                    @include respond-to-h(mdt){
+                        width: 180px;
+                        height: 45px;
+
+                    }
+
+                    @include respond-to-h(md){
+                        width: 160px;
+                        height: 40px;
+                    }
+                    @include respond-to-h(sm){
+                        width: 160px;
+                        height: 40px;
+                    }
+                    @include respond-to-h(xs){
+                        width: 150px;
+                        height: 40px;
+                    }
+                    @include respond-to-h(xxs){
+                        width: 150px;
+                        height: 40px;
+                    }
+                    .slider{
+                        .el{
+                            cursor: pointer;
+                            .perspectiveText{
+                                p{
+                                    color: var(--Wtext);
+                                    font-size: 1.3rem;
+                                    font-family: "Sansation-Regular";
+                                    text-transform: capitalize;
+                                    @include respond-to-h(lg){
+                                        font-size: 1.1rem;
+                                    }
+                                    @include respond-to-h(mdt){
+                                        font-size: 1.1rem;
+                                    }
+                                    @include respond-to-h(md){
+                                        font-size: 1rem;
+                                    }
+                                    @include respond-to-h(sm){
+                                        font-size: 1rem;
+                                    }
+                                    @include respond-to-h(xs){
+                                        font-size: 0.9rem;
+                                    }
+                                    @include respond-to-h(xxs){
+                                        font-size: 0.9rem;
+                                    }
+                                }
+                            }
+
+                            &:nth-of-type(2){
+                                p{
+                                    color: var(--ChText);    
+                                    &:nth-of-type(2){
+                                        color: var(--ChText);
+                                        transform: rotateX(-90deg) translateY(15px);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            @include respond-to-h(md){
+                margin: 0.5rem;
+            }
+            @include respond-to-h(sm){
+                margin: 0.5rem 5rem 0.5rem 0.5rem;
+            }
+            @include respond-to-h(xs){
+                margin: 0.5rem 2.5rem 0.5rem 0.5rem;
+            }
+            @include respond-to-h(xxs){
+                margin: 0.5rem;
+            }
+        }
+
+        @include respond-to-h(lg){
+            padding: 0;
+        }
+        @include respond-to-h(mdt){
+            padding: 0 0 0 5vw;
+        }
+    }
+
+    .Hero__Intro__Updates{
+        position: absolute;
+        bottom: 0;
+        left: 5vw;
+        width: 30vw;
+        height: 10vh;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        font-family: "Sansation-Regular";
+        z-index: 0;
+
+        @include respond-to-v(s){
+            width: 90vw;
+        }
+        @include respond-to-v(sm){
+            width: 90vw;
+        }
+        @include respond-to-v(xs){
+            width: 90vw;
+        }
+        p{
+            width: 100%;
+            text-align: left;
+            margin: 0;
+            color: var(--Wtext);
+            font-size: 2rem;
+            opacity: 0.8;
+
+            @include respond-to-h(lg){
+                font-size: 1.8rem;
+            }
+            @include respond-to-h(md){
+                font-size: 1.5rem;
+            }
+            @include respond-to-h(mdt){
+                font-size: 1.8rem;
+            }
+            @include respond-to-h(sm){
+                font-size: 1.5rem;
+            }
+            @include respond-to-h(xs){
+                font-size: 1.3rem;
+            }
+            @include respond-to-h(xxs){
+                font-size: 1.1rem;
+            }
+
+            @include respond-to-v(md){
+                font-size: 1.5rem;
+            }
+            @include respond-to-v(s){
+                font-size: 1.8rem;
+            }
+            @include respond-to-v(sm){
+                font-size: 1.5rem;
+            }
+            @include respond-to-v(xs){
+                font-size: 1.5rem;
+            }
+        }
+    }
+
+    .Hero__Intro__Updates__Mask{
+        position: absolute;
+        bottom: 0;
+        left: 5vw;
+        width: 30vw;
+        height: 10vh;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        font-family: "Sansation-Regular";
+        z-index: 1;
+
+        @include respond-to-v(s){
+            width: 90vw;
+        }
+        @include respond-to-v(sm){
+            width: 90vw;
+        }
+        @include respond-to-v(xs){
+            width: 90vw;
+        }
+        p{
+            width: 100%;
+            text-align: left;
+            margin: 0;
+            color: var(--ChText);
+            font-size: 2rem;
+            opacity: 0.8;
+            mask-image: url("../../../../../../public/assets/mask.png");
+            mask-position: center;
+            mask-size: cover;
+            mask-repeat: no-repeat;
+            -webkit-mask-image: url("../../../../../../public/assets/mask.png");
+            -webkit-mask-position: center;
+            -webkit-mask-size: cover;
+            -webkit-mask-repeat: no-repeat;
+
+            &.revealed{
+                color: var(--Wtext);
+            }
+
+            @include respond-to-h(lg){
+                font-size: 1.8rem;
+            }
+            @include respond-to-h(md){
+                font-size: 1.5rem;
+            }
+            @include respond-to-h(mdt){
+                font-size: 1.8rem;
+            }
+            @include respond-to-h(sm){
+                font-size: 1.5rem;
+            }
+            @include respond-to-h(xs){
+                font-size: 1.3rem;
+            }
+            @include respond-to-h(xxs){
+                font-size: 1.1rem;
+            }
+
+            @include respond-to-v(md){
+                font-size: 1.5rem;
+            }
+            @include respond-to-v(s){
+                font-size: 1.8rem;
+            }
+            @include respond-to-v(sm){
+                font-size: 1.5rem;
+            }
+            @include respond-to-v(xs){
+                font-size: 1.5rem;
+            }
+        }
+    }
+}

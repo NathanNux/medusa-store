@@ -1,0 +1,1344 @@
+@use "../../../../styles/mixins.scss" as *;
+
+
+.product{
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    flex-direction: row;
+    background-color: var(--WhiteBg);
+    gap: 2vw;
+
+    @include respond-to-h(xs){
+        height: 120vh;
+    } 
+    @include respond-to-h(xxs){
+        height: 120vh;
+    } 
+    @include respond-to-v(lg){
+        height: 70vh;
+        align-items: center;
+    }
+    @include respond-to-v(md){
+        height: 75vh;
+        align-items: center;
+        padding-bottom: 5vh;
+    }
+    @include respond-to-v(s){
+        overflow: hidden;
+    }
+    @include respond-to-v(sm){
+        overflow: hidden;
+    }
+    @include respond-to-v(xs){
+        overflow: hidden;
+    }
+
+    .product__details{
+        width: 50%;
+        height: 90%;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex-direction: column;
+        gap: 2.5vh;
+
+        @include respond-to-h(sm){
+            height: 100%;
+        }
+        @include respond-to-v(lg){
+            width: 40%;
+            justify-content: center;
+            padding-top: 10vh;
+        }
+        @include respond-to-v(md){
+            width: 40%;
+            justify-content: center;
+            padding-top: 10vh;
+        }
+
+        @include respond-to-v(s){
+            width: 100%;
+            height: 100%;
+            justify-content: flex-end;
+            padding-bottom: 5vh;
+        }
+        @include respond-to-v(sm){
+            width: 100%;
+            height: 100%;
+            justify-content: flex-end;
+            padding-bottom: 5vh;
+        }
+        @include respond-to-v(xs){
+            width: 100%;
+            height: 100%;
+            justify-content: flex-end;
+            padding-bottom: 5vh;
+        }
+
+        .product__details__mainDetails{
+            width: 100%;
+            height: 20vh;
+            position: relative;
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            flex-direction: column;
+            gap: 1vw;
+            padding: 0vh 2.5vw;
+            margin-top: 25vh;
+
+            @include respond-to-h(xs){
+                margin-top: 10vh;
+                height:35vh;
+            } 
+            @include respond-to-h(xxs){
+                margin-top: 10vh;
+                height:35vh;
+            }
+
+            @include respond-to-v(lg){
+                height: 15vh;
+                margin-top: 15vh;
+            }
+            @include respond-to-v(md){
+                height: 15vh;
+                margin-top: 15vh;
+            }
+            @include respond-to-v(s){
+                margin-top: 20vh;
+                margin-bottom: 25vh;
+            }
+             @include respond-to-v(sm){
+                margin-top: 20vh;
+                margin-bottom: 25vh;
+            }
+             @include respond-to-v(xs){
+                margin-top: 20vh;
+                margin-bottom: 25vh;
+            }
+        }
+
+        .product__details__subDetails{
+            width: 100%;
+            height: 10vh;
+            position: relative;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            flex-direction: column;
+            gap: 1vw;
+            padding: 0 2.5vw;
+
+            @include respond-to-h(xs){
+                height: 15vh;
+            } 
+            @include respond-to-h(xxs){
+                height: 15vh;
+            }
+            
+            @include respond-to-v(lg){
+                height: 7.5vh;
+            }
+            @include respond-to-v(s){
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-evenly;
+                padding: 0 5vw;
+            } 
+            @include respond-to-v(sm){
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-evenly;
+                padding: 0 5vw;
+            }
+            @include respond-to-v(xs){
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-evenly;
+                padding: 0 5vw;
+            } 
+
+            .product__details__subDetails__colors{
+                width: 100%;
+                height: 2.5vh;
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                gap: 1vw;
+
+                @include respond-to-h(xs){
+                    height: 5vh;
+                } 
+                @include respond-to-h(xxs){
+                    height: 5vh;
+                }
+                @include respond-to-v(s){
+                    height: 5vh;
+                    width: 50%;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                } 
+                @include respond-to-v(sm){
+                    height: 5vh;
+                    width: 50%;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                } 
+
+                @include respond-to-v(xs){
+                    height: 5vh;
+                    width: 50%;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                } 
+
+
+                p{
+                    font-family: "Sansation-Light";
+                    position: relative;
+                    z-index: 1;
+                    font-size: 1.5rem;
+                    color: var(--ChText);
+                    font-weight: 300;
+                    white-space: nowrap;
+
+                    @include respond-to-h(md){
+                        font-size: 1.3rem;
+                    } 
+                     @include respond-to-h(sm){
+                        font-size: 1.3rem;
+                    } 
+                    @include respond-to-h(xs){
+                        font-size: 1.2rem;
+                    } 
+                    @include respond-to-h(xxs){
+                        font-size: 1.1rem;
+                    } 
+                    @include respond-to-v(md){
+                        font-size: 1.3rem;
+                    }  
+
+                    @include respond-to-v(s){
+                        text-align: center;
+                    }
+                     @include respond-to-v(sm){
+                        text-align: center;
+                    }
+                     @include respond-to-v(xs){
+                        text-align: center;
+                    }
+                }
+
+               .product__details__subDetails__colors__items{
+                    width: 100%;
+                    height: 100%;
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-start;
+                    gap: 0.5vw;
+
+
+                    @include respond-to-v(s){
+                        justify-content: center;
+                        gap: 2.5vw;
+                        padding: 0.5vh 0;
+                        border-top: 1px solid var(--ButtonBorder);
+                    }
+                      @include respond-to-v(sm){
+                        justify-content: center;
+                        gap: 2.5vw;
+                        padding: 0.5vh 0;
+                        border-top: 1px solid var(--ButtonBorder);
+                    }
+                      @include respond-to-v(xs){
+                        justify-content: center;
+                        gap: 2.5vw;
+                        padding: 0.5vh 0;
+                        border-top: 1px solid var(--ButtonBorder);
+                    }
+
+                    .product__details__subDetails__colors__item{
+                        width: 1.5vw;
+                        height: 1.5vw;
+                        border-radius: 50%;
+                        cursor: pointer;
+
+                        @include respond-to-h(md){
+                            width: 1.3vw;
+                            height: 1.3vw;
+                        } 
+                        @include respond-to-h(sm){
+                            width: 1.3vw;
+                            height: 1.3vw;
+                        }
+                        @include respond-to-h(xs){
+                            width: 1.3vw;
+                            height: 1.3vw;
+                        }
+                        @include respond-to-h(xxs){
+                            width: 1.1vw;
+                            height: 1.1vw;
+                        } 
+
+                        @include respond-to-v(md){
+                            width: 2vw;
+                            height: 2vw;
+                        } 
+                        @include respond-to-v(s){
+                            width: 8vw;
+                            height: 8vw;
+                        } 
+                          @include respond-to-v(sm){
+                            width: 6vw;
+                            height: 6vw;
+                        } 
+                          @include respond-to-v(xs){
+                            width: 6vw;
+                            height: 6vw;
+                        } 
+                    }
+               }
+            }
+
+            .product__details__subDetails__sizes{
+                width: 100%;
+                height: 2.5vh;
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                gap: 1vw;
+
+                 @include respond-to-h(xs){
+                    height: 5vh;
+                }
+                 @include respond-to-h(xxs){
+                    height: 5vh;
+                } 
+                @include respond-to-v(s){
+                    height: 5vh;
+                    width: 50%;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                } 
+                  @include respond-to-v(sm){
+                    height: 5vh;
+                    width: 50%;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                } 
+                  @include respond-to-v(xs){
+                    height: 5vh;
+                    width: 50%;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                } 
+
+                p{
+                    font-family: "Sansation-Light";
+                    position: relative;
+                    z-index: 1;
+                    font-size: 1.5rem;
+                    color: var(--ChText);
+                    font-weight: 300;
+                    white-space: nowrap;
+
+                    @include respond-to-h(md){
+                        font-size: 1.3rem;
+                    } 
+                    @include respond-to-h(sm){
+                        font-size: 1.2rem;
+                    }
+                    @include respond-to-h(xs){
+                        font-size: 1.1rem;
+                    }
+                    @include respond-to-h(xxs){
+                        font-size: 1.1rem;
+                    }
+                    @include respond-to-v(md){
+                        font-size: 1.3rem;
+                    }  
+                    @include respond-to-v(s){
+                        text-align: center;
+                    }
+                     @include respond-to-v(sm){
+                        text-align: center;
+                    }
+                     @include respond-to-v(xs){
+                        text-align: center;
+                    }
+                }
+                
+
+                .product__details__subDetails__sizes__items{
+                    width: 100%;
+                    height: 100%;
+                    position: relative;
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    gap: 0.5vw;
+                    @include respond-to-v(s){
+                        justify-content: center;
+                        gap: 2.5vw;
+                        border-top: 1px solid var(--ButtonBorder);
+                        padding: 0.5vh 0;
+                    } 
+                     @include respond-to-v(sm){
+                        justify-content: center;
+                        gap: 2.5vw;
+                        border-top: 1px solid var(--ButtonBorder);
+                        padding: 0.5vh 0;
+                    }
+                     @include respond-to-v(xs){
+                        justify-content: center;
+                        gap: 2.5vw;
+                        border-top: 1px solid var(--ButtonBorder);
+                        padding: 0.5vh 0;
+                    }
+
+                    .product__details__subDetails__sizes__item{
+                        width: fit-content;
+                        height: 100%;
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        border-radius: 25px;
+                        background-color: var(--OButton);
+                        box-shadow: none;
+                        border: 0.5px solid var(--WhiteBg);
+                        padding: 0.5vw 0.5vw;
+                        cursor: pointer;
+                        @include respond-to-v(s){
+                            padding: 0.5vw 3vw;
+                        }
+                        @include respond-to-v(sm){
+                            padding: 0.5vw 3vw;
+                        }
+                        @include respond-to-v(xs){
+                            padding: 0.5vw 3vw;
+                        }
+
+                        p{
+                            font-family: "Sansation-Regular";
+                            position: relative;
+                            z-index: 1;
+                            font-size: 1.3rem;
+                            color: var(--Wtext);
+                            font-weight: 300;
+                            padding: 0.15rem;
+
+                            @include respond-to-h(md){
+                                font-size: 1.1rem;
+                                padding: 0.15rem;
+                            } 
+                            @include respond-to-h(sm){
+                                font-size: 1.1rem;
+                                padding: 0.15rem;
+                            } 
+                            @include respond-to-h(xs){
+                                font-size: 1rem;
+                                padding: 0.15rem;
+                            }
+                            @include respond-to-h(xxs){
+                                font-size: 0.9rem;
+                                padding: 0.15rem;
+                            }  
+                            @include respond-to-v(md){
+                                font-size: 1.1rem;
+                                padding: 0 0.25rem;
+                            }  
+                             @include respond-to-v(sm){
+                                font-size: 1.1rem;
+                                padding: 0 0.25rem;
+                            }  
+                              @include respond-to-v(xs){
+                                font-size: 1.1rem;
+                                padding: 0 0.25rem;
+                            } 
+                        }
+
+                        &.active{
+                            background-color: var(--CharcoalBg);
+                            border: 0.5px solid var(--OButton);
+                        }
+
+                        &:hover{
+                            background-color: var(--CharcoalBg);
+                            border: 0.5px solid var(--OButton);
+                        }
+                    }
+                }
+                
+            }
+            
+        }
+        .product__details__cta{
+            width: 100%;
+            height: 12.5vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            flex-direction: row;
+            gap: 1vw;
+            padding: 0 2.5vw;
+
+            @include respond-to-h(xs){
+                height: 20vh;
+            }
+            @include respond-to-h(xxs){
+                height: 20vh;
+            }
+
+            @include respond-to-v(lg){
+                flex-direction: column;
+                height: 25vh;
+                justify-content: center;
+                align-items: flex-start;
+            }
+
+            @include respond-to-v(md){
+                flex-direction: column;
+                height: 25vh;
+                justify-content: center;
+                align-items: flex-start;
+            }
+            @include respond-to-v(s){
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-start;
+                height: 15vh;
+                z-index: 1;
+            }
+             @include respond-to-v(sm){
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-start;
+                height: 15vh;
+                z-index: 1;
+            }
+             @include respond-to-v(xs){
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-start;
+                height: 15vh;
+                z-index: 1;
+            }
+
+
+            .divider{
+                position: absolute;
+                width: 90%;
+                height: 0.5px;
+                background-color: var(--ButtonBorder);
+                bottom: 0;
+                left: 5%;
+                z-index: 0;
+
+            }
+
+            .product__details__cta__price{
+                width: 40%;
+                height: 100%;
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                flex-direction: row;
+                gap: 1.5vw;
+                padding-top: 5vh;
+
+                @include respond-to-v(lg){
+                    width: 100%;
+                    padding: 0;
+                    height: 5vh;
+                }
+                @include respond-to-v(md){
+                    width: 100%;
+                    padding: 0;
+                    height: 5vh;
+                }
+                @include respond-to-v(s){
+                    width: 100%;
+                    padding: 0;
+                    height: 10vh;
+                    position: absolute;
+                    top: 0;
+                    left: 5vw;
+                    z-index: 1;
+                }
+                 @include respond-to-v(sm){
+                    width: 100%;
+                    padding: 0;
+                    height: 10vh;
+                    position: absolute;
+                    top: 0;
+                    left: 5vw;
+                    z-index: 1;
+                }
+                 @include respond-to-v(xs){
+                    width: 100%;
+                    padding: 0;
+                    height: 10vh;
+                    position: absolute;
+                    top: 0;
+                    left: 5vw;
+                    z-index: 1;
+                }
+
+                p{
+                    font-family: "Sansation-Light";
+                    position: relative;
+                    z-index: 1;
+                    font-size: 1.5rem;
+                    color: var(--ChText);
+                    font-weight: 300;
+
+                    @include respond-to-h(md){
+                        font-size: 1.3rem;
+                    }
+                    @include respond-to-h(sm){
+                        font-size: 1.2rem;
+                    }
+                    @include respond-to-h(xs){
+                        font-size: 1.1rem;
+                    }
+                    @include respond-to-h(xxs){
+                        font-size: 1rem;
+                    }
+                    @include respond-to-v(md){
+                        font-size: 1.3rem;
+                    }  
+                }
+                .product__details__cta__price__main{
+                    width: 50%;
+                    height: 0.1%;
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-start;
+
+                    p{
+                        font-family: "ooohBaby-Regular";
+                        position: relative;
+                        z-index: 1;
+                        font-size: 3rem;
+                        color: var(--ChText);
+                        font-weight: 300;
+                        margin: 0;
+
+                        @include respond-to-h(md){
+                            font-size: 2.5rem;
+                        }
+                        @include respond-to-h(mdt){
+                            font-size: 2.5rem;
+                        }
+                        @include respond-to-h(sm){
+                            font-size: 2rem;
+                        }
+                        @include respond-to-h(xs){
+                            font-size: 1.8rem;
+                        }
+                        @include respond-to-h(xxs){
+                            font-size: 1.5rem;
+                        }
+                        @include respond-to-v(md){
+                            font-size: 2rem;
+                        }  
+                        @include respond-to-v(s){
+                            font-size: 2rem;
+                        }  
+                         @include respond-to-v(sm){
+                            font-size: 2rem;
+                        } 
+                         @include respond-to-v(xs){
+                            font-size: 2rem;
+                        } 
+                    }
+                }
+
+            }
+
+            .product__details__cta__buy{
+                width: 60%;
+                height: 100%;
+                position: relative;
+                display: flex;
+                align-items: flex-end;
+                justify-content: flex-end;
+                flex-direction: column;
+                gap: 0.25vw;
+                padding: 1.5vh 0;
+
+                @include respond-to-v(lg){
+                    width: 100%;
+                    padding: 0;
+                    height: 7.5vh;
+                    align-items: flex-start;
+                }
+                @include respond-to-v(md){
+                    width: 100%;
+                    padding: 0;
+                    height: 7.5vh;
+                    align-items: flex-start;
+                }
+                @include respond-to-v(s){
+                    width: 100%;
+                    padding: 0;
+                    height: 10vh;
+                    align-items: flex-end;
+                    justify-content: space-between;
+                    position: absolute;
+                    bottom: 0;
+                    right: 0;
+                    z-index: 2;
+                    padding: 3.5vh 5vw 0 5vw;
+                }
+                @include respond-to-v(sm){
+                    width: 100%;
+                    padding: 0;
+                    height: 10vh;
+                    align-items: flex-end;
+                    justify-content: space-between;
+                    position: absolute;
+                    bottom: 0;
+                    right: 0;
+                    z-index: 2;
+                    padding: 2.5vh 5vw 0 5vw;
+                }
+                @include respond-to-v(xs){
+                    width: 100%;
+                    padding: 0;
+                    height: 10vh;
+                    align-items: flex-end;
+                    justify-content: space-between;
+                    position: absolute;
+                    bottom: 0;
+                    right: 0;
+                    z-index: 2;
+                    padding: 3.5vh 5vw 0 5vw;
+                }
+
+                .product__details__cta__buy__buttons{
+                    width: 100%;
+                    height: 50%;
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-end;
+                    flex-direction: row;
+                    gap: 1vw;
+                    @include respond-to-v(lg){
+                        justify-content: flex-start;
+                    }
+                    @include respond-to-v(md){
+                        justify-content: flex-start;
+                    }
+                    @include respond-to-v(s){
+                        justify-content: flex-start;
+                        height: 100%;
+                        flex-direction: row-reverse;
+                        gap: 5vw;
+                        padding: 0 5vw;
+                    }
+                     @include respond-to-v(sm){
+                        justify-content: flex-start;
+                        height: 100%;
+                        flex-direction: row-reverse;
+                        gap: 5vw;
+                        padding: 0 5vw;
+                    }
+                     @include respond-to-v(xs){
+                        justify-content: flex-start;
+                        height: 100%;
+                        flex-direction: row-reverse;
+                        gap: 5vw;
+                        padding: 0 5vw;
+                    }
+
+                    .product__details__cta__buy__button__add{
+                        width: 1.5vw;
+                        height: 1.5vw;
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        cursor: pointer;
+
+                    }
+                    .ClickButton{
+                        .button{
+                            width: 200px;
+                            height: 45px;
+                            @include respond-to-h(lg){
+                                width: 150px !important;
+                                height: 40px !important;
+                            }
+                            @include respond-to-h(mdt){
+                                width: 150px !important;
+                                height: 40px !important;
+                            }
+                            @include respond-to-h(md){
+                                width: 150px !important;
+                                height: 40px !important;
+                            }
+                            @include respond-to-h(sm){
+                                width: 150px !important;
+                                height: 40px !important;
+                            }
+                            @include respond-to-h(xs){
+                                width: 150px !important;
+                                height: 40px !important;
+                            }
+                            @include respond-to-h(xxs){
+                                width: 150px !important;
+                                height: 40px !important;
+                            }
+                            @include respond-to-v(md){
+                                width: 150px !important;
+                                height: 40px !important;
+                            }
+                            @include respond-to-v(s){
+                                width: 150px !important;
+                                height: 40px !important;
+                            }
+                            @include respond-to-v(sm){
+                                width: 150px !important;
+                                height: 40px !important;
+                            }
+                            @include respond-to-v(xs){
+                                width: 150px !important;
+                                height: 40px !important;
+                            }
+                            .slider{
+                                .el{
+                                    &:nth-of-type(1){
+                                        .perspectiveText{
+                                            position: absolute;
+                                            top: 50%;
+                                            left: 50%;
+                                            transform: translate(-50%, -50%);
+                                 
+                                            p{
+                                                &:nth-of-type(1){
+                                                    position: absolute;
+                                                    top: 50%;
+                                                    left: 50%;
+                                                    transform: translate(-50%, -50%);
+                                                    width: 100%;
+                                                    text-align: center;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    
+                                    p{
+                                        font-family: "Sansation-Light";
+                                        text-transform: capitalize;
+                                        font-size: 1.3rem;
+                                        color: var(--WhiteBg);
+                                        font-weight: 300;
+                                        margin: 0;
+
+                                        @include respond-to-h(lg){
+                                            font-size: 1.3rem;
+                                        }
+                                        @include respond-to-h(mdt){
+                                            font-size: 1.3rem;
+                                        }
+                                        @include respond-to-h(md){
+                                            font-size: 1.1rem;
+                                        }
+                                        @include respond-to-h(sm){
+                                            font-size: 1.1rem;
+                                        }
+                                        @include respond-to-h(xs){
+                                            font-size: 1rem;
+                                        }
+                                        @include respond-to-h(xxs){
+                                            font-size: 1rem;
+                                        }
+                                        @include respond-to-v(lg){
+                                            font-size: 1.3rem;
+                                        }
+                                        @include respond-to-v(md){
+                                            font-size: 1.1rem;
+                                        }
+                                        @include respond-to-v(s){
+                                            font-size: 1.1rem;
+                                        }
+                                        @include respond-to-v(sm){
+                                            font-size: 1.1rem;
+                                        }
+                                        @include respond-to-v(xs){
+                                            font-size: 1rem;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                }
+
+                p{
+                    font-family: "Sansation-Light";
+                    position: relative;
+                    z-index: 1;
+                    font-size: 1rem;
+                    color: var(--ChText);
+                    font-weight: 300;
+                    
+                    @include respond-to-h(md){
+                        font-size: 0.9rem;
+                    }
+
+                    @include respond-to-h(mdt){
+                        font-size: 0.9rem;
+                    }
+                    @include respond-to-h(sm){
+                        font-size: 0.9rem;
+                    }
+                    @include respond-to-h(xs){
+                        font-size: 0.7rem;
+                    }
+                    @include respond-to-h(xxs){
+                        font-size: 0.6rem;
+                    }
+
+                    @include respond-to-v(md){
+                        font-size: 0.9rem;
+                    }
+                    @include respond-to-v(s){
+                        font-size: 0.9rem;
+                        text-align: right;
+                    }
+                      @include respond-to-v(sm){
+                        font-size: 0.9rem;
+                        text-align: right;
+                    }
+                      @include respond-to-v(xs){
+                        font-size: 0.9rem;
+                        text-align: right;
+                    }
+                }
+            }
+        }
+
+    }
+
+    .product__image{
+        width: 50%;
+        height: 90%;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 1vw;
+        @include respond-to-h(xs){
+            margin-bottom: 5vh;
+        }
+        @include respond-to-v(lg){
+            width: 60%;
+            justify-content: flex-end;
+        }
+        @include respond-to-v(md){
+            width: 60%;
+            justify-content: flex-end;
+        }
+
+        @include respond-to-v(s){
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 40%;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            gap: 0;
+            margin: 0;
+        }
+          @include respond-to-v(sm){
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 40%;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            gap: 0;
+            margin: 0;
+        }
+          @include respond-to-v(xs){
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 40%;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            gap: 0;
+            margin: 0;
+        }
+
+        .Image__container{
+            width: 40vw;
+            height: 47.5vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            overflow: hidden;
+            @include respond-to-h(xs){
+                height: 60vh;
+            }
+            @include respond-to-h(xxs){
+                height: 60vh;
+            }
+            @include respond-to-v(lg){
+                justify-content: flex-end;
+                width: 50vw;
+            }
+            @include respond-to-v(md){
+                justify-content: flex-end;
+                width: 50vw;
+            }
+
+            @include respond-to-v(s){
+                width: 90vw;
+                height: 40vh;
+            }
+              @include respond-to-v(sm){
+                width: 90vw;
+                height: 40vh;
+            }
+              @include respond-to-v(xs){
+                width: 90vw;
+                height: 40vh;
+            }
+
+            .product__image__main{
+                width: 40vw;
+                height: 40vh;
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden;
+                border: 1px solid var(--ButtonBorder);
+                border-radius: 50px;
+
+                @include respond-to-h(md){
+                    height: 45vh;
+                }
+                @include respond-to-h(mdt){
+                    height: 35vh;
+                }
+                @include respond-to-h(xs){
+                    height: 50vh;
+                }
+                @include respond-to-h(xxs){
+                    height: 50vh;
+                }
+
+                @include respond-to-v(lg){
+                    height: 25vh;
+                    width: 50vw;
+                }
+                @include respond-to-v(md){
+                    height: 25vh;
+                    width: 50vw;
+                }
+                @include respond-to-v(s){
+                    width: 90vw;
+                    height: 30vh;
+                }
+                  @include respond-to-v(sm){
+                    width: 90vw;
+                    height: 30vh;
+                }
+                  @include respond-to-v(xs){
+                    width: 90vw;
+                    height: 30vh;
+                }
+            }
+
+            .product__image__bar{
+                width: 50%;
+                height: 5vh;
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 1vw;
+                @include respond-to-v(s){
+                    gap: 2.5vw;
+                }  
+                @include respond-to-v(sm){
+                    gap: 2.5vw;
+                } 
+                @include respond-to-v(xs){
+                    gap: 2.5vw;
+                } 
+
+                .dot{
+                    width: 1vw;
+                    height: 1vw;
+                    border-radius: 50%;
+                    background-color: var(--CharcoalBg);
+                    transition: all 0.3s ease-in-out;
+                    cursor: pointer;
+
+                    &.active{
+                        width: 1.1vw;
+                        height: 1.1vw;
+                        background-color: var(--OButton);
+                    }
+                    &:hover{
+                        width: 1.1vw;
+                        height: 1.1vw;
+                        background-color: var(--OButton);
+                    }
+
+                    @include respond-to-v(s){
+                        width: 5vw;
+                        height: 5vw;
+
+                        &.active{
+                            width: 6vw;
+                            height: 6vw;
+                        }
+                    }
+                     @include respond-to-v(sm){
+                        width: 4vw;
+                        height: 4vw;
+
+                        &.active{
+                            width: 5vw;
+                            height: 5vw;
+                        }
+                    }
+                     @include respond-to-v(xs){
+                        width: 4vw;
+                        height: 4vw;
+
+                        &.active{
+                            width: 5vw;
+                            height: 5vw;
+                        }
+                    }
+
+                }
+            }
+        }
+
+        .product__image__benefits{
+            width: 100%;
+            height: 6vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+
+            @include respond-to-h(md){
+                height: 8vh;
+                margin-bottom: 2vh;
+            }
+            @include respond-to-h(mdt){
+                height: 6.5vh;
+            }
+            @include respond-to-h(xs){
+                height: 10vh;
+            }
+            @include respond-to-h(xxs){
+                height: 10vh;
+            }
+            @include respond-to-v(s){
+                display: none;
+            }
+              @include respond-to-v(sm){
+                display: none;
+            }
+              @include respond-to-v(xs){
+                display: none;
+            }
+
+            .divider{
+                width: 85%;
+                height: 0.5px;
+                background-color: var(--ButtonBorder);
+                @include respond-to-h(sm){
+                    width: 95%;
+                }
+                @include respond-to-h(xs){
+                    width: 95%;
+                }
+                 @include respond-to-h(xxs){
+                    width: 95%;
+                }
+                @include respond-to-v(lg){
+                    width: 95%;
+                }
+                 @include respond-to-v(md){
+                    width: 95%;
+                }
+
+                &:nth-of-type(3){
+                    width: 80%;
+                    @include respond-to-h(sm){
+                        width: 90%;
+                    }
+                    @include respond-to-h(xs){
+                        width: 90%;
+                    }
+                     @include respond-to-h(xxs){
+                        width: 90%;
+                    }
+                    @include respond-to-v(lg){
+                        width: 90%;
+                    }
+                      @include respond-to-v(md){
+                        width: 90%;
+                    }
+                }
+            }
+
+            .product__image__benefits__text{
+                width: 80%;
+                height: 100%;
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: row;
+                gap: 0.5vw;
+
+                @include respond-to-h(md){
+                    img{
+                        width: 45px;
+                        height: 45px;
+                    }
+                }
+                 @include respond-to-h(mdt){
+                    img{
+                        width: 45px;
+                        height: 45px;
+                    }
+                }
+                @include respond-to-h(sm){
+                    width: 90%;
+                    img{
+                        width: 40px;
+                        height: 40px;
+                    }
+                }
+                @include respond-to-h(xs){
+                    width: 90%;
+                    img{
+                        width: 35px;
+                        height: 35px;
+                    }
+                }
+                 @include respond-to-h(xxs){
+                    width: 90%;
+                    img{
+                        width: 35px;
+                        height: 35px;
+                    }
+                }
+                @include respond-to-v(lg){
+                    width: 90%;
+                    img{
+                        width: 50px;
+                        height: 50px;
+                    }
+                }
+                @include respond-to-v(md){
+                    width: 95%;
+                    img{
+                        width: 45px;
+                        height: 45px;
+                    }
+                }
+
+               .product__image__benefits__text__items{
+                    width: 100%;
+                    height: 100%;
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-evenly;
+                    flex-direction: row;
+
+                    .product__image__benefits__text__items__title{
+                        width: fit-content;
+                        height: fit-content;
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        border-radius: 25px;
+                        background-color: var(--OButton);
+                        box-shadow: none;
+                        border: 0.5px solid var(--WhiteBg);
+                        padding: 0.5vw 1vw;
+
+                        p{
+                            font-family: "Sansation-Light";
+                            position: relative;
+                            z-index: 1;
+                            font-size: 1.3rem;
+                            color: var(--Wtext);
+                            font-weight: 300;
+                            @include respond-to-h(lg){
+                                font-size: 1.2rem;
+                            }
+                            @include respond-to-h(md){
+                                font-size: 1rem;
+                            }
+                            @include respond-to-h(mdt){
+                                font-size: 1.1rem;
+                            }
+                            @include respond-to-h(sm){
+                                font-size: 1rem;
+                            }
+                            @include respond-to-h(xs){
+                                font-size: 0.8rem;
+                            }
+                            @include respond-to-h(xxs){
+                                font-size: 0.7rem;
+                            }
+                            @include respond-to-v(md){
+                                font-size: 1rem;
+                            }
+                        }
+                    }
+               }
+            }
+        }
+    }
+}

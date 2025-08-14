@@ -1,7 +1,7 @@
 import React from "react"
 
-import Footer from "@modules/layout/templates/footer"
-import Nav from "@modules/layout/templates/nav"
+import Nav from "./original/nav"
+import Footer from "./original/footer"
 
 const Layout: React.FC<{
   children: React.ReactNode

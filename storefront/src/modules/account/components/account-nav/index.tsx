@@ -1,6 +1,6 @@
 "use client"
 
-import { clx } from "@medusajs/ui"
+import { Button, clx } from "@medusajs/ui"
 import { ArrowRightOnRectangle } from "@medusajs/icons"
 import { useParams, usePathname } from "next/navigation"
 
@@ -10,7 +10,9 @@ import MapPin from "@modules/common/icons/map-pin"
 import Package from "@modules/common/icons/package"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { HttpTypes } from "@medusajs/types"
-import { signout } from "@lib/data/customer"
+import { deleteAccount, signout } from "@lib/data/customer"
+import { useState } from "react"
+import { AnimatePresence, motion } from "framer-motion"
 
 const AccountNav = ({
   customer,
@@ -19,6 +21,7 @@ const AccountNav = ({
 }) => {
   const route = usePathname()
   const { countryCode } = useParams() as { countryCode: string }
+  const [ openModal, setOpenModal ] = useState(false)
 
   const handleLogout = async () => {
     await signout(countryCode)
@@ -120,7 +123,7 @@ const AccountNav = ({
                   route={route!}
                   data-testid="overview-link"
                 >
-                  Overview
+                  Přehled
                 </AccountNavLink>
               </li>
               <li>
@@ -129,7 +132,7 @@ const AccountNav = ({
                   route={route!}
                   data-testid="profile-link"
                 >
-                  Profile
+                  Profil
                 </AccountNavLink>
               </li>
               <li>
@@ -138,7 +141,7 @@ const AccountNav = ({
                   route={route!}
                   data-testid="addresses-link"
                 >
-                  Addresses
+                  Adresy
                 </AccountNavLink>
               </li>
               <li>
@@ -147,17 +150,47 @@ const AccountNav = ({
                   route={route!}
                   data-testid="orders-link"
                 >
-                  Orders
+                  Objednávky
                 </AccountNavLink>
               </li>
               <li className="text-grey-700">
-                <button
+                <Button
                   type="button"
                   onClick={handleLogout}
+                  variant="primary"
                   data-testid="logout-button"
+                  className="w-[100px]"
                 >
-                  Log out
-                </button>
+                  Odhlásit se
+                </Button>
+              </li>
+              <li className="text-grey-700">
+                <Button
+                  type="button"
+                  onClick={() => setOpenModal(true)}
+                  variant="danger"
+                  data-testid="delete-account-button"
+                  className="w-[150px]"
+                >
+                  Smazat účet
+                </Button>
+                <AnimatePresence mode="wait">
+                  {openModal && (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute inset-0 z-1050 flex items-center justify-center h-[80vh] w-full"
+                      data-testid="delete-account-modal"
+                    >
+                      <Modal
+                        isOpen={openModal}
+                        setIsOpen={setOpenModal}
+                      />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </li>
             </ul>
           </div>
@@ -172,6 +205,45 @@ type AccountNavLinkProps = {
   route: string
   children: React.ReactNode
   "data-testid"?: string
+}
+
+const Modal = ({
+  isOpen,
+  setIsOpen
+}: {
+  isOpen: boolean
+  setIsOpen: (isOpen: boolean) => void
+}) => {
+
+  const handleDeleteAccount = async () => {
+    await deleteAccount()
+  }
+  if (!isOpen) return null
+
+  return (
+    <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 w-full h-full">
+      <div className="bg-white p-6 rounded shadow-lg">
+        <h2 className="text-lg font-semibold mb-4">Delete Account</h2>
+        <p>Are you sure you want to delete your account? This action cannot be undone.</p>
+        <div className="mt-4 flex items-center justify-center gap-x-2">
+          <Button
+            onClick={handleDeleteAccount}
+            variant="danger"
+            className="w-[150px]"
+          >
+            Delete Account
+          </Button>
+          <Button
+            onClick={() => setIsOpen(false)}
+            variant="secondary"
+            className="w-[150px]"
+          >
+            Cancel
+          </Button>
+        </div>
+      </div>
+    </div>
+  )
 }
 
 const AccountNavLink = ({
