@@ -54,10 +54,9 @@ const CartMetadataWorkflow = createWorkflow(
   (input:CartMetadataInput) => {
     const metadata = getCartMetadataStep(input)
 
-
     return new WorkflowResponse({
       metadata,
-    })
+    }) as unknown as WorkflowResponse<{ metadata: unknown }>
   },
 )
 
