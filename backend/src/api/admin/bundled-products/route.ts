@@ -44,18 +44,29 @@ export async function GET(
   res: MedusaResponse
 ) {
   const query = req.scope.resolve("query")
-  const { 
-    data: bundledProducts, 
-    metadata: { count, take, skip } = {} 
+  const limit = Number((req.query as any)?.limit ?? (req.query as any)?.take ?? 15)
+  const offset = Number((req.query as any)?.offset ?? (req.query as any)?.skip ?? 0)
+
+  const {
+    data: bundledProducts,
+    metadata: { count, take, skip } = {},
   } = await query.graph({
     entity: "bundle",
-    ...req.queryConfig
+    fields: [
+      "*",
+      "items.*",
+      "items.product.*",
+    ],
+    pagination: {
+      take: limit,
+      skip: offset,
+    },
   })
 
   res.json({
     bundled_products: bundledProducts,
-    count: count || 0,
-    limit: take || 15,
-    offset: skip || 0,
+  count: count || 0,
+  limit: take || limit,
+  offset: skip || offset,
   })
 }
