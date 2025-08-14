@@ -16,7 +16,7 @@ export const updateReviewWorkflow = createWorkflow(
 
     return new WorkflowResponse({
       reviews
-    })
+    }) as unknown as WorkflowResponse<{ reviews: unknown }>
   }
 )
 

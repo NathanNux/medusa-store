@@ -1,18 +1,15 @@
 import { SubscriberArgs, type SubscriberConfig } from "@medusajs/framework"
-import { syncProductsWorkflow } from "../workflows/sync-products"
+import { sanitySyncProductsWorkflow } from "../workflows/sanity-sync-products"
 
 export default async function handleProductEvents({
   event: { data },
   container,
 }: SubscriberArgs<{ id: string }>) {
-  await syncProductsWorkflow(container)
-    .run({
-      input: {
-        filters: {
-          id: data.id,
-        },
-      },
-    })
+  await sanitySyncProductsWorkflow(container).run({
+    input: {
+      product_ids: [data.id],
+    },
+  })
 }
 
 export const config: SubscriberConfig = {

@@ -34,7 +34,14 @@ export const POST = async (
   const { result } = await createReviewWorkflow(req.scope)
     .run({
       input: {
-        ...input,
+  // ensure required fields are forwarded with correct types
+  title: input.title,
+  content: input.content,
+  rating: input.rating,
+  product_id: input.product_id,
+  first_name: input.first_name,
+  last_name: input.last_name,
+  // add customer id
         customer_id: req.auth_context?.actor_id
       }
     })

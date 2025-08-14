@@ -36,7 +36,7 @@ export const createReviewWorkflow = createWorkflow(
 
     return new WorkflowResponse({
       review
-    })
+    }) as unknown as WorkflowResponse<{ review: unknown }>
   }
 )
 

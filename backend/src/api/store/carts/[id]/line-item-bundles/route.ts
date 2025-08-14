@@ -23,7 +23,8 @@ export async function POST(
         cart_id: req.params.id,
         bundle_id: req.validatedBody.bundle_id,
         quantity: req.validatedBody.quantity || 1,
-        items: req.validatedBody.items
+  // req.validatedBody may be typed as Partial in Medusa's request type; assert to the required shape for workflow
+  items: req.validatedBody.items as unknown as { item_id: string; variant_id: string }[]
       }
     })
 

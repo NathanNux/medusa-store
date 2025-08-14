@@ -18,6 +18,6 @@ export const createWishlistWorkflow = createWorkflow(
 
     return new WorkflowResponse({
       wishlist
-    })
+    }) as unknown as WorkflowResponse<{ wishlist: unknown }>
   }
 )
