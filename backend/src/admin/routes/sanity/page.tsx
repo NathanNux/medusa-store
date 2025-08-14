@@ -9,7 +9,10 @@ import {
   Toaster,
   toast,
 } from "@medusajs/ui";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useSanitySyncs, useTriggerSanitySync } from "../../hooks/sanity";
+
+const queryClientProvider = new QueryClient();
 
 const SanityRoute = () => {
   const { mutateAsync, isPending } = useTriggerSanitySync();
@@ -41,7 +44,7 @@ const SanityRoute = () => {
   };
 
   return (
-    <>
+    <QueryClientProvider client={queryClientProvider}>
       <Container className="flex flex-col p-0 overflow-hidden">
         <div className="p-6 flex justify-between">
           <Heading className="font-sans font-medium h1-core">
@@ -104,7 +107,7 @@ const SanityRoute = () => {
         </Table>
       </Container>
       <Toaster />
-    </>
+    </QueryClientProvider>
   );
 };
 

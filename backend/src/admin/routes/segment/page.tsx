@@ -6,7 +6,7 @@ import {
   Heading,
 } from "@medusajs/ui";
 
-const SanityRoute = () => {
+const SegmentRoute = () => {
   return (
     <>
       <Container className="flex flex-col p-0 overflow-hidden">
@@ -36,4 +36,4 @@ export const config = defineRouteConfig({
   icon: Segment,
 });
 
-export default SanityRoute;
+export default SegmentRoute;
