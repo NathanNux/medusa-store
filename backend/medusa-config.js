@@ -21,7 +21,9 @@ import {
   MINIO_SECRET_KEY,
   MINIO_BUCKET,
   MEILISEARCH_HOST,
-  MEILISEARCH_ADMIN_KEY
+  MEILISEARCH_ADMIN_KEY,
+  JWT_EXPIRES_IN,
+  STOREFRONT_URL
 } from 'lib/constants';
 
 loadEnv(process.env.NODE_ENV, process.cwd());
@@ -49,7 +51,7 @@ const medusaConfig = {
   admin: {
     storefrontUrl: STOREFRONT_URL,
     backendUrl: BACKEND_URL,
-    
+
     disable: SHOULD_DISABLE_ADMIN,
   },
   modules: [
