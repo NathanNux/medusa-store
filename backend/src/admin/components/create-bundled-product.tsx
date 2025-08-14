@@ -55,6 +55,7 @@ const CreateBundledProductInner = () => {
     setCurrentProductPage(currnetProductPage + 1)
   }
 
+  // ...existing code...
   const { mutateAsync: createBundledProduct, isPending: isCreating } = useMutation({
     mutationFn: async (data: Record<string, any>) => {
       await sdk.client.fetch("/admin/bundled-products", {
@@ -64,12 +65,28 @@ const CreateBundledProductInner = () => {
     }
   })
 
+  const isValid = title.trim().length > 0 && items.every(
+    (it) => !!it.product_id && Number.isFinite(it.quantity) && it.quantity > 0
+  )
+
   const handleCreate = async () => {
+    const validTitle = title.trim()
+    const validItems = items.every((it) => !!it.product_id && Number.isFinite(it.quantity) && it.quantity > 0)
+
+    if (!validTitle) {
+      toast.error("Bundle title is required")
+      return
+    }
+    if (!validItems) {
+      toast.error("Please select a product and set quantity > 0 for each item")
+      return
+    }
+
     try {
       await createBundledProduct({
-        title,
+        title: validTitle,
         product: {
-          title,
+          title: validTitle,
           options: [
             {
               title: "Default",
@@ -79,7 +96,7 @@ const CreateBundledProductInner = () => {
           status: "published",
           variants: [
             {
-              title,
+              title: validTitle,
               // You can set prices in the product's page
               prices: [],
               options: {
@@ -164,6 +181,7 @@ const CreateBundledProductInner = () => {
               variant="primary"
               onClick={handleCreate}
               isLoading={isCreating}
+              disabled={!isValid}
             >
               Create Bundle
             </Button>

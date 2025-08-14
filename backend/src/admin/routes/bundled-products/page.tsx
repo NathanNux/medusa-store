@@ -13,6 +13,8 @@ import { Link } from "react-router-dom"
 import { useMemo, useState } from "react"
 import { sdk } from "../../lib/sdk"
 import CreateBundledProduct from "../../components/create-bundled-product"
+import UpdateBundledProduct from "../../components/update-bundled-product"
+import DeleteBundledProduct from "../../components/delete-bundled-product"
 
 type BundledProduct = {
   id: string
@@ -58,6 +60,19 @@ const columns = [
     header: "Product",
     cell: ({ row }) => {
       return <Link to={`/products/${row.original.product?.id}`}>View Product</Link>
+    },
+  }),
+  // new actions column
+  columnHelper.display({
+    id: "actions",
+    header: "Akce",
+    cell: ({ row }) => {
+      return (
+        <div className="flex gap-2">
+          <UpdateBundledProduct id={row.original.id} initialTitle={row.original.title} />
+          <DeleteBundledProduct id={row.original.id} />
+        </div>
+      )
     },
   }),
 ]
