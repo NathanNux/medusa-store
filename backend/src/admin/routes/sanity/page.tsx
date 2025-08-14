@@ -9,9 +9,10 @@ import {
   Toaster,
   toast,
 } from "@medusajs/ui";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useSanitySyncs, useTriggerSanitySync } from "../../hooks/sanity";
 
-//const queryClientProvider = new QueryClient()
+const queryClientProvider = new QueryClient()
 
 const SanityRouteInner = () => {
   const { mutateAsync, isPending } = useTriggerSanitySync();
@@ -108,10 +109,10 @@ const SanityRouteInner = () => {
 };
 
 const SanityRoute = () => (
-  <>
+  <QueryClientProvider client={queryClientProvider}>
     <SanityRouteInner />
     <Toaster />
-  </>
+  </QueryClientProvider>
 )
 
 export const config = defineRouteConfig({

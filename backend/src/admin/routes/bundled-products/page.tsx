@@ -8,7 +8,7 @@ import {
   createDataTableColumnHelper,
   DataTablePaginationState,
 } from "@medusajs/ui"
-import { useQuery,  } from "@tanstack/react-query"
+import { useQuery, QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { Link } from "react-router-dom"
 import { useMemo, useState } from "react"
 import { sdk } from "../../lib/sdk"
@@ -79,7 +79,7 @@ const columns = [
 
 const limit = 15
 
-//const queryClient = new QueryClient()
+const queryClient = new QueryClient()
 
 const BundledProductsPageInner = () => {
   const [pagination, setPagination] = useState<DataTablePaginationState>({
@@ -131,7 +131,9 @@ const BundledProductsPageInner = () => {
 }
 
 const BundledProductsPage = () => (
+  <QueryClientProvider client={queryClient}>
     <BundledProductsPageInner />
+  </QueryClientProvider>
 )
 
 export const config = defineRouteConfig({

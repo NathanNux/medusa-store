@@ -8,11 +8,11 @@ import {
   toast
 } from "@medusajs/ui"
 import { useState, useRef, useCallback, useMemo } from "react"
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
+import { useQuery, useMutation, useQueryClient, QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { sdk } from "../lib/sdk"
 import { HttpTypes } from "@medusajs/framework/types"
 
-//const queryClientProvider = new QueryClient()
+const queryClientProvider = new QueryClient()
 
 const CreateBundledProductInner = () => {
   const [open, setOpen] = useState(false)
@@ -195,7 +195,9 @@ const CreateBundledProductInner = () => {
 }
 
 const CreateBundledProduct = () => (
+  <QueryClientProvider client={queryClientProvider}>
     <CreateBundledProductInner />
+  </QueryClientProvider>
 )
 
 export default CreateBundledProduct

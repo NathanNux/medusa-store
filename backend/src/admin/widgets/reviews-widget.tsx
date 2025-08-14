@@ -1,6 +1,6 @@
 import { defineWidgetConfig } from "@medusajs/admin-sdk"
 import { Container, Heading, Text } from "@medusajs/ui"
-import { useQuery } from "@tanstack/react-query"
+import { useQuery, QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { sdk } from "../lib/sdk"
 import { DetailWidgetProps, AdminProduct } from "@medusajs/framework/types"
 
@@ -10,7 +10,7 @@ type StoreProductReview = {
   // ...other fields
 }
 
-//const queryClientProvider = new QueryClient()
+const queryClientProvider = new QueryClient()
 
 const ProductReviewsWidgetInner = ({ data: product }: DetailWidgetProps<AdminProduct>) => {
   const { data: response, isLoading } = useQuery<{ reviews: StoreProductReview[] }>({
@@ -47,7 +47,9 @@ const ProductReviewsWidgetInner = ({ data: product }: DetailWidgetProps<AdminPro
 }
 
 const ProductReviewsWidget = (props: DetailWidgetProps<AdminProduct>) => (
+  <QueryClientProvider client={queryClientProvider}>
     <ProductReviewsWidgetInner {...props} />
+  </QueryClientProvider>
 )
 
 export const config = defineWidgetConfig({
