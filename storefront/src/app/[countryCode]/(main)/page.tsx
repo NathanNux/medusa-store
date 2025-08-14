@@ -5,10 +5,11 @@ import { Metadata } from "next"
 import { listCollections } from "@lib/data/collections"
 import { getRegion } from "@lib/data/regions"
 import ScrollToTopOnReload from "@lib/helpers/scrollToTopOnReload"
-import HeroSection from "@modules/home/Hero"
-import ECom from "@modules/home/E-com"
-import Kurzy from "@modules/home/Kurzy"
-import Info from "@modules/home/Info"
+import HeroSection from "@modules/home/components/Hero"
+import ECom from "@modules/home/components/E-com"
+import Kurzy from "@modules/home/components/Kurzy"
+import Info from "@modules/home/components/Info"
+
 
 export const metadata: Metadata = {
   title: "Medusa Next.js Starter Template",
