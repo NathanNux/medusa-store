@@ -58,6 +58,7 @@ const CreateBundledProductInner = () => {
   // ...existing code...
   const { mutateAsync: createBundledProduct, isPending: isCreating } = useMutation({
     mutationFn: async (data: Record<string, any>) => {
+      console.log(data)
       await sdk.client.fetch("/admin/bundled-products", {
         method: "POST",
         body: data
@@ -71,6 +72,7 @@ const CreateBundledProductInner = () => {
 
   const handleCreate = async () => {
     const validTitle = title.trim()
+    console.log(validTitle)
     const validItems = items.every((it) => !!it.product_id && Number.isFinite(it.quantity) && it.quantity > 0)
 
     if (!validTitle) {
