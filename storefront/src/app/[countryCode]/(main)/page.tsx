@@ -8,7 +8,7 @@ import ScrollToTopOnReload from "@lib/helpers/scrollToTopOnReload"
 import ECom from "@modules/home/components/E-com"
 import Kurzy from "@modules/home/components/Kurzy"
 import Info from "@modules/home/components/Info"
-import HeroSection from "@modules/home/components/Hero/hero"
+import HeroSection from "../../../modules/home/components/Hero/hero"
 
 
 export const metadata: Metadata = {
