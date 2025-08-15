@@ -4,7 +4,7 @@
 @use '../modules/common/components/Buttons/hashtagButton/style.scss' as HashTagButtons;
 @use '../modules/common/components/Buttons/LinkButton/style.scss' as LinkButton;
 @use '../modules/common/components/Buttons/ClickButton/style.scss' as ClickButton;
-@use '../modules/common/components/Buttons/ScrollLink/styles.module.scss' as ScrollLink;
+@use '../modules/common/components/Buttons/ScrollLink/styles.scss' as ScrollLink;
 
 // Anim Styles
 //=============================================================
@@ -39,7 +39,7 @@
 
 // E-Shop Product styles
 //=============================================================
-@use '../modules/products/ProductPage/details/style.scss' as eProductDetails;
+@use '../modules/products/ProductPage/detail s/style.scss' as eProductDetails;
 @use '../modules/products/ProductPage/product/style.scss' as eProductProduct;
 @use '../modules/products/ProductPage/Sold/style.scss' as eProductSold;
 
