@@ -6,14 +6,14 @@
 @use '../modules/common/components/Buttons/ClickButton/style.scss' as ClickButton;
 @use '../modules/common/components/Buttons/ScrollLink/styles.scss' as ScrollLink;
 
-// // Anim Styles
-// //=============================================================
-// @use '../modules/common/components/MouseAnim/style.scss' as MouseAnim;
+// Anim Styles
+//=============================================================
+@use '../modules/common/components/MouseAnim/style.scss' as MouseAnim;
 
-// // Global styles 
-// //=============================================================
-// @use '../modules/layout/Footer/style.scss' as wFooter;
-// @use '../modules/layout/Navbar/style.scss' as wNav;
+// Global styles 
+//=============================================================
+@use '../modules/layout/Footer/style.scss' as wFooter;
+@use '../modules/layout/Navbar/style.scss' as wNav;
 
 // // Web styles 
 // //=============================================================
