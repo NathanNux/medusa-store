@@ -67,7 +67,7 @@ export async function PATCH(
     })
     const existingItemIds = (existing?.[0]?.items ?? []).map((it: any) => it.id).filter(Boolean)
     if (existingItemIds.length) {
-      await service.deleteBundleItems(existingItemIds)
+      await service.deleteBundleItems(existingItemIds, { hardDelete: true })
     }
 
     // 2) Vytvořit nové položky
@@ -111,9 +111,9 @@ export async function DELETE(
   })
   const existingItemIds = (existing?.[0]?.items ?? []).map((it: any) => it.id).filter(Boolean)
   if (existingItemIds.length) {
-    await service.deleteBundleItems(existingItemIds)
+    await service.deleteBundleItems(existingItemIds, { hardDelete: true })
   }
 
-  await service.deleteBundles([id])
+  await service.deleteBundles([id], { hardDelete: true })
   return res.json({ id, deleted: true, object: "bundled_product" })
 }
