@@ -1,4 +1,4 @@
-@use "../../../styles/mixins.scss" as *;
+@use "../../../styles/" as *;
 
 .kurzy{
     width: 100vw;
@@ -239,7 +239,7 @@
                     }
                     .kurzy__intro__title__details__img__inner{
                         position: relative;
-                        width: 17.5;
+                        width: 17.5vw;
                         height: 20vh;
                         display: flex;
                         align-items: center;
