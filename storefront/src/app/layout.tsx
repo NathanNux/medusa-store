@@ -1,3 +1,5 @@
+import LenisProvider from "@lib/context/LenisContext"
+import { StateProvider } from "@lib/context/StateContext"
 import { getBaseURL } from "@lib/util/env"
 import { Metadata } from "next"
 import "styles/globals.scss"
@@ -10,7 +12,11 @@ export default function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en" data-mode="light">
       <body>
-        <main className="relative">{props.children}</main>
+        <StateProvider>
+          <LenisProvider>
+            <main className="relative">{props.children}</main>
+          </LenisProvider>
+        </StateProvider>
       </body>
     </html>
   )
