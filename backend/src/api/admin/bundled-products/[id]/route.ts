@@ -63,9 +63,22 @@ export async function PATCH(
     const { data: existing } = await query.graph({
       entity: "bundle",
       filters: { id },
-      fields: ["items.*"],
+      fields: ["items.*", "items.product.*"],
     })
     const existingItemIds = (existing?.[0]?.items ?? []).map((it: any) => it.id).filter(Boolean)
+    // 1a) Odstranit remote linky položek -> produkt
+    if (existing?.[0]?.items?.length) {
+      const linksToDelete = existing[0].items
+        .filter((it: any) => it?.id && it?.product?.id)
+        .map((it: any) => ({
+          ["bundledProduct"]: { bundle_item_id: it.id },
+          [Modules.PRODUCT]: { product_id: it.product.id },
+        }))
+      if (linksToDelete.length) {
+        const remoteLink = req.scope.resolve("remoteLink") as any
+        await remoteLink.delete(linksToDelete)
+      }
+    }
     if (existingItemIds.length) {
       await service.deleteBundleItems(existingItemIds, { hardDelete: true })
     }
@@ -102,16 +115,48 @@ export async function DELETE(
   const { id } = req.params
   const service = req.scope.resolve("bundledProduct") as any
   const query = req.scope.resolve("query")
+  const remoteLink = req.scope.resolve("remoteLink") as any
+  const productService = req.scope.resolve(Modules.PRODUCT) as any
 
   // Nejprve smažeme položky, aby FK neblokoval smazání bundlu
   const { data: existing } = await query.graph({
     entity: "bundle",
     filters: { id },
-    fields: ["items.*"],
+    fields: ["items.*", "items.product.*", "product.*"],
   })
   const existingItemIds = (existing?.[0]?.items ?? []).map((it: any) => it.id).filter(Boolean)
+  // Smazat remote linky položek
+  if (existing?.[0]?.items?.length) {
+    const linksToDelete = existing[0].items
+      .filter((it: any) => it?.id && it?.product?.id)
+      .map((it: any) => ({
+        ["bundledProduct"]: { bundle_item_id: it.id },
+        [Modules.PRODUCT]: { product_id: it.product.id },
+      }))
+    if (linksToDelete.length) {
+      await remoteLink.delete(linksToDelete)
+    }
+  }
   if (existingItemIds.length) {
     await service.deleteBundleItems(existingItemIds, { hardDelete: true })
+  }
+
+  // Smazat remote link bundle -> produkt a smazat bundle produkt (tvůj "product" reprezentace bundlu)
+  const bundleProductId = existing?.[0]?.product?.id
+  if (bundleProductId) {
+    await remoteLink.delete([
+      {
+        ["bundledProduct"]: { bundle_id: id },
+        [Modules.PRODUCT]: { product_id: bundleProductId },
+      },
+    ])
+    // hard delete produktu, který reprezentuje bundle (NE maže produkty položek)
+    if (productService?.deleteProducts) {
+      await productService.deleteProducts([bundleProductId], { hardDelete: true })
+    } else if (productService?.softDeleteProducts) {
+      // fallback, kdyby deleteProducts nebylo k dispozici
+      await productService.softDeleteProducts([bundleProductId])
+    }
   }
 
   await service.deleteBundles([id], { hardDelete: true })
