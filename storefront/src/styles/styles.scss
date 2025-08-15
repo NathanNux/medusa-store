@@ -15,10 +15,10 @@
 @use '../modules/layout/Footer/style.scss' as wFooter;
 @use '../modules/layout/Navbar/style.scss' as wNav;
 
-// // Web styles 
-// //=============================================================
+// Web styles 
+//=============================================================
 // @use '../../src/modules/home/Hero/AboutHero/style.scss' as wHeroAbout;
-// @use '../../src/modules/home/Hero/IntroHero/style.scss' as wHeroIntro;
+@use '../../src/modules/home/Hero/IntroHero/style.scss' as wHeroIntro;
 
 @use '../../src/modules/home/E-com/Intro/style.scss' as wEComIntro;
 @use '../../src/modules/home/E-com/Entry/style.scss' as wEComEntry;
