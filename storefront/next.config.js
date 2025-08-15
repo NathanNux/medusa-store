@@ -33,10 +33,10 @@ const nextConfig = {
         protocol: "http",
         hostname: "localhost",
       },
-      ...(process.env.NEXT_PUBLIC_BASE_URL ? [{
+      ...(process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL ? [{
         // Note: needed to serve images from /public folder
-        protocol: process.env.NEXT_PUBLIC_BASE_URL.startsWith('https') ? 'https' : 'http',
-        hostname: process.env.NEXT_PUBLIC_BASE_URL.replace(/^https?:\/\//, ''),
+        protocol: process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL.startsWith('https') ? 'https' : 'http',
+        hostname: process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL.replace(/^https?:\/\//, ''),
       }] : []),
       ...(process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL ? [{
         // Note: only needed when using local-file for product media
