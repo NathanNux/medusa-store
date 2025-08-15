@@ -2,7 +2,6 @@
 
 import { sdk } from "@lib/config"
 import medusaError from "@lib/util/medusa-error"
-import { HttpTypes } from "@medusajs/types"
 import { getCacheOptions } from "./cookies"
 
 export const listRegions = async () => {
@@ -11,12 +10,12 @@ export const listRegions = async () => {
   }
 
   return sdk.client
-    .fetch<{ regions: HttpTypes.StoreRegion[] }>(`/store/regions`, {
+    .fetch<{ regions: any[] }>(`/store/regions`, {
       method: "GET",
       next,
       cache: "force-cache",
     })
-    .then(({ regions }) => regions)
+    .then(({ regions }: { regions: any[] }) => regions)
     .catch(medusaError)
 }
 
@@ -26,40 +25,48 @@ export const retrieveRegion = async (id: string) => {
   }
 
   return sdk.client
-    .fetch<{ region: HttpTypes.StoreRegion }>(`/store/regions/${id}`, {
+    .fetch<{ region: any }>(`/store/regions/${id}`, {
       method: "GET",
       next,
       cache: "force-cache",
     })
-    .then(({ region }) => region)
+    .then(({ region }: { region: any }) => region)
     .catch(medusaError)
 }
 
-const regionMap = new Map<string, HttpTypes.StoreRegion>()
+const regionMap = new Map<string, any>()
 
 export const getRegion = async (countryCode: string) => {
   try {
-    if (regionMap.has(countryCode)) {
-      return regionMap.get(countryCode)
+    const code = (countryCode || "").toLowerCase()
+
+    if (code && regionMap.has(code)) {
+      return regionMap.get(code)
     }
 
     const regions = await listRegions()
 
-    if (!regions) {
+    if (!regions || !regions.length) {
       return null
     }
 
-    regions.forEach((region) => {
-      region.countries?.forEach((c) => {
-        regionMap.set(c?.iso_2 ?? "", region)
+    regions.forEach((region: any) => {
+      region.countries?.forEach((c: any) => {
+        const iso2 = (c?.iso_2 || "").toLowerCase()
+        if (iso2) {
+          regionMap.set(iso2, region)
+        }
       })
     })
 
-    const region = countryCode
-      ? regionMap.get(countryCode)
-      : regionMap.get("us")
+    // Try exact match after hydrating the map
+    const exact = code ? regionMap.get(code) : undefined
+    if (exact) return exact
 
-    return region
+    // Final fallbacks to avoid hard failure in server actions
+    // 1) Prefer US if present, 2) otherwise pick the first region
+    const us = regionMap.get("us")
+    return us ?? regions[0]
   } catch (e: any) {
     return null
   }

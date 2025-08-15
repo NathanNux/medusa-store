@@ -103,16 +103,22 @@ const Details: React.FC<ProductTemplateProps> = ({ product, region, countryCode,
     // add the selected variant to the cart
     const handleAddToCart = async () => {
       if (!selectedVariant?.id) return null
-  
+
       setIsAdding(true)
-  
-      await addToCart({
-        variantId: selectedVariant.id,
-        quantity: 1,
-        countryCode,
-      })
-  
-      setIsAdding(false)
+      try {
+        const res = await addToCart({
+          variantId: selectedVariant.id,
+          quantity: 1,
+          countryCode,
+        })
+        if (!res?.success) {
+          console.error("Failed to add to cart:", res?.message)
+        }
+      } catch (e: any) {
+        console.error("Failed to add to cart:", e?.message || e)
+      } finally {
+        setIsAdding(false)
+      }
     }
 
     // WIP finish here the styling and scss
