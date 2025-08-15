@@ -381,7 +381,7 @@
             display: flex;
             align-items: center;
             justify-content: flex-end;
-            text-align: flex-end;
+            text-align: left;
             font-family: "Sentient-Regular";
 
             p{
@@ -679,11 +679,11 @@
             color: var(--ChText);
             font-size: 2rem;
             opacity: 0.8;
-            mask-image: url("../../../../../../public/assets/mask.png");
+            mask-image: url("/assets/mask.png");
             mask-position: center;
             mask-size: cover;
             mask-repeat: no-repeat;
-            -webkit-mask-image: url("../../../../../../public/assets/mask.png");
+            -webkit-mask-image: url("/assets/mask.png");
             -webkit-mask-position: center;
             -webkit-mask-size: cover;
             -webkit-mask-repeat: no-repeat;
