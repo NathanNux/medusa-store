@@ -25,13 +25,13 @@
 // @use '../../src/modules/home/E-com/Desc/style.scss' as wEComDesc;
 // @use '../../src/modules/home/E-com/CTA/style.scss' as wEComCTA;
 
-// @use '../../src/modules/home/Kurzy/style.scss' as wKurzy;
+@use '../../src/modules/home/Kurzy/style.scss' as wKurzy;
 
-// @use '../../src/modules/home/Info/Mapa/styles.scss' as wInfoMapa;
-// @use '../../src/modules/home/Info/Kontakt/styles.scss' as wInfoContact;
+@use '../../src/modules/home/Info/Mapa/styles.scss' as wInfoMapa;
+@use '../../src/modules/home/Info/Kontakt/styles.scss' as wInfoContact;
 
-// // E-Commerce styles
-// //=============================================================
+// E-Commerce styles
+//=============================================================
 
 // // E-Shop styles 
 // //=============================================================
