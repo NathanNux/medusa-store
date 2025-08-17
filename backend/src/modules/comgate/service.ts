@@ -64,7 +64,7 @@ class ComgatePaymentProviderService extends AbstractPaymentProvider<ComgateOptio
     const auth = Buffer.from(`${merchant}:${secret}`).toString("base64")
 
     const payload = {
-        test: Number(COMGATE_TEST),
+        test: 1,
         price: Number(input?.amount) * 100, // Předpokládáme, že Comgate očekává částku v haléřích
         curr: currency_code.toUpperCase(),
         label: "Keramická zahrada",
