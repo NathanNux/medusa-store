@@ -31,7 +31,12 @@ export default async function CheckoutForm({
     <div className="w-full grid grid-cols-1 gap-y-8">
       <Addresses cart={cart} customer={customer} />
 
-      <Shipping cart={cart} availableShippingMethods={shippingMethods}/>
+      <Shipping
+        cart={cart}
+        availableShippingMethods={shippingMethods}
+        packetaApiKey={process.env.NEXT_PUBLIC_PACKETA_API_KEY}
+        packetaShippingMethodId={process.env.NEXT_PUBLIC_PACKETA_SHIPPING_METHOD_ID}
+      />
 
       <Payment cart={cart} availablePaymentMethods={paymentMethods} />
 

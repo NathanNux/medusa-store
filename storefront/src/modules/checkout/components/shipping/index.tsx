@@ -20,6 +20,8 @@ const PICKUP_OPTION_OFF = "__PICKUP_OFF"
 type ShippingProps = {
   cart: HttpTypes.StoreCart
   availableShippingMethods: HttpTypes.StoreCartShippingOption[] | null
+  packetaApiKey?: string
+  packetaShippingMethodId?: string
 }
 
 function formatAddress(address: StoreOrderAddress | null): string {
@@ -51,6 +53,8 @@ function formatAddress(address: StoreOrderAddress | null): string {
 const Shipping: React.FC<ShippingProps> = ({
   cart,
   availableShippingMethods,
+  packetaApiKey,
+  packetaShippingMethodId,
 }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isLoadingPrices, setIsLoadingPrices] = useState(true)
@@ -66,7 +70,7 @@ const Shipping: React.FC<ShippingProps> = ({
   )
 
   async function onPointSelected(pickupPoint: string) {
-    await fetch(`http://localhost:9000/store/carts/${cart.id}`, {
+    await fetch(`${process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL}/store/carts/${cart.id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -77,7 +81,7 @@ const Shipping: React.FC<ShippingProps> = ({
       }),
     })
 
-    await fetch(`http://localhost:9000/store/carts/${cart.id}/metadata`, {
+    await fetch(`${process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL}/store/carts/${cart.id}/metadata`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -129,10 +133,22 @@ const Shipping: React.FC<ShippingProps> = ({
   }, [availableShippingMethods])
 
   useEffect(() => {
-    const script = document.createElement('script')
-    script.src = 'https://widget.packeta.com/v6/www/js/library.js'
-    script.async = true
-    document.body.appendChild(script)
+    if (typeof window === 'undefined'){
+      console.warn("Window is not defined, skipping Packeta widget initialization")
+      return
+    }
+    if ((window as any).Packeta?.Widget){
+      console.warn("Packeta Widget is already loaded, skipping script injection")
+      return
+    }
+    let script = document.getElementById('packeta-widget-script') as HTMLScriptElement | null
+    if (!script) {
+      script = document.createElement('script')
+      script.id = 'packeta-widget-script'
+      script.src = 'https://widget.packeta.com/v6/www/js/library.js'
+      script.async = true
+      document.body.appendChild(script)
+    }
   }, [])
 
   const handleEdit = () => {
@@ -144,12 +160,25 @@ const Shipping: React.FC<ShippingProps> = ({
   }
 
     const handleOpenWidget = () => {
-    if (!window.Packeta || !window.Packeta.Widget) {
-      console.error('Widget is not loaded yet')
+    const key = packetaApiKey
+    const open = () => {
+      if (!(window as any).Packeta?.Widget) return
+      if (!key) {
+        console.error('PACKETA_API_KEY is not configured')
+        setError('Pickup point selector is not configured.')
+        return
+      }
+      (window as any).Packeta.Widget.pick(key, showSelectedPickupPoint, packetaOptions)
+    }
+    if (!(window as any).Packeta?.Widget) {
+      console.warn('Widget is not loaded yet, will open when ready')
+      const script = document.getElementById('packeta-widget-script') as HTMLScriptElement | null
+      if (script) {
+        script.addEventListener('load', () => open(), { once: true })
+      }
+      setError('Loading pickup point selector…')
       return
     }
-
-  const packetaApiKey = process.env.PACKETA_API_KEY
 
     const packetaOptions = {
       language: "en",
@@ -204,7 +233,7 @@ const Shipping: React.FC<ShippingProps> = ({
         }
     }
 
-    window.Packeta.Widget.pick(packetaApiKey, showSelectedPickupPoint, packetaOptions)
+  open()
   }
 
   const handleSetShippingMethod = async (
@@ -223,8 +252,9 @@ const Shipping: React.FC<ShippingProps> = ({
     setIsLoading(true)
   setShippingMethodId((prev) => {
       console.log("Setting shipping method ID:", prev, "to", id)
-      if (id === process.env.PACKETA_SHIPPING_METHOD_ID?.toString()) {
+      if (id === packetaShippingMethodId?.toString()) {
         // This is a special case for the "Zásilkovna - výdejní místo" option
+        console.log("Opening Packeta widget")
         handleOpenWidget()
       }
       currentId = prev
