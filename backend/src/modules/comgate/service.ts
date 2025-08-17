@@ -69,7 +69,7 @@ class ComgatePaymentProviderService extends AbstractPaymentProvider<ComgateOptio
         curr: currency_code.toUpperCase(),
         label: "Keramická zahrada",
         refId: input.data?.session_id,
-        method: COMGATE_METHOD,
+        method: "ALL",
         email: email,
         fullName: fullName,
         delivery: "HOME_DELIVERY",
