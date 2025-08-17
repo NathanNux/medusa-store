@@ -23,12 +23,7 @@ class PacketaProviderService extends AbstractFulfillmentProviderService {
 
   async validateFulfillmentData(optionData, data, context) {
     console.log("Validating fulfillment data with optionData:", optionData, "data:", data, "context:", context);
-    if (data.metadata?.packeta_pickup_point || context?.shipping_address?.metadata?.packeta_pickup_point) {
-      return data
-    }
-    else {
-      throw new Error("Packeta pickup point is required")
-    }
+    return data
   }
 
 async createFulfillment(
