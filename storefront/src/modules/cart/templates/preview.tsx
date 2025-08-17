@@ -11,6 +11,7 @@ type ItemsTemplateProps = {
   cart: HttpTypes.StoreCart
 }
 
+
 const ItemsPreviewTemplate = ({ cart }: ItemsTemplateProps) => {
   const items = cart.items
   const hasOverflow = items && items.length > 4

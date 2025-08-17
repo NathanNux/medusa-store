@@ -27,14 +27,13 @@ import {
   SANITY_API_TOKEN,
   SANITY_PROJECT_ID,
   SANITY_STUDIO_URL,
-  SEGMENT_WRITE_KEY
-} from 'lib/constants';
-import {
+  SEGMENT_WRITE_KEY,
   COMGATE_MERCHANT,
   COMGATE_SECRET,
   COMGATE_TEST,
   COMGATE_COUNTRY,
   COMGATE_CURRENCY,
+  COMGATE_METHOD
 } from 'lib/constants';
 
 loadEnv(process.env.NODE_ENV, process.cwd());
@@ -214,6 +213,7 @@ const medusaConfig = {
               test: COMGATE_TEST,
               country: COMGATE_COUNTRY,
               curr: COMGATE_CURRENCY,
+              method: COMGATE_METHOD
             },
           }] : []),
           // Stripe provider (conditionally enabled if env present)

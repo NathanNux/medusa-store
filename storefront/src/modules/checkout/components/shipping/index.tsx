@@ -149,7 +149,7 @@ const Shipping: React.FC<ShippingProps> = ({
       return
     }
 
-    const packetaApiKey = '1c80656ab4964dc5'
+    const packetaApiKey = process.env.PACKETA_API_KEY
 
     const packetaOptions = {
       language: "en",
@@ -223,7 +223,7 @@ const Shipping: React.FC<ShippingProps> = ({
     setIsLoading(true)
     setShippingMethodId((prev) => {
       console.log("Setting shipping method ID:", prev, "to", id)
-      if (id === "so_01K1BYJ5XTSZA9H74KQ2F3PE2F"){
+      if (id === process.env.PACKETA_SHIPPING_METHOD_ID?.toString()) {
         // This is a special case for the "Zásilkovna - výdejní místo" option
         handleOpenWidget()
       }

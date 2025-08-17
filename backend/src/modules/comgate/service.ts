@@ -12,6 +12,7 @@ type ComgateOptions = {
   test?: boolean
   country: string  // Změněno na povinné
   curr: string     // Změněno na povinné
+  method: string
 }
 
 type InjectedDependencies = {
@@ -57,17 +58,17 @@ class ComgatePaymentProviderService extends AbstractPaymentProvider<ComgateOptio
 
 
     console.log("Comgate initiatePayment input:", input)
-    const merchant = "497113"
-    const secret = "VnQ7tNhYZZCQRJeuUb6MDDqfNmnmYzIo"
+    const merchant = this.container.merchant
+    const secret = this.container.secret
     const auth = Buffer.from(`${merchant}:${secret}`).toString("base64")
 
     const payload = {
-        test: 1,
+        test: Number(this.container.test),
         price: Number(input?.amount) * 100, // Předpokládáme, že Comgate očekává částku v haléřích
         curr: currency_code.toUpperCase(),
         label: "Keramická zahrada",
         refId: input.data?.session_id,
-        method: "ALL",
+        method: this.container.method,
         email: email,
         fullName: fullName,
         delivery: "HOME_DELIVERY",
