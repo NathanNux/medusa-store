@@ -149,7 +149,7 @@ const Shipping: React.FC<ShippingProps> = ({
       return
     }
 
-    const packetaApiKey = process.env.PACKETA_API_KEY
+  const packetaApiKey = process.env.PACKETA_API_KEY
 
     const packetaOptions = {
       language: "en",
@@ -221,7 +221,7 @@ const Shipping: React.FC<ShippingProps> = ({
     }
     let currentId: string | null = null
     setIsLoading(true)
-    setShippingMethodId((prev) => {
+  setShippingMethodId((prev) => {
       console.log("Setting shipping method ID:", prev, "to", id)
       if (id === process.env.PACKETA_SHIPPING_METHOD_ID?.toString()) {
         // This is a special case for the "Zásilkovna - výdejní místo" option
@@ -231,15 +231,12 @@ const Shipping: React.FC<ShippingProps> = ({
       return id
     })
 
-    await setShippingMethod({ cartId: cart.id, shippingMethodId: id })
-      .catch((err) => {
-        setShippingMethodId(currentId)
-
-        setError(err.message)
-      })
-      .finally(() => {
-        setIsLoading(false)
-      })
+    const res = await setShippingMethod({ cartId: cart.id, shippingMethodId: id })
+    if (!res?.success) {
+      setShippingMethodId(currentId)
+      setError(res?.message || "Failed to set shipping method")
+    }
+    setIsLoading(false)
   }
 
   useEffect(() => {
