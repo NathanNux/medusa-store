@@ -4,6 +4,7 @@ import { BigNumber } from "@medusajs/framework/utils"
 import axios from "axios"
 import crypto from "crypto"
 import { Logger } from "@medusajs/framework/types"
+import { COMGATE_MERCHANT, COMGATE_METHOD, COMGATE_SECRET, COMGATE_TEST } from "lib/constants"
 
 
 type ComgateOptions = {
@@ -12,6 +13,7 @@ type ComgateOptions = {
   test?: boolean
   country: string  // Změněno na povinné
   curr: string     // Změněno na povinné
+  method: string
 }
 
 type InjectedDependencies = {
@@ -57,8 +59,8 @@ class ComgatePaymentProviderService extends AbstractPaymentProvider<ComgateOptio
 
 
     console.log("Comgate initiatePayment input:", input)
-    const merchant = "497113"
-    const secret = "VnQ7tNhYZZCQRJeuUb6MDDqfNmnmYzIo"
+    const merchant = COMGATE_MERCHANT
+    const secret = COMGATE_SECRET
     const auth = Buffer.from(`${merchant}:${secret}`).toString("base64")
 
     const payload = {

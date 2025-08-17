@@ -225,18 +225,27 @@ export async function setShippingMethod({
 }: {
   cartId: string
   shippingMethodId: string
-}) {
-  const headers = {
-    ...(await getAuthHeaders()),
-  }
+}): Promise<{ success: boolean; message?: string }> {
+  try {
+    const headers = {
+      ...(await getAuthHeaders()),
+    }
 
-  return sdk.store.cart
-    .addShippingMethod(cartId, { option_id: shippingMethodId }, {}, headers)
-    .then(async () => {
-  const cartCacheTag = await getCacheTag("carts")
-  if (cartCacheTag) revalidateTag(cartCacheTag)
-    })
-    .catch(medusaError)
+    await sdk.store.cart.addShippingMethod(
+      cartId,
+      { option_id: shippingMethodId },
+      {},
+      headers
+    )
+
+    const cartCacheTag = await getCacheTag("carts")
+    if (cartCacheTag) revalidateTag(cartCacheTag)
+
+    return { success: true }
+  } catch (e: any) {
+    const message = e?.message || "Failed to set shipping method"
+    return { success: false, message }
+  }
 }
 
 export async function initiatePaymentSession(
