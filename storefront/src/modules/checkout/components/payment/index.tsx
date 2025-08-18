@@ -56,16 +56,25 @@ const Payment = ({
     }
     else if (isComgate(method)) {
       // Initialize Comgate payment session
-      const resp = await initiatePaymentSession(cart, { provider_id: method })
+      const firstName = cart?.billing_address?.first_name || cart?.shipping_address?.first_name || null
+      const lastName = cart?.billing_address?.last_name || cart?.shipping_address?.last_name || null
+      const email = cart?.email || null
+      const resp = await initiatePaymentSession(cart, {
+        provider_id: method,
+        // pass extra data so provider can use it directly
+        data: {
+          email,
+          first_name: firstName,
+          last_name: lastName,
+          cart_id: cart.id,
+        } as any,
+      })
       if ((resp as any)?.message) {
         setError((resp as any).message)
         return
       }
 
       // Send metadata to backend (cart metadata) so Comgate service can use them
-      const firstName = cart?.billing_address?.first_name || cart?.shipping_address?.first_name || null
-      const lastName = cart?.billing_address?.last_name || cart?.shipping_address?.last_name || null
-      const email = cart?.email || null
       const init = await initComgateMetadata({
         cartId: cart.id,
         email,
@@ -112,8 +121,22 @@ const Payment = ({
 
 
       if (!checkActiveSession) {
+        // When creating session here, also include extra data for Comgate
+        const isComgateSelected = isComgate(selectedPaymentMethod)
+        const firstName = cart?.billing_address?.first_name || cart?.shipping_address?.first_name || null
+        const lastName = cart?.billing_address?.last_name || cart?.shipping_address?.last_name || null
+        const email = cart?.email || null
         await initiatePaymentSession(cart, {
           provider_id: selectedPaymentMethod,
+          ...(isComgateSelected
+            ? {
+                data: {
+                  email,
+                  first_name: firstName,
+                  last_name: lastName,
+                } as any,
+              }
+            : {}),
         })
       }
 

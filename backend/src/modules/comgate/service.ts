@@ -49,29 +49,22 @@ class ComgatePaymentProviderService extends AbstractPaymentProvider<ComgateOptio
     }
 
     async initiatePayment(
-  input: InitiatePaymentInput,
+  input: InitiatePaymentInput
 ): Promise<InitiatePaymentOutput> {
   const { currency_code, context } = input
 
-  // Získání údajů o zákazníkovi, pokud jsou k dispozici
-  const email = context?.customer?.email
-  const fullName = context?.customer?.first_name + " " + context?.customer?.last_name
+  // Získání údajů o zákazníkovi, pokud jsou k dispozici; fallback na input.data
+  const dataAny = (input?.data as any) || {}
+  const email = context?.customer?.email || dataAny.email || null
+  const firstName = context?.customer?.first_name || dataAny.first_name || ""
+  const lastName = context?.customer?.last_name || dataAny.last_name || ""
+  const fullName = `${firstName} ${lastName}`.trim()
 
 
     console.log("Comgate initiatePayment input:", input)
     const merchant = COMGATE_MERCHANT
     const secret = COMGATE_SECRET
     const auth = Buffer.from(`${merchant}:${secret}`).toString("base64")
-
-      // Derivace orderId z inputu/kontekstu. Preferuj explicitní hodnoty, fallback na session_id jen pro ref.
-      const orderId =
-        // z input.data
-        (input?.data as any)?.order_id ||
-        (input?.data as any)?.orderId ||
-        // z contextu
-        (context as any)?.order?.id ||
-        (context as any)?.order_id ||
-        null
 
     const payload = {
         test: 1,
@@ -85,9 +78,9 @@ class ComgatePaymentProviderService extends AbstractPaymentProvider<ComgateOptio
         delivery: "HOME_DELIVERY",
         category: "PHYSICAL_GOODS_ONLY",
         enableApplePayGooglePay: true,
-          url_paid: `${process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL}/store/orders/${orderId ?? "unknown"}/payment/success`,
-          url_cancelled: `${process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL}/store/orders/${orderId ?? "unknown"}/payment/cancelled`,
-          url_success: `${process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL}/store/orders/${orderId ?? "unknown"}/payment/success`
+        url_paid: `${process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL}/store/carts/${input.data?.session_id}/payment/success`,
+        url_cancelled: `${process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL}/store/carts/${input.data?.session_id}/payment/cancelled`,
+        url_success: `${process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL}/store/carts/${input.data?.session_id}/payment/success`,
       }
 
       //redirect to summary url: http://localhost:8000/cz/order/order_01K2D66AE6147SZF9479HZBQR2/confirmed
