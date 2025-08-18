@@ -9,7 +9,7 @@ const API_KEY="1c80656ab4964dc5"
 
 class PacketaProviderService extends AbstractFulfillmentProviderService {
   static identifier = "packeta"
-  constructor(options:any) {
+  constructor(options: any) {
     super()
     // Inicializace klienta pro Packeta API, pokud potřebujete
   }
