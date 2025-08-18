@@ -271,6 +271,48 @@ export async function initiatePaymentSession(
   }
 }
 
+/**
+ * Attempts to capture a payment on the backend. Expects a store API route to handle capture.
+ * If the route is not available, this will fail gracefully and the caller can fallback to placeOrder.
+ */
+export async function capturePayment({
+  cartId,
+  paymentSessionId,
+  providerId,
+  payload = {},
+}: {
+  cartId: string
+  paymentSessionId?: string
+  providerId?: string
+  payload?: Record<string, any>
+}): Promise<{ success: boolean; data?: any; message?: string }> {
+  try {
+    const headers = {
+      ...(await getAuthHeaders()),
+    }
+    const res = await sdk.client
+      .fetch<{
+        ok: boolean
+        data?: any
+        message?: string
+      }>(`/store/payment/capture`, {
+        method: "POST",
+        headers,
+        body: {
+          cart_id: cartId,
+          payment_session_id: paymentSessionId,
+          provider_id: providerId,
+          payload,
+        },
+      })
+
+    return { success: !!res.ok, data: res.data, message: res.message }
+  } catch (e: any) {
+    const message = e?.message || "Failed to capture payment"
+    return { success: false, message }
+  }
+}
+
 export async function initComgateMetadata({
   cartId,
   email,

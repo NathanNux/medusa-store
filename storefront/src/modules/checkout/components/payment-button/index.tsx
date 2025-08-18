@@ -1,20 +1,23 @@
 "use client"
 
 import { isManual, isStripe, isComgate } from "@lib/constants"
-import { placeOrder } from "@lib/data/cart"
+import { placeOrder, capturePayment } from "@lib/data/cart"
 import { HttpTypes } from "@medusajs/types"
 import { Button } from "@medusajs/ui"
 import { useElements, useStripe } from "@stripe/react-stripe-js"
 import React, { useState } from "react"
 import ErrorMessage from "../error-message"
+import { redirect } from "next/navigation"
 
 type PaymentButtonProps = {
   cart: HttpTypes.StoreCart
-  "data-testid": string
+  "data-testid": string,
+  countryCode: string
 }
 
 const PaymentButton: React.FC<PaymentButtonProps> = ({
   cart,
+  countryCode,
   "data-testid": dataTestId,
 }) => {
   const notReady =
@@ -207,11 +210,10 @@ const ComgatePaymentButton = ({
 }) => {
   const [submitting, setSubmitting] = useState(false)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
-
   const session = cart.payment_collection?.payment_sessions?.find(
     (s) => s.status === "pending"
   )
-
+  const country_code = cart?.shipping_address?.country_code?.toLowerCase?.()
   console.log("session:", session)
 
   const redirectUrl: string | undefined =
@@ -229,6 +231,36 @@ const ComgatePaymentButton = ({
 
     // Otevře URL v novém okně, nebo můžeš redirectnout přímo
     window.location.href = redirectUrl
+
+    if (window.addEventListener) {
+        window.addEventListener('message', async function (e) {
+            // validace, že message obsahuje data
+            if (!e || !(e !== null && e !== void 0 && e.data)) return;
+            const { id, status /* refId, ... */ } = e.data;
+            if (['PAID', 'AUTHORIZED'].includes(status)) {
+                console.log("Payment successful:", id);
+                // Try to capture on backend first, then place order
+                try {
+                  const cap = await capturePayment({
+                    cartId: cart.id,
+                    paymentSessionId: session?.id,
+                    providerId: session?.provider_id,
+                    payload: { transaction_id: id },
+                  })
+                  if (!cap.success) {
+                    console.warn("capturePayment failed:", cap.message)
+                  }
+                } catch (err) {
+                  console.warn("capturePayment threw:", err)
+                }
+                await placeOrder();
+                console.log(id)
+            } 
+            else {
+                redirect(`/${country_code}/store/carts/${cart.id}/payment/cancelled`)
+            }
+        }, false);
+    }
   }
 
   return (
