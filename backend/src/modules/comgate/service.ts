@@ -49,7 +49,7 @@ class ComgatePaymentProviderService extends AbstractPaymentProvider<ComgateOptio
     }
 
     async initiatePayment(
-  input: InitiatePaymentInput
+  input: InitiatePaymentInput,
 ): Promise<InitiatePaymentOutput> {
   const { currency_code, context } = input
 
@@ -63,6 +63,16 @@ class ComgatePaymentProviderService extends AbstractPaymentProvider<ComgateOptio
     const secret = COMGATE_SECRET
     const auth = Buffer.from(`${merchant}:${secret}`).toString("base64")
 
+      // Derivace orderId z inputu/kontekstu. Preferuj explicitní hodnoty, fallback na session_id jen pro ref.
+      const orderId =
+        // z input.data
+        (input?.data as any)?.order_id ||
+        (input?.data as any)?.orderId ||
+        // z contextu
+        (context as any)?.order?.id ||
+        (context as any)?.order_id ||
+        null
+
     const payload = {
         test: 1,
         price: Number(input?.amount) * 100, // Předpokládáme, že Comgate očekává částku v haléřích
@@ -75,6 +85,9 @@ class ComgatePaymentProviderService extends AbstractPaymentProvider<ComgateOptio
         delivery: "HOME_DELIVERY",
         category: "PHYSICAL_GOODS_ONLY",
         enableApplePayGooglePay: true,
+          url_paid: `${process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL}/store/orders/${orderId ?? "unknown"}/payment/success`,
+          url_cancelled: `${process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL}/store/orders/${orderId ?? "unknown"}/payment/cancelled`,
+          url_success: `${process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL}/store/orders/${orderId ?? "unknown"}/payment/success`
       }
 
       //redirect to summary url: http://localhost:8000/cz/order/order_01K2D66AE6147SZF9479HZBQR2/confirmed

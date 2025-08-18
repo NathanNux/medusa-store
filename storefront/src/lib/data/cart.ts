@@ -251,20 +251,60 @@ export async function setShippingMethod({
 export async function initiatePaymentSession(
   cart: HttpTypes.StoreCart,
   data: HttpTypes.StoreInitializePaymentSession
-) {
-  const headers = {
-    ...(await getAuthHeaders()),
+): Promise<{ success: boolean; data?: any; message?: string }> {
+  try {
+    const headers = {
+      ...(await getAuthHeaders()),
+    }
+    const resp = await sdk.store.payment.initiatePaymentSession(
+      cart,
+      data,
+      {},
+      headers
+    )
+    const cartCacheTag = await getCacheTag("carts")
+    if (cartCacheTag) revalidateTag(cartCacheTag)
+    return { success: true, data: resp }
+  } catch (e: any) {
+    const message = e?.message || "Failed to initiate payment session"
+    return { success: false, message }
   }
+}
 
-  return sdk.store.payment
-    .initiatePaymentSession(cart, data, {}, headers)
-    .then(async (resp) => {
-      const cartCacheTag = await getCacheTag("carts")
-      if (cartCacheTag) revalidateTag(cartCacheTag)
-      console.log(resp)
-      return resp
-    })
-    .catch(medusaError)
+export async function initComgateMetadata({
+  cartId,
+  email,
+  firstName,
+  lastName,
+}: {
+  cartId: string
+  email?: string | null
+  firstName?: string | null
+  lastName?: string | null
+}): Promise<{ success: boolean; message?: string }> {
+  try {
+    const headers = {
+      ...(await getAuthHeaders()),
+    }
+    await sdk.store.cart.update(
+      cartId,
+      {
+        metadata: {
+          comgate_order_ref: cartId,
+          comgate_email: email ?? null,
+          comgate_first_name: firstName ?? null,
+          comgate_last_name: lastName ?? null,
+        },
+      },
+      {},
+      headers
+    )
+    const cartCacheTag = await getCacheTag("carts")
+    if (cartCacheTag) revalidateTag(cartCacheTag)
+    return { success: true }
+  } catch (e: any) {
+    return { success: false, message: e?.message || "Failed to init Comgate metadata" }
+  }
 }
 
 export async function applyPromotions(codes: string[]) {

@@ -2,7 +2,7 @@
 
 import { RadioGroup } from "@headlessui/react"
 import { isStripe as isStripeFunc, paymentInfoMap, isComgate } from "@lib/constants"
-import { initiatePaymentSession } from "@lib/data/cart"
+import { initiatePaymentSession, initComgateMetadata } from "@lib/data/cart"
 import { CheckCircleSolid, CreditCard } from "@medusajs/icons"
 import { Button, Container, Heading, Text, clx } from "@medusajs/ui"
 import ErrorMessage from "@modules/checkout/components/error-message"
@@ -55,10 +55,27 @@ const Payment = ({
       console.log("response:", response)
     }
     else if (isComgate(method)) {
-      const response = await initiatePaymentSession(cart, {
-        provider_id: method,
+      // Initialize Comgate payment session
+      const resp = await initiatePaymentSession(cart, { provider_id: method })
+      if ((resp as any)?.message) {
+        setError((resp as any).message)
+        return
+      }
+
+      // Send metadata to backend (cart metadata) so Comgate service can use them
+      const firstName = cart?.billing_address?.first_name || cart?.shipping_address?.first_name || null
+      const lastName = cart?.billing_address?.last_name || cart?.shipping_address?.last_name || null
+      const email = cart?.email || null
+      const init = await initComgateMetadata({
+        cartId: cart.id,
+        email,
+        firstName,
+        lastName,
       })
-      console.log("Comgate response:", response)
+      if (!init.success) {
+        console.warn("Failed to init Comgate metadata:", init.message)
+      }
+      console.log("Comgate initialized")
     }
   }
 
