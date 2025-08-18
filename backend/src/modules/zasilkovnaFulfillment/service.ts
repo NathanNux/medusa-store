@@ -82,20 +82,24 @@ const requestBody = {
 
     // Always log the full response first!
     console.log("Full Packeta API response:", JSON.stringify(responseBody, null, 2));  
+    // Výsledek fulfillmentu
+    return {
+      data: {
+        ...data,
+        packeta_response: responseBody,
+      },
+      labels: []
+    }
     }
     catch (exception) {
         console.error("Packeta API exception:", exception);
     }
 
-
-
-
-
     // Výsledek fulfillmentu
     return {
       data: {
         ...data,
-        packeta_response: "Response from Packeta API",
+        packeta_response: "Packeta API response",
       },
       labels: []
     }
