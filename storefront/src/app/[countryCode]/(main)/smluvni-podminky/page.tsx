@@ -10,6 +10,9 @@ type Section = {
 	bullets?: string[]
 }
 
+const SIDLO_ADRESA = process.env.SIDLO_ADRESA;
+const IDENTIFIKACNI_CISLO = process.env.IDENTIFIKACNI_CISLO;
+const INTERNETOVA_ADRESA = process.env.INTERNETOVA_ADRESA;
 const sections: Section[] = [
 	{
 		id: "uvodni-ustanoveni",
@@ -170,12 +173,12 @@ export default function Page() {
 					<p>
 						obchodní společnosti: <strong>Lucie Polanská</strong>,
 						<br />
-						se sídlem <strong>{process.env.SIDLO_ADRESA}</strong>,
+						se sídlem <strong>{SIDLO_ADRESA}</strong>,
 						<br />
-						identifikační číslo: <strong>{process.env.IDENTIFIKACNI_CISLO}</strong>,
+						identifikační číslo: <strong>{IDENTIFIKACNI_CISLO}</strong>,
 						<br />
 						pro prodej zboží prostřednictvím on-line obchodu umístěného na internetové adrese:
-						<strong>{process.env.INTERNETOVA_ADRESA}</strong>
+						<strong>{INTERNETOVA_ADRESA}</strong>
 					</p>
 				</header>
 

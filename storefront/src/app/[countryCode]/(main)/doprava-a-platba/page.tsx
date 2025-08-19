@@ -10,6 +10,11 @@ type Section = {
   bullets?: string[]
 }
 
+const IBAN = process.env.IBAN;
+const SWIFT_KOD = process.env.SWIFT_KOD;
+const CISLO_UCTU = process.env.CISLO_UCTU;
+
+
 const sections: Section[] = [
   {
     id: "uvod",
@@ -123,9 +128,9 @@ const sections: Section[] = [
     title: "Převodem (možnost platby přes QR kód)",
     paragraphs: [
       "Klasický převod na náš bankovní účet, který zadáte v internetovém bankovnictví. Objednávka může být zpracována až po připsání platby na náš účet.",
-      `Číslo účtu: ${process.env.CISLO_UCTU}`,
-      `IBAN: ${process.env.IBAN}`,
-      `BIC (SWIFT) kód: ${process.env.SWIFT_KOD}`,
+      `Číslo účtu: ${CISLO_UCTU}`,
+      `IBAN: ${IBAN}`,
+      `BIC (SWIFT) kód: ${SWIFT_KOD}`,
       "Variabilní symbol: vždy číslo objednávky",
     ],
   },
@@ -145,7 +150,7 @@ const sections: Section[] = [
     paragraphs: [
       "I toto se bohužel může stát - klidně nám napište nebo zavolejte a společně dořešíme. Peníze rovněž můžete zaslat přímo na náš bankovní účet.",
       "Jako variabilní symbol vždy uveďte číslo objednávky.",
-      `Číslo účtu: ${process.env.CISLO_UCTU}`,
+      `Číslo účtu: ${CISLO_UCTU}`,
     ],
   },
   {
@@ -204,9 +209,9 @@ const sections: Section[] = [
     title: "Převodem (QR, SK)",
     paragraphs: [
       "Klasický převod na náš bankovní účet, který zadáte v internetovém bankovnictví. Objednávka může být zpracována až po připsání platby na náš účet.",
-      `Číslo účtu: ${process.env.CISLO_UCTU}`,
-      `IBAN: ${process.env.IBAN}`,
-      `BIC (SWIFT) kód: ${process.env.SWIFT_KOD}`,
+      `Číslo účtu: ${CISLO_UCTU}`,
+      `IBAN: ${IBAN}`,
+      `BIC (SWIFT) kód: ${SWIFT_KOD}`,
       "Variabilní symbol: vždy číslo objednávky",
     ],
   },
