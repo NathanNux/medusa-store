@@ -504,7 +504,7 @@ const Shipping: React.FC<ShippingProps> = ({
               className="mt"
               onClick={handleSubmit}
               isLoading={isLoading}
-              disabled={!cart.shipping_methods?.[0] || !packetaPickupPointSelected}
+              disabled={!cart.shipping_methods?.[0] || (shippingMethodId === packetaShippingMethodId?.toString() && !packetaPickupPointSelected)}
               data-testid="submit-delivery-option-button"
             >
               Continue to payment
