@@ -75,6 +75,7 @@ export default function Footer() {
             style={{
                 backgroundColor: footerColors.bg,
                 color: footerColors.text,
+                position: pathname === `/${countryCode}` || pathname === `/${countryCode}/store` ? "absolute" : "relative",
             }}
         >
             <div className="footer__background">

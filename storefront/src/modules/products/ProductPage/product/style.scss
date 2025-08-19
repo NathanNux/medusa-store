@@ -11,6 +11,7 @@
     flex-direction: row;
     background-color: var(--WhiteBg);
     gap: 2vw;
+    overflow: hidden;
 
     @include respond-to-h(xs){
         height: 120vh;
@@ -88,7 +89,7 @@
             align-items: flex-start;
             justify-content: flex-start;
             flex-direction: column;
-            gap: 1vw;
+            gap: 1vh;
             padding: 0vh 2.5vw;
             margin-top: 25vh;
 
@@ -632,8 +633,7 @@
                     display: flex;
                     align-items: center;
                     justify-content: flex-start;
-
-                    p{
+                    span{
                         font-family: "ooohBaby-Regular";
                         position: relative;
                         z-index: 1;
@@ -663,10 +663,10 @@
                         @include respond-to-v(s){
                             font-size: 2rem;
                         }  
-                         @include respond-to-v(sm){
+                        @include respond-to-v(sm){
                             font-size: 2rem;
                         } 
-                         @include respond-to-v(xs){
+                        @include respond-to-v(xs){
                             font-size: 2rem;
                         } 
                     }
@@ -901,7 +901,7 @@
                     position: relative;
                     z-index: 1;
                     font-size: 1rem;
-                    color: var(--ChText);
+                    color: var(--Wtext);
                     font-weight: 300;
                     
                     @include respond-to-h(md){
@@ -1004,14 +1004,14 @@
         }
 
         .Image__container{
-            width: 40vw;
-            height: 47.5vh;
+            width: 45vw;
+            height: 50vh;
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-direction: column;
-            overflow: hidden;
+            padding: 2.5vh 2.5vw;
             @include respond-to-h(xs){
                 height: 60vh;
             }
@@ -1040,119 +1040,231 @@
                 height: 40vh;
             }
 
-            .product__image__main{
-                width: 40vw;
-                height: 40vh;
+            .Image__container__slider{
+                width: 100%;
+                height: 100%;
                 position: relative;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                overflow: hidden;
-                border: 1px solid var(--ButtonBorder);
-                border-radius: 50px;
+                flex-direction: column;
+                gap: 2vh;
 
-                @include respond-to-h(md){
-                    height: 45vh;
-                }
-                @include respond-to-h(mdt){
-                    height: 35vh;
-                }
-                @include respond-to-h(xs){
-                    height: 50vh;
-                }
-                @include respond-to-h(xxs){
-                    height: 50vh;
-                }
+                .Image__container__slider__container{
+                    width: 40vw;
+                    height: 40vh;
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    overflow: hidden;
+                    box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+                    border-radius: 50px;
 
-                @include respond-to-v(lg){
-                    height: 25vh;
-                    width: 50vw;
-                }
-                @include respond-to-v(md){
-                    height: 25vh;
-                    width: 50vw;
-                }
-                @include respond-to-v(s){
-                    width: 90vw;
-                    height: 30vh;
-                }
-                  @include respond-to-v(sm){
-                    width: 90vw;
-                    height: 30vh;
-                }
-                  @include respond-to-v(xs){
-                    width: 90vw;
-                    height: 30vh;
-                }
-            }
+                    .slider-track{
+                        width: fit-content;
+                        height: 100%;
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: flex-start;
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        .product__image__item{
+                            width: 40vw;
+                            height: 40vh;
+                            position: relative;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            overflow: hidden;
+                            
 
-            .product__image__bar{
-                width: 50%;
-                height: 5vh;
-                position: relative;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 1vw;
-                @include respond-to-v(s){
-                    gap: 2.5vw;
-                }  
-                @include respond-to-v(sm){
-                    gap: 2.5vw;
-                } 
-                @include respond-to-v(xs){
-                    gap: 2.5vw;
-                } 
+                            @include respond-to-h(md){
+                                height: 45vh;
+                            }
+                            @include respond-to-h(mdt){
+                                height: 35vh;
+                            }
+                            @include respond-to-h(xs){
+                                height: 50vh;
+                            }
+                            @include respond-to-h(xxs){
+                                height: 50vh;
+                            }
 
-                .dot{
-                    width: 1vw;
-                    height: 1vw;
-                    border-radius: 50%;
-                    background-color: var(--CharcoalBg);
-                    transition: all 0.3s ease-in-out;
-                    cursor: pointer;
+                            @include respond-to-v(lg){
+                                height: 25vh;
+                                width: 50vw;
+                            }
+                            @include respond-to-v(md){
+                                height: 25vh;
+                                width: 50vw;
+                            }
+                            @include respond-to-v(s){
+                                width: 90vw;
+                                height: 30vh;
+                            }
+                            @include respond-to-v(sm){
+                                width: 90vw;
+                                height: 30vh;
+                            }
+                            @include respond-to-v(xs){
+                                width: 90vw;
+                                height: 30vh;
+                            }
 
-                    &.active{
-                        width: 1.1vw;
-                        height: 1.1vw;
-                        background-color: var(--OButton);
+                            .product__image__item__right{
+                                width: 5vw;
+                                height: 5vw;
+                                position: absolute;
+                                top: 50%;
+                                right: 1vw;
+                                transform: translateY(-50%);
+                                z-index: 1;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+
+                                @include respond-to-h(md){
+                                    right: 1vw;
+                                }
+                                @include respond-to-h(xs){
+                                    right: 2vw;
+                                }
+                                .arrow{
+                                    width: 3vw;
+                                    height: 3vw;
+                                    border-radius: 50%;
+                                    border: 1px solid var(--ButtonBorder);
+                                    opacity: 0.5;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    transform: rotate(90deg);
+                                    transition: all 0.3s cubic-bezier(0.76, 0, 0.24, 1);
+                                    cursor: pointer;
+
+                                    &:hover{
+                                        opacity: 1;
+                                    }
+                                }
+                            }
+
+                            .product__image__item__left{
+                                width: 5vw;
+                                height: 5vw;
+                                position: absolute;
+                                top: 50%;
+                                left: 1vw;
+                                transform: translateY(-50%);
+                                z-index: 1;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+
+                                @include respond-to-h(md){
+                                    left: 1vw;
+                                }
+                                @include respond-to-h(xs){
+                                    left: 2vw;
+                                }
+
+                                .arrow{
+                                    width: 3vw;
+                                    height: 3vw;
+                                    border-radius: 50%;
+                                    border: 1px solid var(--ButtonBorder);
+                                    opacity: 0.5;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    transform: rotate(270deg);
+                                    transition: all 0.3s cubic-bezier(0.76, 0, 0.24, 1);
+                                    cursor: pointer;
+
+                                    &:hover{
+                                        opacity: 1;
+                                    }
+                                }
+                            }
+                        }
                     }
-                    &:hover{
-                        width: 1.1vw;
-                        height: 1.1vw;
-                        background-color: var(--OButton);
-                    }
+                }
+                
 
+                
+
+                .product__image__bar{
+                    width: 50%;
+                    height: 5vh;
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 1vw;
                     @include respond-to-v(s){
-                        width: 5vw;
-                        height: 5vw;
+                        gap: 2.5vw;
+                    }  
+                    @include respond-to-v(sm){
+                        gap: 2.5vw;
+                    } 
+                    @include respond-to-v(xs){
+                        gap: 2.5vw;
+                    } 
+
+                    .dot{
+                        width: 1vw;
+                        height: 1vw;
+                        border-radius: 50%;
+                        background-color: var(--CharcoalBg);
+                        transition: all 0.3s ease-in-out;
+                        cursor: pointer;
 
                         &.active{
-                            width: 6vw;
-                            height: 6vw;
+                            width: 1.1vw;
+                            height: 1.1vw;
+                            background-color: var(--OButton);
                         }
-                    }
-                     @include respond-to-v(sm){
-                        width: 4vw;
-                        height: 4vw;
+                        &:hover{
+                            width: 1.1vw;
+                            height: 1.1vw;
+                            background-color: var(--OButton);
+                        }
 
-                        &.active{
+                        @include respond-to-v(s){
                             width: 5vw;
                             height: 5vw;
-                        }
-                    }
-                     @include respond-to-v(xs){
-                        width: 4vw;
-                        height: 4vw;
 
-                        &.active{
-                            width: 5vw;
-                            height: 5vw;
+                            &.active{
+                                width: 6vw;
+                                height: 6vw;
+                            }
                         }
-                    }
+                        @include respond-to-v(sm){
+                            width: 4vw;
+                            height: 4vw;
 
+                            &.active{
+                                width: 5vw;
+                                height: 5vw;
+                            }
+                        }
+                        @include respond-to-v(xs){
+                            width: 4vw;
+                            height: 4vw;
+
+                            &.active{
+                                width: 5vw;
+                                height: 5vw;
+                            }
+                        }
+
+                    }
                 }
             }
+
         }
 
         .product__image__benefits{

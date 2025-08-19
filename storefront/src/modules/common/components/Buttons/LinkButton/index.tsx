@@ -1,7 +1,6 @@
 "use client";
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import Link from 'next/link';
 import LocalizedClientLink from '../../localized-client-link';
 
 type LinkButtonProps = {
@@ -14,7 +13,7 @@ type LinkButtonProps = {
 export default function LinkButton({ text, href } : LinkButtonProps) {
     const [ isActive , setIsActive ] = useState<boolean>(false);
     return (
-        <div className="LinkButton">
+        <LocalizedClientLink href={href} className="LinkButton">
             <button 
                 className="button"
                 onMouseEnter={() => setIsActive(true)}
@@ -29,25 +28,25 @@ export default function LinkButton({ text, href } : LinkButtonProps) {
                         className="el"
                         style={{ backgroundColor: "var(--OButton)" }}
                     >
-                        <PerspectiveText label={text} href={href}/>
+                        <PerspectiveText label={text}/>
                     </div>
                     <div 
                         className="el"
                         style={{ backgroundColor: "var(--CreamDetails)" }}
                     >
-                        <PerspectiveText label={text} href={href}/>
+                        <PerspectiveText label={text}/>
                     </div>
                 </motion.div>
             </button>
-        </div>
+        </LocalizedClientLink>
     )
 }
 
-function PerspectiveText({label, href}: {label: string; href: string}) {
+function PerspectiveText({label}: {label: string}) {
     return (    
-        <LocalizedClientLink href={href} className="perspectiveText">
+        <div className="perspectiveText">
             <p>{label}</p>
             <p>{label}</p>
-        </LocalizedClientLink>
+        </div>
     )
 }

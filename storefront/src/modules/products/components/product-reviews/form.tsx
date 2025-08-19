@@ -8,6 +8,7 @@ import { HttpTypes } from "@medusajs/types"
 import { Button, Input, Label, Textarea, toast, Toaster } from "@medusajs/ui"
 import { Star, StarSolid } from "@medusajs/icons"
 import { addProductReview } from "../../../../lib/data/products"
+import styles from "./form.module.scss"
 
 type ProductReviewsFormProps = {
   productId: string
@@ -31,8 +32,8 @@ export default function ProductReviewsForm({ productId }: ProductReviewsFormProp
 
   if (!customer) {
     return (
-      <div className="product-page-constraint mt-8">
-        <div className="flex justify-center">
+      <div className={`product-page-constraint ${styles.container}`}>
+        <div className={styles.center}>
           <span className="text-ui-fg-subtle">
             Pro přidání recenze se prosím <a href="/account/login" className="underline">přihlaste</a> nebo <a href="/account/register" className="underline">vytvořte účet</a>.
           </span>
@@ -77,36 +78,36 @@ export default function ProductReviewsForm({ productId }: ProductReviewsFormProp
   }
 
   return (
-    <div className="product-page-constraint mt-8">
+    <div className={`product-page-constraint ${styles.container}`}>
         {!showForm && (
-        <div className="flex justify-center">
+        <div className={styles.center}>
             <Button variant="secondary" onClick={() => setShowForm(true)}>Přidat recenzi</Button>
         </div>
         )}
         {showForm && (
-        <div className="flex flex-col gap-y-4">
-            <div className="flex flex-col gap-y-2">
-            <span className="text-xl-regular text-ui-fg-base">
+        <div className={styles.formSection}>
+            <div className={styles.field}>
+            <span className={styles.formTitle}>
             Přidat recenzi
             </span>
             
-            <form onSubmit={handleSubmit} className="flex flex-col gap-y-4">
-            <div className="flex flex-col gap-y-2">
+            <form onSubmit={handleSubmit} className={styles.form}>
+            <div className={styles.field}>
                 <Label>Název</Label>
                 <Input name="title" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Název" />
             </div>
-            <div className="flex flex-col gap-y-2">
+            <div className={styles.field}>
                 <Label>Obsah</Label>
                 <Textarea name="content" value={content} onChange={(e) => setContent(e.target.value)} placeholder="Content" />
             </div>
-            <div className="flex flex-col gap-y-2">
+            <div className={styles.starsRow}>
                 <Label>Hodnocení</Label>
-                <div className="flex gap-x-1">
+                <div className={styles.stars}>
                 {Array.from({ length: 5 }).map((_, index) => (
                     <Button key={index} variant="transparent" onClick={(e) => {
                     e.preventDefault()
                     setRating(index + 1)
-                    }} className="p-0">
+                    }} className={styles.starBtn}>
                     {rating >= index + 1 ? <StarSolid className="text-ui-tag-orange-icon" /> : <Star />}
                     </Button>
                 ))}

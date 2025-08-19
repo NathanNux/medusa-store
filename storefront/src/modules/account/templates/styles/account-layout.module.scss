@@ -1,0 +1,227 @@
+@use "../../../../styles/mixins.scss" as *;
+
+/* Account Layout styles (Sass module) */
+
+.section {
+	flex: 1;
+	// small:py-12 and margin previously set via m-[5vh]
+    overflow: hidden;
+    max-width: 100%;
+	height: 100dvh;
+	padding: 10vh 2.5vw;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	@media (min-width: 768px) {
+		padding-top: 3rem; // py-12
+		padding-bottom: 3rem;
+	}
+}
+
+.container {
+	// exact mapping of: flex-1 h-full max-w-5xl mx-auto pt-[2.5vh] bg-white flex flex-col rounded-2xl content-container
+	flex: 1; // flex-1
+	width: 100%; // content-container w-full
+	height: 90%; // h-full
+	max-width: 70rem; // max-w-5xl overrides content-container
+	margin-left: auto; // mx-auto
+	margin-right: auto;
+	background: var(--WhiteBg); // bg-white
+	display: flex; // flex
+	flex-direction: column; // flex-col
+	border-radius: 5rem !important;
+
+}
+
+.verifiedGrid {
+	display: grid;
+	grid-template-columns: 1fr;
+	padding-top: 3rem; // py-12
+	padding-bottom: 3rem;
+
+	@media (min-width: 768px) {
+		// small:grid-cols-[240px_1fr]
+		grid-template-columns: 240px 1fr;
+	}
+}
+
+.children {
+	flex: 1;
+}
+
+.center {
+	display: flex;
+	width: 100%;
+	height: 100%;
+	align-items: center;
+	justify-content: center;
+}
+
+.centerZ1 {
+	display: flex;
+	width: 100%;
+	height: 100%;
+	align-items: center;
+	justify-content: center;
+	z-index: 1; // z-1
+}
+
+.footer {
+	position: relative; // to allow layering if needed
+	z-index: 2; // preserve z-2 intent
+	display: flex;
+	flex-direction: row;
+	align-items: flex-end;
+	justify-content: space-between;
+	gap: 2rem; // gap-8
+	border-top: none;
+    background-color: var(--WhiteBg);
+    border-radius: 0 0 25px 25px;
+    padding: 3rem 2.5vw 3rem 2.5vw;
+
+    .text{
+        width: 70%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 1rem;
+
+        h3{
+            font-size: 2rem;
+            font-weight: 300;
+            font-family: "Sansation-regular";
+            margin: 0;
+            color: var(--ChText);
+        }
+
+        span{
+            font-size: 1.1rem;
+            font-weight: 300;
+            font-family: "Sansation-light";
+            margin: 0;
+            color: var(--ChText);
+        }
+
+    }
+
+    .Link{
+        width: 30%;
+        height: auto;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        a{
+            font-size: 1.3rem;
+            font-weight: 300;
+            font-family: "Sansation-light";
+            color: var(--ChText);
+            text-decoration: underline;
+
+            p{
+                font-size: 1.3rem;
+                font-weight: 300;
+                font-family: "Sansation-light";
+                color: var(--ChText);
+            }
+        }
+    }
+
+	@media (min-width: 768px) {
+		// small:flex-row
+		flex-direction: row;
+		border-top: 1px solid var(--border, #e5e7eb); // small:border-t border-gray-200
+	}
+}
+
+.title {
+	// text-xl-semi mb-4
+	font-size: 1.5rem;
+	line-height: 36px;
+	font-weight: 600;
+	margin-bottom: 1rem;
+}
+
+.text {
+	// txt-medium
+	font-size: 0.875rem;
+	line-height: 1.3125rem;
+	font-weight: 400;
+}
+
+// --- Horizontal (landscape) responsiveness ---
+@include respond-to-h(huge) {
+	.container { max-width: 70rem; border-radius: 6rem !important; }
+	.verifiedGrid { padding-top: 4rem; padding-bottom: 4rem; }
+	.title { font-size: 1.75rem; }
+	.text { font-size: 0.95rem; }
+	.footer { padding: 4rem 3vw; gap: 2.5rem; }
+}
+
+@include respond-to-h(xl) {
+	.container { max-width: 66rem; }
+	.title { font-size: 1.65rem; }
+	.footer { padding: 3.5rem 3vw; }
+}
+
+@include respond-to-h(lg) {
+	.container { max-width: 64rem; }
+	.verifiedGrid { grid-template-columns: 260px 1fr; }
+}
+
+@include respond-to-h(md) {
+	.verifiedGrid { grid-template-columns: 240px 1fr; padding-top: 3rem; padding-bottom: 3rem; }
+}
+
+@include respond-to-h(mdt) {
+	.verifiedGrid { grid-template-columns: 240px 1fr; }
+}
+
+@include respond-to-h(sm) {
+	.container { max-width: 58rem; border-radius: 4rem !important; }
+	.footer { padding: 3rem 2.5vw; }
+}
+
+@include respond-to-h(xs) {
+	.container { max-width: 48rem; }
+	.title { font-size: 1.5rem; }
+	.text { font-size: 0.875rem; }
+}
+
+@include respond-to-h(xxs) {
+	.container { max-width: 42rem; border-radius: 3rem !important; }
+	.verifiedGrid { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 2rem; padding-bottom: 2rem; }
+	.footer { flex-direction: column; gap: 1.5rem; padding: 2rem 4vw; border-radius: 0 0 20px 20px; }
+}
+
+// --- Vertical (portrait) responsiveness ---
+@include respond-to-v(lg) {
+	.container { max-width: 64rem; }
+	.verifiedGrid { grid-template-columns: 280px 1fr; }
+	.footer { padding: 3.5rem 3vw; }
+}
+
+@include respond-to-v(md) {
+	.container { max-width: 60rem; }
+	.verifiedGrid { grid-template-columns: 260px 1fr; }
+}
+
+@include respond-to-v(s) {
+	.container { max-width: 52rem; }
+	.verifiedGrid { grid-template-columns: 220px 1fr; }
+	.title { font-size: 1.6rem; }
+}
+
+@include respond-to-v(sm) {
+	.container { max-width: 44rem; border-radius: 3rem !important; }
+	.verifiedGrid { grid-template-columns: 1fr; gap: 1.25rem; }
+	.footer { flex-direction: column; padding: 2.25rem 4vw; gap: 1.25rem; border-radius: 0 0 20px 20px; }
+}
+
+@include respond-to-v(xs) {
+	.container { max-width: 36rem; border-radius: 2rem !important; }
+	.title { font-size: 1.45rem; }
+	.text { font-size: 0.85rem; }
+}

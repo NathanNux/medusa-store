@@ -1,7 +1,7 @@
 import { HttpTypes } from "@medusajs/types"
 
 import styles from "./select.module.scss"
-import HashtagButton from "@modules/common/components/Buttons/hashtagButton"
+import OptionButton from "@modules/common/components/Buttons/optionButton"
 
 type OptionSelectProps = {
   option: HttpTypes.StoreProductOption
@@ -27,13 +27,14 @@ const OptionsSelect: React.FC<OptionSelectProps> = ({
         <div className={styles.Select}> 
             {filteredOptions.map((value) => {
                 return (
-                   <HashtagButton
+                   <OptionButton
                         key={value}
                         text={value}
                         isActive={current === value}
                         onClick={() => updateOption(option.id, value)}
                         disabled={disabled}
                         data-testid={dataTestId}
+                        variant="color"
                     />  
                 )
             })}

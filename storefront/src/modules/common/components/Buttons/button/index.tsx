@@ -15,7 +15,7 @@ type ButtonProps = {
 export default function Button({ClickAction, text, href } : ButtonProps) {
     const [ isActive , setIsActive ] = useState<boolean>(false);
     return (
-        <div className="MButton">
+        <LocalizedClientLink href={href} className="MButton">
             <button 
                 className="button"
                 onClick={ClickAction}
@@ -31,25 +31,25 @@ export default function Button({ClickAction, text, href } : ButtonProps) {
                         className="el"
                         style={{ backgroundColor: "var(--WhiteBg)" }}
                     >
-                        <PerspectiveText label={text} href={href}/>
+                        <PerspectiveText label={text} />
                     </div>
                     <div 
                         className="el"
                         style={{ backgroundColor: "var(--CharcoalBg)" }}
                     >
-                        <PerspectiveText label={text} href={href}/>
+                        <PerspectiveText label={text} />
                     </div>
                 </motion.div>
             </button>
-        </div>
+        </LocalizedClientLink>
     )
 }
 
-function PerspectiveText({label, href}: {label: string; href: string}) {
+function PerspectiveText({label}: {label: string}) {
     return (    
-        <LocalizedClientLink href={href} className="perspectiveText">
+        <div className="perspectiveText">
             <p>{label}</p>
             <p>{label}</p>
-        </LocalizedClientLink>
+        </div>
     )
 }

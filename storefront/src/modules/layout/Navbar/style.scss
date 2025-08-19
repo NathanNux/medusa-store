@@ -14,7 +14,6 @@
     background-color: var(--WhiteBg);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 
-
     @include respond-to-h(mdt){
         height: 7vh;
     }

@@ -57,7 +57,7 @@
             justify-content: space-between;
             background-color: var(--WhiteBg);
             border-radius: 50px;
-            padding: 2.5vh 5vw;
+            padding: 2.5vh 2.5vh 2.5vh 5vw;
             z-index: 2;
             @include respond-to-v(lg){
                 padding: 1vh 1.5vw;
@@ -391,7 +391,7 @@
             }
 
             .search__bar__container__search{
-                width: 50%;
+                width: 40%;
                 height: 100%;
                 position: relative;
                 display: flex;
@@ -913,80 +913,24 @@
     }
 
     .categories{
-        width: 5vw;
-        height: 10vh;
+        width: 50px;
+        height: 50px;
         position: absolute;
-        top: 25vh;
-        left: 5vw;
+        top: 27.5vh;
+        left: 7.5vw;
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: var(--CharcoalBg);
-        border-radius: 60px;
-        padding: 5vh 0;
         z-index: 20;
-
-        @include respond-to-h(md){
-            width: 15vw;
-            border-radius: 50px;
-        }
-        @include respond-to-h(mdt){
-            width: 17.5vw;
-            border-radius: 50px;
-        }
-        @include respond-to-h(sm){
-            width: 17.5vw;
-            border-radius: 50px;
-        }
-        @include respond-to-h(xs){
-            padding: 5vh 2.5vw;
-            width: 17.5vw;
-            border-radius: 50px;
-            height: 75vh;
-        }
-         @include respond-to-h(xxs){
-            padding: 5vh 1.5vw;
-            width: 17.5vw;
-            border-radius: 30px;
-            height: 70vh;
-        }
-
-        @include respond-to-v(lg){
-            height: 40vh;
-            width: 17.5vw;
-        }
-         @include respond-to-v(md){
-            height: 40vh;
-            width: 17.5vw;
-            border-radius: 30px;
-        }
-        @include respond-to-v(s){
-            height: 7.5vh;
-            padding: 2.5vw 2.5vw;
-            left: 2.5vw;
-            background-color: transparent;
-        }
-        @include respond-to-v(sm){
-            height: 7.5vh;
-            padding: 2.5vw 2.5vw;
-            left: 2.5vw;
-            background-color: transparent;
-        }
-        @include respond-to-v(xs){
-            height: 10vh;
-            padding: 2.5vw 2.5vw;
-            left: 2.5vw;
-            background-color: transparent;
-        }
 
 
         .categories__mobile{
             width: 100%;
             height: 100%;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
 
             .categories__mobile__menu{
                 width: 400px;
@@ -995,7 +939,7 @@
                 border-radius: 25px;
                 position: absolute;
                 top: 0;
-                right: 0;
+                left: 0;
                 display: flex;
 
                 .categories__mobile__button__confirm{
@@ -1075,6 +1019,7 @@
             gap: 2rem;
             width: 100%;
             height: auto;
+            padding-top: 2vh;
             @include respond-to-v(md){
                 gap: 0.25rem;
             }
@@ -1099,8 +1044,15 @@
                 align-items: center;
                 justify-content: flex-start;
                 background-color: var(--WhiteBg);
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
                 border-radius: 50px;
                 padding: 0.05vh 0.05vh;
+                transition: all 0.6s cubic-bezier(0.76, 0, 0.24, 1);
+
+                &:hover{
+                    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+                    scale: 1.01;
+                }
 
                 @include respond-to-h(md){
                     width: 20vw;
@@ -1250,7 +1202,7 @@
                         padding: 0 1.5vw;
 
                         .product__name{
-                            width: 70%;
+                            width: 100%;
                             font-size: 1.5rem;
                             color: var(--ChText);
                             font-weight: 300;
@@ -1338,7 +1290,7 @@
 
                     .product__desc__container{
                         width: 100%;
-                        height: 5vh;
+                        height: 2.5vh;
                         display: flex;
                         align-items: flex-start;
                         justify-content: center;
@@ -1431,11 +1383,11 @@
 
                     .product__price__container{
                         width: 100%;
-                        height: 5vh;
+                        height: 10vh;
                         display: flex;
                         align-items: center;
-                        justify-content: space-between;
-                        flex-direction: row-reverse;
+                        justify-content: center;
+                        flex-direction: row;
                         padding: 0 1.5vw;
                         z-index: 10;
 
@@ -1443,11 +1395,45 @@
                             padding: 0 2.5vw;
                         }
 
-                        .product__price{
+                        .product__sale__price{
                             font-size: 1.5rem;
                             color: var(--ChText);
-                            font-weight: 500;
+                            font-weight: 400;
                             text-align: left;
+                            font-family: "Sansation-Light";
+
+                            @include respond-to-h(md){
+                               font-size: 1.1rem;
+                            }
+                            @include respond-to-h(sm){
+                                font-size: 1.1rem;
+                            }
+                            @include respond-to-h(xs){
+                                font-size: 1rem;
+                            }
+                            @include respond-to-h(xxs){
+                                font-size: 0.9rem;
+                            }
+                            @include respond-to-v(md){
+                                font-size: 1.3rem;
+                            }
+                            @include respond-to-v(s){
+                                font-size: 1.1rem;
+                            }
+                             @include respond-to-v(sm){
+                                font-size: 1rem;
+                            }
+                             @include respond-to-v(xs){
+                                font-size: 0.9rem;
+                            }
+                        }
+                        .product__price{
+                            font-size: 2rem;
+                            color: var(--ChText);
+                            font-weight: 400;
+                            text-align: right;
+                            font-family: "Sansation-Light";
+
                             @include respond-to-h(md){
                                font-size: 1.3rem;
                             }
@@ -1502,6 +1488,7 @@
                                 border: none;
                                 cursor: pointer;
                                 transition: transform 0.3s ease;
+                                pointer-events: none;
                                 .add__to__cart__icon{
                                     width: 100%;
                                     height: 100%;
@@ -1891,17 +1878,19 @@
         position: fixed;
         bottom: 5vh;
         right: 1.5vw;
-        width: 3.5vw;
-        height: 3.5vw;
+        width: 2.5vw;
+        height: 2.5vw;
         display: flex;
         align-items: center;
         justify-content: center;
         background-color: var(--OButton);
         border: 0.5px solid var(--WhiteBg);
         border-radius: 50%;
+        z-index: 1001;
         cursor: pointer;
         z-index: 100;
-        transition: background-color 0.3s ease;
+        transition: opacity 0.6s cubic-bezier(0.76, 0, 0.24, 1);
+        opacity: 0.7;
         @include respond-to-v(s){
             width: 10vw;
             height: 10vw;
@@ -1916,7 +1905,7 @@
         }
 
         &:hover{
-            background-color: var(--Wbutton);
+            opacity: 1;
         }
 
         .scroll__to__top__button{
@@ -1936,8 +1925,8 @@
             }
 
             .scroll__to__top__icon{
-                width: 1.25vw;
-                height: 1.25vw;
+                width: 1vw;
+                height: 1vw;
                 object-fit: cover;
                 @include respond-to-v(s){
                     width: 5vw;

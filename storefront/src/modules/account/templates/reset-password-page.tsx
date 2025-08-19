@@ -5,6 +5,7 @@ import { Button, Toaster, toast } from "@medusajs/ui"
 import { useMemo, useState } from "react"
 import { useRouter } from "next/navigation"
 import { Eye, EyeSlash } from "@medusajs/icons"
+import styles from "./styles/reset-password.module.scss"
 
 export default function ResetPasswordForm() {
   const [loading, setLoading] = useState(false)
@@ -84,21 +85,21 @@ export default function ResetPasswordForm() {
   }
 
   return (
-   <section className="h-[100vh] w-[100vw] flex flex-col items-center justify-center">
-     <form onSubmit={handleSubmit} className="w-full max-w-sm flex flex-col items-center gap-4">
+   <section className={styles.section}>
+     <form onSubmit={handleSubmit} className={styles.form}>
       <label>New Password</label>
-      <div className="relative w-full">
+      <div className={styles.inputWrap}>
         <input 
           placeholder="Password" 
           type={showPassword ? "text" : "password"}
           value={password} 
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded pr-10"
+          className={styles.input}
           disabled={success}
         />
         <button
           type="button"
-          className="absolute right-2 top-1/2 -translate-y-1/2"
+          className={styles.toggle}
           tabIndex={-1}
           onClick={() => setShowPassword((v) => !v)}
         >
@@ -106,18 +107,18 @@ export default function ResetPasswordForm() {
         </button>
       </div>
       <label>Confirm Password</label>
-      <div className="relative w-full">
+      <div className={styles.inputWrap}>
         <input 
           placeholder="Confirm Password" 
           type={showConfirmPassword ? "text" : "password"}
           value={confirmPassword} 
           onChange={(e) => setConfirmPassword(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded pr-10"
+          className={styles.input}
           disabled={success}
         />
         <button
           type="button"
-          className="absolute right-2 top-1/2 -translate-y-1/2"
+          className={styles.toggle}
           tabIndex={-1}
           onClick={() => setShowConfirmPassword((v) => !v)}
         >
@@ -128,14 +129,16 @@ export default function ResetPasswordForm() {
         Reset Password
       </Button>
       {success && (
-        <Button
-          variant="primary"
-          type="button"
-          onClick={handleAutoLogin}
-          disabled={loginLoading}
-        >
-          {loginLoading ? "Logging in..." : "Go to My Account"}
-        </Button>
+        <div className={styles.successActions}>
+          <Button
+            variant="primary"
+            type="button"
+            onClick={handleAutoLogin}
+            disabled={loginLoading}
+          >
+            {loginLoading ? "Logging in..." : "Go to My Account"}
+          </Button>
+        </div>
       )}
       <Toaster />
     </form>

@@ -6,10 +6,12 @@ export default function ProductPrice({
   product,
   variant,
   className,
+  countryCode
 }: {
   product: HttpTypes.StoreProduct
   variant?: HttpTypes.StoreProductVariant
   className?: string
+  countryCode: string
 }) {
   const { cheapestPrice, variantPrice } = getProductPrice({
     product,
@@ -31,8 +33,9 @@ export default function ProductPrice({
           data-testid="product-price"
           data-value={selectedPrice?.calculated_price_number}
         >
-          {!variant && "Z "}
-          {selectedPrice?.calculated_price}
+            {cheapestPrice?.calculated_price !== undefined
+                    ? `${String(cheapestPrice.calculated_price).replace(/czk/i, "")}${countryCode === "cz" ? ",-" : ""}`
+                : "Cena není k dispozici"}
         </span>
         {selectedPrice?.price_type === "sale" && (
           <>
@@ -43,7 +46,9 @@ export default function ProductPrice({
                 data-testid="original-product-price"
                 data-value={selectedPrice.original_price_number}
               >
-                {selectedPrice.original_price}
+                 {cheapestPrice?.original_price !== undefined
+                ? `${String(cheapestPrice.original_price).replace(/czk/i, "")}${countryCode === "cz" ? ",-" : ""}`
+                : "Cena není k dispozici"}
               </span>
             </p>
             <span className="text-ui-fg-interactive">

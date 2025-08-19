@@ -4,6 +4,7 @@ import UnderlineLink from "@modules/common/components/interactive-link"
 
 import AccountNav from "../components/account-nav"
 import { HttpTypes } from "@medusajs/types"
+import s from "./styles/account-layout.module.scss"
 
 interface AccountLayoutProps {
   customer: HttpTypes.StoreCustomer | null
@@ -17,45 +18,45 @@ const AccountLayout: React.FC<AccountLayoutProps> = ({
   const isVerified = customer?.metadata?.email_verified as boolean
 
   return (
-    <div className="flex-1 small:py-12" data-testid="account-page">
-      <div className="flex-1 content-container h-full max-w-5xl mx-auto bg-white flex flex-col">
+    <div className={s.section} data-testid="account-page">
+      <div className={s.container}>
         {customer && isVerified && (
-          <div className="grid grid-cols-1  small:grid-cols-[240px_1fr] py-12">
+          <div className={s.verifiedGrid}>
             <div>
               <AccountNav customer={customer} />
             </div>
-            <div className="flex-1">
+            <div className={s.children}>
               {children}
             </div>
         </div>
         )}
         {!customer && (
-          <div className="flex w-full h-full items-center justify-center">
-            <div className="">
+          <div className={s.center}>
+            <div>
               {children}
             </div>
         </div>
         )}
        {customer && !isVerified && (
-         <div className="flex w-full h-full items-center justify-center">
+         <div className={s.centerZ1}>
           {children}
-            <div>
+            {/* <div>
               <AccountNav customer={customer} />
-            </div>
+            </div> */}
         </div>
         
        )}
-        <div className="flex flex-col small:flex-row items-end justify-between small:border-t border-gray-200 py-12 gap-8">
-          <div>
-            <h3 className="text-xl-semi mb-4">Got questions?</h3>
-            <span className="txt-medium">
-              You can find frequently asked questions and answers on our
-              customer service page.
+        <div className={s.footer}>
+          <div className={s.text}>
+            <h3 className={s.title}>Máte dotaz?</h3>
+            <span className={s.text}>
+              Nejčastější dotazy a odpovědi najdete na naší stránce
+              zákaznického servisu.
             </span>
           </div>
-          <div>
+          <div className={s.Link}>
             <UnderlineLink href="/customer-service">
-              Customer Service
+              Zákaznický servis
             </UnderlineLink>
           </div>
         </div>

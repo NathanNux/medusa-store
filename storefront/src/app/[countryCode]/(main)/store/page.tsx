@@ -4,6 +4,7 @@ import { SortOptions } from "@modules/store/components/refinement-list/sort-prod
 import { listCategories } from "@lib/data/categories"
 import { HttpTypes } from "@medusajs/types"
 import { getRegion } from "@lib/data/regions"
+import StoreTemplate from "@modules/store/templates"
 
 export default async function StorePage({ params, searchParams }: { params: { countryCode: string }, searchParams: { sortBy?: SortOptions, page?: string } }) {
   const countryCode = params.countryCode

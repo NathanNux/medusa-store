@@ -6,6 +6,8 @@ import { StoreProductReview } from "../../../../types/global"
 import { Button } from "@medusajs/ui"
 import { useState, useEffect } from "react"
 import ProductReviewsForm from "./form"
+import styles from "./style.module.scss"
+
 type ProductReviewsProps = {
   productId: string
   initialReviews: StoreProductReview[]
@@ -62,40 +64,40 @@ export default function ProductReviews({
 
   function Review({ review }: { review: StoreProductReview }) {
     return (
-        <div className="flex flex-col gap-y-2 text-base-regular text-ui-fg-base">
-        <div className="flex gap-x-2 items-center">
-            {review.title && <strong>{review.title}</strong>}
-            <div className="flex gap-x-1">
+      <div key={review.id} className={styles.review}>
+        <div className={styles.reviewHeader}>
+          {review.title && <strong>{review.title}</strong>}
+          <div className={styles.reviewStars}>
             {Array.from({ length: 5 }).map((_, index) => (
-                <span key={index}>
+              <span key={index}>
                 {index <= review.rating ? (
-                    <StarSolid className="text-ui-tag-orange-icon" />
+                  <StarSolid className="text-ui-tag-orange-icon" />
                 ) : (
-                    <Star />
+                  <Star />
                 )}
-                </span>
+              </span>
             ))}
-            </div>
+          </div>
         </div>
         <div>{review.content}</div>
-        <div className="border-t border-ui-border-base pt-4 text-sm-regular">
-            {review.first_name} {review.last_name}
+        <div className={styles.reviewFooter}>
+          {review.first_name} {review.last_name}
         </div>
-        </div>
+      </div>
     )
   }
 
   return (
-    <div className="product-page-constraint">
-        <div className="flex flex-col items-center text-center mb-16">
-        <span className="text-base-regular text-gray-600 mb-6">
+    <div className={`product-page-constraint ${styles.container}`}>
+        <div className={styles.header}>
+        <span className={styles.subtitle}>
             Recenze
         </span>
-        <p className="text-2xl-regular text-ui-fg-base max-w-lg">
+        <p className={styles.title}>
             Podívejte se, co o tomto produktu říkají naši zákazníci.
         </p>
-        <div className="flex gap-x-2 justify-center items-center">
-            <div className="flex gap-x-2">
+        <div className={styles.starsAndCount}>
+            <div className={styles.stars}>
             {Array.from({ length: 5 }).map((_, index) => (
                 <span key={index}>
                 {!rating || index > rating ? (
@@ -106,16 +108,16 @@ export default function ProductReviews({
                 </span>
             ))}
             </div>
-            <span className="text-base-regular text-gray-600">
+            <span className={styles.count}>
             {count} {count === 1 ? "recenze" : "recenzí"}
             </span>
         </div>
         </div>
 
-        <div className="grid grid-cols-1 small:grid-cols-2 gap-x-6 gap-y-8">
-        {reviews.map((review) => (
-            <Review key={review.id} review={review} />
-        ))}
+        <div className={styles.reviewsGrid}>
+          {reviews.map((review) => (
+              <Review key={review.id} review={review} />
+          ))}
         </div>
 
         {hasMoreReviews && (
@@ -126,7 +128,7 @@ export default function ProductReviews({
         </div>
         )}
 
-        <ProductReviewsForm productId={productId} />
+    <ProductReviewsForm productId={productId} />
     </div>
   )
 }

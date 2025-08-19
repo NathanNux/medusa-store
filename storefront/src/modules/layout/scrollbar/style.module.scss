@@ -1,0 +1,21 @@
+.scrollbarProgress{
+    position: fixed;
+    bottom: 0vh;
+    left: 0;
+    width: 100vw;
+    height: 5px;
+    z-index: 1000;
+    pointer-events: none;
+    border-radius: 4px 0 0 4px;
+    mix-blend-mode: difference;
+    transform-origin: 0% 0%;
+    background-color: var(--CreamDetails);
+    /* ensure hidden when no progress due to scaleX */
+    will-change: transform;
+
+    @media (max-width: 768px) {
+        width: 36vw;
+        bottom: 1.5vh;
+        right: 4vw;
+    }
+}

@@ -1,7 +1,10 @@
 import { HttpTypes } from "@medusajs/types"
 import { NextRequest, NextResponse } from "next/server"
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL
+// Prefer server-side URL, then public; normalize trailing slash
+const RAW_BACKEND_URL =
+  process.env.MEDUSA_BACKEND_URL || process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL
+const BACKEND_URL = RAW_BACKEND_URL?.replace(/\/$/, "")
 const PUBLISHABLE_API_KEY = process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY
 const DEFAULT_REGION = process.env.NEXT_PUBLIC_DEFAULT_REGION || "us"
 
@@ -24,7 +27,8 @@ async function getRegionMap(cacheId: string) {
     regionMapUpdated < Date.now() - 3600 * 1000
   ) {
     // Fetch regions from Medusa. We can't use the JS client here because middleware is running on Edge and the client needs a Node environment.
-    const { regions } = await fetch(`${BACKEND_URL}/store/regions`, {
+    const url = `${BACKEND_URL}/store/regions`
+    const res = await fetch(url, {
       headers: {
         "x-publishable-api-key": PUBLISHABLE_API_KEY!,
       },
@@ -33,15 +37,30 @@ async function getRegionMap(cacheId: string) {
         tags: [`regions-${cacheId}`],
       },
       cache: "force-cache",
-    }).then(async (response) => {
-      const json = await response.json()
-
-      if (!response.ok) {
-        throw new Error(json.message)
-      }
-
-      return json
     })
+
+    const ctype = res.headers.get("content-type") || ""
+    const text = await res.text()
+    let parsed: any
+    if (!ctype.includes("application/json")) {
+      throw new Error(
+        `Expected JSON from ${res.url} but got ${ctype || "unknown"}: ${text.slice(
+          0,
+          200
+        )}`
+      )
+    }
+    try {
+      parsed = JSON.parse(text)
+    } catch (e) {
+      throw new Error(`Failed to parse JSON from ${res.url}: ${text.slice(0, 200)}`)
+    }
+
+    if (!res.ok) {
+      throw new Error(parsed?.message || JSON.stringify(parsed))
+    }
+
+    const { regions } = parsed
 
     if (!regions?.length) {
       throw new Error(

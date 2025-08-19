@@ -1,23 +1,37 @@
 "use client";
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { useFormStatus } from 'react-dom';
 
 type ClickButtonProps = {
-    ClickAction?: () => void;
     text: string;
+    onClickAction?: () => void | Promise<void>;
+    ClickAction?: () => void | Promise<void>; // backward compatibility
+    disabled?: boolean;
+    type?: "button" | "submit";
+    className?: string;
+    "data-testid"?: string;
 }
 
-// This is base button for every button animation inside the website.
-
-export default function ClickButton({ClickAction, text } : ClickButtonProps) {
+// Base animated button used across the site. Can act as a submit button in forms.
+export default function ClickButton({ onClickAction, ClickAction, disabled = false, text, type = "button", className, "data-testid": dataTestId }: ClickButtonProps) {
     const [ isActive , setIsActive ] = useState<boolean>(false);
+    const { pending } = useFormStatus();
+    const isSubmitting = type === "submit" ? pending : false;
+    const isDisabled = disabled || isSubmitting;
+    const handleClick = onClickAction ?? ClickAction;
+
     return (
-        <div className="ClickButton">
+        <div className={className ? `ClickButton ${className}` : "ClickButton"}>
             <button 
+                type={type}
                 className="button"
-                onClick={ClickAction}
+                onClick={handleClick}
+                disabled={isDisabled}
+                aria-busy={isDisabled || undefined}
                 onMouseEnter={() => setIsActive(true)}
                 onMouseLeave={() => setIsActive(false)}
+                data-testid={dataTestId}
             >
                 <motion.div 
                     className="slider"

@@ -1,7 +1,8 @@
 // Common styles 
 //=============================================================
 @use '../modules/common/components/RotatingText/style.scss' as wRotatingText;
-@use '../modules/common/components/Buttons/hashtagButton/style.scss' as HashTagButtons;
+@use '../modules/common/components/Buttons/hashtagButton/style.scss' as HashTagButton;
+@use '../modules/common/components/Buttons/optionButton/style.scss' as OptionButton;
 @use '../modules/common/components/Buttons/LinkButton/style.scss' as LinkButton;
 @use '../modules/common/components/Buttons/ClickButton/style.scss' as ClickButton;
 @use '../modules/common/components/Buttons/ScrollLink/styles.scss' as ScrollLink;

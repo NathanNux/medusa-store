@@ -144,6 +144,18 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   height: fit-content;
-  width: 100vw;
+  width: 100%;
+  overflow-x: hidden; /* avoid horizontal scrollbar from 100vw/gaps */
   position: relative;
+
+  * {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+  }
+  &::-webkit-scrollbar {
+    width: 0px;
+  }
+  &::-webkit-scrollbar-thumb {
+    width: 0px;
+  }
 }

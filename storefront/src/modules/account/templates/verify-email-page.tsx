@@ -1,15 +1,26 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { Button, Toaster, toast } from "@medusajs/ui"
 import { verifyCustomerEmail } from "@lib/data/customer"
+import styles from "./styles/verify-email.module.scss"
+import { motion, useScroll, useTransform } from "framer-motion"
+import Image from "next/image"
+import LocalizedClientLink from "@modules/common/components/localized-client-link"
 
 export default function VerifyEmailPage() {
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
   const router = useRouter()
   const searchParams = useSearchParams()
+  const ref = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"]
+  })
+
+  const y = useTransform(scrollYProgress, [0, 1], ["-5%", "10%"])
 
   const token = searchParams.get("token") || ""
   const email = searchParams.get("email") || ""
@@ -19,13 +30,13 @@ export default function VerifyEmailPage() {
     try {
       const result = await verifyCustomerEmail(token, email)
       if (result.ok) {
-        toast.success(result.message || "Your email has been verified!")
+        toast.success(result.message || "Potvrzení e-mailu bylo úspěšné!")
         setSuccess(true)
       } else {
-        toast.error(result.message || "Verification failed.")
+        toast.error(result.message || "Ověření selhalo.")
       }
     } catch (e) {
-      toast.error("Verification failed.")
+      toast.error("Ověření selhalo.")
     } finally {
       setLoading(false)
     }
@@ -37,30 +48,133 @@ export default function VerifyEmailPage() {
   }, [])
 
   return (
-    <section className="h-[100vh] w-[100vw] flex flex-col items-center justify-center">
-      <div className="w-full max-w-sm flex flex-col items-center gap-4">
-        <h1 className="text-2xl font-bold">Email Verification</h1>
-        <p>
-          Click the button below to verify your email address.
-        </p>
-        <Button
-          disabled={loading || success}
-          variant="primary"
+    <section className={styles.section} ref={ref}>
+      <div className={styles.ImageContainer}>
+        <motion.div
+          className={styles.Image}
+          style={{ y }}
         >
-          {loading ? "Verifying..." : success ? "Verified!" : "Verify Email"}
-        </Button>
-        {success && (
-          <div className="flex flex-col gap-2 mt-4">
-            <Button variant="secondary" onClick={() => router.push("/account")}>
-              Go to My Account
-            </Button>
-            <Button variant="secondary" onClick={() => router.push("/")}>
-              Go to Store
-            </Button>
+          <div className={styles.ImageOverlay} />
+          <Image
+            src={"/assets/img/img/2.jpg"}
+            alt="Potvrzení e-mailové adresy"
+            layout="fill"
+            objectFit="cover"
+          />
+        </motion.div>
+      </div>
+      <div className={styles.container}>
+        <h1 className={styles.title}>Potvrzení e-mailové adresy</h1>
+        <p className={styles.desc}>
+          { loading ? "Klikněte na tlačítko níže pro potvrzení vaší e-mailové adresy." : success ? "Potvrzení e-mailu bylo úspěšné!" : "Ověření selhalo."}
+        </p>
+        <ClickButton 
+          disabled={loading || success} 
+          onClickAction={handleVerify}
+          text={loading ? "Ověřuji..." : success ? "Ověřeno!" : "Potvrdit e-mail"}
+        />
+        {!success && (
+          <div className={styles.actions}>
+            <LinkButton text="Přejít na můj účet" href="/account" />
+            <LinkButton text="Přejít do obchodu" href="/" />
           </div>
         )}
         <Toaster />
       </div>
     </section>
   )
+}
+
+type LinkButtonProps = {
+    text: string;
+    href: string; 
+}
+
+// This is base button for every button animation inside the website.
+
+function LinkButton({ text, href } : LinkButtonProps) {
+    const [ isActive , setIsActive ] = useState<boolean>(false);
+    return (
+        <LocalizedClientLink href={href} className={styles.LinkButton}>
+            <button 
+                className={styles.button}
+                onMouseEnter={() => setIsActive(true)}
+                onMouseLeave={() => setIsActive(false)}
+            >
+                <motion.div 
+                    className={styles.slider}
+                    animate={{top: isActive ? "-100%" : "0%"}}
+                    transition={{ duration: 0.5, type: "tween", ease: [0.76, 0, 0.24, 1]}}
+                >
+                    <div 
+                        className={styles.el}
+                        style={{ backgroundColor: "var(--OButton)" }}
+                    >
+                        <PerspectiveText label={text}/>
+                    </div>
+                    <div 
+                        className={styles.el}
+                        style={{ backgroundColor: "var(--CreamDetails)" }}
+                    >
+                        <PerspectiveText label={text}/>
+                    </div>
+                </motion.div>
+            </button>
+        </LocalizedClientLink>
+    )
+}
+
+function PerspectiveText({label}: {label: string}) {
+    return (    
+        <div className={styles.perspectiveText}>
+            <p>{label}</p>
+            <p>{label}</p>
+        </div>
+    )
+}
+
+type ClickButtonProps = {
+    text: string;
+    onClickAction?: () => void | Promise<void>;
+    ClickAction?: () => void | Promise<void>; // backward compatibility
+    disabled?: boolean;
+}
+
+// This is base button for every button animation inside the website.
+function ClickButton({ onClickAction, ClickAction, disabled = false, text }: ClickButtonProps) {
+    const [isActive, setIsActive] = useState<boolean>(false);
+    const handleClick = onClickAction ?? ClickAction;
+
+    return (
+        <div className={styles.ClickButton}>
+            <button
+                type="button"
+                className={styles.button}
+                onClick={handleClick}
+                disabled={disabled}
+                aria-busy={disabled || undefined}
+                onMouseEnter={() => setIsActive(true)}
+                onMouseLeave={() => setIsActive(false)}
+            >
+                <motion.div
+                    className={styles.slider}
+                    animate={{ top: isActive ? "-100%" : "0%" }}
+                    transition={{ duration: 0.5, type: "tween", ease: [0.76, 0, 0.24, 1] }}
+                >
+                    <div
+                        className={styles.el}
+                        style={{ backgroundColor: "var(--OButton)" }}
+                    >
+                        <PerspectiveText label={text} />
+                    </div>
+                    <div
+                        className={styles.el}
+                        style={{ backgroundColor: "var(--CharcoalBg)" }}
+                    >
+                        <PerspectiveText label={text} />
+                    </div>
+                </motion.div>
+            </button>
+        </div>
+    )
 }

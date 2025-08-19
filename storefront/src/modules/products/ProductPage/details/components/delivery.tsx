@@ -5,12 +5,12 @@ type ShipmentProps = {
 
 const Shipment = ({ shipping }: ShipmentProps) => {
     return (
-        <div>
+        <div className="shipment">
            {shipping.map((item, idx) => (
-                <div key={idx}>
+                <div key={idx} className="shipment__item">
                     <h4>{item.title}</h4>
-                <p>{item.content}</p>
-            </div>
+                    <p>{item.content}</p>
+                </div>
             ))}
         </div>
     )

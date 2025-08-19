@@ -8,18 +8,54 @@
     align-items: center;
     .button{
         position: relative;
-        width: 120px;
-        height: 40px;
+        width: 200px;
+        height: 45px;
         cursor: pointer;
         border-radius: 25px;
         overflow: hidden;
         border: none;
         box-shadow: none;
-        background-color: transparent;
+        background-color: var(--OButton);
 
+        @include respond-to-h(lg){
+            width: 150px !important;
+            height: 40px !important;
+        }
+        @include respond-to-h(mdt){
+            width: 150px !important;
+            height: 40px !important;
+        }
+        @include respond-to-h(md){
+            width: 150px !important;
+            height: 40px !important;
+        }
+        @include respond-to-h(sm){
+            width: 150px !important;
+            height: 40px !important;
+        }
+        @include respond-to-h(xs){
+            width: 150px !important;
+            height: 40px !important;
+        }
+        @include respond-to-h(xxs){
+            width: 150px !important;
+            height: 40px !important;
+        }
+        @include respond-to-v(md){
+            width: 150px !important;
+            height: 40px !important;
+        }
         @include respond-to-v(s){
-            width: 90px;
-            height: 35px;
+            width: 150px !important;
+            height: 40px !important;
+        }
+        @include respond-to-v(sm){
+            width: 150px !important;
+            height: 40px !important;
+        }
+        @include respond-to-v(xs){
+            width: 150px !important;
+            height: 40px !important;
         }
 
         .slider{
@@ -31,9 +67,18 @@
                 width: 100%;
                 height: 100%;
                 background-color: var(--OButton);
-                p{
-                    margin: 0px;
-                    color: var(--ChText);
+                .perspectiveText{
+                    justify-content: center;
+                    align-items: center;
+                    position: relative;
+                    p{
+                        text-transform: capitalize;
+                        margin: 0px;
+                        color: var(--Wtext);
+                        font-size: 1.3rem;
+                        position: absolute;
+                        
+                    }
                 }
                 &:nth-of-type(2){
                     background-color: var(--CharcoalBg);
@@ -51,6 +96,7 @@
                             }
                             &:nth-of-type(2){
                                 opacity: 1;
+                                transform: rotateX(-90deg) translateY(12px);
                             }
                         }
                     }

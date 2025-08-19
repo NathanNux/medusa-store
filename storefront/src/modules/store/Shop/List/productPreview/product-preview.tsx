@@ -1,3 +1,4 @@
+import { getProductPrice } from "@lib/util/get-product-price";
 import { HttpTypes } from "@medusajs/types";
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -14,6 +15,10 @@ type StoreProductWithPrice = HttpTypes.StoreProduct & {
 
 const ProductPreview = ({ product, countryCode }: { product: StoreProductWithPrice, countryCode: string }) => {
     const imageUrl = product.images?.[0]?.url || product.thumbnail || "/assets/img/horizontal_prop.png";
+
+    const { cheapestPrice } = getProductPrice({
+        product,
+    })
 
   return (
     <motion.div
@@ -43,28 +48,35 @@ const ProductPreview = ({ product, countryCode }: { product: StoreProductWithPri
             {/* Add color options if present */}
         </div>
         <div className="product__desc__container">
-            <p className="product__desc">{product.description}</p>
+            {/* <p className="product__desc">{product.description}</p> */}
             {product.created_at && new Date(product.created_at) > new Date(Date.now() - 30 * 24 * 60 * 60 * 1000) && (
                 <span className="product__new">Novinka</span>
             )}
         </div>
         <div className="product__price__container">
+            {cheapestPrice?.price_type === "sale" && 
+                <p className="product__sale__price line-through">
+                    {cheapestPrice?.original_price !== undefined
+                    ? `${String(cheapestPrice.original_price).replace(/czk/i, "")}${countryCode === "cz" ? ",-" : ""}`
+                : ""}
+                </p>
+            }
             <p className="product__price">
-                {product.cheapestPrice?.calculated_price !== undefined
-                    ? `${String(product.cheapestPrice.calculated_price).replace(/czk/i, "")}${countryCode === "cz" ? " Kč" : ""}`
-                    : "—"}
+                {cheapestPrice?.calculated_price !== undefined
+                    ? `${String(cheapestPrice.calculated_price).replace(/czk/i, "")}${countryCode === "cz" ? ",-" : ""}`
+                : "Cena není k dispozici"}
             </p>
-            <div className="product__sale__container">
-            <button className="add__to__cart__button">
-                <Image
-                    src="/assets/icons/bookmark.svg"
-                    alt="Add to Cart Icon"
-                    width={24}
-                    height={24}
-                    className="add__to__cart__icon"
-                />
-            </button>
-            </div>
+            {/* <div className="product__sale__container">
+                <button className="add__to__cart__button">
+                    <Image
+                        src="/assets/icons/bookmark.svg"
+                        alt="Add to Cart Icon"
+                        width={24}
+                        height={24}
+                        className="add__to__cart__icon"
+                    />
+                </button>
+            </div> */}
         </div>
         </Link>
     </motion.div>

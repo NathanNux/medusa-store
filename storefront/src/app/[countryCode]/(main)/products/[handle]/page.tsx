@@ -90,6 +90,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 export default async function ProductPage(props: Props) {
   const params = await props.params
   const region = await getRegion(params.countryCode)
+  const countryCode = params.countryCode
 
   if (!region) {
     notFound()
@@ -97,7 +98,7 @@ export default async function ProductPage(props: Props) {
 
    // @ts-ignore 
   const pricedProduct = await listProducts({
-    countryCode: params.countryCode,
+    countryCode,
     queryParams: { 
       handle: params.handle, 
       fields: "*bundle, *variants.calculated_price, +variants.inventory_quantity, +metadata, +tags",
@@ -133,9 +134,6 @@ export default async function ProductPage(props: Props) {
     offset: 0,
   })
 
-  console.log("reviewsData", reviewsData)
-  console.log("pricedProductID", pricedProduct.id)
-
   return (
     // <ProductTemplate
     //   product={pricedProduct}
@@ -147,7 +145,7 @@ export default async function ProductPage(props: Props) {
      <Product
         product={pricedProduct}
         region={region}
-        countryCode={params.countryCode}
+        countryCode={countryCode}
         categories={productCategories}
       />
       {ENABLE_BUNDLES && bundleProduct && (

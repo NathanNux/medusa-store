@@ -9,6 +9,7 @@ import FreeShippingPriceNudge from "@modules/shipping/components/free-shipping-p
 import { listRegions } from "@lib/data/regions"
 import Navbar from "@modules/layout/Navbar"
 import Footer from "@modules/layout/Footer"
+import Scrollbar from "@modules/layout/scrollbar"
 
 
 export const metadata: Metadata = {
@@ -23,9 +24,13 @@ export default async function PageLayout(props: { children: React.ReactNode }) {
   
 
   if (cart) {
-    const { shipping_options } = await listCartOptions()
-
-    shippingOptions = shipping_options
+    try {
+      const { shipping_options } = await listCartOptions()
+      shippingOptions = shipping_options
+    } catch (e) {
+      console.error("Failed to load shipping options for layout:", e)
+      shippingOptions = []
+    }
   }
 
   return (
@@ -35,6 +40,7 @@ export default async function PageLayout(props: { children: React.ReactNode }) {
         <CartMismatchBanner customer={customer} cart={cart} />
       )}
 
+      <Scrollbar />
       {cart && (
         <FreeShippingPriceNudge
           variant="popup"

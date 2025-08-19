@@ -1,12 +1,11 @@
 "use client";
 import { HttpTypes } from "@medusajs/types";
 import { forwardRef } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import ProductPreview from "./productPreview/product-preview";
 
 type ProductListProps = {
   products: HttpTypes.StoreProduct[];
-  ref?: React.RefObject<HTMLDivElement>;
   countryCode: string;
 }
 
@@ -27,6 +26,8 @@ const ProductList = forwardRef<HTMLDivElement, ProductListProps>(({ products, co
     </div>
   );
 });
+
+ProductList.displayName = "ProductList";
 
 
 export default ProductList;

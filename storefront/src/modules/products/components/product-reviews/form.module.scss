@@ -1,0 +1,50 @@
+// Scoped styles for the product reviews form (nested SCSS)
+
+.container {
+	margin-top: 2rem; // mt-8
+
+	.center {
+		display: flex;
+		justify-content: center;
+	}
+
+	.formSection {
+		display: flex;
+		flex-direction: column;
+		row-gap: 1rem; // gap-y-4
+
+		.formTitle {
+			font-size: 1.5rem; // text-xl-regular
+			line-height: 2.25rem; // 36px
+			color: var(--ui-fg-base, inherit);
+		}
+
+		.form {
+			display: flex;
+			flex-direction: column;
+			row-gap: 1rem; // gap-y-4
+		}
+
+		.field {
+			display: flex;
+			flex-direction: column;
+			row-gap: 0.5rem; // gap-y-2
+		}
+
+		.starsRow {
+			display: flex;
+			flex-direction: column;
+			row-gap: 0.5rem; // gap-y-2
+
+			.stars {
+				display: flex;
+				column-gap: 0.25rem; // gap-x-1
+			}
+
+			.starBtn {
+				padding: 0; // p-0
+				min-width: auto;
+			}
+		}
+	}
+}

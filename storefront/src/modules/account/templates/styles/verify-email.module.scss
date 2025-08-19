@@ -1,0 +1,334 @@
+@use "../../../../styles/mixins.scss" as *;
+
+// Styles for Verify Email page (nested SCSS)
+
+.section {
+	height: 100vh;
+	width: 100vw;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 1rem;
+	overflow: hidden;
+
+	.ImageContainer{
+		z-index: 1;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+
+		.Image {
+			position: absolute;
+			top: -10%;
+			left: -10%;
+			width: 120%;
+			height: 120%;
+			z-index: 0;
+		}
+
+		.ImageOverlay{
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: var(--CharcoalBg);
+			opacity: 0.8;
+			z-index: 1;
+		}
+	}
+
+	.container {
+		width: 40%;
+		height: 60%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		row-gap: 1rem; // gap-4
+		border-radius: 25px;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+		z-index: 2;
+		background-color: var(--WhiteBg);
+
+		.title {
+			font-family: "Sansation-Regular";
+			font-size: 2rem; // text-2xl
+			line-height: 1.5rem;
+			font-weight: 400; // font-bold
+			margin: 0;
+		}
+
+		.desc {
+			text-align: center;
+			font-family: "Sansation-Light";
+			font-size: 1.1rem; // text-2xl
+			line-height: 1.5rem;
+			font-weight: 300; // font-bold
+			margin: 0;
+		}
+
+		.actions {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: row;
+			gap: 1.5rem; // gap-2
+			margin-top: 1rem; // mt-4
+			width: 100%;
+		}
+	}
+}
+
+
+.LinkButton{
+    width: auto;
+    height: auto;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 8px var(--ButtonBorder); // subtle shadow here
+    border-radius: 25px;
+    .button{
+        position: relative;
+        width: 200px;
+        height: 40px;
+        cursor: pointer;
+        border-radius: 25px;
+        overflow: hidden;
+        border: none;
+        box-shadow: none;
+        background-color: transparent;
+
+        @include respond-to-v(s){
+            width: 90px;
+            height: 35px;
+        }
+
+        .slider{
+            position: relative;
+            width: 100%;
+            height: 100%;
+
+            .el{
+                width: 100%;
+                height: 100%;
+                p{
+                    margin: 0px;
+                    color: var(--Wtext);
+                }
+                &:nth-of-type(2){
+                    p{
+                        color: var(--ChText);
+                    }
+                }
+                &:hover{
+                    .perspectiveText{
+                        transform: rotateX(90deg);
+                        p{
+                            &:nth-of-type(1){
+                                transform: translateY(-100%);
+                                opacity: 0;
+                            }
+                            &:nth-of-type(2){
+                                opacity: 1;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+    }
+}
+
+.ClickButton{
+	width: auto;
+	height: auto;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	.button{
+		position: relative;
+		width: 150px;
+		height: 40px;
+		cursor: pointer;
+		border-radius: 25px;
+		overflow: hidden;
+		border: none;
+		box-shadow: none;
+		background-color: transparent;
+
+		@include respond-to-v(s){
+			width: 90px;
+			height: 35px;
+		}
+
+		.slider{
+			position: relative;
+			width: 100%;
+			height: 100%;
+
+			.el{
+				width: 100%;
+				height: 100%;
+				p{
+					margin: 0px;
+					color: var(--Wtext)
+				}
+				&:nth-of-type(2){
+					p{
+						color: var(--Wtext);
+					}
+				}
+				&:hover{
+					.perspectiveText{
+						transform: rotateX(90deg);
+						p{
+							&:nth-of-type(1){
+								transform: translateY(-100%);
+								opacity: 0;
+							}
+							&:nth-of-type(2){
+								opacity: 1;
+							}
+						}
+					}
+				}
+			}
+		}
+		
+	}
+}
+
+
+.perspectiveText{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.75s cubic-bezier(0.76, 0, 0.24, 1);
+    p{
+        transition: all 0.75s cubic-bezier(0.76, 0, 0.24, 1);
+        pointer-events: none;
+        text-transform: capitalize;
+        &:nth-of-type(2){
+            position: absolute;
+            transform-origin: bottom center;
+            transform: rotateX(-90deg) translateY(12px);
+            opacity: 0;
+        }
+    }
+}
+
+// --- Horizontal (landscape) responsiveness ---
+@include respond-to-h(huge) {
+	.section { padding: 2rem; }
+	.section .ImageContainer .Image { top: -8%; left: -8%; width: 116%; height: 116%; }
+	.section .container { width: 36%; height: 55%; row-gap: 1.25rem; }
+	.section .container .title { font-size: 2.5rem; line-height: 2.75rem; }
+	.section .container .desc { font-size: 1.2rem; line-height: 1.75rem; }
+	.LinkButton .button { width: 240px; height: 46px; border-radius: 26px; }
+	.ClickButton .button { width: 200px; height: 44px; border-radius: 26px; }
+}
+
+@include respond-to-h(xl) {
+	.section .container { width: 38%; height: 56%; }
+	.section .container .title { font-size: 2.25rem; line-height: 2.5rem; }
+	.LinkButton .button { width: 220px; height: 44px; }
+	.ClickButton .button { width: 180px; height: 42px; }
+}
+
+@include respond-to-h(lg) {
+	.section .container { width: 40%; height: 58%; }
+	.section .container .title { font-size: 2.1rem; }
+	.section .container .desc { font-size: 1.1rem; }
+}
+
+@include respond-to-h(md) { // notebooks with lower height
+	.section .container { width: 44%; height: 52%; }
+	.section .container .title { font-size: 2rem; line-height: 2.25rem; }
+	.section .container .desc { font-size: 1.05rem; line-height: 1.6rem; }
+	.LinkButton .button { width: 200px; height: 40px; }
+	.ClickButton .button { width: 160px; height: 38px; }
+}
+
+@include respond-to-h(mdt) { // taller mids
+	.section .container { width: 42%; height: 56%; }
+}
+
+@include respond-to-h(sm) {
+	.section .container { width: 48%; height: 56%; }
+	.section .container .title { font-size: 1.9rem; }
+	.section .container .desc { font-size: 1rem; }
+}
+
+@include respond-to-h(xs) {
+	.section .ImageContainer .Image { top: -6%; left: -6%; width: 112%; height: 112%; }
+	.section .container { width: 60%; height: 54%; }
+	.LinkButton .button { width: 180px; height: 38px; }
+	.ClickButton .button { width: 150px; height: 36px; }
+}
+
+@include respond-to-h(xxs) {
+	.section { padding: 0.75rem; }
+	.section .ImageContainer .Image { top: -4%; left: -4%; width: 108%; height: 108%; }
+	.section .container { width: 80%; height: auto; padding: 1rem; }
+	.section .container .title { font-size: 1.75rem; line-height: 2.1rem; }
+	.section .container .desc { font-size: 0.95rem; line-height: 1.4rem; }
+	.LinkButton .button { width: 160px; height: 36px; border-radius: 22px; }
+	.ClickButton .button { width: 140px; height: 34px; border-radius: 22px; }
+}
+
+// --- Vertical (portrait) responsiveness ---
+@include respond-to-v(lg) {
+	.section { padding: 2rem; }
+	.section .ImageContainer .Image { top: -10%; left: -10%; width: 120%; height: 120%; }
+	.section .container { width: 60%; height: 60%; }
+	.section .container .title { font-size: 2.4rem; line-height: 2.6rem; }
+	.section .container .desc { font-size: 1.15rem; }
+	.LinkButton .button { width: 240px; height: 46px; }
+	.ClickButton .button { width: 180px; height: 42px; }
+}
+
+@include respond-to-v(md) {
+	.section .container { width: 70%; height: 58%; }
+	.section .container .title { font-size: 2.1rem; }
+	.LinkButton .button { width: 220px; height: 44px; }
+	.ClickButton .button { width: 170px; height: 40px; }
+}
+
+@include respond-to-v(s) {
+	.section .container { width: 78%; height: 56%; }
+	.section .container .title { font-size: 1.9rem; }
+	.section .container .desc { font-size: 1.05rem; }
+	.LinkButton .button { width: 200px; height: 40px; }
+	.ClickButton .button { width: 160px; height: 38px; }
+}
+
+@include respond-to-v(sm) {
+	.section .container { width: 88%; height: auto; padding: 1rem; }
+	.section .container .title { font-size: 1.7rem; }
+	.section .container .desc { font-size: 0.95rem; }
+	.LinkButton .button { width: 180px; height: 38px; }
+	.ClickButton .button { width: 150px; height: 36px; }
+}
+
+@include respond-to-v(xs) {
+	.section { padding: 0.75rem; }
+	.section .container { width: 94%; height: auto; }
+	.section .container .title { font-size: 1.55rem; line-height: 2rem; }
+	.section .container .desc { font-size: 0.9rem; line-height: 1.35rem; }
+	.LinkButton .button { width: 160px; height: 36px; border-radius: 20px; }
+	.ClickButton .button { width: 140px; height: 34px; border-radius: 20px; }
+}

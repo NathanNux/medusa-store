@@ -1,6 +1,6 @@
 "use client";
 
-import { usePathname } from 'next/navigation';
+import { usePathname, useParams } from 'next/navigation';
 import { createContext, useContext, useEffect, useState } from 'react';
 import type { ReactNode, Dispatch, SetStateAction } from 'react';
 
@@ -14,18 +14,24 @@ const StateContext = createContext<StateContextType | null>(null);
 export function StateProvider({ children }: { children: ReactNode }) {
     const [firstLoad, setFirstLoad] = useState(false);
     const pathname = usePathname();
+    const params = useParams<{ countryCode?: string | string[] }>();
+    const countryCodeParam = params?.countryCode;
+    const countryCode = Array.isArray(countryCodeParam)
+      ? countryCodeParam[0]
+      : countryCodeParam;
+    const isHome = countryCode ? pathname === `/${countryCode}` : pathname === "/";
 
     useEffect(() => {
-        if( pathname === "/") {
-            const timeout = setTimeout(() => {
+        if (isHome) {
+            const timeout = window.setTimeout(() => {
                 setFirstLoad(true);
             }, 3000);
-
             return () => clearTimeout(timeout);
-        } else {
-            setFirstLoad(true);
         }
-    }, [pathname]);
+        // Non-home routes: enable immediately
+        setFirstLoad(true);
+        return;
+    }, [pathname, isHome]);
 
 
     return (

@@ -13,7 +13,7 @@ type ButtonProps = {
     children: React.ReactNode;
 }
 
-export default function Button({
+export default function CartButton({
     onClick,
     disabled = false,
     className = "",
@@ -38,10 +38,10 @@ export default function Button({
                     animate={{ top: isActive ? "-100%" : "0%" }}
                     transition={{ duration: 0.5, type: "tween", ease: [0.76, 0, 0.24, 1] }}
                 >
-                    <div className={styles.el} style={{ backgroundColor: "var(--WhiteBg)" }}>
+                    <div className={styles.el}>
                         <PerspectiveText>{isLoading ? "Načítání..." : children}</PerspectiveText>
                     </div>
-                    <div className={styles.el} style={{ backgroundColor: "var(--CharcoalBg)" }}>
+                    <div className={styles.el}>
                         <PerspectiveText>{isLoading ? "Načítání..." : children}</PerspectiveText>
                     </div>
                 </motion.div>
@@ -52,9 +52,9 @@ export default function Button({
 
 function PerspectiveText({ children }: { children: React.ReactNode }) {
     return (
-        <span className={styles.perspectiveText}>
+        <div className={styles.perspectiveText}>
             <p>{children}</p>
             <p>{children}</p>
-        </span>
+        </div>
     );
 }

@@ -1,12 +1,14 @@
 "use client"
 
-import { useActionState, useEffect } from "react"
+import { useActionState, useState } from "react"
 import Input from "@modules/common/components/input"
 import { LOGIN_VIEW } from "@modules/account/templates/login-template"
 import ErrorMessage from "@modules/checkout/components/error-message"
-import { SubmitButton } from "@modules/checkout/components/submit-button"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { signup } from "@lib/data/customer"
+import s from "./style.module.scss"
+import { useFormStatus } from "react-dom"
+import { motion } from "framer-motion"
 
 type Props = {
   setCurrentView: (view: LOGIN_VIEW) => void
@@ -16,28 +18,25 @@ const Register = ({ setCurrentView }: Props) => {
   const [message, formAction] = useActionState(signup, null)
 
   return (
-    <div
-      className="max-w-sm flex flex-col items-center"
-      data-testid="register-page"
-    >
-      <h1 className="text-large-semi uppercase mb-6">
-        Become a Medusa Store Member
+    <div className={s.root} data-testid="register-page">
+      <h1 className={s.title}>
+        Staňte se členem!
       </h1>
-      <p className="text-center text-base-regular text-ui-fg-base mb-4">
-        Create your Medusa Store Member profile, and get access to an enhanced
-        shopping experience.
+      <p className={s.desc}>
+        Vytvořte si profil člena Medusa Store a získejte přístup k vylepšenému
+        zážitku z nakupování.
       </p>
-      <form className="w-full flex flex-col" action={formAction}>
-        <div className="flex flex-col w-full gap-y-2">
+      <form className={s.form} action={formAction}>
+        <div className={s.fields}>
           <Input
-            label="First name"
+            label="Jméno"
             name="first_name"
             required
             autoComplete="given-name"
             data-testid="first-name-input"
           />
           <Input
-            label="Last name"
+            label="Příjmení"
             name="last_name"
             required
             autoComplete="family-name"
@@ -52,14 +51,14 @@ const Register = ({ setCurrentView }: Props) => {
             data-testid="email-input"
           />
           <Input
-            label="Phone"
+            label="Telefon"
             name="phone"
             type="tel"
             autoComplete="tel"
             data-testid="phone-input"
           />
           <Input
-            label="Password"
+            label="Heslo"
             name="password"
             required
             type="password"
@@ -68,34 +67,32 @@ const Register = ({ setCurrentView }: Props) => {
           />
         </div>
         <ErrorMessage error={message} data-testid="register-error" />
-        <span className="text-center text-ui-fg-base text-small-regular mt-6">
-          By creating an account, you agree to Medusa Store&apos;s{" "}
+        <span className={s.note}>
+          Vytvořením účtu souhlasíte se{" "}
           <LocalizedClientLink
             href="/content/privacy-policy"
-            className="underline"
+            className={s.underline}
           >
-            Privacy Policy
+            Zásadami ochrany osobních údajů
           </LocalizedClientLink>{" "}
-          and{" "}
+          a{" "}
           <LocalizedClientLink
             href="/content/terms-of-use"
-            className="underline"
+            className={s.underline}
           >
-            Terms of Use
+            Podmínkami použití
           </LocalizedClientLink>
           .
         </span>
-        <SubmitButton className="w-full mt-6" data-testid="register-button">
-          Join
-        </SubmitButton>
+        <ClickButton type="submit" className={s.submit} data-testid="register-button" text="Připojit se"/>
       </form>
-      <span className="text-center text-ui-fg-base text-small-regular mt-6">
-        Already a member?{" "}
+      <span className={s.note}>
+        Již jste členem?{" "}
         <button
           onClick={() => setCurrentView(LOGIN_VIEW.SIGN_IN)}
-          className="underline"
+          className={s.underline}
         >
-          Sign in
+          Přihlásit se
         </button>
         .
       </span>
@@ -104,3 +101,66 @@ const Register = ({ setCurrentView }: Props) => {
 }
 
 export default Register
+
+
+type ClickButtonProps = {
+    text: string;
+    onClickAction?: () => void | Promise<void>;
+    ClickAction?: () => void | Promise<void>; // backward compatibility
+    disabled?: boolean;
+    type?: "button" | "submit";
+    className?: string;
+    "data-testid"?: string;
+}
+
+// Base animated button used across the site. Can act as a submit button in forms.
+function ClickButton({ onClickAction, ClickAction, disabled = false, text, type = "button", className, "data-testid": dataTestId }: ClickButtonProps) {
+    const [ isActive , setIsActive ] = useState<boolean>(false);
+    const { pending } = useFormStatus();
+    const isSubmitting = type === "submit" ? pending : false;
+    const isDisabled = disabled || isSubmitting;
+    const handleClick = onClickAction ?? ClickAction;
+
+    return (
+        <div className={className ? `${s.ClickButton} ${className}` : s.ClickButton}>
+            <button
+                type={type}
+                className={s.button}
+                onClick={handleClick}
+                disabled={isDisabled}
+                aria-busy={isDisabled || undefined}
+                onMouseEnter={() => setIsActive(true)}
+                onMouseLeave={() => setIsActive(false)}
+                data-testid={dataTestId}
+            >
+                <motion.div
+                    className={s.slider}
+                    animate={{top: isActive ? "-100%" : "0%"}}
+                    transition={{ duration: 0.5, type: "tween", ease: [0.76, 0, 0.24, 1]}}
+                >
+                    <div
+                        className={s.el}
+                        style={{ backgroundColor: "var(--OButton)" }}
+                    >
+                        <PerspectiveText label={text}/>
+                    </div>
+                    <div
+                        className={s.el}
+                        style={{ backgroundColor: "var(--CharcoalBg)" }}
+                    >
+                        <PerspectiveText label={text} />
+                    </div>
+                </motion.div>
+            </button>
+        </div>
+    )
+}
+
+function PerspectiveText({label}: {label: string}) {
+    return (    
+        <div className={s.perspectiveText}>
+            <p>{label}</p>
+            <p>{label}</p>
+        </div>
+    )
+}

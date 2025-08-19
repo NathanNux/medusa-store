@@ -1,8 +1,17 @@
 "use client";
-import { Easing, motion, useAnimationFrame, useMotionValue, useScroll, useSpring, useTransform, useVelocity } from 'framer-motion';
-import { useEffect, useRef } from 'react';
+import { AnimatePresence, Easing, motion, useAnimationFrame, useMotionValue, useScroll, useSpring, useTransform, useVelocity } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
 
 export default function NewsPopup ({firstLoad}: {firstLoad: boolean}) {
+    const [ isDisplayed, setIsDisplayed ] = useState(true);
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            setIsDisplayed(false);
+        }, 10000);
+
+        return () => clearTimeout(timeout);
+    }, []);
 
     // WIP: create for this a handle and url and desc to fetch the news or if there is new product release or something => might be useful, 
     // Only do that after the full webite is done and fully functional, so that it is not a priority right now
@@ -11,17 +20,8 @@ export default function NewsPopup ({firstLoad}: {firstLoad: boolean}) {
             y: "-100%",
             opacity: 0,
         },
-        start: {
-            y: "-100%",
-            opacity: 0,
-            transition: {
-                duration: 1.25,
-                delay: !firstLoad ? 3.25 : 0,
-                ease: [0.76, 0, 0.24, 1] as Easing,
-            }
-        },
         enter: {
-            y: "0%",
+            y: "0",
             opacity: 1,
             transition: {
                 duration: 1.25,
@@ -29,18 +29,30 @@ export default function NewsPopup ({firstLoad}: {firstLoad: boolean}) {
                 ease: [0.76, 0, 0.24, 1] as Easing,
             }
         },
+        exit: {
+            y: "-100%",
+            opacity: 0,
+            transition: {
+                duration: 1.25,
+                ease: [0.76, 0, 0.24, 1] as Easing,
+            }
+        },
     }
     return (
         <div className='Navbar__News'>
-            <motion.div 
-                className="Navbar__News__RotatingBar"
-                initial="initial"
-                animate="enter"
-                exit="exit"
-                variants={PreloaderAnim}
-            >
-                <RotatingBar />
-            </motion.div>
+            <AnimatePresence>
+                {isDisplayed && (
+                    <motion.div 
+                        className="Navbar__News__RotatingBar"
+                        initial="initial"
+                        animate="enter"
+                        exit="exit"
+                        variants={PreloaderAnim}
+                    >
+                        <RotatingBar />
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
     );
 }

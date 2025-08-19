@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { Suspense, useEffect, useRef, useState } from "react";
 import { AnimatePresence, Easing, motion } from "framer-motion";
 import Nav from "./nav";
@@ -149,7 +148,7 @@ export default function Navbar({ cart, regions }: NavbarProps) {
                 )}
                 <div className="Navbar__Logo">
                     <Magnetic>
-                        <Link href="/">
+                        <LocalizedClientLink href="/">
                             <Image 
                                 src="/assets/icons/logo.svg"
                                 alt="Logo"
@@ -158,7 +157,7 @@ export default function Navbar({ cart, regions }: NavbarProps) {
                                 className="Navbar__Logo"
                                 priority={true}
                             />
-                        </Link>
+                        </LocalizedClientLink>
                     </Magnetic>
                     <div className="Navbar__Logo__bg" style={{ backgroundColor: "var(--WhiteBg)", border: "0.5px solid var(--ButtonBorder)"}}/>
                 </div>

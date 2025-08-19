@@ -19,31 +19,34 @@ export default function ScrollLink({
   borderL?: boolean;
 }) {
   return (
-    <div className="ScrollLink">
+    <LocalizedClientLink href={`/${href}`} className="ScrollLink"
+      style={{
+        borderRight: borderR ? `1px solid ${borderColor}` : "var(--ButtonBorder)",  
+        borderLeft: borderL ? `1px solid ${borderColor}` : "var(--ButtonBorder)",
+      }}
+    >
         <button 
           className="button"
             style={{
             textDecoration: "none",
-            borderRight: borderR ? `1px solid ${borderColor}` : "var(--ButtonBorder)",  
-            borderLeft: borderL ? `1px solid ${borderColor}` : "var(--ButtonBorder)",
           }}
         >
             <div className="slider">
                 <div className="el">
-                    <PerspectiveText label={text} href={href} className={className} textColor={textColor}/>
+                    <PerspectiveText label={text} className={className} textColor={textColor}/>
                 </div>
                 <div className="el">
-                    <PerspectiveText label={text} href={href} className={className} textColor={textColor}/>
+                    <PerspectiveText label={text} className={className} textColor={textColor}/>
                 </div>
             </div>
         </button>
-    </div>
+    </LocalizedClientLink>
   );
 }
 
-function PerspectiveText({label, href, className, textColor}: {label: string; href: string; className?: string; textColor?: string}) {
+function PerspectiveText({label, className, textColor}: {label: string; className?: string; textColor?: string}) {
   return (    
-      <LocalizedClientLink href={`/${href}`} className="perspectiveText">
+      <div className="perspectiveText">
           <p 
             className={className}
             style={{
@@ -60,6 +63,6 @@ function PerspectiveText({label, href, className, textColor}: {label: string; hr
           >
             {label}
           </p>
-      </LocalizedClientLink>
+      </div>
   )
 }

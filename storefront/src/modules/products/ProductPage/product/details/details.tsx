@@ -146,7 +146,7 @@ const Details: React.FC<ProductTemplateProps> = ({ product, region, countryCode,
                 />
             </div>
             <div className="product__details__cta">
-                <ProductPrice product={product} variant={selectedVariant} />
+                <ProductPrice product={product} variant={selectedVariant} countryCode={countryCode} />
                 <CTA
                     inStock={inStock}
                     selectedVariant={selectedVariant}

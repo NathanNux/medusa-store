@@ -3,7 +3,7 @@
 .details{
     width: 100vw;
     min-height: 50vh;
-    padding: 10vh 0vw 5vh 0;
+    padding: 10vh 0vw 15vh 0;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -11,6 +11,7 @@
     justify-content: flex-start;
     background-color: var(--OliveBg);
     gap: 1.5vh;
+    overflow: hidden;
 
     @include respond-to-h(xs){
         height: 80vh;
@@ -215,29 +216,103 @@
                     justify-content: flex-start;
                     border-top: 0.5px solid var(--WhiteBg);
 
-                    p{
-                        font-family: "Sansation-Light";
-                        position: relative;
-                        z-index: 1;
-                        font-size: 1rem;
-                        color: var(--Wtext);
-                        font-weight: 300;
-                        margin: 0;
-                        text-align: left;
+                    .info{
+                        width: 100%;
                         padding: 1vh 0 2.5vh 0;
-                        @include respond-to-h(sm){
-                            font-size: 0.9rem;
-                        }
-                        @include respond-to-h(xs){
-                            font-size: 0.9rem;
-                        }
-                        @include respond-to-h(xxs){
-                            font-size: 0.9rem;
-                        }
-                        @include respond-to-v(xs){
-                            font-size: 0.9rem;
+
+                        p{
+                            font-family: "Sansation-Light";
+                            position: relative;
+                            z-index: 1;
+                            font-size: 1.1rem;
+                            color: var(--Wtext);
+                            font-weight: 300;
+                            margin: 0;
+                            text-align: left;
+                            padding: 1vh 0 2.5vh 0;
+                            @include respond-to-h(sm){
+                                font-size: 0.9rem;
+                            }
+                            @include respond-to-h(xs){
+                                font-size: 0.9rem;
+                            }
+                            @include respond-to-h(xxs){
+                                font-size: 0.9rem;
+                            }
+                            @include respond-to-v(xs){
+                                font-size: 0.9rem;
+                            }
                         }
                     }
+
+                    .details__desc{
+                        width: 100%;
+                        padding: 1vh 0 2.5vh 0;
+
+                        ul{
+                            list-style: none;
+                            padding: 0;
+                            margin: 0;
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: space-between;
+                            width: 100%;
+
+                            li{
+                                border-right: 0.5px solid var(--WhiteBg);
+                                padding: 1vh 2.5vw;
+                                width: 25%;
+
+                                &:nth-of-type(1){
+                                    border-left: 0.5px solid var(--WhiteBg);
+                                }
+
+                                h4{
+                                    font-family: "Sansation-Bold";
+                                    font-size: 1.1rem;
+                                    color: var(--Wtext);
+                                    font-weight: 400;
+                                    margin: 0;
+                                }
+
+                                p{
+                                    font-family: "Sansation-Light";
+                                    font-size: 1rem;
+                                    color: var(--Wtext);
+                                    font-weight: 300;
+                                    margin: 0;
+                                }
+                            }
+                        }
+                    }
+
+                    .shipment{
+                        width: 100%;
+                        padding: 1vh 0 2.5vh 0;
+
+                        .shipment__item{
+                            width: 100%;
+                            padding: 1vh 0;
+                            border-bottom: 0.5px solid var(--WhiteBg);
+
+                            h4{
+                                font-family: "Sansation-Bold";
+                                font-size: 1.1rem;
+                                color: var(--Wtext);
+                                font-weight: 400;
+                                margin: 0;
+                            }
+
+                            p{
+                                font-family: "Sansation-Light";
+                                font-size: 1rem;
+                                color: var(--Wtext);
+                                font-weight: 300;
+                                margin: 0;
+                            }
+                        }
+                    }
+                    
                 }
             }
         }

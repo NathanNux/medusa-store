@@ -37,7 +37,7 @@ export default function Details({ product }: { product: HttpTypes.StoreProduct }
         },
         {
             title: "Hmotnost",
-            content: product.weight ? `${product.weight} kg` : "N/A"
+            content: product.weight ? `${product.weight} g` : "N/A"
         }
     ];
 

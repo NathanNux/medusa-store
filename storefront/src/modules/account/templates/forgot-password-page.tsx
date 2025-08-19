@@ -1,13 +1,26 @@
 "use client"
 
 import { sdk } from "@lib/config"
-import { Button, Toaster, toast } from "@medusajs/ui"
+import { Toaster, toast } from "@medusajs/ui"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
-import { useState } from "react"
+import { useRef, useState } from "react"
+import { motion, useScroll, useTransform } from "framer-motion"
+
+import styles from "./styles/forgot-password.module.scss"
+import Image from "next/image"
+import { useFormStatus } from "react-dom"
 
 export default function RequestResetPassword() {
   const [loading, setLoading] = useState(false)
   const [email, setEmail] = useState("")
+  const ref = useRef<HTMLDivElement>(null)
+
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"]
+  })
+
+  const y = useTransform(scrollYProgress, [0, 1], ["-5%", "10%"])
 
   const handleSubmit = async (
     e: React.FormEvent<HTMLFormElement>
@@ -34,46 +47,127 @@ export default function RequestResetPassword() {
   }
 
   return (
-    <section className="h-[100vh] w-[100vw] flex flex-col items-center justify-center">
-     <div className="w-full h-[20%] gap-5 flex flex-col items-center justify-center">
-        <h1 className="text-2xl font-bold">Reset Password</h1>
-        <div className="w-full h-fit flex flex-col items-center justify-center">
-          <p className="text-base-regular text-ui-fg-base">
-            Enter your email address below to receive a link to reset your password.
-          </p>
-          <p className="text-base-regular text-ui-fg-base">
-            If you don't receive an email, please check your spam folder.
-          </p>
-          <p className="text-base-regular text-ui-fg-base">
-            If you don't have an account, please{" "}
-            <LocalizedClientLink href="/register" className="underline">
-              register
-            </LocalizedClientLink>.
-          </p>
-          <p className="text-base-regular text-ui-fg-base">
-            If you remember your password, you can{" "}
-            <LocalizedClientLink href="/login" className="underline">
-              sign in
-            </LocalizedClientLink>.
-          </p>
-        </div>
-     </div>
-     <div className="w-full h-[30%] flex items-center justify-center">
-        <form onSubmit={handleSubmit} className="flex flex-col items-center gap-4 w-[40%] ">
-          <label>Email</label>
-          <input 
-            placeholder="Email" 
-            type="email" 
-            value={email} 
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-[50%] p-2 border border-gray-300 rounded"
+    <section className={styles.section} ref={ref}>
+      <div className={styles.ImageContainer}>
+        <motion.div
+          className={styles.Image}
+          style={{ y }}
+        >
+          <div className={styles.ImageOverlay}/>
+          <Image 
+            src="/assets/img/img/1.jpg"
+            alt="Description of image"
+            layout="fill"
+            objectFit="cover"
           />
-          <Button variant="secondary" type="submit" disabled={loading}>
-            Request Password Reset
-          </Button>
-        </form>
+        </motion.div>
+      </div>
+      <div className={styles.content}>
+        <div className={styles.header}>
+          <h1 className={styles.title}>Resetovat Heslo</h1>
+          <div className={styles.intro}>
+            <p>
+              Zadejte svou e-mailovou adresu níže a obdržíte odkaz pro obnovení hesla.
+            </p>
+            <p>
+              Pokud e-mail neobdržíte, zkontrolujte prosím svou spamovou složku.
+            </p>
+            <p>
+              Pokud nemáte účet, prosím{" "}
+              <LocalizedClientLink href="/register" className="underline">
+                zaregistrujte se
+              </LocalizedClientLink>.
+            </p>
+            <p>
+              Pokud si pamatujete své heslo, můžete se{" "}
+              <LocalizedClientLink href="/login" className="underline">
+                přihlásit
+              </LocalizedClientLink>.
+            </p>
+          </div>
+      </div>
+      <div className={styles.formWrap}>
+          <form onSubmit={handleSubmit} className={styles.form}>
+            <label>Email</label>
+            <input 
+              placeholder="Email" 
+              type="email" 
+              value={email} 
+              onChange={(e) => setEmail(e.target.value)}
+              className={styles.input}
+            />
+            <ClickButton
+              type="submit"
+              disabled={loading}
+              text={loading ? "Odesílání..." : "Odeslat odkaz pro obnovení hesla"}
+            />
+          </form>
+      </div>
      </div>
      <Toaster />
     </section>
   )
+}
+
+
+type ClickButtonProps = {
+    text: string;
+    onClickAction?: () => void | Promise<void>;
+    ClickAction?: () => void | Promise<void>; // backward compatibility
+    disabled?: boolean;
+    type?: "button" | "submit";
+    className?: string;
+    "data-testid"?: string;
+}
+
+// Base animated button used across the site. Can act as a submit button in forms.
+function ClickButton({ onClickAction, ClickAction, disabled = false, text, type = "button", className, "data-testid": dataTestId }: ClickButtonProps) {
+    const [ isActive , setIsActive ] = useState<boolean>(false);
+    const { pending } = useFormStatus();
+    const isSubmitting = type === "submit" ? pending : false;
+    const isDisabled = disabled || isSubmitting;
+    const handleClick = onClickAction ?? ClickAction;
+
+  return (
+    <div className={className ? `${styles.ClickButton} ${className}` : styles.ClickButton}>
+            <button
+                type={type}
+        className={styles.button}
+                onClick={handleClick}
+                disabled={isDisabled}
+                aria-busy={isDisabled || undefined}
+                onMouseEnter={() => setIsActive(true)}
+                onMouseLeave={() => setIsActive(false)}
+                data-testid={dataTestId}
+            >
+                <motion.div
+          className={styles.slider}
+                    animate={{top: isActive ? "-100%" : "0%"}}
+                    transition={{ duration: 0.5, type: "tween", ease: [0.76, 0, 0.24, 1]}}
+                >
+                    <div
+            className={styles.el}
+                        style={{ backgroundColor: "var(--OButton)" }}
+                    >
+                        <PerspectiveText label={text}/>
+                    </div>
+                    <div
+            className={styles.el}
+                        style={{ backgroundColor: "var(--CharcoalBg)" }}
+                    >
+                        <PerspectiveText label={text} />
+                    </div>
+                </motion.div>
+            </button>
+        </div>
+    )
+}
+
+function PerspectiveText({label}: {label: string}) {
+    return (    
+    <div className={styles.perspectiveText}>
+            <p>{label}</p>
+            <p>{label}</p>
+        </div>
+    )
 }

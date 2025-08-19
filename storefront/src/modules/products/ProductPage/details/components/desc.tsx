@@ -5,8 +5,8 @@ type DescProps = {
 
 const Desc = ({ details }: DescProps) => {
     return (
-        <div className="w-full h-full flex items-center justify-center">
-            <ul className="w-full h-full flex items-center justify-between flex-row">
+        <div className="details__desc">
+            <ul className="details__desc__list">
                 { details.map((item, index) => (
                     <li key={index}>
                         <h4>{item.title}</h4>
