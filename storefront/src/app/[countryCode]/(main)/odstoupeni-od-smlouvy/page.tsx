@@ -30,8 +30,8 @@ const sections: Section[] = [
     id: "prodavajici",
     title: "Prodávající",
     paragraphs: [
-      "YES PRODUCTS s.r.o., se sídlem Husitská 107/3, 130 00 Praha - Žižkov",
-      "identifikační číslo: 03103897, C 227583 vedená u Městského soudu v Praze",
+      `Keramická Zahrada, se sídlem ${process.env.SIDLO_ADRESA}`,
+      `identifikační číslo: ${process.env.IDENTIFIKACNI_CISLO}`,
     ],
   },
   {

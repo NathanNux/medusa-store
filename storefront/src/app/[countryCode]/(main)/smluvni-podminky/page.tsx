@@ -170,12 +170,12 @@ export default function Page() {
 					<p>
 						obchodní společnosti: <strong>Lucie Polanská</strong>,
 						<br />
-						se sídlem <strong>Putim 229, 397 01 Písek</strong>,
+						se sídlem <strong>{process.env.SIDLO_ADRESA}</strong>,
 						<br />
-						identifikační číslo: <strong>03441482</strong>,
+						identifikační číslo: <strong>{process.env.IDENTIFIKACNI_CISLO}</strong>,
 						<br />
 						pro prodej zboží prostřednictvím on-line obchodu umístěného na internetové adrese:
-						<strong> www.keramickazahrada.cz</strong>
+						<strong>{process.env.INTERNETOVA_ADRESA}</strong>
 					</p>
 				</header>
 
