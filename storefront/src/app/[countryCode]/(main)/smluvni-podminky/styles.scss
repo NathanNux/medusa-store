@@ -1,6 +1,11 @@
 .terms {
+  /* Reserve space for the site header so page headings and nav aren't overlapped */
+  --header-offset: 88px; /* mobile/default */
   background: var(--WhiteBg);
   color: var(--ChText);
+
+  /* push content below the fixed header */
+  padding-top: var(--header-offset);
 
   .container {
     max-width: 960px;
@@ -35,8 +40,9 @@
   }
 
   .sidebar {
-    position: sticky;
-    top: 12px;
+  position: sticky;
+  /* keep sidebar below the header as well */
+  top: calc(var(--header-offset) + 12px);
     align-self: start;
     border: 1px solid var(--ButtonBorder);
     border-radius: 8px;
@@ -67,7 +73,8 @@
     }
   }
 
-  .section { scroll-margin-top: 76px; }
+  /* when navigating to anchors, account for the header height */
+  .section { scroll-margin-top: calc(var(--header-offset) + 24px); }
 
   .bullets {
     margin: 8px 0 8px 18px;
@@ -76,6 +83,8 @@
   }
 
   @media (min-width: 768px) {
+    /* header is typically taller on desktop */
+    --header-offset: 112px;
     h1 { font-size: 2rem; }
     .layout {
       grid-template-columns: 240px 1fr;
