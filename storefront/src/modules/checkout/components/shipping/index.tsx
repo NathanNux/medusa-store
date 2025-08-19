@@ -65,11 +65,13 @@ const Shipping: React.FC<ShippingProps> = ({
     Record<string, number>
   >({})
   const [error, setError] = useState<string | null>(null)
+  const [packetaPickupPointSelected, setPacketaPickupPointSelected] = useState<boolean | null>(false)
   const [shippingMethodId, setShippingMethodId] = useState<string | null>(
     cart.shipping_methods?.at(-1)?.shipping_option_id || null
   )
 
   async function onPointSelected(pickupPoint: string) {
+
     await fetch(`${process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL}/store/carts/${cart.id}`, {
       method: "POST",
       headers: {
@@ -88,6 +90,8 @@ const Shipping: React.FC<ShippingProps> = ({
         "x-publishable-api-key": process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY?.toString() || ""
       }
     })
+
+    setPacketaPickupPointSelected(true)
   }
 
   const searchParams = useSearchParams()
@@ -256,6 +260,9 @@ const Shipping: React.FC<ShippingProps> = ({
         // This is a special case for the "Zásilkovna - výdejní místo" option
         console.log("Opening Packeta widget")
         handleOpenWidget()
+      }
+      else{
+        setPacketaPickupPointSelected(false)
       }
       currentId = prev
       return id
@@ -497,7 +504,7 @@ const Shipping: React.FC<ShippingProps> = ({
               className="mt"
               onClick={handleSubmit}
               isLoading={isLoading}
-              disabled={!cart.shipping_methods?.[0]}
+              disabled={!cart.shipping_methods?.[0] || !packetaPickupPointSelected}
               data-testid="submit-delivery-option-button"
             >
               Continue to payment

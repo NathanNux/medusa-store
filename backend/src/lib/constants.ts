@@ -132,3 +132,5 @@ export const COMGATE_TEST = process.env.COMGATE_TEST
 export const COMGATE_COUNTRY = process.env.COMGATE_COUNTRY || 'CZ'
 export const COMGATE_CURRENCY = process.env.COMGATE_CURRENCY || 'CZK'
 export const COMGATE_METHOD = process.env.COMGATE_METHOD || 'ALL'
+
+export const PACKETA_API_KEY = process.env.PACKETA_API_KEY

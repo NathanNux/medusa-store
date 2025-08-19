@@ -2,10 +2,8 @@ import { AbstractFulfillmentProviderService } from "@medusajs/framework/utils"
 import { FulfillmentOption, CreateFulfillmentResult, FulfillmentDTO, FulfillmentItemDTO, FulfillmentOrderDTO } from "@medusajs/framework/types"
 import { randomUUID } from "crypto"
 import { Builder, Parser } from "xml2js"
+import {PACKETA_API_KEY} from "lib/constants"
 
-
-
-const API_KEY="1c80656ab4964dc5"
 
 class PacketaProviderService extends AbstractFulfillmentProviderService {
   static identifier = "packeta"
@@ -22,13 +20,7 @@ class PacketaProviderService extends AbstractFulfillmentProviderService {
   }
 
   async validateFulfillmentData(optionData, data, context) {
-    console.log("Validating fulfillment data with optionData:", optionData, "data:", data, "context:", context);
-    if (context?.shipping_address?.metadata?.packeta_pickup_point) {
       return data
-    }
-    else{
-      throw new Error("Packeta pickup point is required")
-    }
   }
 
 async createFulfillment(
@@ -44,7 +36,7 @@ async createFulfillment(
   
 const requestBody = {
   createPacket: {
-    apiPassword: "1c80656ab4964dc5f40d14a3d2412391",
+    apiPassword: PACKETA_API_KEY.toString(),
     packetAttributes: {
       number: order?.id,
       name: order?.shipping_address?.first_name,
