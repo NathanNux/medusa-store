@@ -10,9 +10,6 @@ type Section = {
   bullets?: string[]
 }
 
-const SIDLO_ADRESA = process.env.SIDLO_ADRESA;
-const IDENTIFIKACNI_CISLO = process.env.IDENTIFIKACNI_CISLO;
-
 const sections: Section[] = [
   {
     id: "uvod",
@@ -33,8 +30,8 @@ const sections: Section[] = [
     id: "prodavajici",
     title: "Prodávající",
     paragraphs: [
-      `Keramická Zahrada, se sídlem ${SIDLO_ADRESA}`,
-      `identifikační číslo: ${IDENTIFIKACNI_CISLO}`,
+      "Keramická Zahrada s.r.o., se sídlem Putim 229, 397 01 Písek",
+      "identifikační číslo: 03441482",
     ],
   },
   {

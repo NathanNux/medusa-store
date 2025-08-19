@@ -10,11 +10,6 @@ type Section = {
   bullets?: string[]
 }
 
-const IBAN = process.env.IBAN;
-const SWIFT_KOD = process.env.SWIFT_KOD;
-const CISLO_UCTU = process.env.CISLO_UCTU;
-
-
 const sections: Section[] = [
   {
     id: "uvod",
@@ -128,9 +123,9 @@ const sections: Section[] = [
     title: "Převodem (možnost platby přes QR kód)",
     paragraphs: [
       "Klasický převod na náš bankovní účet, který zadáte v internetovém bankovnictví. Objednávka může být zpracována až po připsání platby na náš účet.",
-      `Číslo účtu: ${CISLO_UCTU}`,
-      `IBAN: ${IBAN}`,
-      `BIC (SWIFT) kód: ${SWIFT_KOD}`,
+      "Číslo účtu: 2500675505/2010",
+      "IBAN: CZ55 2010 0000 0027 0128 1289",
+      "BIC (SWIFT) kód: FIOBCZPP",
       "Variabilní symbol: vždy číslo objednávky",
     ],
   },
@@ -150,7 +145,7 @@ const sections: Section[] = [
     paragraphs: [
       "I toto se bohužel může stát - klidně nám napište nebo zavolejte a společně dořešíme. Peníze rovněž můžete zaslat přímo na náš bankovní účet.",
       "Jako variabilní symbol vždy uveďte číslo objednávky.",
-      `Číslo účtu: ${CISLO_UCTU}`,
+      "Číslo účtu: 7010757121/2010",
     ],
   },
   {
@@ -209,9 +204,9 @@ const sections: Section[] = [
     title: "Převodem (QR, SK)",
     paragraphs: [
       "Klasický převod na náš bankovní účet, který zadáte v internetovém bankovnictví. Objednávka může být zpracována až po připsání platby na náš účet.",
-      `Číslo účtu: ${CISLO_UCTU}`,
-      `IBAN: ${IBAN}`,
-      `BIC (SWIFT) kód: ${SWIFT_KOD}`,
+      "Číslo účtu: 2701281289/2010",
+      "IBAN: CZ55 2010 0000 0027 0128 1289",
+      "BIC (SWIFT) kód: FIOBCZPP",
       "Variabilní symbol: vždy číslo objednávky",
     ],
   },
