@@ -14,10 +14,13 @@ export const metadata: Metadata = {
 export default async function OrderConfirmedPage(props: Props) {
   const params = await props.params
   const order = await retrieveOrder(params.id).catch(() => null)
+  const cart = params.id
 
-  if (!order) {
+  if (!cart) {
     return notFound()
   }
 
-  return <OrderCompletedTemplate order={order} />
+  return <div className="h-full w-full items-center justify-center">
+    <h1>pending page</h1>
+  </div>
 }

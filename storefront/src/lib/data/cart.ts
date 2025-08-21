@@ -115,10 +115,12 @@ export async function addToCart({
   variantId,
   quantity,
   countryCode,
+  metadata = {}
 }: {
   variantId: string
   quantity: number
   countryCode: string
+  metadata?: Record<string, any>
 }): Promise<{ success: boolean; message?: string }> {
   try {
     if (!variantId) {
@@ -135,15 +137,17 @@ export async function addToCart({
       ...(await getAuthHeaders()),
     }
 
-    await sdk.store.cart.createLineItem(
-      cart.id,
-      {
+    await sdk.client.fetch<{
+      cart: HttpTypes.StoreCart
+    }>(`/store/carts/${cart.id}/line-items-custom`, {
+      method: "POST",
+      body: {
         variant_id: variantId,
         quantity,
+        metadata,
       },
-      {},
-      headers
-    )
+      headers,
+    })
 
     const cartCacheTag = await getCacheTag("carts")
     if (cartCacheTag) revalidateTag(cartCacheTag)
