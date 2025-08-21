@@ -1,8 +1,9 @@
+"use-client"
+
 import { retrieveOrder } from "@lib/data/orders"
 import OrderCompletedTemplate from "@modules/order/templates/order-completed-template"
 import { Metadata } from "next"
 import { notFound, redirect } from "next/navigation"
-import { Redirect } from "next"
 import { useEffect } from "react"
 
 type Props = {
