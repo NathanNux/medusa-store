@@ -1,10 +1,7 @@
-"use client"
-
 import { retrieveOrder } from "@lib/data/orders"
-import OrderCompletedTemplate from "@modules/order/templates/order-completed-template"
+import PaymentCanceled from "@modules/cart/components/payment-canceled"
 import { Metadata } from "next"
-import { notFound, redirect } from "next/navigation"
-import { useEffect } from "react"
+import { notFound } from "next/navigation"
 
 type Props = {
   params: Promise<{ id: string; countryCode: string }>
@@ -24,13 +21,6 @@ export default async function OrderConfirmedPage(props: Props) {
     return notFound()
   }
 
-  useEffect(() => {
-    redirect(`/${countryCode}/checkout?step=payment`)
-  }, [])
 
-
-  return <div className="h-full w-full items-center justify-center">
-    <h1>Order canceled</h1>
-  </div>
+  return <PaymentCanceled countryCode={countryCode} />
 }
-
