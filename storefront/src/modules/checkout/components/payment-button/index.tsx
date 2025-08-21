@@ -258,7 +258,7 @@ const ComgatePaymentButton = ({
             } 
             else {
                 console.log("redirecting to cancelled payment page")
-                redirect(`/${country_code}/cart/${cart.id}/cancelled`)
+                redirect(`/${country_code}/cart/${cart.id}/canceled`)
             }
         }, false);
     }

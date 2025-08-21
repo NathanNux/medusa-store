@@ -80,7 +80,7 @@ class ComgatePaymentProviderService extends AbstractPaymentProvider<ComgateOptio
         category: "PHYSICAL_GOODS_ONLY",
         enableApplePayGooglePay: true,
         url_paid: `${process.env.STOREFRONT_PUBLIC_URL}/cart/${cartId}/success`,
-        url_cancelled: `${process.env.STOREFRONT_PUBLIC_URL}/cart/${cartId}/cancelled`,
+        url_cancelled: `${process.env.STOREFRONT_PUBLIC_URL}/cart/${cartId}/canceled`,
         url_success: `${process.env.STOREFRONT_PUBLIC_URL}/cart/${cartId}/success`,
       }
 
