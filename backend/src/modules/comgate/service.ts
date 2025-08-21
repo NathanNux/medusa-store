@@ -59,6 +59,7 @@ class ComgatePaymentProviderService extends AbstractPaymentProvider<ComgateOptio
   const firstName = context?.customer?.first_name || dataAny.first_name || ""
   const lastName = context?.customer?.last_name || dataAny.last_name || ""
   const fullName = `${firstName} ${lastName}`.trim()
+  const cartId = input.data?.cart_id || null
 
 
     console.log("Comgate initiatePayment input:", input)
@@ -78,9 +79,9 @@ class ComgatePaymentProviderService extends AbstractPaymentProvider<ComgateOptio
         delivery: "HOME_DELIVERY",
         category: "PHYSICAL_GOODS_ONLY",
         enableApplePayGooglePay: true,
-        url_paid: `${process.env.STOREFRONT_PUBLIC_URL}/store/carts/${input.data?.session_id}/payment/success`,
-        url_cancelled: `${process.env.STOREFRONT_PUBLIC_URL}/store/carts/${input.data?.session_id}/payment/cancelled`,
-        url_success: `${process.env.STOREFRONT_PUBLIC_URL}/store/carts/${input.data?.session_id}/payment/success`,
+        url_paid: `${process.env.STOREFRONT_PUBLIC_URL}/cart/${cartId}/success`,
+        url_cancelled: `${process.env.STOREFRONT_PUBLIC_URL}/cart/${cartId}/cancelled`,
+        url_success: `${process.env.STOREFRONT_PUBLIC_URL}/cart/${cartId}/success`,
       }
 
       //redirect to summary url: http://localhost:8000/cz/order/order_01K2D66AE6147SZF9479HZBQR2/confirmed
