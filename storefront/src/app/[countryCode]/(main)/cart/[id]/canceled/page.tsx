@@ -1,4 +1,4 @@
-"use-client"
+"use client"
 
 import { retrieveOrder } from "@lib/data/orders"
 import OrderCompletedTemplate from "@modules/order/templates/order-completed-template"
