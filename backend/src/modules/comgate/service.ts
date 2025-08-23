@@ -79,9 +79,9 @@ class ComgatePaymentProviderService extends AbstractPaymentProvider<ComgateOptio
         delivery: "HOME_DELIVERY",
         category: "PHYSICAL_GOODS_ONLY",
         enableApplePayGooglePay: true,
-        url_paid: `${process.env.STOREFRONT_PUBLIC_URL}/cart/${cartId}/success`,
+        url_paid: `${process.env.STOREFRONT_PUBLIC_URL}/cart/${cartId}/confirmed`,
         url_cancelled: `${process.env.STOREFRONT_PUBLIC_URL}/cart/${cartId}/canceled`,
-        url_success: `${process.env.STOREFRONT_PUBLIC_URL}/cart/${cartId}/success`,
+        url_success: `${process.env.STOREFRONT_PUBLIC_URL}/cart/${cartId}/confirmed`,
       }
 
       //redirect to summary url: http://localhost:8000/cz/order/order_01K2D66AE6147SZF9479HZBQR2/confirmed

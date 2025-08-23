@@ -16,6 +16,7 @@ export default async function OrderConfirmedPage(props: Props) {
   const order = await retrieveOrder(params.id).catch(() => null)
   const cart = params.id
   const countryCode = params.countryCode
+  console.log("Cart:", cart)
 
   if (!cart) {
     return notFound()
