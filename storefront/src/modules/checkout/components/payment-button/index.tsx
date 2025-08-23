@@ -239,22 +239,6 @@ const ComgatePaymentButton = ({
             const { id, status /* refId, ... */ } = e.data;
             if (['PAID', 'AUTHORIZED'].includes(status)) {
                 console.log("Payment successful:", id);
-                // Try to capture on backend first, then place order
-                try {
-                  const cap = await capturePayment({
-                    cartId: cart.id,
-                    paymentSessionId: session?.id,
-                    providerId: session?.provider_id,
-                    payload: { transaction_id: id },
-                  })
-                  if (!cap.success) {
-                    console.warn("capturePayment failed:", cap.message)
-                  }
-                } catch (err) {
-                  console.warn("capturePayment threw:", err)
-                }
-                await placeOrder();
-                console.log(id)
             } 
             else {
                 console.log("redirecting to cancelled payment page")

@@ -33,10 +33,22 @@ class ComgatePaymentProviderService extends AbstractPaymentProvider<ComgateOptio
     this.logger_ = container.logger
   }
 
-    async authorizePayment(data: any): Promise<any> {
-        // Implementujte logiku pro autorizaci platby
-        return { success: true, data }
+  async authorizePayment(data: any): Promise<any> {
+    // Implementujte logiku pro autorizaci platby
+    // Medusa expects a return value that includes a `status` for the PaymentSession
+    // Make a best-effort to derive it from provider data, otherwise default to `authorized`.
+    try {
+            this.logger_?.info?.(`Comgate authorizePayment called: ${JSON.stringify(data)}`)
+    } catch (e) {
+      // ignore logging errors
     }
+
+    const providerStatus = data?.status || data?.state || data?.result || null
+    const status = providerStatus ? String(providerStatus).toUpperCase() : "AUTHORIZED"
+
+    // Return the status and original payload in `data` so Medusa can persist it on the session
+    return { status, data }
+  }
 
     async capturePayment(data: any): Promise<any> {
         // Implementujte logiku pro zachycení platby
