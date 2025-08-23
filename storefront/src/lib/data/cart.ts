@@ -489,6 +489,42 @@ export async function setAddresses(currentState: unknown, formData: FormData) {
  * @param cartId - optional - The ID of the cart to place an order for.
  * @returns The cart object if the order was successful, or null if not.
  */
+
+// ...existing code...
+export async function createOrderFromCart(cartId: string) {
+  if (!cartId) {
+    throw new Error("Missing cartId when creating order")
+  }
+
+  const headers = {
+    ...(await getAuthHeaders()),
+  }
+
+  try {
+    const res = await sdk.client.fetch<{ order?: HttpTypes.StoreOrder }>(`/store/orders`, {
+      method: "POST",
+      headers,
+      body: { cart_id: cartId },
+    })
+
+    // pokud API vrátí order, vrať ho
+    if (res && (res as any).order) {
+      const order = (res as any).order as HttpTypes.StoreOrder
+      const orderCacheTag = await getCacheTag("orders")
+      if (orderCacheTag) revalidateTag(orderCacheTag)
+      // odstraníme cartId cookie, protože cart byl proměněn v order
+      await removeCartId()
+      return order
+    }
+
+    return null
+  } catch (e: any) {
+    // nepřepisujeme původní placeOrder chování, necháme chybu zpracovat volající
+    throw e
+  }
+}
+// ...existing code...
+
 export async function placeOrder(cartId?: string) {
   const id = cartId || (await getCartId())
 
