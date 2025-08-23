@@ -15,6 +15,8 @@ export default async function OrderConfirmedPage(props: Props) {
   if (!params.id) {
     return notFound()
   }
-  await placeOrder(params.id)
-
+  const onPaymentCompleted = async () => {
+      await placeOrder()
+  } 
+  return <div>Order confirmed! Your order ID is {params.id}</div>
 }
