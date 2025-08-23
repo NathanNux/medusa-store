@@ -1,7 +1,6 @@
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
-import { placeOrder } from "@lib/data/cart"
-
+import PaymentConfirmed from "@modules/cart/components/payment-confirmed"
 type Props = {
   params: Promise<{ id: string }>
 }
@@ -15,8 +14,5 @@ export default async function OrderConfirmedPage(props: Props) {
   if (!params.id) {
     return notFound()
   }
-  const onPaymentCompleted = async () => {
-      await placeOrder()
-  } 
-  return <div>Order confirmed! Your order ID is {params.id}</div>
+  return <PaymentConfirmed id={params.id} />
 }
