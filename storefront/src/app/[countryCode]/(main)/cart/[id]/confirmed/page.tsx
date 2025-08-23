@@ -15,11 +15,6 @@ export default async function OrderConfirmedPage(props: Props) {
   if (!params.id) {
     return notFound()
   }
-  const order = await placeOrder(params.id).catch(() => null)
-  console.log("order:", order)
-
-  if (!order) {
-    return notFound()
-  }
+  await placeOrder(params.id)
 
 }
