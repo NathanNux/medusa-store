@@ -1,4 +1,4 @@
-import { AbstractPaymentProvider } from "@medusajs/framework/utils"
+import { AbstractPaymentProvider, PaymentSessionStatus } from "@medusajs/framework/utils"
 import { CancelPaymentInput, CancelPaymentOutput, DeletePaymentInput, DeletePaymentOutput, GetPaymentStatusInput, GetPaymentStatusOutput, InitiatePaymentInput, InitiatePaymentOutput, ProviderWebhookPayload, RetrievePaymentInput, RetrievePaymentOutput, UpdatePaymentInput, UpdatePaymentOutput, WebhookActionResult } from "@medusajs/types"
 import { BigNumber } from "@medusajs/framework/utils"
 import axios from "axios"
@@ -34,20 +34,42 @@ class ComgatePaymentProviderService extends AbstractPaymentProvider<ComgateOptio
   }
 
   async authorizePayment(data: any): Promise<any> {
-    // Implementujte logiku pro autorizaci platby
-    // Medusa expects a return value that includes a `status` for the PaymentSession
-    // Make a best-effort to derive it from provider data, otherwise default to `authorized`.
     try {
-            this.logger_?.info?.(`Comgate authorizePayment called: ${JSON.stringify(data)}`)
+      this.logger_?.info?.(`Comgate authorizePayment called: ${JSON.stringify(data)}`)
     } catch (e) {
       // ignore logging errors
     }
 
-    const providerStatus = data?.status || data?.state || data?.result || null
-    const status = providerStatus ? String(providerStatus).toUpperCase() : "AUTHORIZED"
+    // použij skutečný provider payload pokud je zanořený pod `data`
+    const payload = data?.data ?? data
 
-    // Return the status and original payload in `data` so Medusa can persist it on the session
-    return { status, data }
+    // hledej status na několika místech
+    const providerStatusRaw =
+      data?.status ??
+      data?.state ??
+      data?.result ??
+      payload?.status ??
+      payload?.state ??
+      payload?.result ??
+      null
+
+    const normalizedRaw = providerStatusRaw ? String(providerStatusRaw).trim() : null
+
+    // mapování prověřených hodnot na Medusa-compatibilní stavy (lowercase)
+    const mapStatus = (s: string | null) => {
+      if (!s) return PaymentSessionStatus.AUTHORIZED // fallback (může být změněn na "pending" pokud preferuješ)
+      const k = s.toLowerCase()
+      if (["pending", "waiting"].includes(k)) return PaymentSessionStatus.PENDING
+      if (["authorized", "auth", "ok", "success"].includes(k)) return PaymentSessionStatus.AUTHORIZED
+      if (["captured", "paid"].includes(k)) return PaymentSessionStatus.CAPTURED
+      if (["cancelled", "canceled", "failed", "error"].includes(k)) return PaymentSessionStatus.CANCELED
+      return PaymentSessionStatus.AUTHORIZED
+    }
+
+    const status = mapStatus(normalizedRaw)
+
+    // vrať status a reálný provider payload (ne celou obálku s context), Medusa ji persistuje do PaymentSession.data
+    return { status, data: payload }
   }
 
     async capturePayment(data: any): Promise<any> {
