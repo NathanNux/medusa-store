@@ -30,6 +30,10 @@ export const paymentInfoMap: Record<
     title: "Manual Payment",
     icon: <CreditCard />,
   },
+  pp_comgate_comgate: {
+    title: "Comgate",
+    icon: <CreditCard />
+  },
   // Add more payment providers here
   // NOTE: here you can add any custom payment provider that you want to use
 }
