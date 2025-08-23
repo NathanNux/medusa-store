@@ -35,7 +35,7 @@ class ComgatePaymentProviderService extends AbstractPaymentProvider<ComgateOptio
 
     async authorizePayment(data: any): Promise<any> {
         // Implementujte logiku pro autorizaci platby
-        return { success: true, data }
+        return { success: true, data, status: "authorized" }
     }
 
     async capturePayment(data: any): Promise<any> {
