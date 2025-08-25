@@ -49,7 +49,7 @@ const AccountLayout: React.FC<AccountLayoutProps> = ({
         <div className={s.footer}>
           <div className={s.text}>
             <h3 className={s.title}>Máte dotaz?</h3>
-            <span className={s.text}>
+            <span className={s.textSpan}>
               Nejčastější dotazy a odpovědi najdete na naší stránce
               zákaznického servisu.
             </span>

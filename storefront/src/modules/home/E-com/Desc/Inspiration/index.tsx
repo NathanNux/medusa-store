@@ -78,7 +78,7 @@ export default function Inspiration() {
                         <Image 
                             src={images[0].src}
                             alt={images[0].alt}
-                            sizes="50vw"
+                            sizes="50dvw"
                             className="Inspiration__content__item__img"
                             fill={true}
                             priority={true}
@@ -103,7 +103,7 @@ export default function Inspiration() {
                         <Image 
                             src={images[1].src}
                             alt={images[1].alt}
-                            sizes="50vw"
+                            sizes="50dvw"
                             className="Inspiration__content__item__img"
                             fill={true}
                             priority={true}
@@ -128,7 +128,7 @@ export default function Inspiration() {
                         <Image 
                             src={images[2].src}
                             alt={images[2].alt}
-                            sizes="50vw"
+                            sizes="50dvw"
                             className="Inspiration__content__item__img"
                             fill={true}
                             priority={true}

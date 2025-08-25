@@ -76,7 +76,7 @@ export default function About() {
                                     alt="About Image"
                                     fill={true}
                                     priority={true}
-                                    sizes="50vw"
+                                    sizes="50dvw"
                                 />
                             </motion.div>
                         </motion.div>
@@ -106,7 +106,7 @@ export default function About() {
                                     alt="About Image"
                                     fill={true}
                                     priority={true}
-                                    sizes="50vw"
+                                    sizes="50dvw"
                                 />
                             </motion.div>
                         </motion.div>
@@ -125,7 +125,7 @@ export default function About() {
                                     alt="About Image"
                                     fill={true}
                                     priority={true}
-                                    sizes="50vw"
+                                    sizes="50dvw"
                                 />
                             </motion.div>
                         </motion.div>
@@ -157,7 +157,7 @@ export default function About() {
                                         alt="About Image"
                                         fill={true}
                                         priority={true}
-                                        sizes="50vw"
+                                        sizes="50dvw"
                                     />
                                 </motion.div>
                             </motion.div>

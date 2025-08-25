@@ -51,7 +51,7 @@ function OrderPlacedEmailComponent({ order, email_banner }: OrderPlacedEmailProp
     <Tailwind>
       <Html className="font-sans bg-gray-100">
         <Head />
-        <Preview>Thank you for your order from Medusa</Preview>
+        <Preview>Děkujeme za vaši objednávku z Keramické Zahrady</Preview>
         <Body className="bg-white my-10 mx-auto w-full max-w-2xl">
           {/* Header */}
           <Section className="bg-[#27272a] text-white px-6 py-4">
@@ -61,10 +61,10 @@ function OrderPlacedEmailComponent({ order, email_banner }: OrderPlacedEmailProp
           {/* Thank You Message */}
           <Container className="p-6">
             <Heading className="text-2xl font-bold text-center text-gray-800">
-              Thank you for your order, {order.customer?.first_name || order.shipping_address?.first_name}
+              Děkujeme za vaši objednávku, {order.customer?.first_name || order.shipping_address?.first_name}
             </Heading>
             <Text className="text-center text-gray-600 mt-2">
-              We're processing your order and will notify you when it ships.
+              Vaši objednávku zpracováváme a budeme vás informovat, jakmile bude odeslána.
             </Text>
           </Container>
 
@@ -86,7 +86,7 @@ function OrderPlacedEmailComponent({ order, email_banner }: OrderPlacedEmailProp
                   </Column>
                   <Column align="right">
                     <Link href={email_banner.url} className="font-semibold px-2 text-white underline">
-                      Shop Now
+                      Nakupujte nyní
                     </Link>
                   </Column>
                 </Row>
@@ -97,11 +97,11 @@ function OrderPlacedEmailComponent({ order, email_banner }: OrderPlacedEmailProp
           {/* Order Items */}
           <Container className="px-6">
             <Heading className="text-xl font-semibold text-gray-800 mb-4">
-              Your Items
+              Vaše položky
             </Heading>
             <Row>
               <Column>
-                <Text className="text-sm m-0 my-2 text-gray-500">Order ID: #{order.display_id}</Text>
+                <Text className="text-sm m-0 my-2 text-gray-500">ID objednávky: #{order.display_id}</Text>
               </Column>
             </Row>
             {order.items?.map((item) => (
@@ -131,11 +131,11 @@ function OrderPlacedEmailComponent({ order, email_banner }: OrderPlacedEmailProp
             {/* Order Summary */}
             <Section className="mt-8">
               <Heading className="text-xl font-semibold text-gray-800 mb-4">
-                Order Summary
+                Shrnutí objednávky
               </Heading>
               <Row className="text-gray-600">
                 <Column className="w-1/2">
-                  <Text className="m-0">Subtotal</Text>
+                  <Text className="m-0">Mezisoučet</Text>
                 </Column>
                 <Column className="w-1/2 text-right">
                   <Text className="m-0">
@@ -155,7 +155,7 @@ function OrderPlacedEmailComponent({ order, email_banner }: OrderPlacedEmailProp
               ))}
               <Row className="text-gray-600">
                 <Column className="w-1/2">
-                  <Text className="m-0">Tax</Text>
+                  <Text className="m-0">Daň</Text>
                 </Column>
                 <Column className="w-1/2 text-right">
                   <Text className="m-0">{formatPrice(order.tax_total || 0)}</Text>
@@ -163,7 +163,7 @@ function OrderPlacedEmailComponent({ order, email_banner }: OrderPlacedEmailProp
               </Row>
               <Row className="border-t border-gray-200 mt-4 text-gray-800 font-bold">
                 <Column className="w-1/2">
-                  <Text>Total</Text>
+                  <Text>Celkem</Text>
                 </Column>
                 <Column className="w-1/2 text-right">
                   <Text>{formatPrice(order.total)}</Text>
@@ -175,13 +175,13 @@ function OrderPlacedEmailComponent({ order, email_banner }: OrderPlacedEmailProp
           {/* Footer */}
           <Section className="bg-gray-50 p-6 mt-10">
             <Text className="text-center text-gray-500 text-sm">
-              If you have any questions, reply to this email or contact our support team at support@medusajs.com.
+              Jestli máte nějaké dotazy, odpovězte na tento e-mail nebo kontaktujte náš tým podpory na adrese support@medusajs.com.
             </Text>
             <Text className="text-center text-gray-500 text-sm">
-              Order Token: {order.id}
+              ID objednávky: {order.id}
             </Text>
             <Text className="text-center text-gray-400 text-xs mt-4">
-              © {new Date().getFullYear()} Medusajs, Inc. All rights reserved.
+              © {new Date().getFullYear()} Keramická Zahrada, Lucie Polanská. Všechna práva vyhrazena.
             </Text>
           </Section>
         </Body>

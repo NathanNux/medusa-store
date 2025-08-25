@@ -96,54 +96,54 @@ export const Address = ({
     >
       <div className="flex flex-col gap-8">
         <div className="flex flex-col gap-2">
-          <span className="text-xs">Contact</span>
+          <span className="text-xs">Kontakt</span>
           <div className="flex gap-2">
             <Input
               name="first_name"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
-              placeholder="First name"
+              placeholder="Jméno"
             />
             <Input
               name="last_name"
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
-              placeholder="Last name"
+              placeholder="Příjmení"
             />
           </div>
           <Input
             name="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="Email"
+            placeholder="E-mail"
           />
           <Input
             name="phone"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            placeholder="Phone"
+            placeholder="Telefon"
           />
         </div>
         <div className="flex flex-col gap-2">
-          <span className="text-xs">Delivery</span>
+          <span className="text-xs">Doručení</span>
           <Input
             name="address"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
-            placeholder="Address"
+            placeholder="Adresa"
           />
           <div className="flex gap-2">
             <Input
               name="postal_code"
               value={postalCode}
               onChange={(e) => setPostalCode(e.target.value)}
-              placeholder="Postal code"
+              placeholder="PSČ"
             />
             <Input
               name="city"
               value={city}
               onChange={(e) => setCity(e.target.value)}
-              placeholder="City"
+              placeholder="Město"
             />
           </div>
           <Select
@@ -151,7 +151,7 @@ export const Address = ({
             onValueChange={(value) => setCountry(value)}
           >
             <Select.Trigger>
-              <Select.Value placeholder="Country" />
+              <Select.Value placeholder="Země" />
             </Select.Trigger>
             <Select.Content>
               {options.map((opt) => (
@@ -171,7 +171,7 @@ export const Address = ({
           onClick={handleSubmit}
           className="w-full"
         >
-          Continue
+          Pokračovat
         </Button>
       </div>
     </Card>

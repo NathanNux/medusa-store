@@ -8,6 +8,7 @@ import { useElements, useStripe } from "@stripe/react-stripe-js"
 import React, { useState } from "react"
 import ErrorMessage from "../error-message"
 import { redirect } from "next/navigation"
+import styles from "./style.module.scss"
 
 type PaymentButtonProps = {
   cart: HttpTypes.StoreCart
@@ -49,7 +50,11 @@ const PaymentButton: React.FC<PaymentButtonProps> = ({
           data-testid={dataTestId}/>
       )
     default:
-      return <Button disabled>Select a payment method</Button>
+      return (
+        <div className={styles.root}>
+          <Button disabled>Vyberte způsob platby</Button>
+        </div>
+      )
   }
 }
 
@@ -142,21 +147,24 @@ const StripePaymentButton = ({
   }
 
   return (
-    <>
+    <div className={styles.root}>
       <Button
+        className={styles.button}
         disabled={disabled || notReady}
         onClick={handlePayment}
         size="large"
         isLoading={submitting}
         data-testid={dataTestId}
       >
-        Place order
+        Potvrdit objednávku
       </Button>
-      <ErrorMessage
-        error={errorMessage}
-        data-testid="stripe-payment-error-message"
-      />
-    </>
+      <div className={styles.errorWrap}>
+        <ErrorMessage
+          error={errorMessage}
+          data-testid="stripe-payment-error-message"
+        />
+      </div>
+    </div>
   )
 }
 
@@ -181,21 +189,24 @@ const ManualTestPaymentButton = ({ notReady }: { notReady: boolean }) => {
   }
 
   return (
-    <>
+    <div className={styles.root}>
       <Button
+        className={styles.button}
         disabled={notReady}
         isLoading={submitting}
         onClick={handlePayment}
         size="large"
         data-testid="submit-order-button"
       >
-        Place order
+        Potvrdit objednávku
       </Button>
-      <ErrorMessage
-        error={errorMessage}
-        data-testid="manual-payment-error-message"
-      />
-    </>
+      <div className={styles.errorWrap}>
+        <ErrorMessage
+          error={errorMessage}
+          data-testid="manual-payment-error-message"
+        />
+      </div>
+    </div>
   )
 }
 
@@ -225,7 +236,7 @@ const ComgatePaymentButton = ({
 
   const handlePayment = () => {
     if (!redirectUrl) {
-      setErrorMessage("Comgate redirect URL not found.")
+      setErrorMessage("Přesměrovací URL ComgateComgate nebyla nalezena.")
       return
     }
 
@@ -249,21 +260,24 @@ const ComgatePaymentButton = ({
   }
 
   return (
-    <>
+    <div className={styles.root}>
       <Button
+        className={`${styles.button} ${styles.comgate}`}
         disabled={notReady || !redirectUrl}
         isLoading={submitting}
         onClick={handlePayment}
         size="large"
         data-testid={dataTestId}
       >
-        Pay with Comgate
+        Zaplatit přes Comgate
       </Button>
-      <ErrorMessage
-        error={errorMessage}
-        data-testid="comgate-payment-error-message"
-      />
-    </>
+      <div className={styles.errorWrap}>
+        <ErrorMessage
+          error={errorMessage}
+          data-testid="comgate-payment-error-message"
+        />
+      </div>
+    </div>
   )
 }
 

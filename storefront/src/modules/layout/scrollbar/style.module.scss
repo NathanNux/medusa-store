@@ -1,8 +1,10 @@
+@use "../../../styles/mixins.scss" as *;
+
 .scrollbarProgress{
     position: fixed;
-    bottom: 0vh;
+    bottom: 0dvh;
     left: 0;
-    width: 100vw;
+    width: 100dvw;
     height: 5px;
     z-index: 1000;
     pointer-events: none;
@@ -13,9 +15,4 @@
     /* ensure hidden when no progress due to scaleX */
     will-change: transform;
 
-    @media (max-width: 768px) {
-        width: 36vw;
-        bottom: 1.5vh;
-        right: 4vw;
-    }
 }

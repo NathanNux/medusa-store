@@ -112,7 +112,7 @@ export default function Entry () {
                                     className="ECom__Entry__content__images__upper__item__img"
                                     fill={true}
                                     priority={index < 3}
-                                    sizes="50vw"
+                                    sizes="50dvw"
                                 />
                            </motion.div>
                         </div>
@@ -133,7 +133,7 @@ export default function Entry () {
                                     className="ECom__Entry__content__images__upper__item__img"
                                     fill={true}
                                     priority={index < 3}
-                                    sizes="50vw"
+                                    sizes="50dvw"
                                 />
                             </motion.div>
                         </div>

@@ -10,6 +10,7 @@
     cursor: pointer;
     border-radius: 25px;
     overflow: hidden;
+    box-shadow: 0 2px 8px var(--ButtonBorder);
 
     .slider{
         position: relative;

@@ -2,10 +2,11 @@
 
 import { useActionState } from "react"
 import { createTransferRequest } from "@lib/data/orders"
-import { Text, Heading, Input, Button, IconButton, Toaster } from "@medusajs/ui"
+import { Input, IconButton } from "@medusajs/ui"
 import { SubmitButton } from "@modules/checkout/components/submit-button"
 import { CheckCircleMiniSolid, XCircleSolid } from "@medusajs/icons"
 import { useEffect, useState } from "react"
+import s from "./style.module.scss"
 
 export default function TransferRequestForm() {
   const [showSuccess, setShowSuccess] = useState(false)
@@ -23,56 +24,42 @@ export default function TransferRequestForm() {
   }, [state.success, state.order])
 
   return (
-    <div className="flex flex-col gap-y-4 w-full">
-      <div className="grid sm:grid-cols-2 items-center gap-x-8 gap-y-4 w-full">
-        <div className="flex flex-col gap-y-1">
-          <Heading level="h3" className="text-lg text-neutral-950">
-            Order transfers
-          </Heading>
-          <Text className="text-base-regular text-neutral-500">
-            Can&apos;t find the order you are looking for?
-            <br /> Connect an order to your account.
-          </Text>
+    <div className={s.root}>
+      <div className={s.headerRow}>
+        <div className={s.intro}>
+          <h3 className={s.title}>Převod objednávek</h3>
+          <p className={s.desc}>
+            Nemůžete najít objednávku, kterou hledáte?
+            <br /> Propojte objednávku se svým účtem.
+          </p>
         </div>
-        <form
-          action={formAction}
-          className="flex flex-col gap-y-1 sm:items-end"
-        >
-          <div className="flex flex-col gap-y-2 w-full">
-            <Input className="w-full" name="order_id" placeholder="Order ID" />
-            <SubmitButton
-              variant="secondary"
-              className="w-fit whitespace-nowrap self-end"
-            >
-              Request transfer
+        <form action={formAction} className={s.form}>
+          <div className={s.formInner}>
+            <Input className={s.input} name="order_id" placeholder="ID objednávky" />
+            <SubmitButton variant="secondary" className="w-fit whitespace-nowrap self-end">
+              Požádat o převod
             </SubmitButton>
           </div>
         </form>
       </div>
       {!state.success && state.error && (
-        <Text className="text-base-regular text-rose-500 text-right">
-          {state.error}
-        </Text>
+        <p className={s.error}>{state.error}</p>
       )}
       {showSuccess && (
-        <div className="flex justify-between p-4 bg-neutral-50 shadow-borders-base w-full self-stretch items-center">
-          <div className="flex gap-x-2 items-center">
-            <CheckCircleMiniSolid className="w-4 h-4 text-emerald-500" />
-            <div className="flex flex-col gap-y-1">
-              <Text className="text-medim-pl text-neutral-950">
-                Transfer for order {state.order?.id} requested
-              </Text>
-              <Text className="text-base-regular text-neutral-600">
-                Transfer request email sent to {state.order?.email}
-              </Text>
+        <div className={s.success}>
+          <div className={s.successLeft}>
+            <CheckCircleMiniSolid className={s.iconSuccess} />
+            <div className={s.successTextWrap}>
+              <p className={s.successTitle}>
+                Požadavek na převod pro objednávku {state.order?.id} byl odeslán
+              </p>
+              <p className={s.successDesc}>
+                E-mail s žádostí o převod byl odeslán na {state.order?.email}
+              </p>
             </div>
           </div>
-          <IconButton
-            variant="transparent"
-            className="h-fit"
-            onClick={() => setShowSuccess(false)}
-          >
-            <XCircleSolid className="w-4 h-4 text-neutral-500" />
+          <IconButton variant="transparent" className={s.closeBtn} onClick={() => setShowSuccess(false)}>
+            <XCircleSolid className={s.iconClose} />
           </IconButton>
         </div>
       )}

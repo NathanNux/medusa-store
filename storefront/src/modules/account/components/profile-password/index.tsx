@@ -5,6 +5,7 @@ import Input from "@modules/common/components/input"
 import AccountInfo from "../account-info"
 import { HttpTypes } from "@medusajs/types"
 import { toast } from "@medusajs/ui"
+import s from "./style.module.scss"
 
 type MyInformationProps = {
   customer: HttpTypes.StoreCustomer
@@ -14,8 +15,9 @@ const ProfilePassword: React.FC<MyInformationProps> = ({ customer }) => {
   const [successState, setSuccessState] = React.useState(false)
 
   // TODO: Add support for password updates
+  // WIP: Toto dodělat. 
   const updatePassword = async () => {
-    toast.info("Password update is not implemented")
+    toast.info("Aktualizování hesel není ještě implementováno. Pracuje se na tom.")
   }
 
   const clearState = () => {
@@ -23,15 +25,11 @@ const ProfilePassword: React.FC<MyInformationProps> = ({ customer }) => {
   }
 
   return (
-    <form
-      action={updatePassword}
-      onReset={() => clearState()}
-      className="w-full"
-    >
+    <form action={updatePassword} onReset={() => clearState()} className={s.root}>
       <AccountInfo
-        label="Password"
+        label="Heslo"
         currentInfo={
-          <span>The password is not shown for security reasons</span>
+          <span>Heslo není z bezpečnostních důvodů zobrazeno</span>
         }
         isSuccess={successState}
         isError={false}
@@ -39,23 +37,23 @@ const ProfilePassword: React.FC<MyInformationProps> = ({ customer }) => {
         clearState={clearState}
         data-testid="account-password-editor"
       >
-        <div className="grid grid-cols-2 gap-4">
+        <div className={s.gridTwo}>
           <Input
-            label="Old password"
+            label="Staré heslo"
             name="old_password"
             required
             type="password"
             data-testid="old-password-input"
           />
           <Input
-            label="New password"
+            label="Nové heslo"
             type="password"
             name="new_password"
             required
             data-testid="new-password-input"
           />
           <Input
-            label="Confirm password"
+            label="Potvrdit heslo"
             type="password"
             name="confirm_password"
             required

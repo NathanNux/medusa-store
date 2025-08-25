@@ -1,4 +1,5 @@
 import { Metadata } from "next"
+import s from "../styles/orders.module.scss"
 
 import OrderOverview from "@modules/account/components/order-overview"
 import { notFound } from "next/navigation"
@@ -20,17 +21,17 @@ export default async function Orders() {
   }
 
   return (
-    <div className="w-full" data-testid="orders-page-wrapper">
-      <div className="mb-8 flex flex-col gap-y-4">
-        <h1 className="text-2xl-semi">Orders</h1>
-        <p className="text-base-regular">
+    <div className={s.root} data-testid="orders-page-wrapper">
+      <div className={s.header}>
+        <h1 className={s.title}>Orders</h1>
+        <p className={s.desc}>
           View your previous orders and their status. You can also create
           returns or exchanges for your orders if needed.
         </p>
       </div>
-      <div>
+      <div className={s.body}>
         <OrderOverview orders={orders} />
-        <Divider className="my-16" />
+        <Divider className={s.dividerSpacing} />
         <TransferRequestForm />
       </div>
     </div>

@@ -1,7 +1,6 @@
 // this folder constants are used to store static data like icons, links, etc.
 // it will later be moved to sanity studio for easier management
 
-import { P } from "framer-motion/dist/types.d-Bq-Qm38R";
 
 export const iconLinks = [
     {
@@ -9,24 +8,28 @@ export const iconLinks = [
         alt: "search Icon button",
         width: 24,
         height: 24,
+        href: "/search"
     },
     {
         src: "/assets/icons/bookmark.svg",
         alt: "bookmark Icon button",
         width: 24,
         height: 24,
+        href: "/account"
     },
     {
         src: "/assets/icons/cart.svg",
         alt: "cart Icon button",
         width: 24,
         height: 24,
+        href: "/cart"
     },
     {
         src: "/assets/icons/user.svg",
         alt: "user Icon button",
         width: 30,
         height: 30,
+        href: "/account"
     },
 ];
 

@@ -1,5 +1,6 @@
 import { HttpTypes } from "@medusajs/types"
-import { Table, Text } from "@medusajs/ui"
+import { Table } from "@medusajs/ui"
+import styles from "../styles/item.module.scss"
 
 import LineItemOptions from "@modules/common/components/line-item-options"
 import LineItemPrice from "@modules/common/components/line-item-price"
@@ -13,33 +14,30 @@ type ItemProps = {
 
 const Item = ({ item, currencyCode }: ItemProps) => {
   return (
-    <Table.Row className="w-full" data-testid="product-row">
-      <Table.Cell className="!pl-0 p-4 w-24">
-        <div className="flex w-16">
+    <Table.Row className={styles.row} data-testid="product-row">
+      <Table.Cell className={styles.cellThumb}>
+        <div className={styles.thumbWrap}>
           <Thumbnail thumbnail={item.thumbnail} size="square" />
         </div>
       </Table.Cell>
 
-      <Table.Cell className="text-left">
-        <Text
-          className="txt-medium-plus text-ui-fg-base"
-          data-testid="product-name"
-        >
+      <Table.Cell className={styles.cellInfo}>
+        <p className={styles.name} data-testid="product-name">
           {item.product_title}
-        </Text>
+        </p>
         <LineItemOptions variant={item.variant} data-testid="product-variant" />
         <div className="text-sm text-ui-fg-muted">
-          {!!item.metadata?.width && <div>Width: {item.metadata.width as number}cm</div>}
-          {!!item.metadata?.height && <div>Height: {item.metadata.height as number}cm</div>}
+          {!!item.metadata?.width && <div>Šířka: {item.metadata.width as number}cm</div>}
+          {!!item.metadata?.height && <div>Výška: {item.metadata.height as number}cm</div>}
         </div>
       </Table.Cell>
 
-      <Table.Cell className="!pr-0">
-        <span className="!pr-0 flex flex-col items-end h-full justify-center">
-          <span className="flex gap-x-1 ">
-            <Text className="text-ui-fg-muted">
+      <Table.Cell className={styles.cellPrice}>
+        <span className={styles.priceWrap}>
+          <span className={styles.unitWrap}>
+            <span className={styles.quantity}>
               <span data-testid="product-quantity">{item.quantity}</span>x{" "}
-            </Text>
+            </span>
             <LineItemUnitPrice
               item={item}
               style="tight"

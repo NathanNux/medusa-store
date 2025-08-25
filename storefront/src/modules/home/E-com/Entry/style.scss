@@ -1,47 +1,47 @@
 @use "../../../../styles/mixins.scss" as *;
 
 .ECom__Entry{
-    width: 100vw;
-    height: 150vh;
+    width: 100dvw;
+    height: 150dvh;
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     background-color: var(--OliveBg);
-    padding: 10vh 5vw;
-    gap: 2.5vh;
+    padding: 10dvh 5dvw;
+    gap: 2.5dvh;
 
     @include respond-to-h(mdt){
-        height: 125vh;
+        height: 125dvh;
     }
     @include respond-to-h(sm){
-        height: 125vh;
+        height: 125dvh;
     }
     @include respond-to-h(xs){
-        height: 175vh;
+        height: 175dvh;
     }
     @include respond-to-h(xxs){
-        height: 160vh;
+        height: 160dvh;
     }
 
     @include respond-to-v(lg){
-        height: 75vh;
+        height: 75dvh;
     }
     @include respond-to-v(md){
-        height: 75vh;
+        height: 75dvh;
     }
     @include respond-to-v(s){
-        height: 60vh;
-        padding: 5vw;
+        height: 60dvh;
+        padding: 5dvw;
     }
     @include respond-to-v(sm){
-        height: 60vh;
-        padding: 5vw;
+        height: 60dvh;
+        padding: 5dvw;
     }
     @include respond-to-v(xs){
-        height: 70vh;
-        padding: 5vw;
+        height: 70dvh;
+        padding: 5dvw;
     }
 
     .ECom__Entry__title{
@@ -52,29 +52,29 @@
         align-items: center;
         justify-content: center;
         flex-direction: column;
-        gap: 2vh;
+        gap: 2dvh;
         z-index: 1;
 
         @include respond-to-v(lg){
             height: 20%;
-            gap: 0.5vh;
+            gap: 0.5dvh;
         }
         @include respond-to-v(md){
             height: 25%;
-            gap: 0.5vh;
+            gap: 0.5dvh;
         }
 
         @include respond-to-v(s){
             height: 30%;
-            gap: 0.5vh;
+            gap: 0.5dvh;
         }
         @include respond-to-v(sm){
             height: 30%;
-            gap: 0.5vh;
+            gap: 0.5dvh;
         }
         @include respond-to-v(xs){
             height: 30%;
-            gap: 0.5vh;
+            gap: 0.5dvh;
         }
         h2{
             font-family: "OoohBaby-Regular";
@@ -137,11 +137,11 @@
             z-index: 0;
 
             .ECom__Entry__Gradient{
-                width: 100vw;
+                width: 100dvw;
                 height: 100%;
                 position: absolute;
-                top: -40vh;
-                left: 55vh;
+                top: -40dvh;
+                left: 55dvh;
                 z-index: 0;
                 overflow: hidden;
 
@@ -154,14 +154,14 @@
                     opacity: 0.6;
 
                     g{
-                        width: 50vw;
-                        height: 50vh;
+                        width: 50dvw;
+                        height: 50dvh;
                     }
                 }
 
                 &:nth-child(2){
-                    top: 40vh;
-                    left: -30vw;
+                    top: 40dvh;
+                    left: -30dvw;
                 }
             }
         }
@@ -174,28 +174,28 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.5vw;
+            gap: 0.5dvw;
             overflow: hidden;
 
             .ECom__Entry__content__images__upper__item{
-                width: 25vw;
-                height: 50vh;
+                width: 25dvw;
+                height: 50dvh;
                 position: relative;
                 @include respond-to-h(mdt){
-                    height: 40vh;
+                    height: 40dvh;
                 }
                 @include respond-to-h(sm){
-                    height: 40vh;
+                    height: 40dvh;
                 }
                 @include respond-to-h(xs){
-                    height: 60vh;
+                    height: 60dvh;
                 }
 
                 @include respond-to-v(lg){
-                    height: 20vh;
+                    height: 20dvh;
                 }
                 @include respond-to-v(md){
-                    height: 20vh;
+                    height: 20dvh;
                 }
                 @include respond-to-v(s){
                     display: none;
@@ -238,38 +238,38 @@
                 }
                 &:nth-child(2){
                     z-index: 2;
-                    width: 50vw;
-                    height: 50vh;
+                    width: 50dvw;
+                    height: 50dvh;
                     @include respond-to-h(mdt){
-                        height: 40vh;
+                        height: 40dvh;
                     }
                     @include respond-to-h(sm){
-                        height: 40vh;
+                        height: 40dvh;
                     }
                     @include respond-to-h(xs){
-                        height: 60vh;
+                        height: 60dvh;
                     }
 
 
                     @include respond-to-v(lg){
-                        height: 20vh;
+                        height: 20dvh;
                     }
                     @include respond-to-v(md){
-                        height: 20vh;
+                        height: 20dvh;
                     }
                     @include respond-to-v(s){
                         width: 100%;
-                        height: 25vh;
+                        height: 25dvh;
                         display: flex;
                     }
                      @include respond-to-v(sm){
                         width: 100%;
-                        height: 25vh;
+                        height: 25dvh;
                         display: flex;
                     }
                      @include respond-to-v(xs){
                         width: 100%;
-                        height: 27.5vh;
+                        height: 27.5dvh;
                         display: flex;
                     }
                 }
@@ -277,8 +277,8 @@
         }
 
         .ECom__Entry__content__text{
-            width: 15vw;
-            height: 15vw;
+            width: 15dvw;
+            height: 15dvw;
             position: absolute;
             top: 50%;
             left: 50%;
@@ -329,37 +329,37 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.5vw;
+            gap: 0.5dvw;
 
             .ECom__Entry__content__images__upper__item{
-                width: 50vw;
-                height: 50vh;
+                width: 50dvw;
+                height: 50dvh;
                 position: relative;
                 overflow: hidden;
                 @include respond-to-h(mdt){
-                    height: 40vh;
+                    height: 40dvh;
                 }
                 @include respond-to-h(sm){
-                    height: 40vh;
+                    height: 40dvh;
                 }
                 @include respond-to-h(xs){
-                    height: 60vh;
+                    height: 60dvh;
                 }
 
                 @include respond-to-v(lg){
-                    height: 20vh;
+                    height: 20dvh;
                 }
                 @include respond-to-v(md){
-                    height: 20vh;
+                    height: 20dvh;
                 }
                 @include respond-to-v(s){
-                    height: 15vh;
+                    height: 15dvh;
                 }
                 @include respond-to-v(sm){
-                    height: 15vh;
+                    height: 15dvh;
                 }
                 @include respond-to-v(xs){
-                    height: 17.5vh;
+                    height: 17.5dvh;
                 }
                 .ECom__Entry__content__images__upper__item__img__container{
                     position: relative;

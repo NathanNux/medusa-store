@@ -1,49 +1,59 @@
 @use "../../../../styles/mixins.scss" as *;
 
 .details{
-    width: 100vw;
-    min-height: 50vh;
-    padding: 10vh 0vw 15vh 0;
+    width: 100dvw;
+    min-height: 50dvh;
+    padding: 10dvh 0dvw 15dvh 0;
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
     background-color: var(--OliveBg);
-    gap: 1.5vh;
+    gap: 1.5dvh;
     overflow: hidden;
 
     @include respond-to-h(xs){
-        height: 80vh;
+        height: 80dvh;
     }
     @include respond-to-h(xxs){
-        height: 80vh;
+        height: 80dvh;
     }
     @include respond-to-v(lg){
-        height: 50vh;
+        height: 50dvh;
     }
     @include respond-to-v(md){
-        height: 60vh;
+        height: 60dvh;
+    }
+
+    @include respond-to-v(s){
+        min-height: 140dvh;
+    }
+    @include respond-to-v(sm){
+        min-height: 140dvh;
+    }
+    @include respond-to-v(xs){
+        min-height: 160dvh;
     }
 
     .details__title{
         width: 100%;
-        height: 7.5vh;
+        height: 7.5dvh;
         position: relative;
         display: flex;
         align-items: center;
         justify-content: flex-start;
-        padding: 0 2.5vw;
+        padding: 0 2.5dvw;
 
         @include respond-to-h(mdt){
-            height: 5vh;
+            height: 5dvh;
         }
 
         @include respond-to-h(xs){
-            height: 15vh;
+            height: 15dvh;
         }
         @include respond-to-h(xxs){
-            height: 15vh;
+            height: 15dvh;
         }
 
         h2{
@@ -87,14 +97,14 @@
 
     .details__content{
         width: 100%;
-        height: 60vh;
+        height: 60dvh;
         position: relative;
         display: flex;
         align-items: flex-start;
         justify-content: center;
         flex-direction: column;
         @include respond-to-h(sm){
-            height: 80vh;
+            height: 80dvh;
         }
 
         .details__content__list{
@@ -115,7 +125,7 @@
                 justify-content: center;
                 flex-direction: column;
                 border-top: 1px solid var(--WhiteBg);
-                padding: 0 2.5vw;
+                padding: 0 2.5dvw;
                 @include respond-to-v(s){
                     width: 90%;
                 }
@@ -134,7 +144,7 @@
                     align-items: center;
                     justify-content: space-between;
                     flex-direction: row;
-                    padding: 1vh 0;
+                    padding: 1dvh 0;
 
                     h3{
                         font-family: "Sansation-Light";
@@ -218,7 +228,7 @@
 
                     .info{
                         width: 100%;
-                        padding: 1vh 0 2.5vh 0;
+                        padding: 1dvh 0 2.5dvh 0;
 
                         p{
                             font-family: "Sansation-Light";
@@ -229,7 +239,7 @@
                             font-weight: 300;
                             margin: 0;
                             text-align: left;
-                            padding: 1vh 0 2.5vh 0;
+                            padding: 1dvh 0 2.5dvh 0;
                             @include respond-to-h(sm){
                                 font-size: 0.9rem;
                             }
@@ -247,7 +257,7 @@
 
                     .details__desc{
                         width: 100%;
-                        padding: 1vh 0 2.5vh 0;
+                        padding: 1dvh 0 2.5dvh 0;
 
                         ul{
                             list-style: none;
@@ -258,9 +268,30 @@
                             justify-content: space-between;
                             width: 100%;
 
+                            @include respond-to-v(s){
+                                flex-wrap: wrap;
+                                align-items: flex-start;
+                                justify-content: flex-start;
+
+                            }
+                            @include respond-to-v(sm){
+                                flex-wrap: wrap;
+                                align-items: flex-start;
+                                justify-content: flex-start;
+
+                            }
+
+                            @include respond-to-v(xs){
+                                flex-wrap: wrap;
+                                align-items: flex-start;
+                                justify-content: flex-start;
+
+                            }
+
+
                             li{
                                 border-right: 0.5px solid var(--WhiteBg);
-                                padding: 1vh 2.5vw;
+                                padding: 1dvh 2.5dvw;
                                 width: 25%;
 
                                 &:nth-of-type(1){
@@ -288,11 +319,11 @@
 
                     .shipment{
                         width: 100%;
-                        padding: 1vh 0 2.5vh 0;
+                        padding: 1dvh 0 2.5dvh 0;
 
                         .shipment__item{
                             width: 100%;
-                            padding: 1vh 0;
+                            padding: 1dvh 0;
                             border-bottom: 0.5px solid var(--WhiteBg);
 
                             h4{

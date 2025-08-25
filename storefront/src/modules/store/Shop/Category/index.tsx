@@ -27,8 +27,8 @@ export default function Categories({ category, setCategoryAction, categories }: 
     // Mobile menu animation
     const menu = {
         open: {
-            width: isMobile ? "90vw" : "400px",
-            height: isMobile ? "65vh" : "600px",
+            width: isMobile ? "90dvw" : "400px",
+            height: isMobile ? "65dvh" : "65dvh",
             transition: { duration: 0.75, type: "tween" as const, ease: [0.76, 0, 0.24, 1] as Easing}
         },
         closed: {

@@ -2,15 +2,25 @@
 
 .button{
     position: absolute;
-    top: 1.5vh;
-    right: 1.5vw;
+    top: 1.5dvh;
+    right: 1.5dvw;
     width: 100px;
     height: 40px;
     cursor: pointer;
     border-radius: 25px;
     overflow: hidden;
+    box-shadow: 0 2px 8px var(--ButtonBorder); // subtle shadow here
+
 
     @include respond-to-v(s){
+        width: 90px;
+        height: 35px;
+    }
+    @include respond-to-v(sm){
+        width: 90px;
+        height: 35px;
+    }
+    @include respond-to-v(xs){
         width: 90px;
         height: 35px;
     }
@@ -26,6 +36,7 @@
             background-color: var(--OButton);
             p{
                 margin: 0px;
+                color: var(--Wtext);
             }
             &:nth-of-type(2){
                 background-color: var(--CharcoalBg);

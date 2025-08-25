@@ -101,8 +101,8 @@ export default function Footer() {
                 <div className="footer__head__bg">
                     <svg
                         className="divider"
-                        width="100vw"
-                        height="4vw"
+                        width="100dvw"
+                        height="4dvw"
                         viewBox="0 0 100 4"
                         style={{ display: "block",zIndex: 1 }}
                         xmlns="http://www.w3.org/2000/svg"
@@ -119,8 +119,8 @@ export default function Footer() {
                     <div className="footer__head__bg__overlay">
                         <svg
                             className="divider"
-                            width="10vw"
-                            height="10vw"
+                            width="10dvw"
+                            height="10dvw"
                             viewBox="0 0 100 4"
                             style={{ display: "block", zIndex: 1 }}
                             xmlns="http://www.w3.org/2000/svg"
@@ -141,8 +141,8 @@ export default function Footer() {
                     </div>
                     <svg
                         className="divider"
-                        width="100vw"
-                        height="4vw"
+                        width="100dvw"
+                        height="4dvw"
                         viewBox="0 0 100 4"
                         style={{ display: "block", zIndex: 1 }}
                         xmlns="http://www.w3.org/2000/svg"

@@ -21,22 +21,22 @@ function PasswordResetEmailComponent({ reset_url, email }: PasswordResetEmailPro
   return (
     <Html>
       <Head />
-      <Preview>Reset your password</Preview>
+      <Preview>Zresetujte své heslo</Preview>
       <Tailwind>
         <Body className="bg-white my-auto mx-auto font-sans px-2">
           <Container className="border border-solid border-[#eaeaea] rounded my-[40px] mx-auto p-[20px] max-w-[465px]">
             <Section className="mt-[32px]">
               <Heading className="text-black text-[24px] font-normal text-center p-0 my-[30px] mx-0">
-                Reset Your Password
+                Zresetujte své heslo
               </Heading>
             </Section>
 
             <Section className="my-[32px]">
               <Text className="text-black text-[14px] leading-[24px]">
-                Hello{email ? ` ${email}` : ""},
+                Dobrý den,{email ? ` ${email}` : ""},
               </Text>
               <Text className="text-black text-[14px] leading-[24px]">
-                We received a request to reset your password. Click the button below to create a new password for your account.
+                Obdrželi jsme žádost o resetování vašeho hesla. Klikněte na tlačítko níže a vytvořte si nové heslo pro svůj účet.
               </Text>
             </Section>
 
@@ -45,13 +45,13 @@ function PasswordResetEmailComponent({ reset_url, email }: PasswordResetEmailPro
                 className="bg-[#000000] rounded text-white text-[12px] font-semibold no-underline text-center px-5 py-3"
                 href={reset_url}
               >
-                Reset Password
+                Zresetujte heslo
               </Button>
             </Section>
 
             <Section className="my-[32px]">
               <Text className="text-black text-[14px] leading-[24px]">
-                Or copy and paste this URL into your browser:
+                Nebo zkopírujte a vložte tuto adresu URL do svého prohlížeče:
               </Text>
               <Link
                 href={reset_url}
@@ -63,16 +63,16 @@ function PasswordResetEmailComponent({ reset_url, email }: PasswordResetEmailPro
 
             <Section className="my-[32px]">
               <Text className="text-[#666666] text-[12px] leading-[24px]">
-                This password reset link will expire soon for security reasons.
+                Tento odkaz pro resetování hesla brzy vyprší z bezpečnostních důvodů.
               </Text>
               <Text className="text-[#666666] text-[12px] leading-[24px] mt-2">
-                If you didn't request a password reset, you can safely ignore this email. Your password will remain unchanged.
+                Pokud jste o resetování hesla nežádali, můžete tento e-mail bezpečně ignorovat. Vaše heslo zůstane nezměněno.
               </Text>
             </Section>
 
             <Section className="mt-[32px] pt-[20px] border-t border-solid border-[#eaeaea]">
               <Text className="text-[#666666] text-[12px] leading-[24px]">
-                For security reasons, never share this reset link with anyone. If you're having trouble with the button above, copy and paste the URL into your web browser.
+                Z bezpečnostních důvodů nikdy nesdílejte tento odkaz na resetování s nikým. Pokud máte potíže s tlačítkem výše, zkopírujte a vložte adresu URL do svého webového prohlížeče.
               </Text>
             </Section>
           </Container>

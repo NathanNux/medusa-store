@@ -56,7 +56,7 @@ export default function Shaping(){
                             src= "/assets/img/img/5.jpg"
                             alt="Shaping Image"
                             fill={true}
-                            sizes="50vw"
+                            sizes="50dvw"
                             className="Shaping__image__img"
                             priority={true}
                         />

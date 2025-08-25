@@ -1,6 +1,6 @@
 import { convertToLocale } from "@lib/util/money"
 import { HttpTypes } from "@medusajs/types"
-import { Heading, Text } from "@medusajs/ui"
+import styles from "../styles/shipping-details.module.scss"
 
 import Divider from "@modules/common/components/divider"
 
@@ -10,52 +10,34 @@ type ShippingDetailsProps = {
 
 const ShippingDetails = ({ order }: ShippingDetailsProps) => {
   return (
-    <div>
-      <Heading level="h2" className="flex flex-row text-3xl-regular my-6">
-        Delivery
-      </Heading>
-      <div className="flex items-start gap-x-8">
-        <div
-          className="flex flex-col w-1/3"
-          data-testid="shipping-address-summary"
-        >
-          <Text className="txt-medium-plus text-ui-fg-base mb-1">
-            Shipping Address
-          </Text>
-          <Text className="txt-medium text-ui-fg-subtle">
-            {order.shipping_address?.first_name}{" "}
-            {order.shipping_address?.last_name}
-          </Text>
-          <Text className="txt-medium text-ui-fg-subtle">
-            {order.shipping_address?.address_1}{" "}
-            {order.shipping_address?.address_2}
-          </Text>
-          <Text className="txt-medium text-ui-fg-subtle">
-            {order.shipping_address?.postal_code},{" "}
-            {order.shipping_address?.city}
-          </Text>
-          <Text className="txt-medium text-ui-fg-subtle">
+    <div className={styles.root}>
+      <h2 className={styles.title}>Doprava</h2>
+      <div className={styles.row}>
+        <div className={styles.col} data-testid="shipping-address-summary">
+          <p className={styles.label}>Adresa doručení</p>
+          <p className={styles.value}>
+            {order.shipping_address?.first_name} {order.shipping_address?.last_name}
+          </p>
+          <p className={styles.value}>
+            {order.shipping_address?.address_1} {order.shipping_address?.address_2}
+          </p>
+          <p className={styles.value}>
+            {order.shipping_address?.postal_code}, {order.shipping_address?.city}
+          </p>
+          <p className={styles.value}>
             {order.shipping_address?.country_code?.toUpperCase()}
-          </Text>
+          </p>
         </div>
 
-        <div
-          className="flex flex-col w-1/3 "
-          data-testid="shipping-contact-summary"
-        >
-          <Text className="txt-medium-plus text-ui-fg-base mb-1">Contact</Text>
-          <Text className="txt-medium text-ui-fg-subtle">
-            {order.shipping_address?.phone}
-          </Text>
-          <Text className="txt-medium text-ui-fg-subtle">{order.email}</Text>
+        <div className={styles.col} data-testid="shipping-contact-summary">
+          <p className={styles.label}>Kontaktní údaje</p>
+          <p className={styles.value}>{order.shipping_address?.phone}</p>
+          <p className={styles.value}>{order.email}</p>
         </div>
 
-        <div
-          className="flex flex-col w-1/3"
-          data-testid="shipping-method-summary"
-        >
-          <Text className="txt-medium-plus text-ui-fg-base mb-1">Method</Text>
-          <Text className="txt-medium text-ui-fg-subtle">
+        <div className={styles.col} data-testid="shipping-method-summary">
+          <p className={styles.label}>Metoda</p>
+          <p className={styles.value}>
             {(order as any).shipping_methods[0]?.name} (
             {convertToLocale({
               amount: order.shipping_methods?.[0].total ?? 0,
@@ -64,10 +46,10 @@ const ShippingDetails = ({ order }: ShippingDetailsProps) => {
               .replace(/,/g, "")
               .replace(/\./g, ",")}
             )
-          </Text>
+          </p>
         </div>
       </div>
-      <Divider className="mt-8" />
+      <Divider className={styles.divider} />
     </div>
   )
 }

@@ -1,7 +1,8 @@
-import { Container, Text } from "@medusajs/ui"
-import { useHits, useSearchBox } from "react-instantsearch-hooks-web"
 
 import InteractiveLink from "@modules/common/components/interactive-link"
+import styles from "./style.module.scss"
+import { Container } from "@medusajs/ui"
+import { useHits, useSearchBox } from "react-instantsearch-hooks-web"
 
 const ShowAll = () => {
   const { hits } = useHits()
@@ -14,18 +15,18 @@ const ShowAll = () => {
   if (hits.length === 0) {
     return (
       <Container
-        className="flex gap-2 justify-center h-fit py-2"
+        className={styles.noResultsContainer}
         data-testid="no-search-results-container"
       >
-        <Text>No results found.</Text>
+        <p>Nenalezeny žádné výsledky.</p>
       </Container>
     )
   }
 
   return (
-    <Container className="flex sm:flex-col small:flex-row gap-2 justify-center items-center h-fit py-4 small:py-2">
-      <Text>Showing the first {width > 640 ? 6 : 3} results.</Text>
-      <InteractiveLink href={`/results/${query}`}>View all</InteractiveLink>
+    <Container className={styles.resultsContainer}>
+      <p>Zobrazit první {width > 640 ? 6 : 3} výsledků.</p>
+      <InteractiveLink href={`/results/${query}`}>Zobrazit všechny</InteractiveLink>
     </Container>
   )
 }

@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { Button, Toaster, toast } from "@medusajs/ui"
-import { verifyCustomerEmail } from "@lib/data/customer"
+import { verifyCustomerEmail, resendVerification } from "@lib/data/customer"
 import styles from "./styles/verify-email.module.scss"
 import { motion, useScroll, useTransform } from "framer-motion"
 import Image from "next/image"
@@ -12,7 +12,8 @@ import LocalizedClientLink from "@modules/common/components/localized-client-lin
 export default function VerifyEmailPage() {
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
-  const router = useRouter()
+  const [resending, setResending] = useState(false)
+  const [resent, setResent] = useState(false)
   const searchParams = useSearchParams()
   const ref = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
@@ -39,6 +40,28 @@ export default function VerifyEmailPage() {
       toast.error("Ověření selhalo.")
     } finally {
       setLoading(false)
+    }
+  }
+
+  const handleResend = async () => {
+    if (!email) {
+      toast.error("Chybí e-mail pro opětovné odeslání.")
+      return
+    }
+    setResending(true)
+    setResent(false)
+    try {
+      const result = await resendVerification(email)
+      if (result.success) {
+        toast.success(result.message)
+        setResent(true)
+      } else {
+        toast.error(result.message)
+      }
+    } catch (e: any) {
+      toast.error(e?.message || "Nepodařilo se odeslat ověřovací e-mail.")
+    } finally {
+      setResending(false)
     }
   }
 
@@ -74,6 +97,15 @@ export default function VerifyEmailPage() {
           text={loading ? "Ověřuji..." : success ? "Ověřeno!" : "Potvrdit e-mail"}
         />
         {!success && (
+          <div className={styles.actions}>
+            <ClickButton
+              disabled={resending}
+              onClickAction={handleResend}
+              text={resending ? "Odesílání..." : resent ? "E-mail byl odeslán!" : "Znovu odeslat ověřovací e-mail"}
+            />
+          </div>
+        )}
+        {success && (
           <div className={styles.actions}>
             <LinkButton text="Přejít na můj účet" href="/account" />
             <LinkButton text="Přejít do obchodu" href="/" />

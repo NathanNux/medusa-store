@@ -77,7 +77,7 @@ export default function Mapa() {
                         fill={true}
                         quality={100}
                         loading="lazy"
-                        sizes="100vw"
+                        sizes="100dvw"
                     />
                 </motion.div>
             </div>

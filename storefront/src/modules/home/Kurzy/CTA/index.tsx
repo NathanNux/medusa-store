@@ -172,7 +172,7 @@ export default function CTA() {
                             alt="CTA Image"
                             fill={true}
                             priority={true}
-                            sizes="50vw"
+                            sizes="50dvw"
                             className="kurzy__cta__content__CTA__image__img"
                         />
                     </div>
@@ -200,7 +200,7 @@ export default function CTA() {
                                             alt={image.alt}
                                             fill={true}
                                             priority={true}
-                                            sizes="50vw"
+                                            sizes="50dvw"
                                         />
                                     </motion.div>
                                 </motion.div>

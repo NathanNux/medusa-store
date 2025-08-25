@@ -1,33 +1,33 @@
 @use "../../../../styles/mixins.scss" as *;
 .Hero__Intro{
-    width: 100vw;
-    height: 100vh;
+    width: 100dvw;
+    height: 100dvh;
     position: relative;
     display: flex;
     align-items: flex-end;
     justify-content: center;    
     background-color: var(--WhiteBg);
-    padding: 0 5vw;
+    padding: 0 5dvw;
     overflow: hidden;
     z-index: 1;
 
     @include respond-to-h(sm){
-        padding: 0 2.5vw;
+        padding: 0 2.5dvw;
     }
     @include respond-to-h(xs){
-        padding: 0 2.5vw;
+        padding: 0 2.5dvw;
     }
     @include respond-to-h(xxs){
-        padding: 0 2.5vw;
+        padding: 0 2.5dvw;
     }
     @include respond-to-v(s){
-        height: 100vh;
+        height: 100dvh;
     }
     @include respond-to-v(sm){
-        height: 100vh;
+        height: 100dvh;
     }
     @include respond-to-v(xs){
-        height: 100vh;
+        height: 100dvh;
     }
 
     .Hero__Intro__Image__wrapper{
@@ -65,30 +65,30 @@
         top: 55%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: 45vh;
-        height: 65vh;
+        width: 45dvh;
+        height: 65dvh;
         // border: 1px solid var(--ChText);        
         @include respond-to-v(lg){
-            width: 35vh;
-            height: 50vh;
+            width: 35dvh;
+            height: 50dvh;
         }
         @include respond-to-v(md){
-            width: 32.5vh;
-            height: 45vh;
+            width: 32.5dvh;
+            height: 45dvh;
         }
         @include respond-to-v(s){
-            width: 35vh;
-            height: 50vh;
+            width: 35dvh;
+            height: 50dvh;
             top: 45%;
         }
          @include respond-to-v(sm){
-            width: 35vh;
-            height: 50vh;
+            width: 35dvh;
+            height: 50dvh;
             top: 45%;
         }
          @include respond-to-v(xs){
-            width: 35vh;
-            height: 50vh;
+            width: 35dvh;
+            height: 50dvh;
             top: 45%;
         }
 
@@ -124,7 +124,7 @@
         width: 80%;
         height: 50%;
         font-family: "ooohBaby-Regular";
-        gap: 10vw;
+        gap: 10dvw;
 
         @include respond-to-v(lg){
             top: 45%;
@@ -336,7 +336,7 @@
         align-items: center;
         justify-content: flex-start;
         gap: 1.5rem;
-        padding: 0 2.5vw;
+        padding: 0 2.5dvw;
         @include respond-to-h(sm){
             width: 100%;
         }
@@ -584,16 +584,16 @@
             padding: 0;
         }
         @include respond-to-h(mdt){
-            padding: 0 0 0 5vw;
+            padding: 0 0 0 5dvw;
         }
     }
 
     .Hero__Intro__Updates{
         position: absolute;
         bottom: 0;
-        left: 5vw;
-        width: 30vw;
-        height: 10vh;
+        left: 5dvw;
+        width: 30dvw;
+        height: 10dvh;
         display: flex;
         align-items: center;
         justify-content: flex-start;
@@ -601,13 +601,13 @@
         z-index: 0;
 
         @include respond-to-v(s){
-            width: 90vw;
+            width: 90dvw;
         }
         @include respond-to-v(sm){
-            width: 90vw;
+            width: 90dvw;
         }
         @include respond-to-v(xs){
-            width: 90vw;
+            width: 90dvw;
         }
         p{
             width: 100%;
@@ -654,9 +654,9 @@
     .Hero__Intro__Updates__Mask{
         position: absolute;
         bottom: 0;
-        left: 5vw;
-        width: 30vw;
-        height: 10vh;
+        left: 5dvw;
+        width: 30dvw;
+        height: 10dvh;
         display: flex;
         align-items: center;
         justify-content: flex-start;
@@ -664,13 +664,13 @@
         z-index: 1;
 
         @include respond-to-v(s){
-            width: 90vw;
+            width: 90dvw;
         }
         @include respond-to-v(sm){
-            width: 90vw;
+            width: 90dvw;
         }
         @include respond-to-v(xs){
-            width: 90vw;
+            width: 90dvw;
         }
         p{
             width: 100%;

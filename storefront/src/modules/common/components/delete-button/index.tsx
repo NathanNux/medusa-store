@@ -3,6 +3,7 @@ import { Spinner, Trash } from "@medusajs/icons"
 import { clx } from "@medusajs/ui"
 import { useState } from "react"
 import { removeBundleFromCart } from "@lib/data/cart"
+import styles from "./style.module.scss"
 
 
 const DeleteButton = ({
@@ -33,16 +34,13 @@ const DeleteButton = ({
 
   return (
     <div
-      className={clx(
-        "flex items-center justify-between text-small-regular",
-        className
-      )}
+      className={clx(styles.root, className)}
     >
       <button
-        className="flex gap-x-1 text-ui-fg-subtle hover:text-ui-fg-base cursor-pointer"
+        className={styles.button}
         onClick={() => handleDelete(id)}
       >
-        {isDeleting ? <Spinner className="animate-spin" /> : <Trash />}
+        {isDeleting ? <Spinner className={styles.spinner} /> : <Trash />}
         <span>{children}</span>
       </button>
     </div>

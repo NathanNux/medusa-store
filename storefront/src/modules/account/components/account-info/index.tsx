@@ -1,5 +1,6 @@
 import { Disclosure } from "@headlessui/react"
 import { Badge, Button, clx } from "@medusajs/ui"
+import s from "./style.module.scss"
 import { useEffect } from "react"
 
 import useToggleState from "@lib/hooks/use-toggle-state"
@@ -42,13 +43,13 @@ const AccountInfo = ({
   }, [isSuccess, close])
 
   return (
-    <div className="text-small-regular" data-testid={dataTestid}>
-      <div className="flex items-end justify-between">
-        <div className="flex flex-col">
-          <span className="uppercase text-ui-fg-base">{label}</span>
-          <div className="flex items-center flex-1 basis-0 justify-end gap-x-4">
+    <div className={s.root} data-testid={dataTestid}>
+      <div className={s.headerRow}>
+        <div className={s.leftCol}>
+          <span className={s.labelUpper}>{label}</span>
+          <div className={s.rightInfoRow}>
             {typeof currentInfo === "string" ? (
-              <span className="font-semibold" data-testid="current-info">{currentInfo}</span>
+              <span className={s.fontSemibold} data-testid="current-info">{currentInfo}</span>
             ) : (
               currentInfo
             )}
@@ -57,7 +58,7 @@ const AccountInfo = ({
         <div>
           <Button
             variant="secondary"
-            className="w-[100px] min-h-[25px] py-1"
+            className={s.editBtn}
             onClick={handleToggle}
             type={state ? "reset" : "button"}
             data-testid="edit-button"
@@ -73,16 +74,16 @@ const AccountInfo = ({
         <Disclosure.Panel
           static
           className={clx(
-            "transition-[max-height,opacity] duration-300 ease-in-out overflow-hidden",
+            s.successPanel,
             {
-              "max-h-[1000px] opacity-100": isSuccess,
-              "max-h-0 opacity-0": !isSuccess,
+              [s.panelOpen]: isSuccess,
+              [s.panelClosed]: !isSuccess,
             }
           )}
           data-testid="success-message"
         >
-          <Badge className="p-2 my-4" color="green">
-            <span>{label} updated succesfully</span>
+          <Badge className={s.badgeSuccess} color="green">
+            <span>{label} Aktualizováno úspěšně</span>
           </Badge>
         </Disclosure.Panel>
       </Disclosure>
@@ -92,15 +93,15 @@ const AccountInfo = ({
         <Disclosure.Panel
           static
           className={clx(
-            "transition-[max-height,opacity] duration-300 ease-in-out overflow-hidden",
+            s.errorPanel,
             {
-              "max-h-[1000px] opacity-100": isError,
-              "max-h-0 opacity-0": !isError,
+              [s.panelOpen]: isError,
+              [s.panelClosed]: !isError,
             }
           )}
           data-testid="error-message"
         >
-          <Badge className="p-2 my-4" color="red">
+          <Badge className={s.badgeError} color="red">
             <span>{errorMessage}</span>
           </Badge>
         </Disclosure.Panel>
@@ -110,23 +111,23 @@ const AccountInfo = ({
         <Disclosure.Panel
           static
           className={clx(
-            "transition-[max-height,opacity] duration-300 ease-in-out overflow-visible",
+            s.editPanel,
             {
-              "max-h-[1000px] opacity-100": state,
-              "max-h-0 opacity-0": !state,
+              [s.panelOpen]: state,
+              [s.panelClosed]: !state,
             }
           )}
         >
-          <div className="flex flex-col gap-y-2 py-4">
+          <div className={s.editContent}>
             <div>{children}</div>
-            <div className="flex items-center justify-end mt-2">
+            <div className={s.editActions}>
               <Button
                 isLoading={pending}
-                className="w-full small:max-w-[140px]"
+                className={s.saveBtn}
                 type="submit"
                 data-testid="save-button"
               >
-                Save changes
+                Uložit změny
               </Button>
             </div>
           </div>

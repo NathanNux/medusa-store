@@ -64,7 +64,7 @@ export default function Intro () {
                                 src="/assets/img/img/3.jpg"
                                 alt="Intro Image"
                                 fill={true}
-                                sizes="40vw"
+                                sizes="40dvw"
                                 priority={true}
                                 className="Hero__Intro__Img"
                             />

@@ -18,19 +18,19 @@
         background-color: var(--OButton);
 
         @include respond-to-h(lg){
-            width: 150px !important;
+            width: 180px !important;
             height: 40px !important;
         }
         @include respond-to-h(mdt){
-            width: 150px !important;
+            width: 180px !important;
             height: 40px !important;
         }
         @include respond-to-h(md){
-            width: 150px !important;
+            width: 180px !important;
             height: 40px !important;
         }
         @include respond-to-h(sm){
-            width: 150px !important;
+            width: 180px !important;
             height: 40px !important;
         }
         @include respond-to-h(xs){
@@ -42,19 +42,23 @@
             height: 40px !important;
         }
         @include respond-to-v(md){
-            width: 150px !important;
+            width: 180px !important;
+            height: 40px !important;
+        }
+        @include respond-to-v(md){
+            width: 180px !important;
             height: 40px !important;
         }
         @include respond-to-v(s){
-            width: 150px !important;
+            width: 180px !important;
             height: 40px !important;
         }
         @include respond-to-v(sm){
-            width: 150px !important;
+            width: 180px !important;
             height: 40px !important;
         }
         @include respond-to-v(xs){
-            width: 150px !important;
+            width: 180px !important;
             height: 40px !important;
         }
 
@@ -77,7 +81,30 @@
                         color: var(--Wtext);
                         font-size: 1.3rem;
                         position: absolute;
-                        
+                        @include respond-to-h(md){
+                            font-size: 1.2rem;
+                        }
+                         @include respond-to-h(mdt){
+                            font-size: 1.2rem;
+                        }
+                         @include respond-to-h(sm){
+                            font-size: 1.2rem;
+                        }
+                        @include respond-to-h(xs){
+                            font-size: 1.1rem;
+                        }
+                        @include respond-to-h(xxs){
+                            font-size: 1.1rem;
+                        }
+                        @include respond-to-v(s){
+                            font-size: 1.2rem;
+                        }
+                        @include respond-to-v(sm){
+                            font-size: 1.2rem;
+                        }
+                        @include respond-to-v(xs){
+                            font-size: 1.1rem;
+                        }
                     }
                 }
                 &:nth-of-type(2){
@@ -96,7 +123,7 @@
                             }
                             &:nth-of-type(2){
                                 opacity: 1;
-                                transform: rotateX(-90deg) translateY(12px);
+                                transform: rotateX(-90deg) translateY(15px);
                             }
                         }
                     }
@@ -123,7 +150,7 @@
         &:nth-of-type(2){
             position: absolute;
             transform-origin: bottom center;
-            transform: rotateX(-90deg) translateY(9px);
+            transform: rotateX(-90deg) translateY(15px);
             opacity: 0;
         }
     }

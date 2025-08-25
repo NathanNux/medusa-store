@@ -35,6 +35,8 @@ const Details: React.FC<ProductTemplateProps> = ({ product, region, countryCode,
     const [options, setOptions] = useState<Record<string, string | undefined>>({})
     const [isAdding, setIsAdding] = useState(false)
   
+
+    console.log("Product: ", product);
     // If there is only 1 variant, preselect the options
     useEffect(() => {
       if (product.variants?.length === 1) {
@@ -82,6 +84,8 @@ const Details: React.FC<ProductTemplateProps> = ({ product, region, countryCode,
       if (selectedVariant && !selectedVariant.manage_inventory) {
         return true
       }
+
+      console.log("Product in stock: ", selectedVariant?.inventory_quantity);
   
       // If we allow back orders on the variant, we can add to cart
       if (selectedVariant?.allow_backorder) {

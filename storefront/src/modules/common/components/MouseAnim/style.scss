@@ -2,8 +2,8 @@
 
 .mouse-anim{
     position: relative;
-    width: 3vw;
-    height: 7.5vh;
+    width: 3dvw;
+    height: 7.5dvh;
     overflow: hidden;
     z-index: 1;
     display: flex;
@@ -16,41 +16,41 @@
 
     @include respond-to-h(md){
         scale: 0.9;
-        height: 8vh;
+        height: 8dvh;
     }
     @include respond-to-h(mdt){
         scale: 0.9;
-        height: 6vh;
+        height: 6dvh;
     }
     @include respond-to-h(sm){
         scale: 0.9;
-        height: 6vh;
+        height: 6dvh;
     }
     @include respond-to-h(xs){
-        height: 10vh;
+        height: 10dvh;
     }
     @include respond-to-h(xxs){
-        height: 8vh;
+        height: 8dvh;
     }
 
 
      @include respond-to-v(lg){
-        height: 3.5vh;
+        height: 3.5dvh;
     }
      @include respond-to-v(md){
-        height: 3.5vh;
+        height: 3.5dvh;
     }
     @include respond-to-v(s){
-        height: 4vh;
-        width: 5vw;
+        height: 4dvh;
+        width: 5dvw;
     }
     @include respond-to-v(sm){
-        height: 4vh;
-        width: 5vw;
+        height: 4dvh;
+        width: 5dvw;
     }
     @include respond-to-v(xs){
-        height: 4vh;
-        width: 4vw;
+        height: 4dvh;
+        width: 4dvw;
     }
     
 
@@ -63,8 +63,8 @@
     }
     .mouse-anim__wheel{
         position: absolute;
-        width: 0.4vw;
-        height: 0.8vw;
+        width: 0.4dvw;
+        height: 0.8dvw;
         border-radius: 25px;
         background-color: var(--WhiteBg);
     }

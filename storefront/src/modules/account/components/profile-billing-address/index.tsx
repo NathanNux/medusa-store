@@ -8,6 +8,7 @@ import NativeSelect from "@modules/common/components/native-select"
 import AccountInfo from "../account-info"
 import { HttpTypes } from "@medusajs/types"
 import { addCustomerAddress, updateCustomerAddress } from "@lib/data/customer"
+import s from "./style.module.scss"
 
 type MyInformationProps = {
   customer: HttpTypes.StoreCustomer
@@ -63,7 +64,7 @@ const ProfileBillingAddress: React.FC<MyInformationProps> = ({
 
   const currentInfo = useMemo(() => {
     if (!billingAddress) {
-      return "No billing address"
+      return "Žádná fakturační adresa"
     }
 
     const country =
@@ -72,7 +73,7 @@ const ProfileBillingAddress: React.FC<MyInformationProps> = ({
       )?.label || billingAddress.country_code?.toUpperCase()
 
     return (
-      <div className="flex flex-col font-semibold" data-testid="current-info">
+      <div className={s.currentInfo} data-testid="current-info">
         <span>
           {billingAddress.first_name} {billingAddress.last_name}
         </span>
@@ -90,27 +91,27 @@ const ProfileBillingAddress: React.FC<MyInformationProps> = ({
   }, [billingAddress, regionOptions])
 
   return (
-    <form action={formAction} onReset={() => clearState()} className="w-full">
+    <form action={formAction} onReset={() => clearState()} className={s.root}>
       <input type="hidden" name="addressId" value={billingAddress?.id} />
       <AccountInfo
-        label="Billing address"
+        label="Fakturační adresa"
         currentInfo={currentInfo}
         isSuccess={successState}
         isError={!!state.error}
         clearState={clearState}
         data-testid="account-billing-address-editor"
       >
-        <div className="grid grid-cols-1 gap-y-2">
-          <div className="grid grid-cols-2 gap-x-2">
+        <div className={s.formGrid}>
+          <div className={s.rowTwo}>
             <Input
-              label="First name"
+              label="Jméno"
               name="first_name"
               defaultValue={billingAddress?.first_name || undefined}
               required
               data-testid="billing-first-name-input"
             />
             <Input
-              label="Last name"
+              label="Příjmení"
               name="last_name"
               defaultValue={billingAddress?.last_name || undefined}
               required
@@ -118,34 +119,34 @@ const ProfileBillingAddress: React.FC<MyInformationProps> = ({
             />
           </div>
           <Input
-            label="Company"
+            label="Společnost"
             name="company"
             defaultValue={billingAddress?.company || undefined}
             data-testid="billing-company-input"
           />
           <Input
-            label="Address"
+            label="Adresa"
             name="address_1"
             defaultValue={billingAddress?.address_1 || undefined}
             required
             data-testid="billing-address-1-input"
           />
           <Input
-            label="Apartment, suite, etc."
+            label="Bytová jednotka, patro, apod."
             name="address_2"
             defaultValue={billingAddress?.address_2 || undefined}
             data-testid="billing-address-2-input"
           />
-          <div className="grid grid-cols-[144px_1fr] gap-x-2">
+          <div className={s.rowPostal}>
             <Input
-              label="Postal code"
+              label="PSČ"
               name="postal_code"
               defaultValue={billingAddress?.postal_code || undefined}
               required
               data-testid="billing-postcal-code-input"
             />
             <Input
-              label="City"
+              label="Město"
               name="city"
               defaultValue={billingAddress?.city || undefined}
               required
@@ -153,7 +154,7 @@ const ProfileBillingAddress: React.FC<MyInformationProps> = ({
             />
           </div>
           <Input
-            label="Province"
+            label="Kraj / Okres"
             name="province"
             defaultValue={billingAddress?.province || undefined}
             data-testid="billing-province-input"

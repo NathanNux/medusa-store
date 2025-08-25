@@ -21,21 +21,21 @@ function EmailVerificationComponent({ verification_url, email }: EmailVerificati
   return (
     <Html>
       <Head />
-      <Preview>Verify your email address</Preview>
+      <Preview>Potvrďte svou e-mailovou adresu</Preview>
       <Tailwind>
         <Body className="bg-white my-auto mx-auto font-sans px-2">
           <Container className="border border-solid border-[#eaeaea] rounded my-[40px] mx-auto p-[20px] max-w-[465px]">
             <Section className="mt-[32px]">
               <Heading className="text-black text-[24px] font-normal text-center p-0 my-[30px] mx-0">
-                Verify Your Email
+                Potvrďte svou e-mailovou adresu
               </Heading>
             </Section>
             <Section className="my-[32px]">
               <Text className="text-black text-[14px] leading-[24px]">
-                Hello{email ? ` ${email}` : ""},
+                Dobrý den,{email ? ` ${email}` : ""},
               </Text>
               <Text className="text-black text-[14px] leading-[24px]">
-                Please verify your email address by clicking the button below.
+                Potvrďte svou e-mailovou adresu kliknutím na tlačítko níže.
               </Text>
             </Section>
             <Section className="text-center mt-[32px] mb-[32px]">
@@ -43,12 +43,12 @@ function EmailVerificationComponent({ verification_url, email }: EmailVerificati
                 className="bg-[#000000] rounded text-white text-[12px] font-semibold no-underline text-center px-5 py-3"
                 href={verification_url}
               >
-                Verify Email
+                Potvrďte e-mail
               </Button>
             </Section>
             <Section className="my-[32px]">
               <Text className="text-black text-[14px] leading-[24px]">
-                Or copy and paste this URL into your browser:
+                Nebo zkopírujte a vložte tuto adresu URL do svého prohlížeče:
               </Text>
               <Link
                 href={verification_url}
@@ -59,7 +59,7 @@ function EmailVerificationComponent({ verification_url, email }: EmailVerificati
             </Section>
             <Section className="my-[32px]">
               <Text className="text-[#666666] text-[12px] leading-[24px]">
-                If you did not create an account, you can safely ignore this email.
+                Pokud jste tuto žádost o ověření e-mailu neodeslali vy, můžete tento e-mail bezpečně ignorovat.
               </Text>
             </Section>
           </Container>

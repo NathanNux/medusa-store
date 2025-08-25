@@ -12,6 +12,7 @@ import PaymentContainer, {
 import Divider from "@modules/common/components/divider"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { useCallback, useEffect, useState } from "react"
+import styles from "./style.module.scss"
 
 const Payment = ({
   cart,
@@ -194,35 +195,31 @@ const Payment = ({
 
 
   return (
-    <div className="bg-white">
-      <div className="flex flex-row items-center justify-between mb-6">
+    <div className={styles.root}>
+      <div className={styles.headerRow}>
         <Heading
           level="h2"
-          className={clx(
-            "flex flex-row text-3xl-regular gap-x-2 items-baseline",
-            {
-              "opacity-50 pointer-events-none select-none":
-                !isOpen && !paymentReady,
-            }
-          )}
+          className={clx(styles.heading, {
+            [styles.headingDisabled]: !isOpen && !paymentReady,
+          })}
         >
-          Payment
+          Platba
           {!isOpen && paymentReady && <CheckCircleSolid />}
         </Heading>
         {!isOpen && paymentReady && (
           <Text>
             <button
               onClick={handleEdit}
-              className="text-ui-fg-interactive hover:text-ui-fg-interactive-hover"
+              className={styles.editBtn}
               data-testid="edit-payment-button"
             >
-              Edit
+              Upravit
             </button>
           </Text>
         )}
       </div>
       <div>
-        <div className={isOpen ? "block" : "hidden"}>
+        <div className={isOpen ? styles.open : styles.closed}>
           {!paidByGiftcard && availablePaymentMethods?.length && (
             <>
               <RadioGroup
@@ -254,15 +251,12 @@ const Payment = ({
           )}
 
           {paidByGiftcard && (
-            <div className="flex flex-col w-1/3">
-              <Text className="txt-medium-plus text-ui-fg-base mb-1">
-                Payment method
+            <div className={styles.colThird}>
+              <Text className={styles.sectionTitle}>
+                Způsob platby
               </Text>
-              <Text
-                className="txt-medium text-ui-fg-subtle"
-                data-testid="payment-method-summary"
-              >
-                Gift card
+              <Text className={styles.sectionText} data-testid="payment-method-summary">
+                Dárková karta
               </Text>
             </div>
           )}
@@ -274,7 +268,7 @@ const Payment = ({
 
           <Button
             size="large"
-            className="mt-6"
+            className={styles.submitBtn}
             onClick={handleSubmit}
             isLoading={isLoading}
             disabled={
@@ -284,63 +278,54 @@ const Payment = ({
             data-testid="submit-payment-button"
           >
             {!activeSession && isStripeFunc(selectedPaymentMethod)
-              ? " Enter card details"
-              : "Continue to review"}
+              ? " Zadat údaje o kartě"
+              : "Pokračovat k přehledu"}
           </Button>
         </div>
 
-        <div className={isOpen ? "hidden" : "block"}>
+        <div className={isOpen ? styles.closed : styles.open}>
           {cart && paymentReady && activeSession ? (
-            <div className="flex items-start gap-x-1 w-full">
-              <div className="flex flex-col w-1/3">
-                <Text className="txt-medium-plus text-ui-fg-base mb-1">
-                  Payment method
+            <div className={styles.summaryRow}>
+              <div className={styles.colThird}>
+                <Text className={styles.sectionTitle}>
+                  Způsob platby
                 </Text>
-                <Text
-                  className="txt-medium text-ui-fg-subtle"
-                  data-testid="payment-method-summary"
-                >
+                <Text className={styles.sectionText} data-testid="payment-method-summary">
                   {paymentInfoMap[activeSession?.provider_id]?.title ||
                     activeSession?.provider_id}
                 </Text>
               </div>
-              <div className="flex flex-col w-1/3">
-                <Text className="txt-medium-plus text-ui-fg-base mb-1">
-                  Payment details
+              <div className={styles.colThird}>
+                <Text className={styles.sectionTitle}>
+                  Detaily platby
                 </Text>
-                <div
-                  className="flex gap-2 txt-medium text-ui-fg-subtle items-center"
-                  data-testid="payment-details-summary"
-                >
-                  <Container className="flex items-center h-7 w-fit p-2 bg-ui-button-neutral-hover">
+                <div className={styles.detailsRow} data-testid="payment-details-summary">
+                  <Container className={styles.iconBox}>
                     {paymentInfoMap[selectedPaymentMethod]?.icon || (
                       <CreditCard />
                     )}
                   </Container>
-                  <Text>
+                  <Text className={styles.sectionText}>
                     {isStripeFunc(selectedPaymentMethod) && cardBrand
                       ? cardBrand
-                      : "Another step will appear"}
+                      : "Další krok se objeví"}
                   </Text>
                 </div>
               </div>
             </div>
           ) : paidByGiftcard ? (
-            <div className="flex flex-col w-1/3">
-              <Text className="txt-medium-plus text-ui-fg-base mb-1">
-                Payment method
+            <div className={styles.colThird}>
+              <Text className={styles.sectionTitle}>
+                Způsob platby
               </Text>
-              <Text
-                className="txt-medium text-ui-fg-subtle"
-                data-testid="payment-method-summary"
-              >
-                Gift card
+              <Text className={styles.sectionText} data-testid="payment-method-summary">
+                Dárková karta
               </Text>
             </div>
           ) : null}
         </div>
       </div>
-      <Divider className="mt-8" />
+      <Divider className={styles.divider} />
 
     {comgateUrl && (
       <div id="comgate-container">

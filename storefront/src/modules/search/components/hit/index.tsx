@@ -1,8 +1,8 @@
-import { Container, Text } from "@medusajs/ui"
 
 import Thumbnail from "@modules/products/components/thumbnail"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { HttpTypes } from "@medusajs/types"
+import styles from "./style.module.scss"
 
 export type ProductHit = {
   id: string
@@ -25,26 +25,23 @@ const Hit = ({ hit }: HitProps) => {
       href={`/products/${hit.handle}`}
       data-testid="search-result"
     >
-      <Container
-        key={hit.id}
-        className="flex sm:flex-col gap-2 w-full p-4 shadow-elevation-card-rest hover:shadow-elevation-card-hover items-center sm:justify-center"
-      >
+      <div className={styles.container} key={hit.id}>
         <Thumbnail
           thumbnail={hit.thumbnail}
           size="square"
-          className="group h-12 w-12 sm:h-full sm:w-full"
+          className={styles.thumbnail}
         />
-        <div className="flex flex-col justify-between group">
-          <div className="flex flex-col">
-            <Text
-              className="text-ui-fg-subtle"
+        <div className={styles.info}>
+          <div className={styles.info}>
+            <span
+              className={styles.title}
               data-testid="search-result-title"
             >
               {hit.title}
-            </Text>
+            </span>
           </div>
         </div>
-      </Container>
+      </div>
     </LocalizedClientLink>
   )
 }

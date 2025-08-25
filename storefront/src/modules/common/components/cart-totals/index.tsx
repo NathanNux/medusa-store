@@ -2,6 +2,7 @@
 
 import { convertToLocale } from "@lib/util/money"
 import React from "react"
+import styles from "./style.module.scss"
 
 type CartTotalsProps = {
   totals: {
@@ -28,21 +29,21 @@ const CartTotals: React.FC<CartTotalsProps> = ({ totals }) => {
   } = totals
 
   return (
-    <div>
-      <div className="flex flex-col gap-y-2 txt-medium text-ui-fg-subtle ">
-        <div className="flex items-center justify-between">
-          <span className="flex gap-x-1 items-center">
-            Subtotal (excl. shipping and taxes)
+    <div className={styles.root}>
+      <div className={styles.totalsList}>
+        <div className={styles.row}>
+          <span className={styles.label}>
+            Dohromady (bez DPH a dopravy)
           </span>
           <span data-testid="cart-subtotal" data-value={subtotal || 0}>
             {convertToLocale({ amount: subtotal ?? 0, currency_code })}
           </span>
         </div>
         {!!discount_total && (
-          <div className="flex items-center justify-between">
-            <span>Discount</span>
+          <div className={styles.row}>
+            <span> sleva</span>
             <span
-              className="text-ui-fg-interactive"
+              className={styles.discount}
               data-testid="cart-discount"
               data-value={discount_total || 0}
             >
@@ -51,23 +52,23 @@ const CartTotals: React.FC<CartTotalsProps> = ({ totals }) => {
             </span>
           </div>
         )}
-        <div className="flex items-center justify-between">
-          <span>Shipping</span>
+        <div className={styles.row}>
+          <span>Doprava</span>
           <span data-testid="cart-shipping" data-value={shipping_subtotal || 0}>
             {convertToLocale({ amount: shipping_subtotal ?? 0, currency_code })}
           </span>
         </div>
-        <div className="flex justify-between">
-          <span className="flex gap-x-1 items-center ">Taxes</span>
+        <div className={styles.taxRow}>
+          <span className={styles.label}>Daně</span>
           <span data-testid="cart-taxes" data-value={tax_total || 0}>
             {convertToLocale({ amount: tax_total ?? 0, currency_code })}
           </span>
         </div>
         {!!gift_card_total && (
-          <div className="flex items-center justify-between">
-            <span>Gift card</span>
+          <div className={styles.row}>
+            <span>Dárkové karty</span>
             <span
-              className="text-ui-fg-interactive"
+              className={styles.giftCard}
               data-testid="cart-gift-card-amount"
               data-value={gift_card_total || 0}
             >
@@ -77,18 +78,18 @@ const CartTotals: React.FC<CartTotalsProps> = ({ totals }) => {
           </div>
         )}
       </div>
-      <div className="h-px w-full border-b border-gray-200 my-4" />
-      <div className="flex items-center justify-between text-ui-fg-base mb-2 txt-medium ">
-        <span>Total</span>
+      <div className={styles.divider} />
+      <div className={styles.totalRow}>
+        <span>Celkem</span>
         <span
-          className="txt-xlarge-plus"
+          className={styles.total}
           data-testid="cart-total"
           data-value={total || 0}
         >
           {convertToLocale({ amount: total ?? 0, currency_code })}
         </span>
       </div>
-      <div className="h-px w-full border-b border-gray-200 mt-4" />
+  <div className={`${styles.divider} ${styles.mt}`} />
     </div>
   )
 }

@@ -92,7 +92,7 @@ const ImageBar = () => {
                             className="cta__image__bar__img" 
                             fill={true} 
                             priority={index < 3} // Load first three images with priority
-                            sizes="50vw" // Adjust sizes for responsive loading
+                            sizes="50dvw" // Adjust sizes for responsive loading
                         />
                     </div>
                 )

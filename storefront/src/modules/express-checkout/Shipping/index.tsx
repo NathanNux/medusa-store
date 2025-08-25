@@ -150,7 +150,7 @@ export const Shipping = ({
           onClick={handleSubmit}
           className="w-full"
         >
-          Go to payment
+          Pokračovat k platbě
         </Button>
       </div>
     </Card>

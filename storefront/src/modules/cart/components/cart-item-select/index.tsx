@@ -11,6 +11,7 @@ import {
 } from "react"
 
 import ChevronDown from "@modules/common/icons/chevron-down"
+import s from "./style.module.scss"
 
 type NativeSelectProps = {
   placeholder?: string
@@ -19,7 +20,7 @@ type NativeSelectProps = {
 } & Omit<SelectHTMLAttributes<HTMLSelectElement>, "size">
 
 const CartItemSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
-  ({ placeholder = "Select...", className, children, ...props }, ref) => {
+  ({ placeholder = "Vyberte...", className, children, ...props }, ref) => {
     const innerRef = useRef<HTMLSelectElement>(null)
     const [isPlaceholder, setIsPlaceholder] = useState(false)
 
@@ -37,29 +38,19 @@ const CartItemSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
     }, [innerRef.current?.value])
 
     return (
-      <div>
+      <div className={s.root}>
         <IconBadge
           onFocus={() => innerRef.current?.focus()}
           onBlur={() => innerRef.current?.blur()}
-          className={clx(
-            "relative flex items-center txt-compact-small border text-ui-fg-base group",
-            className,
-            {
-              "text-ui-fg-subtle": isPlaceholder,
-            }
-          )}
+          className={clx(s.badge, className, { [s.placeholder]: isPlaceholder })}
         >
-          <select
-            ref={innerRef}
-            {...props}
-            className="appearance-none bg-transparent border-none px-4 transition-colors duration-150 focus:border-gray-700 outline-none w-16 h-16 items-center justify-center"
-          >
+          <select ref={innerRef} {...props} className={s.select}>
             <option disabled value="">
               {placeholder}
             </option>
             {children}
           </select>
-          <span className="absolute flex pointer-events-none justify-end w-8 group-hover:animate-pulse">
+          <span className={s.chevronWrap}>
             <ChevronDown />
           </span>
         </IconBadge>

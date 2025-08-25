@@ -27,7 +27,7 @@ const Login = ({ setCurrentView }: Props) => {
       <form className={s.form} action={formAction}>
         <div className={s.fields}>
           <Input
-            label="Email"
+            label="E-mail"
             name="email"
             type="email"
             title="Enter a valid email address."

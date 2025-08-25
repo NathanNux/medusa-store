@@ -208,10 +208,10 @@ const ECom = ({
         countryCode={countryCode}
         ref={productListRef}
       />
-      {loading && <div style={{ textAlign: "center", margin: "1rem" }}>Loading more products...</div>}
+      {loading && <div style={{ textAlign: "center", margin: "1rem", color: "var(--Wtext)", fontFamily: "Sansation-Regular" }}>Načítání dalších produktů...</div>}
       {allLoaded && filteredProducts.length <= visibleProducts.length && (
-        <div style={{ textAlign: "center", margin: "1rem" }}>
-          No more products.
+        <div style={{ textAlign: "center", margin: "1rem", color: "var(--Wtext)", fontFamily: "Sansation-Regular" }}>
+          Žádné další produkty k zobrazení
         </div>
       )}
       <NewsLetter />

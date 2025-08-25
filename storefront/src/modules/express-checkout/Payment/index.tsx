@@ -120,7 +120,7 @@ export const Payment = ({
       isDone={false}
       path={`/express-checkout/${handle}?step=payment`}
     >
-      <span className="text-sm">Your order</span>
+      <span className="text-sm">Vaše objednávka</span>
       {cart?.items?.map((item) => (
         <div className="flex gap-2" key={item.id}>
           <img src={item.thumbnail} alt={item.title} className="w-24 h-24 rounded" />
@@ -133,7 +133,7 @@ export const Payment = ({
               </span>
             ))}
             <span className="flex gap-1 text-sm items-center">
-              <span className="text-ui-fg-muted">Quantity</span>
+              <span className="text-ui-fg-muted">Množství</span>
               <Input
                 type="number"
                 value={item.quantity}
@@ -150,35 +150,35 @@ export const Payment = ({
       ))}
       <hr className="bg-ui-bg-subtle" />
       <div className="flex justify-between">
-        <span className="text-sm text-ui-fg-muted">Subtotal:</span>
+        <span className="text-sm text-ui-fg-muted">Celkem:</span>
         <span className="text-sm text-ui-fg-base">{formatPrice(
           cart?.item_subtotal || 0,
           cart?.currency_code
         )}</span>
       </div>
       <div className="flex justify-between">
-        <span className="text-sm text-ui-fg-muted">Shipping & handling:</span>
+        <span className="text-sm text-ui-fg-muted">Doprava & manipulace:</span>
         <span className="text-sm text-ui-fg-base">{formatPrice(
           cart?.shipping_total || 0,
           cart?.currency_code
         )}</span>
       </div>
       <div className="flex justify-between">
-        <span className="text-sm text-ui-fg-muted">Total:</span>
+        <span className="text-sm text-ui-fg-muted">Celkem:</span>
         <span className="text-sm text-ui-fg-base">{formatPrice(
           cart?.total || 0,
           cart?.currency_code
         )}</span>
       </div>
       <hr className="bg-ui-bg-subtle" />
-      <span className="text-sm">Delivery address</span>
+      <span className="text-sm">Dodací adresa</span>
       <p className="text-xs text-ui-fg-muted">
         {cart?.shipping_address?.first_name} {cart?.shipping_address?.last_name}<br />
         {cart?.shipping_address?.address_1}<br />
         {cart?.shipping_address?.city}, {cart?.shipping_address?.postal_code}, {cart?.shipping_address?.country_code}<br />
       </p>
       <hr className="bg-ui-bg-subtle" />
-      <span className="text-sm">Payment method</span>
+      <span className="text-sm">Platební metoda</span>
       <div className="flex flex-col gap-2">
         <RadioGroup
           value={selectedPaymentProvider}
@@ -200,7 +200,7 @@ export const Payment = ({
         className="w-full"
         disabled={!canPlaceOrder || loading}
         onClick={placeOrder}
-      >Pay {formatPrice(
+      >Zaplatit {formatPrice(
         cart?.total || 0,
         cart?.currency_code
       )}</Button>

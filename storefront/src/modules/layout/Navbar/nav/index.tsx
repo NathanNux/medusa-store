@@ -1,11 +1,11 @@
 import styles from './styles.module.scss';
 import { Easing, motion } from 'framer-motion';
 import { links, footerLinks } from '../data';
-import Link from 'next/link';
 import Image from 'next/image';
 import CountrySelect from '@modules/layout/components/country-select';
-import useToggleState from '@lib/hooks/use-toggle-state';
 import { HttpTypes } from '@medusajs/types';
+import useToggleState from '@lib/hooks/use-toggle-state';
+import LocalizedClientLink from '@modules/common/components/localized-client-link';
 
 type NavbarProps = {
     isActive: boolean;
@@ -75,7 +75,7 @@ export default function index({ isActive, setIsActive, regions }: NavbarProps) {
                     exit="exit"
                     custom={1}
                 >
-                    <Link href="/" onClick={closeMenu}>
+                    <LocalizedClientLink href="/" onClick={closeMenu}>
                         <Image 
                             src="/assets/icons/logo.svg"
                             alt="Logo"
@@ -84,7 +84,7 @@ export default function index({ isActive, setIsActive, regions }: NavbarProps) {
                             className={styles.logoImage}
                             priority={true}
                         />
-                    </Link>
+                    </LocalizedClientLink>
                 </motion.div>
                 <motion.div 
                     className={styles.logoTitle}
@@ -110,9 +110,9 @@ export default function index({ isActive, setIsActive, regions }: NavbarProps) {
                               animate="enter"
                               exit="exit"
                             >
-                                <Link href={href} onClick={closeMenu}>
+                                <LocalizedClientLink href={href} onClick={closeMenu}>
                                     <p>{title}</p>
-                                </Link>
+                                </LocalizedClientLink>
                             </motion.div>
                         </div>
                     )
@@ -133,9 +133,9 @@ export default function index({ isActive, setIsActive, regions }: NavbarProps) {
                                 key={`f_${i}`}
                                 className={styles.a}
                             >
-                                <Link href={href} onClick={closeMenu}>
+                                <LocalizedClientLink href={href} onClick={closeMenu}>
                                     {title}
-                                </Link>
+                                </LocalizedClientLink>
                             </motion.div>
                         )
                     })

@@ -1,46 +1,46 @@
 @use "../../../../styles/mixins.scss" as *;
 
 .ECom__Intro{
-    width: 100vw;
-    height: 100vh;
+    width: 100dvw;
+    height: 100dvh;
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     background-color: var(--OliveBg);
-    padding: 10vh 5vw;
+    padding: 10dvh 5dvw;
     gap: 10%;
 
     @include respond-to-h(xs){
-       height: 140vh;
-       padding: 20vh 5vw;
+       height: 140dvh;
+       padding: 20dvh 5dvw;
     }
     @include respond-to-h(xxs){
-       height: 140vh;
-       padding: 20vh 5vw;
+       height: 140dvh;
+       padding: 20dvh 5dvw;
     }
 
     @include respond-to-v(lg){
-       height: 80vh;
-       padding: 10vh 5vw;
+       height: 80dvh;
+       padding: 10dvh 5dvw;
     }
     @include respond-to-v(md){
-       height: 80vh;
-       padding: 10vh 5vw;
+       height: 80dvh;
+       padding: 10dvh 5dvw;
     }
 
     @include respond-to-v(s){
-       height: 90vh;
-       padding: 10vh 5vw;
+       height: 90dvh;
+       padding: 10dvh 5dvw;
     }
     @include respond-to-v(sm){
-       height: 90vh;
-       padding: 10vh 5vw;
+       height: 90dvh;
+       padding: 10dvh 5dvw;
     }
     @include respond-to-v(xs){
-       height: 100vh;
-       padding: 10vh 5vw;
+       height: 100dvh;
+       padding: 10dvh 5dvw;
     }
 
     .ECom__Intro__Details{
@@ -56,8 +56,8 @@
             width: 100%;
             height: 100%;
             position: absolute;
-            top: -10vh;
-            left: 5vw;
+            top: -10dvh;
+            left: 5dvw;
             z-index: 0;
 
             svg{
@@ -68,8 +68,8 @@
                 opacity: 1;
 
                 g{
-                    width: 50vw;
-                    height: 50vh;
+                    width: 50dvw;
+                    height: 50dvh;
                 }
             }
         }
@@ -156,7 +156,7 @@
             display: flex;
             align-items: center;
             justify-content: flex-start;
-            gap: 5vw;
+            gap: 5dvw;
             h2{
                 font-family: "Sansation-Light";
                 color: var(--Wtext);
@@ -201,8 +201,8 @@
             }
             .Hero__Intro__Img__Container{
                 position: relative;
-                width: 15vw;
-                height: 15vh;
+                width: 15dvw;
+                height: 15dvh;
                 border: 1px solid var(--ChText);
 
                 .Hero__Intro__Img__Container__inner{
@@ -217,30 +217,30 @@
                 }
 
                 @include respond-to-h(mdt){
-                    width: 20vw;
-                    height: 15vh;
+                    width: 20dvw;
+                    height: 15dvh;
                 }
                 @include respond-to-h(sm){
-                    width: 20vw;
-                    height: 15vh;
+                    width: 20dvw;
+                    height: 15dvh;
                 }
                 @include respond-to-h(xs){
-                    width: 15vw;
-                    height: 17.5vh;
+                    width: 15dvw;
+                    height: 17.5dvh;
                 }
                 @include respond-to-h(xxs){
-                    width: 15vw;
-                    height: 17.5vh;
+                    width: 15dvw;
+                    height: 17.5dvh;
                 }
 
 
                 @include respond-to-v(lg){
-                    width: 25vw;
-                    height: 10vh;
+                    width: 25dvw;
+                    height: 10dvh;
                 }
                 @include respond-to-v(md){
-                    width: 25vw;
-                    height: 10vh;
+                    width: 25dvw;
+                    height: 10dvh;
                 }
                 @include respond-to-v(s){
                     display: none;
@@ -292,12 +292,19 @@
             display: flex;
             flex-wrap: wrap;
             line-height: 1.4;
+            @include respond-to-h(sm){
+                width: 45%;
+            }
 
             &:nth-of-type(2){
                 text-align: right;
                 width: 25%;
-                margin-top: 10vh;
+                margin-top: 10dvh;
                 justify-content: flex-end;
+
+                @include respond-to-h(sm){
+                    width: 35%;
+                }
             }
 
             span{
@@ -362,21 +369,21 @@
                 width: 100%;
                 &:nth-of-type(2){
                     width: 100%;
-                    margin-top: 25vh;
+                    margin-top: 25dvh;
                 }
             }
             @include respond-to-v(sm){
                 width: 100%;
                 &:nth-of-type(2){
                     width: 100%;
-                    margin-top: 25vh;
+                    margin-top: 25dvh;
                 }
             }
             @include respond-to-v(xs){
                 width: 100%;
                 &:nth-of-type(2){
                     width: 100%;
-                    margin-top: 25vh;
+                    margin-top: 25dvh;
                 }
             }
         }

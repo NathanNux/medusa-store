@@ -10,6 +10,20 @@ type CategoryProps = {
 };
 
 export default function CategoryNav({ category, setCategoryAction, categories }: CategoryProps) {
+    // Debug: log categories, products, and product types
+    if (categories) {
+        console.log('Categories:', categories);
+        categories.forEach((cat: any) => {
+            console.log(`Category: ${cat.name}`);
+            if (Array.isArray(cat.products)) {
+                console.log('Products:', cat.products);
+                cat.products.forEach((product: any) => {
+                    console.log(`Product: ${product.title || product.name || product.id}`);
+                    console.log('Product Type:', product.type);
+                });
+            }
+        });
+    }
     const perspective = {
         initial: {
             opacity: 0,
@@ -107,6 +121,32 @@ export default function CategoryNav({ category, setCategoryAction, categories }:
                                 </AnimatePresence>   
                             </motion.div>
                         </motion.div>
+                        {/* Show subcategories (types) if this category is active */}
+                        {category === cat.name && Array.isArray((cat as any).products) && (
+                            <AnimatePresence>
+                                <motion.ul
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: 20 }}
+                                    transition={{ staggerChildren: 0.07, delayChildren: 0.2 }}
+                                    className={style.subcategoryList}
+                                >
+                                    {/* Get unique types from products */}
+                                    {Array.from(new Set((cat as any).products.map((p: any) => p.type).filter(Boolean))).map((type: any, j: number) => (
+                                        <motion.li
+                                            key={typeof type === "object" && type.id ? type.id : type}
+                                            initial={{ opacity: 0, x: -20 }}
+                                            animate={{ opacity: 1, x: 0 }}
+                                            exit={{ opacity: 0, x: -20 }}
+                                            transition={{ duration: 0.3, delay: j * 0.08 }}
+                                            className={style.subcategoryItem}
+                                        >
+                                            {typeof type === "string" ? type : type.name}
+                                        </motion.li>
+                                    ))}
+                                </motion.ul>
+                            </AnimatePresence>
+                        )}
                     </div>
                 ))}
             </div>

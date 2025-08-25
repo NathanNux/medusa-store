@@ -56,7 +56,7 @@ export default function Kontakt() {
                                 quality={100}
                                 loading="lazy"
                                 className="kontakt__Contact__Form__Background"
-                                sizes="(max-width: 768px) 100vw, (min-width: 769px) 50vw"
+                                sizes="(max-width: 768px) 100dvw, (min-width: 769px) 50dvw"
                             />
                         </div>
                         <form>
@@ -91,23 +91,22 @@ export default function Kontakt() {
                                     <HashtagButton 
                                         text="Objednavka" 
                                         isActive={isHashtagActive("Objednavka")}
-                                        onClick={handleHashtagClick}
+                                        onClick={() => handleHashtagClick("Objednavka")}
                                     />
                                     <HashtagButton 
                                         text="Kurzy" 
                                         isActive={isHashtagActive("Kurzy")}
-                                        onClick={handleHashtagClick}
+                                        onClick={() => handleHashtagClick("Kurzy")}
                                     />
                                     <HashtagButton 
                                         text="E-shop" 
                                         isActive={isHashtagActive("E-shop")}
-                                        onClick={handleHashtagClick}
-
+                                        onClick={() => handleHashtagClick("E-shop")}
                                     />
                                     <HashtagButton 
                                         text="Dotaz" 
                                         isActive={isHashtagActive("Dotaz")}
-                                        onClick={handleHashtagClick}
+                                        onClick={() => handleHashtagClick("Dotaz")}
                                     />
                                 </div>
                             </div>

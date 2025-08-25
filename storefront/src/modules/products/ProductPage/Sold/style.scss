@@ -1,79 +1,79 @@
 @use "../../../../styles/mixins.scss" as *;
 
 .soldProducts{
-    width: 100vw;
-    height: 50vh;
+    width: 100dvw;
+    height: 50dvh;
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     background-color: var(--OliveBg);
-    gap: 5vh;
-    padding: 10vh 0;
+    gap: 5dvh;
+    padding: 10dvh 0;
 
     @include respond-to-h(mdt){
-        height: 55vh;
+        height: 55dvh;
     }
     @include respond-to-h(xs){
-        height: 75vh;
+        height: 75dvh;
     }
 
     @include respond-to-h(xxs){
-        height: 75vh;
+        height: 75dvh;
     }
     @include respond-to-v(lg){
-        height: 25vh;
+        height: 25dvh;
         padding: 0;
-        padding-bottom: 5vh;
+        padding-bottom: 5dvh;
     }
     @include respond-to-v(md){
-        height: 25vh;
+        height: 25dvh;
         padding: 0;
-        padding-bottom: 5vh;
+        padding-bottom: 5dvh;
     }
     @include respond-to-v(s){
-        height: 35vh;
+        height: 35dvh;
         padding: 0;
-        padding-bottom: 10vh;
+        padding-bottom: 10dvh;
         overflow: hidden;
     }
     @include respond-to-v(sm){
-        height: 35vh;
+        height: 35dvh;
         padding: 0;
-        padding-bottom: 10vh;
+        padding-bottom: 10dvh;
         overflow: hidden;
     }
     @include respond-to-v(xs){
-        height: 35vh;
+        height: 35dvh;
         padding: 0;
-        padding-bottom: 10vh;
+        padding-bottom: 10dvh;
         overflow: hidden;
     }
 
     .soldProducts__title{
         width: 100%;
-        height: 5vw;
+        height: 5dvw;
         position: relative;
         display: flex;
         align-items: flex-start;
         justify-content: flex-end;
         flex-direction: column;
-        padding: 0 5vw;
+        padding: 0 5dvw;
         @include respond-to-h(xxs){
-            height: 10vh;
+            height: 10dvh;
         }
         @include respond-to-v(md){
-            height: 7.5vh;
+            height: 7.5dvh;
         }
         @include respond-to-v(s){
-            height: 7.5vh;
+            height: 7.5dvh;
         }
          @include respond-to-v(sm){
-            height: 7.5vh;
+            height: 7.5dvh;
         }
          @include respond-to-v(xs){
-            height: 7.5vh;
+            height: 7.5dvh;
         }
 
         .soldProducts__title__text{
@@ -83,8 +83,8 @@
             display: flex;
             align-items: center;
             justify-content: flex-start;
-            gap: 1vw;
-            padding: 0 2vw;
+            gap: 1dvw;
+            padding: 0 2dvw;
 
             @include respond-to-h(md){
                 img{
@@ -225,7 +225,7 @@
                 align-items: center;
                 justify-content: center;
                 flex-direction: row;
-                gap: 1vw;
+                gap: 1dvw;
 
                 .soldProducts__image__bar{
                     width: 100%;
@@ -235,16 +235,16 @@
                     align-items: flex-end;
                     justify-content: center;
                     flex-direction: row;
-                    gap: 1vw;
+                    gap: 1dvw;
 
                     .soldProducts__image__bar__item {
                         position: relative;
                         display: flex;
                         align-items: center;
                         justify-content: center;
-                        width: 20vw;
+                        width: 20dvw;
                         // Default to horizontal
-                        height: 20vh;
+                        height: 20dvh;
                         // Optional: style the image inside
                         border-radius: 10px;
                         img {
@@ -254,39 +254,39 @@
                         }
 
                         @include respond-to-h(md){
-                            height: 25vh;
+                            height: 25dvh;
                         }
                         @include respond-to-h(mdt){
-                            height: 17.5vh;
+                            height: 17.5dvh;
                         }
                         @include respond-to-h(sm){
-                            height: 20vh;
+                            height: 20dvh;
                         }
                         @include respond-to-h(xs){
-                            height: 30vh;
+                            height: 30dvh;
                         }
                         @include respond-to-h(xxs){
-                            height: 25vh;
+                            height: 25dvh;
                         }
                         @include respond-to-v(lg){
-                            width: 30vw;
-                            height: 15vh;
+                            width: 30dvw;
+                            height: 15dvh;
                         }
                         @include respond-to-v(md){
-                            width: 30vw;
-                            height: 15vh;
+                            width: 30dvw;
+                            height: 15dvh;
                         }
                         @include respond-to-v(s){
-                            width: 50vw;
-                            height: 15vh;
+                            width: 50dvw;
+                            height: 15dvh;
                         }
                          @include respond-to-v(sm){
-                            width: 50vw;
-                            height: 15vh;
+                            width: 50dvw;
+                            height: 15dvh;
                         }
                          @include respond-to-v(xs){
-                            width: 50vw;
-                            height: 15vh;
+                            width: 50dvw;
+                            height: 15dvh;
                         }
                     }
                 }

@@ -51,7 +51,7 @@ export default function Benefits() {
 
                 <div className="Benefits__content__text">
                     <h4>
-                        {wordSplit("Většina mých výrobků jsou mrazuvzdorné a vhodné tak k celoroční instalaci venku.", isInView)}
+                        {wordSplit("Většina mých výrobků jsou mrazuvzdorné a dvhodné tak k celoroční instalaci venku.", isInView)}
                     </h4>
                 </div>
             </div>  
@@ -73,7 +73,7 @@ export default function Benefits() {
                             src={"/assets/img/img/2.jpg"}
                             alt="Benefits Image"
                             fill={true}
-                            sizes="50vw"
+                            sizes="50dvw"
                             className="Benefits__image__img"
                             priority={true}
                             quality={80}
@@ -98,7 +98,7 @@ export default function Benefits() {
                             src={"/assets/img/roller/3h.jpg"}
                             alt="Benefits Image"
                             fill={true}
-                            sizes="50vw"
+                            sizes="50dvw"
                             className="Benefits__image__img"
                             priority={true}
                             quality={80}

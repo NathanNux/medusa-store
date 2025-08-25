@@ -1,5 +1,6 @@
 import { Heading } from "@medusajs/ui"
 import { cookies as nextCookies } from "next/headers"
+import s from "./styles/oder-complete.module.scss"
 
 import CartTotals from "@modules/common/components/cart-totals"
 import Help from "@modules/order/components/help"
@@ -22,23 +23,20 @@ export default async function OrderCompletedTemplate({
   const isOnboarding = cookies.get("_medusa_onboarding")?.value === "true"
 
   return (
-    <div className="py-6 min-h-[calc(100vh-64px)]">
-      <div className="content-container flex flex-col justify-center items-center gap-y-10 max-w-4xl h-full w-full">
+    <div className={s.root}>
+      <div className={s.container}>
         {isOnboarding && <OnboardingCta orderId={order.id} />}
-        <div
-          className="flex flex-col gap-4 max-w-4xl h-full bg-white w-full py-10"
-          data-testid="order-complete-container"
-        >
+        <div className={s.panel} data-testid="order-complete-container">
           <Heading
             level="h1"
-            className="flex flex-col gap-y-3 text-ui-fg-base text-3xl mb-4"
+            className={s.title}
           >
-            <span>Thank you!</span>
-            <span>Your order was placed successfully.</span>
+            <span>Děkujeme!</span>
+            <span>Vaše objednávka byla úspěšně vytvořena.</span>
           </Heading>
           <OrderDetails order={order} />
-          <Heading level="h2" className="flex flex-row text-3xl-regular">
-            Summary
+          <Heading level="h2" className={s.sectionTitle}>
+            Shrnutí
           </Heading>
           <Items order={order} />
           <CartTotals totals={order} />

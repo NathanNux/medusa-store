@@ -45,8 +45,6 @@ export default function SearchBar({
     const searchBarRef = useRef<HTMLDivElement>(null);
     const priceDropdownRef = useRef<HTMLDivElement>(null);
 
-    console.log("api categories:", categories);
-
     const searchMenu = {
         open: {
             width: "80%",

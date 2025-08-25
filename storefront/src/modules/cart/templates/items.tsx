@@ -1,9 +1,10 @@
 import repeat from "@lib/util/repeat"
 import { HttpTypes } from "@medusajs/types"
-import { Heading, Table } from "@medusajs/ui"
+import { Table } from "@medusajs/ui"
 
 import Item from "@modules/cart/components/item"
 import SkeletonLineItem from "@modules/skeletons/components/skeleton-line-item"
+import s from "./items.module.scss"
 
 type ItemsTemplateProps = {
   cart?: HttpTypes.StoreCart
@@ -12,22 +13,18 @@ type ItemsTemplateProps = {
 const ItemsTemplate = ({ cart }: ItemsTemplateProps) => {
   const items = cart?.items
   return (
-    <div>
-      <div className="pb-3 flex items-center">
-        <Heading className="text-[2rem] leading-[2.75rem]">Cart</Heading>
+    <div className={s.root}>
+      <div className={s.headerRow}>
+        <h1 className={s.title}>Košík</h1>
       </div>
       <Table>
-        <Table.Header className="border-t-0">
-          <Table.Row className="text-ui-fg-subtle txt-medium-plus">
-            <Table.HeaderCell className="!pl-0">Item</Table.HeaderCell>
-            <Table.HeaderCell></Table.HeaderCell>
-            <Table.HeaderCell>Quantity</Table.HeaderCell>
-            <Table.HeaderCell className="hidden small:table-cell">
-              Price
-            </Table.HeaderCell>
-            <Table.HeaderCell className="!pr-0 text-right">
-              Total
-            </Table.HeaderCell>
+        <Table.Header className={s.tableHeader}>
+          <Table.Row className={s.tableHeaderRow}>
+            <Table.HeaderCell className={s.colItem}>Produkt</Table.HeaderCell>
+            <Table.HeaderCell className={s.colSpacer}></Table.HeaderCell>
+            <Table.HeaderCell className={s.colQty}>Množství</Table.HeaderCell>
+            <Table.HeaderCell className={s.colPrice}>Cena</Table.HeaderCell>
+            <Table.HeaderCell className={s.colTotal}>Celkem</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>

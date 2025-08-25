@@ -1,13 +1,13 @@
 import ECom from "@modules/store/Shop"
 import { listProducts } from "@lib/data/products"
-import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
 import { listCategories } from "@lib/data/categories"
 import { HttpTypes } from "@medusajs/types"
 import { getRegion } from "@lib/data/regions"
 import StoreTemplate from "@modules/store/templates"
 
-export default async function StorePage({ params, searchParams }: { params: { countryCode: string }, searchParams: { sortBy?: SortOptions, page?: string } }) {
-  const countryCode = params.countryCode
+export default async function StorePage({ params }: { params: { countryCode: string } }) {
+  const awaitedParams = await params;
+  const countryCode = awaitedParams.countryCode;  
 
   // Fetch all products, including bundle info
   const { response: { products, count } } = await listProducts({

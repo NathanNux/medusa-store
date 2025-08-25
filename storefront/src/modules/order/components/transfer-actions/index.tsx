@@ -1,8 +1,9 @@
 "use client"
 
 import { acceptTransferRequest, declineTransferRequest } from "@lib/data/orders"
-import { Button, Text } from "@medusajs/ui"
+import { Button } from "@medusajs/ui"
 import { useState } from "react"
+import styles from "../styles/transfer-actions.module.scss"
 
 type TransferStatus = "pending" | "success" | "error"
 
@@ -37,19 +38,15 @@ const TransferActions = ({ id, token }: { id: string; token: string }) => {
   }
 
   return (
-    <div className="flex flex-col gap-y-4">
+    <div className={styles.root}>
       {status?.accept === "success" && (
-        <Text className="text-emerald-500">
-          Order transferred successfully!
-        </Text>
+        <p className={styles.success}>Vaše objednávka byla úspěšně převedena!</p>
       )}
       {status?.decline === "success" && (
-        <Text className="text-emerald-500">
-          Order transfer declined successfully!
-        </Text>
+        <p className={styles.success}>Převod objednávky byl úspěšně zamítnut!</p>
       )}
       {status?.accept !== "success" && status?.decline !== "success" && (
-        <div className="flex gap-x-4">
+        <div className={styles.actions}>
           <Button
             size="large"
             onClick={acceptTransfer}
@@ -58,7 +55,7 @@ const TransferActions = ({ id, token }: { id: string; token: string }) => {
               status?.accept === "pending" || status?.decline === "pending"
             }
           >
-            Accept transfer
+            Přijmout převod
           </Button>
           <Button
             size="large"
@@ -69,11 +66,11 @@ const TransferActions = ({ id, token }: { id: string; token: string }) => {
               status?.accept === "pending" || status?.decline === "pending"
             }
           >
-            Decline transfer
+            Zamítnout převod
           </Button>
         </div>
       )}
-      {errorMessage && <Text className="text-red-500">{errorMessage}</Text>}
+      {errorMessage && <p className={styles.error}>{errorMessage}</p>}
     </div>
   )
 }

@@ -12,7 +12,7 @@ export const SecondCol = () => {
       "lg:w-1/2 w-full"
     )}>
       <div className="flex flex-col justify-center gap-1">
-        <span className="text-xs text-ui-fg-subtle">
+        {/* <span className="text-xs text-ui-fg-subtle">
           Powered by
         </span>
         <img 
@@ -20,7 +20,7 @@ export const SecondCol = () => {
           alt="Medusa" 
           width={67}
           height={16}
-        />
+        /> */}
       </div>
       <div className="flex justify-center gap-1">
         <span className="text-sm text-ui-fg-muted">

@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState, useActionState } from "react"
 import { PencilSquare as Edit, Trash } from "@medusajs/icons"
-import { Button, Heading, Text, clx } from "@medusajs/ui"
+import { Button, clx } from "@medusajs/ui"
 
 import useToggleState from "@lib/hooks/use-toggle-state"
 import CountrySelect from "@modules/checkout/components/country-select"
@@ -15,6 +15,7 @@ import {
   deleteCustomerAddress,
   updateCustomerAddress,
 } from "@lib/data/customer"
+import s from "./edit-address-modal.module.scss"
 
 type EditAddressProps = {
   region: HttpTypes.StoreRegion
@@ -64,30 +65,19 @@ const EditAddress: React.FC<EditAddressProps> = ({
   return (
     <>
       <div
-        className={clx(
-          "border rounded-rounded p-5 min-h-[220px] h-full w-full flex flex-col justify-between transition-colors",
-          {
-            "border-gray-900": isActive,
-          }
-        )}
+        className={clx(s.card, { [s.cardActive]: isActive })}
         data-testid="address-container"
       >
         <div className="flex flex-col">
-          <Heading
-            className="text-left text-base-semi"
-            data-testid="address-name"
-          >
+          <h3 className={s.name} data-testid="address-name">
             {address.first_name} {address.last_name}
-          </Heading>
+          </h3>
           {address.company && (
-            <Text
-              className="txt-compact-small text-ui-fg-base"
-              data-testid="address-company"
-            >
+            <p className={s.company} data-testid="address-company">
               {address.company}
-            </Text>
+            </p>
           )}
-          <Text className="flex flex-col text-left text-base-regular mt-2">
+          <p className={s.addressLines}>
             <span data-testid="address-address">
               {address.address_1}
               {address.address_2 && <span>, {address.address_2}</span>}
@@ -99,39 +89,39 @@ const EditAddress: React.FC<EditAddressProps> = ({
               {address.province && `${address.province}, `}
               {address.country_code?.toUpperCase()}
             </span>
-          </Text>
+          </p>
         </div>
-        <div className="flex items-center gap-x-4">
+        <div className={s.actions}>
           <button
-            className="text-small-regular text-ui-fg-base flex items-center gap-x-2"
+            className={s.linkBtn}
             onClick={open}
             data-testid="address-edit-button"
           >
             <Edit />
-            Edit
+            Upravit
           </button>
           <button
-            className="text-small-regular text-ui-fg-base flex items-center gap-x-2"
+            className={s.linkBtn}
             onClick={removeAddress}
             data-testid="address-delete-button"
           >
             {removing ? <Spinner /> : <Trash />}
-            Remove
+            Odstranit
           </button>
         </div>
       </div>
 
       <Modal isOpen={state} close={close} data-testid="edit-address-modal">
         <Modal.Title>
-          <Heading className="mb-2">Edit address</Heading>
+          <h2 className={s.modalTitle}>Upravit adresu</h2>
         </Modal.Title>
         <form action={formAction}>
           <input type="hidden" name="addressId" value={address.id} />
           <Modal.Body>
-            <div className="grid grid-cols-1 gap-y-2">
-              <div className="grid grid-cols-2 gap-x-2">
+            <div className={s.form}>
+              <div className={s.rowTwo}>
                 <Input
-                  label="First name"
+                  label="Jméno"
                   name="first_name"
                   required
                   autoComplete="given-name"
@@ -139,7 +129,7 @@ const EditAddress: React.FC<EditAddressProps> = ({
                   data-testid="first-name-input"
                 />
                 <Input
-                  label="Last name"
+                  label="Příjmení"
                   name="last_name"
                   required
                   autoComplete="family-name"
@@ -148,14 +138,14 @@ const EditAddress: React.FC<EditAddressProps> = ({
                 />
               </div>
               <Input
-                label="Company"
+                label="Společnost"
                 name="company"
                 autoComplete="organization"
                 defaultValue={address.company || undefined}
                 data-testid="company-input"
               />
               <Input
-                label="Address"
+                label="Adresa"
                 name="address_1"
                 required
                 autoComplete="address-line1"
@@ -163,15 +153,15 @@ const EditAddress: React.FC<EditAddressProps> = ({
                 data-testid="address-1-input"
               />
               <Input
-                label="Apartment, suite, etc."
+                label="Bytová jednotka, patro, apod."
                 name="address_2"
                 autoComplete="address-line2"
                 defaultValue={address.address_2 || undefined}
                 data-testid="address-2-input"
               />
-              <div className="grid grid-cols-[144px_1fr] gap-x-2">
+              <div className={s.rowPostal}>
                 <Input
-                  label="Postal code"
+                  label="PSČ"
                   name="postal_code"
                   required
                   autoComplete="postal-code"
@@ -179,7 +169,7 @@ const EditAddress: React.FC<EditAddressProps> = ({
                   data-testid="postal-code-input"
                 />
                 <Input
-                  label="City"
+                  label="Město"
                   name="city"
                   required
                   autoComplete="locality"
@@ -188,7 +178,7 @@ const EditAddress: React.FC<EditAddressProps> = ({
                 />
               </div>
               <Input
-                label="Province / State"
+                label="Kraj / Okres"
                 name="province"
                 autoComplete="address-level1"
                 defaultValue={address.province || undefined}
@@ -203,7 +193,7 @@ const EditAddress: React.FC<EditAddressProps> = ({
                 data-testid="country-select"
               />
               <Input
-                label="Phone"
+                label="Telefon"
                 name="phone"
                 autoComplete="phone"
                 defaultValue={address.phone || undefined}
@@ -211,23 +201,21 @@ const EditAddress: React.FC<EditAddressProps> = ({
               />
             </div>
             {formState.error && (
-              <div className="text-rose-500 text-small-regular py-2">
-                {formState.error}
-              </div>
+              <div className={s.error}>{formState.error}</div>
             )}
           </Modal.Body>
           <Modal.Footer>
-            <div className="flex gap-3 mt-6">
+            <div className={s.actionsRow}>
               <Button
                 type="reset"
                 variant="secondary"
                 onClick={close}
-                className="h-10"
+                className={s.btnHeight}
                 data-testid="cancel-button"
               >
-                Cancel
+                Zrušit
               </Button>
-              <SubmitButton data-testid="save-button">Save</SubmitButton>
+              <SubmitButton data-testid="save-button">Uložit</SubmitButton>
             </div>
           </Modal.Footer>
         </form>

@@ -1,38 +1,38 @@
 @use "../../../../styles/mixins.scss" as *;
 
 .cta{
-    width: 100vw;
-    height: 80vh;
+    width: 100dvw;
+    height: 80dvh;
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     background-color: var(--OliveBg);
-    gap: 5vh;
-    padding: 2.5vh 0;
+    gap: 5dvh;
+    padding: 2.5dvh 0;
 
     @include respond-to-h(xs){
-        height: 100vh;
+        height: 100dvh;
     }
     @include respond-to-h(xxs){
-        height: 100vh;
+        height: 100dvh;
     }
 
     @include respond-to-v(lg){
-        height: 75vh;
+        height: 75dvh;
     }
     @include respond-to-v(md){
-        height: 75vh;
+        height: 75dvh;
     }
     @include respond-to-v(s){
-        height: 75vh;
+        height: 75dvh;
     }
     @include respond-to-v(sm){
-        height: 75vh;
+        height: 75dvh;
     }
     @include respond-to-v(xs){
-        height: 75vh;
+        height: 75dvh;
     }
 
     .cta__content{
@@ -43,7 +43,7 @@
         align-items: center;
         justify-content: flex-end;
         flex-direction: column;
-        gap: 2.5vh;
+        gap: 2.5dvh;
 
         .cta__title{
             font-family: "Sansation-Light";
@@ -61,13 +61,13 @@
                 font-size: 3.5rem;
             }
             @include respond-to-h(sm){
-                font-size: 3rem;
+                font-size: 2.8rem;
             }
             @include respond-to-h(xs){
-                font-size: 2.5rem;
+                font-size: 2.3rem;
             }
             @include respond-to-h(xxs){
-                font-size: 2.5rem;
+                font-size: 2.3rem;
             }
             @include respond-to-v(lg){
                 font-size: 4rem;
@@ -223,7 +223,7 @@
                 align-items: center;
                 justify-content: center;
                 flex-direction: row;
-                gap: 1vw;
+                gap: 1dvw;
 
                 .cta__image__bar{
                     width: 100%;
@@ -233,101 +233,101 @@
                     align-items: flex-end;
                     justify-content: center;
                     flex-direction: row;
-                    gap: 1vw;
+                    gap: 1dvw;
 
                     .cta__image__bar__item__wrapper {
                         position: relative;
                         display: flex;
                         align-items: center;
                         justify-content: center;
-                        width: 20vw;
+                        width: 20dvw;
                         // Default to horizontal
-                        height: 20vh;
+                        height: 20dvh;
                         @include respond-to-h(md){
-                            width: 17.5vw;
+                            width: 17.5dvw;
                         }
                         @include respond-to-h(mdt){
-                            width: 22.5vw;
+                            width: 22.5dvw;
                         }
                         @include respond-to-h(sm){
-                            width: 22.5vw;
+                            width: 22.5dvw;
                         }
                         @include respond-to-h(xs){
-                            height: 25vh;
-                            width: 15vw;
+                            height: 25dvh;
+                            width: 15dvw;
                         }
                         @include respond-to-h(xxs){
-                            height: 25vh;
-                            width: 17.5vw;
+                            height: 25dvh;
+                            width: 17.5dvw;
                         }
 
                     
                         // Even items (2nd, 4th, etc.) - vertical
                         &:nth-child(even) {
-                            height: 40vh;
+                            height: 40dvh;
 
                             @include respond-to-v(lg){
-                                width: 30vw;
-                                height: 30vh;
+                                width: 30dvw;
+                                height: 30dvh;
                             }
                             @include respond-to-v(md){
-                                width: 30vw;
-                                height: 30vh;
+                                width: 30dvw;
+                                height: 30dvh;
                             }
                             @include respond-to-v(s){
-                                width: 45vw;
-                                height: 30vh;
+                                width: 45dvw;
+                                height: 30dvh;
                             }
                             @include respond-to-v(sm){
-                                width: 50vw;
-                                height: 30vh;
+                                width: 50dvw;
+                                height: 30dvh;
                             }
                             @include respond-to-v(xs){
-                                width: 50vw;
-                                height: 35vh;
+                                width: 50dvw;
+                                height: 35dvh;
                             }
                         }
                     
                         // Odd items (1st, 3rd, etc.) - horizontal (optional, for clarity)
                         &:nth-child(odd) {
-                            height: 25vh;
-                            width: 25vw;
+                            height: 25dvh;
+                            width: 25dvw;
                             @include respond-to-h(md){
-                                width: 22.5vw;
+                                width: 22.5dvw;
                             }
                             @include respond-to-h(mdt){
-                                width: 27.5vw;
+                                width: 27.5dvw;
                             }
                             @include respond-to-h(sm){
-                                width: 27.5vw;
+                                width: 27.5dvw;
                             }
                             @include respond-to-h(xs){
-                                height: 25vh;
-                                width: 20vw;
+                                height: 25dvh;
+                                width: 20dvw;
                             }
                             @include respond-to-h(xxs){
-                                height: 25vh;
-                                width: 20vw;
+                                height: 25dvh;
+                                width: 20dvw;
                             }
                             @include respond-to-v(lg){
-                                width: 40vw;
-                                height: 20vh;
+                                width: 40dvw;
+                                height: 20dvh;
                             }
                             @include respond-to-v(md){
-                                width: 40vw;
-                                height: 20vh;
+                                width: 40dvw;
+                                height: 20dvh;
                             }
                              @include respond-to-v(s){
-                                width: 70vw;
-                                height: 20vh;
+                                width: 70dvw;
+                                height: 20dvh;
                             }
                              @include respond-to-v(sm){
-                                width: 70vw;
-                                height: 20vh;
+                                width: 70dvw;
+                                height: 20dvh;
                             }
                              @include respond-to-v(xs){
-                                width: 70vw;
-                                height: 25vh;
+                                width: 70dvw;
+                                height: 25dvh;
                             }
 
 

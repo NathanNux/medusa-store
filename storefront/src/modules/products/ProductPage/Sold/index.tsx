@@ -103,7 +103,7 @@ const ImageBar = () => {
                             className="soldProducts__image__bar__item" 
                             fill={true} 
                             priority={index < 3}
-                            sizes="50vw"
+                            sizes="50dvw"
                         />
                     </div>
                 )

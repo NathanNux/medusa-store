@@ -7,6 +7,7 @@ import Input from "@modules/common/components/input"
 import AccountInfo from "../account-info"
 import { HttpTypes } from "@medusajs/types"
 import { updateCustomer } from "@lib/data/customer"
+import s from "./style.module.scss"
 
 type MyInformationProps = {
   customer: HttpTypes.StoreCustomer
@@ -46,25 +47,25 @@ const ProfileName: React.FC<MyInformationProps> = ({ customer }) => {
   }, [state])
 
   return (
-    <form action={formAction} className="w-full overflow-visible">
+    <form action={formAction} className={s.root}>
       <AccountInfo
-        label="Name"
+        label="Jméno"
         currentInfo={`${customer.first_name} ${customer.last_name}`}
         isSuccess={successState}
         isError={!!state?.error}
         clearState={clearState}
         data-testid="account-name-editor"
       >
-        <div className="grid grid-cols-2 gap-x-4">
+        <div className={s.rowTwoWideGap}>
           <Input
-            label="First name"
+            label="Jméno"
             name="first_name"
             required
             defaultValue={customer.first_name ?? ""}
             data-testid="first-name-input"
           />
           <Input
-            label="Last name"
+            label="Příjmení"
             name="last_name"
             required
             defaultValue={customer.last_name ?? ""}

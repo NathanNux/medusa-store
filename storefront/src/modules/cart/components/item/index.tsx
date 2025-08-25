@@ -1,6 +1,6 @@
 "use client"
 
-import { Table, Text, clx } from "@medusajs/ui"
+import { Table, clx } from "@medusajs/ui"
 import { updateLineItem } from "@lib/data/cart"
 import { HttpTypes } from "@medusajs/types"
 import CartItemSelect from "@modules/cart/components/cart-item-select"
@@ -13,6 +13,7 @@ import LocalizedClientLink from "@modules/common/components/localized-client-lin
 import Spinner from "@modules/common/icons/spinner"
 import Thumbnail from "@modules/products/components/thumbnail"
 import { useState } from "react"
+import s from "./style.module.scss"
 
 type ItemProps = {
   item: HttpTypes.StoreCartLineItem
@@ -45,14 +46,11 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
   const maxQuantity = item.variant?.manage_inventory ? 10 : maxQtyFromInventory
 
   return (
-    <Table.Row className="w-full" data-testid="product-row">
-      <Table.Cell className="!pl-0 p-4 w-24">
+    <Table.Row className={s.row} data-testid="product-row">
+      <Table.Cell className={s.cellThumb}>
         <LocalizedClientLink
           href={`/products/${item.product_handle}`}
-          className={clx("flex", {
-            "w-16": type === "preview",
-            "small:w-24 w-12": type === "full",
-          })}
+          className={clx(s.thumbLink, type === "preview" ? s.thumbLinkPreview : s.thumbLinkFull)}
         >
           <Thumbnail
             thumbnail={item.thumbnail}
@@ -62,23 +60,20 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
         </LocalizedClientLink>
       </Table.Cell>
 
-      <Table.Cell className="text-left">
-        <Text
-          className="txt-medium-plus text-ui-fg-base"
-          data-testid="product-title"
-        >
+      <Table.Cell className={s.cellTitle}>
+        <p className={s.title} data-testid="product-title">
           {item.product_title}
-        </Text>
+        </p>
         <LineItemOptions variant={item.variant} data-testid="product-variant" />
         <div className="text-sm text-ui-fg-muted">
-          {!!item.metadata?.width && <div>Width: {item.metadata.width as number}cm</div>}
-          {!!item.metadata?.height && <div>Height: {item.metadata.height as number}cm</div>}
+          {!!item.metadata?.width && <div>Šířka: {item.metadata.width as number}cm</div>}
+          {!!item.metadata?.height && <div>Výška: {item.metadata.height as number}cm</div>}
         </div>
       </Table.Cell>
 
       {type === "full" && (
-        <Table.Cell>
-          <div className="flex gap-2 items-center w-28">
+        <Table.Cell className={s.cellActions}>
+          <div className={s.actionsRow}>
             <DeleteButton 
               id={item.id} 
               data-testid="product-delete-button" 
@@ -89,7 +84,6 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
             <CartItemSelect
               value={item.quantity}
               onChange={(value) => changeQuantity(parseInt(value.target.value))}
-              className="w-14 h-10 p-4"
               data-testid="product-select-button"
             >
               {/* TODO: Update this with the v2 way of managing inventory */}
@@ -115,7 +109,7 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
       )}
 
       {type === "full" && (
-        <Table.Cell className="hidden small:table-cell">
+        <Table.Cell className={s.cellUnit}>
           <LineItemUnitPrice
             item={item}
             style="tight"
@@ -124,15 +118,13 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
         </Table.Cell>
       )}
 
-      <Table.Cell className="!pr-0">
-        <span
-          className={clx("!pr-0", {
-            "flex flex-col items-end h-full justify-center": type === "preview",
-          })}
-        >
+      <Table.Cell className={s.cellPrice}>
+        <span className={clx(s.priceWrap, { [s.previewPriceWrap]: type === "preview" })}>
           {type === "preview" && (
-            <span className="flex gap-x-1 ">
-              <Text className="text-ui-fg-muted">{item.quantity}x </Text>
+            <span className={s.previewQtyRow}>
+              <span className={s.muted}>
+                <span data-testid="product-quantity">{item.quantity}</span>x
+              </span>
               <LineItemUnitPrice
                 item={item}
                 style="tight"

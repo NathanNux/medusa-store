@@ -113,7 +113,7 @@ export const Product = ({ handle, isActive }: ProductProps) => {
       path={`/express-checkout/${handle}`}
     >
       {loading && <Spinner />}
-      {!loading && !product && <div>Product not found</div>}
+      {!loading && !product && <div>Produkt nebyl nalezen</div>}
       {!loading && product && (
         <div className="flex gap-4 flex-col">
           <div className="flex gap-4">
@@ -156,7 +156,7 @@ export const Product = ({ handle, isActive }: ProductProps) => {
                 value={selectedOptions[option.id!]}
               >
                 <Select.Trigger>
-                  <Select.Value placeholder={`Select ${option.title}`} />
+                  <Select.Value placeholder={`Zvolit ${option.title}`} />
                 </Select.Trigger>
                 <Select.Content>
                   {option.values?.map((value) => (
@@ -173,11 +173,11 @@ export const Product = ({ handle, isActive }: ProductProps) => {
           ))}
           <div className="flex flex-col gap-1">
             <span className="text-xs text-ui-fg-muted">
-              Quantity
+              Množství
             </span>
             <Input
               name="quantity"
-              placeholder="Quantity"
+              placeholder="Množství"
               type="number"
               min="1"
               max={selectedVariant?.inventory_quantity}
@@ -191,9 +191,9 @@ export const Product = ({ handle, isActive }: ProductProps) => {
             onClick={handleAddToCart}
             className="w-full"
           >
-            {!selectedVariant && "Select Options"}
-            {selectedVariant && !isInStock && "Out of Stock"}
-            {selectedVariant && isInStock && "Add to Cart"}
+            {!selectedVariant && "Zvolit možnosti"}
+            {selectedVariant && !isInStock && "Není skladem"}
+            {selectedVariant && isInStock && "Přidat do košíku"}
           </Button>
         </div>
       )}

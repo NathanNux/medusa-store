@@ -4,6 +4,7 @@ import { transferCart } from "@lib/data/customer"
 import { ExclamationCircleSolid } from "@medusajs/icons"
 import { StoreCart, StoreCustomer } from "@medusajs/types"
 import { Button } from "@medusajs/ui"
+import styles from "./style.module.scss"
 import { useState } from "react"
 
 function CartMismatchBanner(props: {
@@ -31,18 +32,18 @@ function CartMismatchBanner(props: {
   }
 
   return (
-    <div className="flex items-center justify-center small:p-4 p-2 text-center bg-orange-300 small:gap-2 gap-1 text-sm mt-2 text-orange-800">
-      <div className="flex flex-col small:flex-row small:gap-2 gap-1 items-center">
-        <span className="flex items-center gap-1">
+    <div className={styles.root}>
+      <div className={styles.content}>
+        <span className={styles.message}>
           <ExclamationCircleSolid className="inline" />
-          Something went wrong when we tried to transfer your cart
+          Něco se pokazilo při pokusu o přenos vašeho košíku.
         </span>
 
-        <span>·</span>
+        <span className={styles.divider}>·</span>
 
         <Button
           variant="transparent"
-          className="hover:bg-transparent active:bg-transparent focus:bg-transparent disabled:text-orange-500 text-orange-950 p-0 bg-transparent"
+          className={styles.actionBtn}
           size="base"
           disabled={isPending}
           onClick={handleSubmit}

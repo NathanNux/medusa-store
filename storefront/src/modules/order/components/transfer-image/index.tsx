@@ -1,7 +1,9 @@
 import { SVGProps } from "react"
+import styles from "../styles/transfer-image.module.scss"
 
 const TransferImage = (props: SVGProps<SVGSVGElement>) => (
   <svg
+    className={styles.root}
     width="280"
     height="181"
     viewBox="0 0 280 181"

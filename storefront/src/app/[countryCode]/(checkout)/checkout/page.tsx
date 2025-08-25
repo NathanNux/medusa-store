@@ -5,6 +5,7 @@ import CheckoutForm from "@modules/checkout/templates/checkout-form"
 import CheckoutSummary from "@modules/checkout/templates/checkout-summary"
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
+import styles from "./page.module.scss"
 
 export const metadata: Metadata = {
   title: "Checkout",
@@ -21,9 +22,9 @@ export default async function Checkout(props:{params: Promise<{countryCode:strin
   const customer = await retrieveCustomer()
 
   return (
-    <div className="grid grid-cols-1 small:grid-cols-[1fr_416px] content-container gap-x-40 py-12">
+    <div className={styles.root}>
       <PaymentWrapper cart={cart}>
-      <CheckoutForm cart={cart} customer={customer} countryCode={countryCode} />
+        <CheckoutForm cart={cart} customer={customer} countryCode={countryCode} />
       </PaymentWrapper>
       <CheckoutSummary cart={cart} />
     </div>

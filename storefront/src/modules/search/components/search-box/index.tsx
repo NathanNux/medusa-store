@@ -1,3 +1,4 @@
+import styles from "./style.module.scss"
 import { XMarkMini } from "@medusajs/icons"
 import { FormEvent } from "react"
 import { useRouter } from "next/navigation"
@@ -40,9 +41,9 @@ const ControlledSearchBox = ({
   }
 
   return (
-    <div {...props} className="w-full">
+    <div {...props} className={styles.root}>
       <form action="" noValidate onSubmit={handleSubmit} onReset={handleReset}>
-        <div className="flex items-center justify-between">
+        <div className={styles.inputRow}>
           <input
             ref={inputRef}
             data-testid="search-input"
@@ -54,16 +55,16 @@ const ControlledSearchBox = ({
             type="search"
             value={value}
             onChange={onChange}
-            className="txt-compact-large h-6 placeholder:text-ui-fg-on-color placeholder:transition-colors focus:outline-none flex-1 bg-transparent "
+            className={styles.searchInput}
           />
           {value && (
             <button
               onClick={handleReset}
               type="button"
-              className="items-center justify-center text-ui-fg-on-color focus:outline-none gap-x-2 px-2 txt-compact-large flex"
+              className={styles.cancelBtn}
             >
               <XMarkMini />
-              Cancel
+              Zrušit
             </button>
           )}
         </div>

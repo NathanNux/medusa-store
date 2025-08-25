@@ -9,6 +9,9 @@ import { Button, Input, Label, Textarea, toast, Toaster } from "@medusajs/ui"
 import { Star, StarSolid } from "@medusajs/icons"
 import { addProductReview } from "../../../../lib/data/products"
 import styles from "./form.module.scss"
+import { useFormStatus } from "react-dom"
+
+import { motion } from 'framer-motion';
 
 type ProductReviewsFormProps = {
   productId: string
@@ -35,7 +38,7 @@ export default function ProductReviewsForm({ productId }: ProductReviewsFormProp
       <div className={`product-page-constraint ${styles.container}`}>
         <div className={styles.center}>
           <span className="text-ui-fg-subtle">
-            Pro přidání recenze se prosím <a href="/account/login" className="underline">přihlaste</a> nebo <a href="/account/register" className="underline">vytvořte účet</a>.
+            Pro přidání recenze se prosím <a href="/account" className="underline">přihlaste</a> nebo <a href="/account" className="underline">vytvořte účet</a>.
           </span>
         </div>
         <Toaster />
@@ -80,9 +83,14 @@ export default function ProductReviewsForm({ productId }: ProductReviewsFormProp
   return (
     <div className={`product-page-constraint ${styles.container}`}>
         {!showForm && (
-        <div className={styles.center}>
-            <Button variant="secondary" onClick={() => setShowForm(true)}>Přidat recenzi</Button>
-        </div>
+          <div className={styles.center}>
+            <ClickButton
+              text="Přidat recenzi"
+              onClickAction={() => setShowForm(true)}
+              type="button"
+              className={styles.addReviewButton}
+            />
+          </div>
         )}
         {showForm && (
         <div className={styles.formSection}>
@@ -113,12 +121,81 @@ export default function ProductReviewsForm({ productId }: ProductReviewsFormProp
                 ))}
                 </div>
             </div>
-            <Button type="submit" disabled={isLoading} variant="primary">Odeslat</Button>
+            <ClickButton
+              text="Odeslat"
+              type="submit"
+              disabled={isLoading}
+              className={styles.submitButton}
+            />
             </form>
             </div>
         </div>
         )}
         <Toaster />
     </div>
+    )
+}
+
+
+
+type ClickButtonProps = {
+    text: string;
+    onClickAction?: () => void | Promise<void>;
+    ClickAction?: () => void | Promise<void>; // backward compatibility
+    disabled?: boolean;
+    type?: "button" | "submit";
+    className?: string;
+    "data-testid"?: string;
+}
+
+// Base animated button used across the site. Can act as a submit button in forms.
+function ClickButton({ onClickAction, ClickAction, disabled = false, text, type = "button", className, "data-testid": dataTestId }: ClickButtonProps) {
+    const [ isActive , setIsActive ] = useState<boolean>(false);
+    const { pending } = useFormStatus();
+    const isSubmitting = type === "submit" ? pending : false;
+    const isDisabled = disabled || isSubmitting;
+    const handleClick = onClickAction ?? ClickAction;
+
+    return (
+        <div className={className ? `${styles.ClickButton} ${className}` : styles.ClickButton}>
+            <button 
+                type={type}
+                className={styles.button}
+                onClick={handleClick}
+                disabled={isDisabled}
+                aria-busy={isDisabled || undefined}
+                onMouseEnter={() => setIsActive(true)}
+                onMouseLeave={() => setIsActive(false)}
+                data-testid={dataTestId}
+            >
+                <motion.div
+                    className={styles.slider}
+                    animate={{top: isActive ? "-100%" : "0%"}}
+                    transition={{ duration: 0.5, type: "tween", ease: [0.76, 0, 0.24, 1]}}
+                >
+                    <div 
+                        className={styles.el}
+                        style={{ backgroundColor: "var(--CreamDetails)" }}
+                    >
+                        <PerspectiveText label={text}/>
+                    </div>
+                    <div 
+                        className={styles.el}
+                        style={{ backgroundColor: "var(--CharcoalBg)" }}
+                    >
+                        <PerspectiveText label={text} />
+                    </div>
+                </motion.div>
+            </button>
+        </div>
+    )
+}
+
+function PerspectiveText({label}: {label: string}) {
+    return (    
+        <div className={styles.perspectiveText}>
+            <p>{label}</p>
+            <p>{label}</p>
+        </div>
     )
 }

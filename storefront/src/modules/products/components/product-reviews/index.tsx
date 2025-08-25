@@ -3,10 +3,13 @@
 import { getProductReviews } from "../../../../lib/data/products"
 import { Star, StarSolid } from "@medusajs/icons"
 import { StoreProductReview } from "../../../../types/global"
-import { Button } from "@medusajs/ui"
+// import { Button } from "@medusajs/ui"
 import { useState, useEffect } from "react"
 import ProductReviewsForm from "./form"
 import styles from "./style.module.scss"
+
+import { motion } from 'framer-motion';
+import { useFormStatus } from 'react-dom';
 
 type ProductReviewsProps = {
   productId: string
@@ -90,9 +93,6 @@ export default function ProductReviews({
   return (
     <div className={`product-page-constraint ${styles.container}`}>
         <div className={styles.header}>
-        <span className={styles.subtitle}>
-            Recenze
-        </span>
         <p className={styles.title}>
             Podívejte se, co o tomto produktu říkají naši zákazníci.
         </p>
@@ -121,14 +121,80 @@ export default function ProductReviews({
         </div>
 
         {hasMoreReviews && (
-        <div className="flex justify-center mt-8">
-            <Button variant="secondary" onClick={() => setPage(page + 1)}>
-                Načíst další recenze
-            </Button>
-        </div>
+          <div className="flex justify-center mt-8">
+            <ClickButton
+              text="Načíst další recenze"
+              onClickAction={() => setPage(page + 1)}
+              type="button"
+              className={styles.loadMoreButton}
+            />
+          </div>
         )}
 
-    <ProductReviewsForm productId={productId} />
+      <ProductReviewsForm productId={productId} />
     </div>
   )
+}
+
+
+type ClickButtonProps = {
+    text: string;
+    onClickAction?: () => void | Promise<void>;
+    ClickAction?: () => void | Promise<void>; // backward compatibility
+    disabled?: boolean;
+    type?: "button" | "submit";
+    className?: string;
+    "data-testid"?: string;
+}
+
+// Base animated button used across the site. Can act as a submit button in forms.
+function ClickButton({ onClickAction, ClickAction, disabled = false, text, type = "button", className, "data-testid": dataTestId }: ClickButtonProps) {
+    const [ isActive , setIsActive ] = useState<boolean>(false);
+    const { pending } = useFormStatus();
+    const isSubmitting = type === "submit" ? pending : false;
+    const isDisabled = disabled || isSubmitting;
+    const handleClick = onClickAction ?? ClickAction;
+
+    return (
+        <div className={className ? `${styles.ClickButton} ${className}` : styles.ClickButton}>
+            <button 
+                type={type}
+                className={styles.button}
+                onClick={handleClick}
+                disabled={isDisabled}
+                aria-busy={isDisabled || undefined}
+                onMouseEnter={() => setIsActive(true)}
+                onMouseLeave={() => setIsActive(false)}
+                data-testid={dataTestId}
+            >
+                <motion.div
+                    className={styles.slider}
+                    animate={{top: isActive ? "-100%" : "0%"}}
+                    transition={{ duration: 0.5, type: "tween", ease: [0.76, 0, 0.24, 1]}}
+                >
+                    <div 
+                        className={styles.el}
+                        style={{ backgroundColor: "var(--CreamDetails)" }}
+                    >
+                        <PerspectiveText label={text}/>
+                    </div>
+                    <div 
+                        className={styles.el}
+                        style={{ backgroundColor: "var(--CharcoalBg)" }}
+                    >
+                        <PerspectiveText label={text} />
+                    </div>
+                </motion.div>
+            </button>
+        </div>
+    )
+}
+
+function PerspectiveText({label}: {label: string}) {
+    return (    
+        <div className={styles.perspectiveText}>
+            <p>{label}</p>
+            <p>{label}</p>
+        </div>
+    )
 }

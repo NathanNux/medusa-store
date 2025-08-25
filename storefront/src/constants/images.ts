@@ -9,32 +9,32 @@ export const images = [
     {
         src: floating1,
         alt: "About Image 1",
-        sizes: "50vw"
+        sizes: "50dvw"
     },
     {
         src: floating2,
         alt: "About Image 2",
-        sizes: "50vw"
+        sizes: "50dvw"
     },
     {
         src: floating3,
         alt: "About Image 3",
-        sizes: "50vw"
+        sizes: "50dvw"
     },
     {
         src: floating4,
         alt: "About Image 4",
-        sizes: "50vw"
+        sizes: "50dvw"
     },
     {
         src: floating5,
         alt: "About Image 5",
-        sizes: "50vw"
+        sizes: "50dvw"
     },
     {
         src: floating6,
         alt: "About Image 6",
-        sizes: "50vw"
+        sizes: "50dvw"
     }
 
 ]

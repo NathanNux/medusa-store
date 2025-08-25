@@ -5,6 +5,7 @@ import Addresses from "@modules/checkout/components/addresses"
 import Payment from "@modules/checkout/components/payment"
 import Review from "@modules/checkout/components/review"
 import Shipping from "@modules/checkout/components/shipping"
+import styles from "./style.module.scss"
 
 export default async function CheckoutForm({
   cart,
@@ -30,18 +31,15 @@ export default async function CheckoutForm({
   }
 
   return (
-    <div className="w-full grid grid-cols-1 gap-y-8">
+    <div className={styles.root}>
       <Addresses cart={cart} customer={customer} />
-
       <Shipping
         cart={cart}
         availableShippingMethods={shippingMethods}
         packetaApiKey={process.env.NEXT_PUBLIC_PACKETA_API_KEY}
         packetaShippingMethodId={process.env.NEXT_PUBLIC_PACKETA_SHIPPING_METHOD_ID}
       />
-
       <Payment cart={cart} availablePaymentMethods={paymentMethods} />
-
       <Review cart={cart} countryCode={countryCode} />
     </div>
   )

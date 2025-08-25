@@ -2,6 +2,7 @@ import { getPercentageDiff } from "@lib/util/get-precentage-diff"
 import { convertToLocale } from "@lib/util/money"
 import { HttpTypes } from "@medusajs/types"
 import { clx } from "@medusajs/ui"
+import styles from "./style.module.scss"
 
 type LineItemPriceProps = {
   item: HttpTypes.StoreCartLineItem | HttpTypes.StoreOrderLineItem
@@ -20,41 +21,53 @@ const LineItemPrice = ({
   const hasReducedPrice = currentPrice < originalPrice
 
   return (
-    <div className="flex flex-col gap-x-2 text-ui-fg-subtle items-end">
-      <div className="text-left">
+    <div className={styles.root}>
+      <div className={styles.priceContainer}>
         {hasReducedPrice && (
           <>
             <p>
               {style === "default" && (
-                <span className="text-ui-fg-subtle">Original: </span>
+                <span className={styles.originalLabel}>Původně: </span>
               )}
               <span
-                className="line-through text-ui-fg-muted"
+                className={styles.originalPrice}
                 data-testid="product-original-price"
               >
-                {convertToLocale({
-                  amount: originalPrice,
-                  currency_code: currencyCode,
-                })}
+                {(() => {
+                  const price = convertToLocale({
+                    amount: originalPrice,
+                    currency_code: currencyCode,
+                  });
+                  if (currencyCode?.toLowerCase() === "czk") {
+                    return price.replace(/czk/i, "") + ",-";
+                  }
+                  return price;
+                })()}
               </span>
             </p>
             {style === "default" && (
-              <span className="text-ui-fg-interactive">
+              <span className={styles.discount}>
                 -{getPercentageDiff(originalPrice, currentPrice || 0)}%
               </span>
             )}
           </>
         )}
         <span
-          className={clx("text-base-regular", {
-            "text-ui-fg-interactive": hasReducedPrice,
+          className={clx(styles.price, {
+            [styles.discounted]: hasReducedPrice,
           })}
           data-testid="product-price"
         >
-          {convertToLocale({
-            amount: currentPrice,
-            currency_code: currencyCode,
-          })}
+          {(() => {
+            const price = convertToLocale({
+              amount: currentPrice,
+              currency_code: currencyCode,
+            });
+            if (currencyCode?.toLowerCase() === "czk") {
+              return price.replace(/czk/i, "") + ",-";
+            }
+            return price;
+          })()}
         </span>
       </div>
     </div>

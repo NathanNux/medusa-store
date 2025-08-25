@@ -7,6 +7,7 @@ import Input from "@modules/common/components/input"
 import AccountInfo from "../account-info"
 import { HttpTypes } from "@medusajs/types"
 // import { updateCustomer } from "@lib/data/customer"
+import s from "./style.module.scss"
 
 type MyInformationProps = {
   customer: HttpTypes.StoreCustomer
@@ -46,9 +47,9 @@ const ProfileEmail: React.FC<MyInformationProps> = ({ customer }) => {
   }, [state])
 
   return (
-    <form action={formAction} className="w-full">
+    <form action={formAction} className={s.root}>
       <AccountInfo
-        label="Email"
+        label="E-mail"
         currentInfo={`${customer.email}`}
         isSuccess={successState}
         isError={!!state.error}
@@ -56,9 +57,9 @@ const ProfileEmail: React.FC<MyInformationProps> = ({ customer }) => {
         clearState={clearState}
         data-testid="account-email-editor"
       >
-        <div className="grid grid-cols-1 gap-y-2">
+        <div className={s.formGrid}>
           <Input
-            label="Email"
+            label="E-mail"
             name="email"
             type="email"
             autoComplete="email"

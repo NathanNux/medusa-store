@@ -1,6 +1,7 @@
 import repeat from "@lib/util/repeat"
 import { HttpTypes } from "@medusajs/types"
 import { Table } from "@medusajs/ui"
+import styles from "../styles/items.module.scss"
 
 import Divider from "@modules/common/components/divider"
 import Item from "@modules/order/components/item"
@@ -14,8 +15,8 @@ const Items = ({ order }: ItemsProps) => {
   const items = order.items
 
   return (
-    <div className="flex flex-col">
-      <Divider className="!mb-0" />
+    <div className={styles.root}>
+      <Divider className={styles.divider} />
       <Table>
         <Table.Body data-testid="products-table">
           {items?.length

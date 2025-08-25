@@ -3,8 +3,8 @@ export function abandonedCartEmail({ customer, cart_id, items }: any) {
   const storefrontUrl = process.env.MEDUSA_STOREFRONT_URL || "https://yourstore.com";
   return (
     <div>
-      <h1>Hi {customer?.first_name}, your cart is waiting! 🛍️</h1>
-      <p>You left some great items in your cart. Complete your purchase before they're gone!</p>
+      <h1>Dobrý den, {customer?.first_name}, váš košík čeká! 🛍️</h1>
+      <p>Nechali jste si v košíku skvělé položky. Dokončete svůj nákup, než budou pryč!</p>
       {items?.map((item: any, idx: number) => (
         <div key={idx} style={{ display: "flex", alignItems: "center", marginBottom: 12 }}>
           {item.thumbnail && (
@@ -12,8 +12,8 @@ export function abandonedCartEmail({ customer, cart_id, items }: any) {
           )}
           <div>
             <strong>{item.product_title}</strong>
-            <div>Quantity: <strong>{item.quantity}</strong></div>
-            <div>Price: <strong>{item.unit_price / 100} Kč</strong></div>
+            <div>Množství: <strong>{item.quantity}</strong></div>
+            <div>Cena: <strong>{item.unit_price / 100} Kč</strong></div>
           </div>
         </div>
       ))}
@@ -29,11 +29,13 @@ export function abandonedCartEmail({ customer, cart_id, items }: any) {
           marginTop: 20,
         }}
       >
-        Return to Cart & Checkout
+        Vrátit se do košíku a k pokladně
       </a>
       <p style={{ fontSize: 12, color: "#888", marginTop: 20 }}>
-        Need help? <a href="mailto:support@yourstore.com">Contact us</a>
+        Potřebujete pomoc? <a href="mailto:support@yourstore.com">Kontaktujte nás</a>
       </p>
     </div>
   );
 }
+
+// WIP: Add here valid email for support

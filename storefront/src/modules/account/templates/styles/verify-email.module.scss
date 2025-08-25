@@ -3,13 +3,13 @@
 // Styles for Verify Email page (nested SCSS)
 
 .section {
-	height: 100vh;
-	width: 100vw;
+	height: 100dvh;
+	width: 100dvw;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	padding: 1rem;
+	padding: 1rem; 
 	overflow: hidden;
 
 	.ImageContainer{
@@ -51,9 +51,48 @@
 		justify-content: center;
 		row-gap: 1rem; // gap-4
 		border-radius: 25px;
-		box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+		box-shadow: 0 0 10px var(--ButtonBorder); // subtle shadow here
+
 		z-index: 2;
 		background-color: var(--WhiteBg);
+
+		@include respond-to-h(sm){
+			width: 50%;
+			height: 70%;
+		}
+
+		@include respond-to-h(xs){
+			width: 50%;
+			height: 80%;
+			margin-top: 10dvh;
+		}
+		@include respond-to-h(xxs){
+			width: 50%;
+			height: 80%;
+			margin-top: 10dvh;
+		}
+
+		@include respond-to-v(md){
+			width: 70%;
+			height: 50%;
+			margin-top: 10dvh;
+		}
+
+		@include respond-to-v(s){
+			width: 90%;
+			height: 60%;
+			margin-top: 10dvh;
+		}
+		@include respond-to-v(sm){
+			width: 90%;
+			height: 60%;
+			margin-top: 10dvh;
+		}
+		@include respond-to-v(xs){
+			width: 90%;
+			height: 60%;
+			margin-top: 10dvh;
+		}
 
 		.title {
 			font-family: "Sansation-Regular";
@@ -61,6 +100,36 @@
 			line-height: 1.5rem;
 			font-weight: 400; // font-bold
 			margin: 0;
+
+			@include respond-to-h(lg){
+				font-size: 1.8rem;
+			}
+
+			@include respond-to-h(md){
+				font-size: 1.8rem;
+			}
+			@include respond-to-h(sm){
+				font-size: 1.8rem;
+			}
+			@include respond-to-h(xs){
+				font-size: 1.8rem;
+			}
+			@include respond-to-h(xxs){
+				font-size: 1.8rem;
+			}
+
+			@include respond-to-v(s){
+				font-size: 1.6rem;
+				text-align: center;
+			}
+			@include respond-to-v(sm){
+				font-size: 1.6rem;
+				text-align: center;
+			}
+			@include respond-to-v(xs){
+				font-size: 1.6rem;
+				text-align: center;
+			}
 		}
 
 		.desc {
@@ -80,6 +149,12 @@
 			gap: 1.5rem; // gap-2
 			margin-top: 1rem; // mt-4
 			width: 100%;
+
+			.ClickButton{
+				.button{
+					width: 300px;
+				}
+			}
 		}
 	}
 }
@@ -167,7 +242,15 @@
 		background-color: transparent;
 
 		@include respond-to-v(s){
-			width: 90px;
+			width: 150px;
+			height: 35px;
+		}
+		@include respond-to-v(sm){
+			width: 150px;
+			height: 35px;
+		}
+		@include respond-to-v(xs){
+			width: 150px;
 			height: 35px;
 		}
 
@@ -229,106 +312,4 @@
             opacity: 0;
         }
     }
-}
-
-// --- Horizontal (landscape) responsiveness ---
-@include respond-to-h(huge) {
-	.section { padding: 2rem; }
-	.section .ImageContainer .Image { top: -8%; left: -8%; width: 116%; height: 116%; }
-	.section .container { width: 36%; height: 55%; row-gap: 1.25rem; }
-	.section .container .title { font-size: 2.5rem; line-height: 2.75rem; }
-	.section .container .desc { font-size: 1.2rem; line-height: 1.75rem; }
-	.LinkButton .button { width: 240px; height: 46px; border-radius: 26px; }
-	.ClickButton .button { width: 200px; height: 44px; border-radius: 26px; }
-}
-
-@include respond-to-h(xl) {
-	.section .container { width: 38%; height: 56%; }
-	.section .container .title { font-size: 2.25rem; line-height: 2.5rem; }
-	.LinkButton .button { width: 220px; height: 44px; }
-	.ClickButton .button { width: 180px; height: 42px; }
-}
-
-@include respond-to-h(lg) {
-	.section .container { width: 40%; height: 58%; }
-	.section .container .title { font-size: 2.1rem; }
-	.section .container .desc { font-size: 1.1rem; }
-}
-
-@include respond-to-h(md) { // notebooks with lower height
-	.section .container { width: 44%; height: 52%; }
-	.section .container .title { font-size: 2rem; line-height: 2.25rem; }
-	.section .container .desc { font-size: 1.05rem; line-height: 1.6rem; }
-	.LinkButton .button { width: 200px; height: 40px; }
-	.ClickButton .button { width: 160px; height: 38px; }
-}
-
-@include respond-to-h(mdt) { // taller mids
-	.section .container { width: 42%; height: 56%; }
-}
-
-@include respond-to-h(sm) {
-	.section .container { width: 48%; height: 56%; }
-	.section .container .title { font-size: 1.9rem; }
-	.section .container .desc { font-size: 1rem; }
-}
-
-@include respond-to-h(xs) {
-	.section .ImageContainer .Image { top: -6%; left: -6%; width: 112%; height: 112%; }
-	.section .container { width: 60%; height: 54%; }
-	.LinkButton .button { width: 180px; height: 38px; }
-	.ClickButton .button { width: 150px; height: 36px; }
-}
-
-@include respond-to-h(xxs) {
-	.section { padding: 0.75rem; }
-	.section .ImageContainer .Image { top: -4%; left: -4%; width: 108%; height: 108%; }
-	.section .container { width: 80%; height: auto; padding: 1rem; }
-	.section .container .title { font-size: 1.75rem; line-height: 2.1rem; }
-	.section .container .desc { font-size: 0.95rem; line-height: 1.4rem; }
-	.LinkButton .button { width: 160px; height: 36px; border-radius: 22px; }
-	.ClickButton .button { width: 140px; height: 34px; border-radius: 22px; }
-}
-
-// --- Vertical (portrait) responsiveness ---
-@include respond-to-v(lg) {
-	.section { padding: 2rem; }
-	.section .ImageContainer .Image { top: -10%; left: -10%; width: 120%; height: 120%; }
-	.section .container { width: 60%; height: 60%; }
-	.section .container .title { font-size: 2.4rem; line-height: 2.6rem; }
-	.section .container .desc { font-size: 1.15rem; }
-	.LinkButton .button { width: 240px; height: 46px; }
-	.ClickButton .button { width: 180px; height: 42px; }
-}
-
-@include respond-to-v(md) {
-	.section .container { width: 70%; height: 58%; }
-	.section .container .title { font-size: 2.1rem; }
-	.LinkButton .button { width: 220px; height: 44px; }
-	.ClickButton .button { width: 170px; height: 40px; }
-}
-
-@include respond-to-v(s) {
-	.section .container { width: 78%; height: 56%; }
-	.section .container .title { font-size: 1.9rem; }
-	.section .container .desc { font-size: 1.05rem; }
-	.LinkButton .button { width: 200px; height: 40px; }
-	.ClickButton .button { width: 160px; height: 38px; }
-}
-
-@include respond-to-v(sm) {
-	.section .container { width: 88%; height: auto; padding: 1rem; }
-	.section .container .title { font-size: 1.7rem; }
-	.section .container .desc { font-size: 0.95rem; }
-	.LinkButton .button { width: 180px; height: 38px; }
-	.ClickButton .button { width: 150px; height: 36px; }
-}
-
-@include respond-to-v(xs) {
-	.section { padding: 0.75rem; }
-	.section .container { width: 94%; height: auto; }
-	.section .container .title { font-size: 1.55rem; line-height: 2rem; }
-	.section .container .desc { font-size: 0.9rem; line-height: 1.35rem; }
-	.LinkButton .button { width: 160px; height: 36px; border-radius: 20px; }
-	.ClickButton .button { width: 140px; height: 34px; border-radius: 20px; }
 }

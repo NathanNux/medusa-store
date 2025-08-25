@@ -21,22 +21,22 @@ function UserInvitedEmailComponent({ invite_url, email }: UserInvitedEmailProps)
   return (
     <Html>
       <Head />
-      <Preview>You've been invited to join our platform</Preview>
+      <Preview>Jste pozváni na naši platformu!</Preview>
       <Tailwind>
         <Body className="bg-white my-auto mx-auto font-sans px-2">
           <Container className="border border-solid border-[#eaeaea] rounded my-[40px] mx-auto p-[20px] max-w-[465px]">
             <Section className="mt-[32px]">
               <Heading className="text-black text-[24px] font-normal text-center p-0 my-[30px] mx-0">
-                You're Invited!
+                Jste pozváni!
               </Heading>
             </Section>
 
             <Section className="my-[32px]">
               <Text className="text-black text-[14px] leading-[24px]">
-                Hello{email ? ` ${email}` : ""},
+                Dobrý den,{email ? ` ${email}` : ""},
               </Text>
               <Text className="text-black text-[14px] leading-[24px]">
-                You've been invited to join our platform. Click the button below to accept your invitation and set up your account.
+                Byli jste pozváni k připojení k naší platformě. Klikněte na tlačítko níže a přijměte svou pozvánku a nastavte si svůj účet.
               </Text>
             </Section>
 
@@ -45,13 +45,13 @@ function UserInvitedEmailComponent({ invite_url, email }: UserInvitedEmailProps)
                 className="bg-[#000000] rounded text-white text-[12px] font-semibold no-underline text-center px-5 py-3"
                 href={invite_url}
               >
-                Accept Invitation
+                Přijmout pozvánku
               </Button>
             </Section>
 
             <Section className="my-[32px]">
               <Text className="text-black text-[14px] leading-[24px]">
-                Or copy and paste this URL into your browser:
+                Nebo zkopírujte a vložte tuto adresu URL do svého prohlížeče:
               </Text>
               <Link
                 href={invite_url}
@@ -63,7 +63,7 @@ function UserInvitedEmailComponent({ invite_url, email }: UserInvitedEmailProps)
 
             <Section className="mt-[32px]">
               <Text className="text-[#666666] text-[12px] leading-[24px]">
-                If you weren't expecting this invitation, you can ignore this email.
+                Pokud jste tuto pozvánku neočekávali, můžete tento e-mail ignorovat.
               </Text>
             </Section>
           </Container>

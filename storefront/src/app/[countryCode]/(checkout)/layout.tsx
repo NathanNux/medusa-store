@@ -1,6 +1,8 @@
+
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import ChevronDown from "@modules/common/icons/chevron-down"
 import MedusaCTA from "@modules/layout/components/medusa-cta"
+import styles from "./styles/layout.module.scss"
 
 export default function CheckoutLayout({
   children,
@@ -8,34 +10,30 @@ export default function CheckoutLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className="w-full bg-white relative small:min-h-screen">
-      <div className="h-16 bg-white border-b ">
-        <nav className="flex h-full items-center content-container justify-between">
+    <div className={styles.root}>
+      <div className={styles.header}>
+        <nav>
           <LocalizedClientLink
             href="/cart"
-            className="text-small-semi text-ui-fg-base flex items-center gap-x-2 uppercase flex-1 basis-0"
+            className={styles.backLink}
             data-testid="back-to-cart-link"
           >
-            <ChevronDown className="rotate-90" size={16} />
-            <span className="mt-px hidden small:block txt-compact-plus text-ui-fg-subtle hover:text-ui-fg-base ">
-              Back to shopping cart
-            </span>
-            <span className="mt-px block small:hidden txt-compact-plus text-ui-fg-subtle hover:text-ui-fg-base">
-              Back
-            </span>
+            <ChevronDown className={styles.chevron} size={16} />
+            <span className={styles.backText}>Back to shopping cart</span>
+            <span className={styles.backTextMobile}>Back</span>
           </LocalizedClientLink>
           <LocalizedClientLink
             href="/"
-            className="txt-compact-xlarge-plus text-ui-fg-subtle hover:text-ui-fg-base uppercase"
+            className={styles.storeLink}
             data-testid="store-link"
           >
             Medusa Store
           </LocalizedClientLink>
-          <div className="flex-1 basis-0" />
+          <div className={styles.spacer} />
         </nav>
       </div>
-      <div className="relative" data-testid="checkout-container">{children}</div>
-      <div className="py-4 w-full flex items-center justify-center">
+      <div className={styles.checkoutContainer} data-testid="checkout-container">{children}</div>
+      <div className={styles.footer}>
         <MedusaCTA />
       </div>
     </div>

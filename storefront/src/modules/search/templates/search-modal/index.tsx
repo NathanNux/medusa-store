@@ -1,4 +1,5 @@
 "use client"
+import styles from "./style.module.scss"
 
 import { InstantSearch } from "react-instantsearch-hooks-web"
 import { useRouter } from "next/navigation"
@@ -55,23 +56,23 @@ export default function SearchModal() {
   }, [])
 
   return (
-    <div className="relative z-[75] w-full h-fit">
-      <div className="fixed inset-0 bg-opacity-75 backdrop-blur-md opacity-100 h-screen w-screen" />
-      <div className="fixed inset-0 px-5 sm:p-0" ref={searchRef}>
-        <div className="flex flex-col justify-start w-full h-fit transform p-5 items-center text-left align-middle transition-all max-h-[75vh] bg-transparent shadow-none">
+    <div className={styles.root}>
+      <div className={styles.overlay} />
+      <div className={styles.modalWrap} ref={searchRef}>
+        <div className={styles.modal}>
           <InstantSearch
             indexName={SEARCH_INDEX_NAME}
             searchClient={searchClient}
           >
             <div
-              className="flex absolute flex-col h-fit w-full sm:w-fit"
+              className={styles.container}
               data-testid="search-modal-container"
             >
-              <div className="w-full flex items-center gap-x-2 p-4 bg-[rgba(3,7,18,0.5)] text-ui-fg-on-color backdrop-blur-2xl rounded-rounded">
+              <div className={styles.searchBar}>
                 <MagnifyingGlassMini />
                 <SearchBox />
               </div>
-              <div className="flex-1 mt-6">
+              <div className={styles.results}>
                 <Hits hitComponent={Hit} />
               </div>
             </div>

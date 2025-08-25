@@ -8,6 +8,7 @@ import { SortOptions } from "@modules/store/components/refinement-list/sort-prod
 import PaginatedProducts from "@modules/store/templates/paginated-products"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { HttpTypes } from "@medusajs/types"
+import s from "./style.module.scss"
 
 export default function CategoryTemplate({
   category,
@@ -37,18 +38,15 @@ export default function CategoryTemplate({
   getParents(category)
 
   return (
-    <div
-      className="flex flex-col small:flex-row small:items-start py-6 content-container"
-      data-testid="category-container"
-    >
+    <div className={`${s.root} content-container`} data-testid="category-container">
       <RefinementList sortBy={sort} data-testid="sort-by-container" />
-      <div className="w-full">
-        <div className="flex flex-row mb-8 text-2xl-semi gap-4">
+      <div className={s.main}>
+        <div className={s.header}>
           {parents &&
             parents.map((parent) => (
-              <span key={parent.id} className="text-ui-fg-subtle">
+              <span key={parent.id} className={s.parentCrumb}>
                 <LocalizedClientLink
-                  className="mr-4 hover:text-black"
+                  className={s.breadcrumbLink}
                   href={`/categories/${parent.handle}`}
                   data-testid="sort-by-link"
                 >
@@ -57,16 +55,16 @@ export default function CategoryTemplate({
                 /
               </span>
             ))}
-          <h1 data-testid="category-page-title">{category.name}</h1>
+          <h1 className={s.pageTitle} data-testid="category-page-title">{category.name}</h1>
         </div>
         {category.description && (
-          <div className="mb-8 text-base-regular">
-            <p>{category.description}</p>
+          <div className={s.descWrap}>
+            <p className={s.desc}>{category.description}</p>
           </div>
         )}
         {category.category_children && (
-          <div className="mb-8 text-base-large">
-            <ul className="grid grid-cols-1 gap-2">
+          <div className={s.childrenWrap}>
+            <ul className={s.childList}>
               {category.category_children?.map((c) => (
                 <li key={c.id}>
                   <InteractiveLink href={`/categories/${c.handle}`}>

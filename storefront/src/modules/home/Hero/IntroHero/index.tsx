@@ -123,7 +123,7 @@ export default function IntroHero() {
                     <Image 
                         src={"/assets/img/11.jpg"}
                         alt="Intro Image"
-                        sizes="50vw"
+                        sizes="50dvw"
                         fill={true}
                     />
                 </motion.div> */}
@@ -175,7 +175,7 @@ export default function IntroHero() {
                         <Image 
                             src={"/assets/img/img/2.jpg"}
                             alt="Intro Image"
-                            sizes="100vw"
+                            sizes="100dvw"
                             fill={true}
                             className="Hero__Intro__Cover"
                             style={{ objectFit: "cover", zIndex: -1 }}

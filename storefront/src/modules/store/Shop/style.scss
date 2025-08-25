@@ -6,46 +6,52 @@
     align-items: center;
     justify-content: center;
     position: relative;
-    width: 100vw;
-    min-height: 80vh;
+    width: 100dvw;
+    min-height: 80dvh;
     background-color: var(--OliveBg);
 
     .search__bar{
-        width: 100vw;
-        height: 10vh;
+        width: 100dvw;
+        height: 10dvh;
         position: absolute;
-        top: 25vh;
+        top: 25dvh;
         left: 0;
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 0 5vw;
+        padding: 0 5dvw;
         z-index: 20;
 
 
+        @include respond-to-h(xs){
+            height: 15dvh;
+        }
+        @include respond-to-h(xxs){
+            height: 15dvh;
+        }
         @include respond-to-v(lg){
-            height: 5vh;
+            height: 5dvh;
         }
         @include respond-to-v(md){
-            height: 5vh;
+            height: 6.5dvh;
         }
         @include respond-to-v(s){
-            height: 7.5vh;
-            width: 100vw;
-            left: 0vw;
-            padding: 0 2.5vw;
+            height: 7.5dvh;
+            width: 100dvw;
+            left: 0dvw;
+            padding: 0 2.5dvw;
         }
         @include respond-to-v(sm){
-            height: 7.5vh;
-            width: 100vw;
-            left: 0vw;
-            padding: 0 2.5vw;
+            height: 7.5dvh;
+            width: 100dvw;
+            left: 0dvw;
+            padding: 0 2.5dvw;
         }
         @include respond-to-v(xs){
             height: 65px;
-            width: 100vw;
-            left: 0vw;
-            padding: 0 2.5vw;
+            width: 100dvw;
+            left: 0dvw;
+            padding: 0 2.5dvw;
         }
         
         .search__bar__container{
@@ -57,22 +63,22 @@
             justify-content: space-between;
             background-color: var(--WhiteBg);
             border-radius: 50px;
-            padding: 2.5vh 2.5vh 2.5vh 5vw;
+            padding: 2.5dvh 2.5dvh 2.5dvh 5dvw;
             z-index: 2;
             @include respond-to-v(lg){
-                padding: 1vh 1.5vw;
+                padding: 1dvh 1.5dvw;
             }
             @include respond-to-v(md){
-                padding: 1vh 1.5vw;
+                padding: 1dvh 1.5dvw;
             }
             @include respond-to-v(s){
-                padding: 1vh 2.5vw 1vh 15vw;
+                padding: 1dvh 2.5dvw 1dvh 15dvw;
             }
              @include respond-to-v(sm){
-                padding: 1vh 2.5vw 1vh 15vw;
+                padding: 1dvh 2.5dvw 1dvh 15dvw;
             }
              @include respond-to-v(xs){
-                padding: 1vh 2.5vw 1vh 15vw;
+                padding: 1dvh 2.5dvw 1dvh 15dvw;
             }
 
             .search__bar__container__categories{
@@ -82,7 +88,22 @@
                 flex-direction: row;
                 align-items: center;
                 justify-content: space-evenly;
+                @include respond-to-h(xs){
+                    width: 40%;
+                }
+                @include respond-to-h(xxs){
+                    width: 40%;
+                    margin-left: 2.5dvw;
+                }
 
+                @include respond-to-v(lg){
+                    width: 30%;
+                    margin-left: 5dvw;
+                }
+                @include respond-to-v(md){
+                    width: 35%;
+                    margin-left: 5dvw;
+                }
                 @include respond-to-v(s){
                     width: 75%;
                 }
@@ -120,7 +141,7 @@
                         flex-direction: row;
                         align-items: center;
                         justify-content: center;
-                        gap: 0.5vw;
+                        gap: 0.5dvw;
                         background-color: transparent;
                         box-shadow: none;
                         border: none;
@@ -170,8 +191,8 @@
                         }
 
                         .arrow__container{
-                            width: 1.5vw;
-                            height: 1.5vw;
+                            width: 1.5dvw;
+                            height: 1.5dvw;
                             display: flex;
                             align-items: center;
                             justify-content: center;
@@ -180,44 +201,44 @@
 
                             @include respond-to-h(xs){
                                 img{
-                                    width: 1.5vw;
-                                    height: 1.5vw;
+                                    width: 1.5dvw;
+                                    height: 1.5dvw;
                                 }
                             }
                             @include respond-to-h(xxs){
                                 img{
-                                    width: 1.5vw;
-                                    height: 1.5vw;
+                                    width: 1.5dvw;
+                                    height: 1.5dvw;
                                 }
                             }
                             @include respond-to-v(md){
                                 img{
-                                    width: 1.5vw;
-                                    height: 1.5vw;
+                                    width: 1.5dvw;
+                                    height: 1.5dvw;
                                 }
                             }
                             @include respond-to-v(s){
-                                width: 4vw;
-                                height: 4vw;
+                                width: 4dvw;
+                                height: 4dvw;
                                 img{
-                                    width: 4vw;
-                                    height: 4vw;
+                                    width: 4dvw;
+                                    height: 4dvw;
                                 }
                             }
                             @include respond-to-v(sm){
-                                width: 4vw;
-                                height: 4vw;
+                                width: 4dvw;
+                                height: 4dvw;
                                 img{
-                                    width: 4vw;
-                                    height: 4vw;
+                                    width: 4dvw;
+                                    height: 4dvw;
                                 }
                             }
                             @include respond-to-v(xs){
-                                width: 4vw;
-                                height: 4vw;
+                                width: 4dvw;
+                                height: 4dvw;
                                 img{
-                                    width: 4vw;
-                                    height: 4vw;
+                                    width: 4dvw;
+                                    height: 4dvw;
                                 }
                             }
                         }
@@ -227,7 +248,7 @@
                         position: absolute;
                         top: 90%;
                         left: 0;
-                        width: 10vw;
+                        width: 10dvw;
                         height: auto;
                         background-color: var(--WhiteBg);
                         border: 1px solid var(--ButtonBorder);
@@ -236,34 +257,58 @@
                         flex-direction: column;
                         justify-content: center;
                         align-items: center;
-                        gap: 0.5vh;
-                        padding: 1.5vh 0;
+                        gap: 0.5dvh;
+                        padding: 1.5dvh 0;
                         transform-origin: top center;
+                        @include respond-to-h(lg){
+                            width: 15dvw;
+                            left: -50%;
+                        } 
+                        @include respond-to-h(md){
+                            width: 15dvw;
+                            left: -50%;
+                        } 
+                        @include respond-to-h(mdt){
+                            width: 15dvw;
+                            left: -50%;
+                        } 
+                        @include respond-to-h(sm){
+                            width: 15dvw;
+                            left: -50%;
+                        } 
+                        @include respond-to-h(xs){
+                            width: 15dvw;
+                            left: -50%;
+                        } 
+                        @include respond-to-h(xxs){
+                            width: 20dvw;
+                            left: -50%;
+                        } 
                         @include respond-to-v(lg){
-                            width: 15vw;
+                            width: 15dvw;
                             left: -50%;
                         } 
                         @include respond-to-v(md){
-                            width: 15vw;
+                            width: 17.5dvw;
                             left: -50%;
                         } 
                          @include respond-to-v(s){
-                            width: 30vw;
+                            width: 30dvw;
                             left: -50%;
                         } 
                          @include respond-to-v(sm){
-                            width: 35vw;
+                            width: 35dvw;
                             left: -50%;
                         } 
                          @include respond-to-v(xs){
-                            width: 35vw;
+                            width: 35dvw;
                             left: -50%;
                         } 
                         
 
                         .dropdown__menu__item{
                             width: 100%;
-                            height: 2.5vh;
+                            height: 2.5dvh;
                             display: flex;
                             align-items: center;
                             justify-content: center;
@@ -273,6 +318,13 @@
                             transition: border 0.3s ease;
                             border: none;
                             transform-origin: top center;
+
+                            @include respond-to-h(xs){
+                                height: 5dvh;
+                            } 
+                            @include respond-to-h(xxs){
+                                height: 5dvh;
+                            } 
 
                             p{
                                 font-size: 1.3rem;
@@ -334,7 +386,7 @@
                         flex-direction: row;
                         align-items: center;
                         justify-content: center;
-                        gap: 0.5vw;
+                        gap: 0.5dvw;
                         background-color: transparent;
                         box-shadow: none;
                         border: none;
@@ -398,32 +450,41 @@
                 flex-direction: row;
                 align-items: center;
                 justify-content: center;
+                @include respond-to-h(xs){
+                    width: 50%;
+                }
+                @include respond-to-h(xxs){
+                    width: 50%;
+                }
+                @include respond-to-v(md){
+                    width: 50%;
+                }
                 @include respond-to-v(s){
                     width: 20%;
                     position: absolute;
-                    right: 2.5vw;
+                    right: 2.5dvw;
                     top: 50%;
                     transform: translateY(-50%);
                     transform-origin: right center;
-                    padding: 1vh 2.5vw;
+                    padding: 1dvh 2.5dvw;
                 }
                 @include respond-to-v(sm){
                     width: 20%;
                     position: absolute;
-                    right: 2.5vw;
+                    right: 2.5dvw;
                     top: 50%;
                     transform: translateY(-50%);
                     transform-origin: right center;
-                    padding: 1vh 2.5vw;
+                    padding: 1dvh 2.5dvw;
                 }
                 @include respond-to-v(xs){
                    width: 20%;
                     position: absolute;
-                    right: 2.5vw;
+                    right: 2.5dvw;
                     top: 50%;
                     transform: translateY(-50%);
                     transform-origin: right center;
-                    padding: 1vh 2.5vw;
+                    padding: 1dvh 2.5dvw;
                 }
 
                 .search__bar__subcontainer__search{
@@ -436,17 +497,18 @@
                     justify-content: space-evenly;
                     background-color: var(--WhiteBg);
                     border-radius: 50px;
-                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-                    gap: 1vw;
-                    padding: 0 1vw;
+                    box-shadow: 0 0 10px var(--ButtonBorder); // subtle shadow here
+
+                    gap: 1dvw;
+                    padding: 0 1dvw;
                     @include respond-to-v(s){
-                        padding: 0 2vw 0 5vw;
+                        padding: 0 2dvw 0 5dvw;
                     }
                     @include respond-to-v(sm){
-                        padding: 0 2vw 0 5vw;
+                        padding: 0 2dvw 0 5dvw;
                     }
                     @include respond-to-v(xs){
-                        padding: 0 2vw 0 5vw;
+                        padding: 0 2dvw 0 5dvw;
                     }
 
                     .search__input{
@@ -535,7 +597,7 @@
 
 
                     .search__icon__close{
-                        width: 5vw;
+                        width: 5dvw;
                         height: 100%;
                         display: flex;
                         align-items: center;
@@ -559,7 +621,7 @@
                             display: flex;
                             align-items: center;
                             justify-content: center;
-                            gap: 0.5vw;
+                            gap: 0.5dvw;
 
                             @include respond-to-v(lg){
                                 img{
@@ -574,21 +636,21 @@
                                 }
                             }
                             @include respond-to-v(s){
-                                gap: 1vw;
+                                gap: 1dvw;
                                 img{
                                     width: 15px;
                                     height: 15px;
                                 }
                             }
                             @include respond-to-v(sm){
-                                gap: 1vw;
+                                gap: 1dvw;
                                 img{
                                     width: 15px;
                                     height: 15px;
                                 }
                             }
                             @include respond-to-v(xs){
-                                gap: 1vw;
+                                gap: 1dvw;
                                 img{
                                     width: 15px;
                                     height: 15px;
@@ -634,8 +696,8 @@
                     }
 
                     .search__icon{
-                        width: 2vw;
-                        height: 2vw;
+                        width: 2dvw;
+                        height: 2dvw;
                         display: flex;
                         align-items: center;
                         justify-content: center;
@@ -646,27 +708,44 @@
                         position: relative;
                         z-index: 3;
 
+                        @include respond-to-h(xs){
+                            height: 7.5dvh;
+                            width: 7.5dvh;
+                        }
+                         @include respond-to-h(xxs){
+                            height: 7.5dvh;
+                            width: 7.5dvh;
+                        }
+                        @include respond-to-v(lg){
+                            height: 2dvh;
+                            width: 2dvh;
+                        }
+                         @include respond-to-v(md){
+                            height: 2.5dvh;
+                            width: 2.5dvh;
+                        }
+
                         @include respond-to-v(s){
-                            height: 7vw;
-                            width: 7vw;
+                            height: 7dvw;
+                            width: 7dvw;
                             position: absolute;
-                            left: 4vw;
+                            left: 4dvw;
                             top: 50%;
                             transform: translateY(-50%);
                         }
                         @include respond-to-v(sm){
-                            height: 7.5vw;
-                            width: 7.5vw;
+                            height: 7.5dvw;
+                            width: 7.5dvw;
                             position: absolute;
-                            left: 4vw;
+                            left: 4dvw;
                             top: 50%;
                             transform: translateY(-50%);
                         }
                         @include respond-to-v(xs){
-                            height: 7.5vw;
-                            width: 7.5vw;
+                            height: 7.5dvw;
+                            width: 7.5dvw;
                             position: absolute;
-                            left: 4vw;
+                            left: 4dvw;
                             top: 50%;
                             transform: translateY(-50%);
                         }
@@ -683,7 +762,7 @@
                         top: 150%;
                         left: 0;
                         width: 50%;
-                        height: 5vh;
+                        height: 5dvh;
                         display: flex;
                         align-items: center;
                         justify-content: center;
@@ -741,7 +820,7 @@
                         background-color: var(--WhiteBg);
                         border: 1px solid var(--ButtonBorder);
                         border-radius: 10px;
-                        padding: 1.5vh 0;
+                        padding: 1.5dvh 0;
                         transform-origin: top center;
                         perspective: 100px;
 
@@ -753,26 +832,26 @@
                             flex-direction: column;
                             align-items: center;
                             justify-content: center;
-                            gap: 1vh;
+                            gap: 1dvh;
 
                             li{
                                 width: 100%;
-                                height: 2.5vh;
+                                height: 2.5dvh;
                                 display: flex;
                                 align-items: center;
                                 justify-content: flex-start;
                                 background-color: transparent;
                                 cursor: pointer;
                                 transition: background-color 0.3s ease;
-                                padding: 0.5vh 1vw;
+                                padding: 0.5dvh 1dvw;
                                 @include respond-to-v(s){
-                                    padding: 1vh 2.5vw;
+                                    padding: 1dvh 2.5dvw;
                                 }
                                  @include respond-to-v(sm){
-                                    padding: 1vh 2.5vw;
+                                    padding: 1dvh 2.5dvw;
                                 }
                                  @include respond-to-v(xs){
-                                    padding: 1vh 2.5vw;
+                                    padding: 1dvh 2.5dvw;
                                 }
 
                                 p{
@@ -858,7 +937,7 @@
         .active__filters__bar {
             position: absolute;
             top: 90%;
-            left: 10vw;
+            left: 10dvw;
             width: 100%;
             height: auto;
             display: flex;
@@ -875,7 +954,8 @@
                 padding: 0.3em 0.8em;
                 font-size: 1rem;
                 color: var(--ChText);
-                box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+                box-shadow: 0 1px 4px var(--ButtonBorder); // subtle shadow here
+
 
                 .filter__close__icon {
                     margin-left: 0.5em;
@@ -916,12 +996,60 @@
         width: 50px;
         height: 50px;
         position: absolute;
-        top: 27.5vh;
-        left: 7.5vw;
+        top: 27.5dvh;
+        left: 7.5dvw;
         display: flex;
         align-items: center;
         justify-content: center;
         z-index: 20;
+
+        @include respond-to-h(lg){
+            top: 27dvh;
+            left: 6.5dvw;
+        }
+        @include respond-to-h(md){
+            top: 26.5dvh;
+            left: 6.5dvw;
+        }
+        @include respond-to-h(mdt){
+            top: 27.5dvh;
+            left: 7dvw;
+        }
+        @include respond-to-h(sm){
+            top: 26.5dvh;
+            left: 6dvw;
+        }
+
+        @include respond-to-h(xs){
+            top: 26dvh;
+            left: 5.5dvw;
+        }
+        @include respond-to-h(xxs){
+            top: 26dvh;
+            left: 5.5dvw;
+        }
+
+        @include respond-to-v(lg){
+            top: 25.6dvh;
+            left: 6.25dvw;
+        }
+        @include respond-to-v(md){
+            top: 25.6dvh;
+            left: 6.25dvw;
+        }
+        @include respond-to-v(s){
+            top: 26dvh;
+            left: 6dvw;
+        }
+        @include respond-to-v(sm){
+            top: 25.75dvh;
+            left: 5dvw;
+        }
+        @include respond-to-v(xs){
+            top: 26dvh;
+            left: 6dvw;
+        }
+        
 
 
         .categories__mobile{
@@ -944,11 +1072,11 @@
 
                 .categories__mobile__button__confirm{
                     position: absolute;
-                    bottom: 2.5vh;
+                    bottom: 2.5dvh;
                     left: 50%;
                     transform: translateX(-50%);
                     width: 80%;
-                    height: 5vh;
+                    height: 5dvh;
                     display: flex;
                     align-items: center;
                     justify-content: center;
@@ -962,11 +1090,35 @@
                         background-color: var(--WhiteBg);
                         border-radius: 20px;
 
+                        @include respond-to-h(xs){
+                            width: 90px;
+                            height: 30px;
+                        }
+                        @include respond-to-h(xxs){
+                            width: 90px;
+                            height: 30px;
+                        }
+
                         p{
                             font-size: 1.1rem;
                             color: var(--ChText);
                             font-weight: 300;
 
+                            @include respond-to-h(xs){
+                                font-size: 1rem;
+                            }
+                            @include respond-to-h(xxs){
+                                font-size: 1rem;
+                            }
+                            @include respond-to-v(s){
+                                font-size: 1rem;
+                            }
+                            @include respond-to-v(sm){
+                                font-size: 1rem;
+                            }
+                            @include respond-to-v(xs){
+                                font-size: 1rem;
+                            }
                         }
                     }
                 }
@@ -975,42 +1127,51 @@
     }
 
     .product__list{
-        width: 100vw;
-        min-height: 60vh; 
-        margin-left: 0vw;
-        margin-top: 40vh;
+        width: 100dvw;
+        min-height: 60dvh; 
+        margin-left: 0dvw;
+        margin-top: 40dvh;
         height: auto;
         position: relative;
         display: flex;
         align-items: flex-start;
         justify-content: center;
-        padding: 0 5vw;
+        padding: 0 5dvw;
         overflow: hidden;
 
+
+        @include respond-to-h(xs){
+            width: 90dvw;
+            margin-top: 45dvh;
+        }
+        @include respond-to-h(xxs){
+            width: 90dvw;
+            margin-top: 45dvh;
+        }
+
         @include respond-to-v(lg){
-            margin-top: 35vh;
+            margin-top: 32dvh;
         }
         @include respond-to-v(md){
-            margin-top: 35vh;
-            margin-left: 12.5vw;
+            margin-top: 32dvh;
         }
         @include respond-to-v(s){
-            width: 95vw;
+            width: 95dvw;
             margin-left: 0;
             padding: 0;
-            margin-top: 40vh;
+            margin-top: 35dvh;
         }
         @include respond-to-v(sm){
-            width: 95vw;
+            width: 95dvw;
             margin-left: 0;
             padding: 0;
-            margin-top: 40vh;
+            margin-top: 35dvh;
         }
         @include respond-to-v(xs){
-            width: 95vw;
+            width: 95dvw;
             margin-left: 0;
             padding: 0;
-            margin-top: 40vh;
+            margin-top: 40dvh;
         }
 
         .product__list__items {
@@ -1019,86 +1180,108 @@
             gap: 2rem;
             width: 100%;
             height: auto;
-            padding-top: 2vh;
+            padding-top: 2dvh;
+            @include respond-to-h(md){
+                gap: 2.5rem;
+                grid-template-columns: repeat(3, 1fr);
+            }
+             @include respond-to-h(sm){
+                gap: 2.5rem;
+                grid-template-columns: repeat(3, 1fr);
+            }
+            @include respond-to-h(xs){
+                gap: 1rem;
+                grid-template-columns: repeat(3, 1fr);
+            }
+            @include respond-to-h(xxs){
+                gap: 1rem;
+                grid-template-columns: repeat(3, 1fr);
+            }
+            @include respond-to-v(lg){
+                gap: 1.5rem;
+                grid-template-columns: repeat(3, 1fr);
+            }
             @include respond-to-v(md){
                 gap: 0.25rem;
+                grid-template-columns: repeat(3, 1fr);
             }
             @include respond-to-v(s){
                 grid-template-columns: repeat(2, 1fr);
-                gap: 5vw;
+                gap: 5dvw;
             }
             @include respond-to-v(sm){
                 grid-template-columns: repeat(2, 1fr);
-                gap: 5vw;
+                gap: 5dvw;
             }
             @include respond-to-v(xs){
                 grid-template-columns: repeat(2, 1fr);
-                gap: 5vw;
+                gap: 5dvw;
             }
 
             .product__list__item{
-                width: 20vw;
-                height: 40vh;
+                width: 20dvw;
+                height: 40dvh;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 justify-content: flex-start;
                 background-color: var(--WhiteBg);
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+                box-shadow: 0 0 10px var(--ButtonBorder); // subtle shadow here
                 border-radius: 50px;
-                padding: 0.05vh 0.05vh;
+                padding: 0.05dvh 0.05dvh;
                 transition: all 0.6s cubic-bezier(0.76, 0, 0.24, 1);
 
                 &:hover{
-                    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+                    box-shadow: 0 0 15px var(--ButtonBorder); // subtle shadow here
                     scale: 1.01;
                 }
 
                 @include respond-to-h(md){
-                    width: 20vw;
-                    height: 50vh;
+                    width: 27.5dvw;
+                    height: 60dvh;
                 }
                 @include respond-to-h(mdt){
-                    width: 20vw;
-                    height: 35vh;
+                    width: 20dvw;
+                    height: 35dvh;
                 }
                 @include respond-to-h(sm){
-                    width: 20vw;
-                    height: 40vh;
+                    width: 27.5dvw;
+                    height: 45dvh;
                 }
                  @include respond-to-h(xs){
-                    width: 20vw;
-                    height: 60vh;
+                    width: 25dvw;
+                    height: 60dvh;
                     border-radius: 35px;
                 }
                   @include respond-to-h(xxs){
-                    width: 20vw;
-                    height: 55vh;
+                    width: 25dvw;
+                    height: 55dvh;
                     border-radius: 35px;
                 }
 
                 @include respond-to-v(lg){
-                    height: 25vh;
+                    width: 27.5dvw;
+                    height: 25dvh;
                     border-radius: 30px;
                 }
                 @include respond-to-v(md){
-                    height: 30vh;
-                    width: 22.5vw;
+                    height: 30dvh;
+                    width: 27.5dvw;
                     border-radius: 30px;
                 }
                 @include respond-to-v(s){
-                    height: 30vh;
-                    width: 45vw;
+                    height: 30dvh;
+                    width: 45dvw;
                     border-radius: 25px;
                 }
                  @include respond-to-v(sm){
-                    height: 30vh;
-                    width: 45vw;
+                    height: 30dvh;
+                    width: 45dvw;
                     border-radius: 25px;
                 }
                  @include respond-to-v(xs){
-                    height: 35vh;
-                    width: 45vw;
+                    height: 35dvh;
+                    width: 45dvw;
                     border-radius: 25px;
                 }
 
@@ -1114,71 +1297,71 @@
 
                     @include respond-to-h(md){
                         justify-content: space-between;
-                        padding-bottom: 2.5vh;
+                        padding-bottom: 2.5dvh;
                     }
 
                     @include respond-to-h(sm){
                         justify-content: space-between;
-                        padding-bottom: 2.5vh;
+                        padding-bottom: 2.5dvh;
                     }
                     @include respond-to-h(xs){
                         justify-content: space-between;
-                        padding-bottom: 2.5vh;
+                        padding-bottom: 2.5dvh;
                     }
                     @include respond-to-h(xxs){
                         justify-content: space-between;
-                        padding-bottom: 2.5vh;
+                        padding-bottom: 2.5dvh;
                     }
                     @include respond-to-v(md){
                         justify-content: space-between;
-                        padding-bottom: 0.5vh;
+                        padding-bottom: 0.5dvh;
                     }
 
 
                     .product__image__container{
                         width: 100%;
-                        height: 25vh;
+                        height: 25dvh;
                         display: flex;
                         align-items: center;
                         justify-content: center;
                         border-radius: 50px;
                         overflow: hidden;
                         @include respond-to-h(md){
-                            height: 27.5vh;
+                            height: 27.5dvh;
                         }
                         @include respond-to-h(mdt){
-                            height: 20vh;
+                            height: 20dvh;
                         }
                         @include respond-to-h(sm){
-                            height: 20vh;
+                            height: 20dvh;
                         }
                         @include respond-to-h(xs){
-                            height: 30vh;
+                            height: 30dvh;
                             border-radius: 35px;
                         }
                         @include respond-to-h(xxs){
-                            height: 25vh;
+                            height: 25dvh;
                             border-radius: 35px;
                         }
 
                         @include respond-to-v(lg){
-                            height: 15vh;
+                            height: 15dvh;
                             border-radius: 30px;
                         }
                         @include respond-to-v(md){
-                            height: 12.5vh;
+                            height: 17.5dvh;
                             border-radius: 30px;
                         }
                         @include respond-to-v(s){
-                            height: 20vh;
+                            height: 20dvh;
                             border-radius: 25px;
                         }
                         @include respond-to-v(sm){
-                            height: 20vh;
+                            height: 20dvh;
                             border-radius: 25px;
                         }
                         @include respond-to-v(xs){
-                            height: 20vh;
+                            height: 20dvh;
                             border-radius: 25px;
                         }
                         
@@ -1192,14 +1375,14 @@
 
                     .product__title__color_container{
                         width: 100%;
-                        height: 5vh;
+                        height: 5dvh;
                         display: flex;
                         flex-direction: row;
                         align-items: center;
                         justify-content: center;
-                        gap: 0.5vh;
+                        gap: 0.5dvh;
                         font-family: "Sansation-Light";
-                        padding: 0 1.5vw;
+                        padding: 0 1.5dvw;
 
                         .product__name{
                             width: 100%;
@@ -1236,47 +1419,47 @@
 
                         .product__color__container{
                             width: 30%;
-                            height: 2vh;
+                            height: 2dvh;
                             display: flex;
                             align-items: center;
                             justify-content: center;
-                            gap: 0.05vw;
+                            gap: 0.05dvw;
 
                             .product__color{
-                                width: 1.5vw;
-                                height: 1.5vw;
+                                width: 1.5dvw;
+                                height: 1.5dvw;
                                 border-radius: 50%;
                                 border: 1px solid var(--ButtonBorder);
                                 background-color: var(--ChText);
                                 cursor: pointer;
                                 @include respond-to-h(md){
-                                    width: 1.3vw;
-                                    height: 1.3vw;
+                                    width: 1.3dvw;
+                                    height: 1.3dvw;
                                 }
 
                                 @include respond-to-h(sm){
-                                    width: 1.3vw;
-                                    height: 1.3vw;
+                                    width: 1.3dvw;
+                                    height: 1.3dvw;
                                 }
                                 @include respond-to-h(xs){
-                                    width: 1.5vw;
-                                    height: 1.5vw;
+                                    width: 1.5dvw;
+                                    height: 1.5dvw;
                                 }
                                 @include respond-to-h(xxs){
-                                    width: 1.5vw;
-                                    height: 1.5vw;
+                                    width: 1.5dvw;
+                                    height: 1.5dvw;
                                 }
                                 @include respond-to-v(s){
-                                    width: 3vw;
-                                    height: 3vw;
+                                    width: 3dvw;
+                                    height: 3dvw;
                                 }
                                 @include respond-to-v(sm){
-                                    width: 3vw;
-                                    height: 3vw;
+                                    width: 3dvw;
+                                    height: 3dvw;
                                 }
                                 @include respond-to-v(xs){
-                                    width: 3vw;
-                                    height: 3vw;
+                                    width: 3dvw;
+                                    height: 3dvw;
                                 }
 
                                 &.active{
@@ -1290,24 +1473,24 @@
 
                     .product__desc__container{
                         width: 100%;
-                        height: 2.5vh;
+                        height: 2.5dvh;
                         display: flex;
                         align-items: flex-start;
                         justify-content: center;
                         flex-direction: column-reverse;
-                        padding: 0 1.5vw;
+                        padding: 0 1.5dvw;
 
                         @include respond-to-h(sm){
-                            height: 7.5vh;
+                            height: 7.5dvh;
                         }
                         @include respond-to-h(xs){
-                            height: 10vh;
+                            height: 10dvh;
                         }
                         @include respond-to-h(xxs){
-                            height: 15vh;
+                            height: 15dvh;
                         }
                         @include respond-to-v(md){
-                            height: 7.5vh;
+                            height: 7.5dvh;
                         }
 
                         .product__new{
@@ -1383,16 +1566,16 @@
 
                     .product__price__container{
                         width: 100%;
-                        height: 10vh;
+                        height: 10dvh;
                         display: flex;
                         align-items: center;
                         justify-content: center;
                         flex-direction: row;
-                        padding: 0 1.5vw;
+                        padding: 0 1.5dvw;
                         z-index: 10;
 
                         @include respond-to-v(s){
-                            padding: 0 2.5vw;
+                            padding: 0 2.5dvw;
                         }
 
                         .product__sale__price{
@@ -1403,7 +1586,10 @@
                             font-family: "Sansation-Light";
 
                             @include respond-to-h(md){
-                               font-size: 1.1rem;
+                               font-size: 1.4rem;
+                            }
+                             @include respond-to-h(mdt){
+                               font-size: 1.3rem;
                             }
                             @include respond-to-h(sm){
                                 font-size: 1.1rem;
@@ -1434,8 +1620,11 @@
                             text-align: right;
                             font-family: "Sansation-Light";
 
+                            @include respond-to-h(mdt){
+                               font-size: 1.8rem;
+                            }
                             @include respond-to-h(md){
-                               font-size: 1.3rem;
+                               font-size: 1.5rem;
                             }
                             @include respond-to-h(sm){
                                 font-size: 1.3rem;
@@ -1467,20 +1656,20 @@
                             align-items: center;
                             justify-content: flex-start;
                             flex-direction: row;
-                            gap: 0.5vw;
+                            gap: 0.5dvw;
                             @include respond-to-v(s){
-                                gap: 2.5vw;
+                                gap: 2.5dvw;
                             }
                             @include respond-to-v(sm){
-                                gap: 2.5vw;
+                                gap: 2.5dvw;
                             }
                             @include respond-to-v(xs){
-                                gap: 2.5vw;
+                                gap: 2.5dvw;
                             }
 
                             .add__to__cart__button{
-                                width: 2vw;
-                                height: 2vw;
+                                width: 2dvw;
+                                height: 2dvw;
                                 display: flex;
                                 align-items: center;
                                 justify-content: center;
@@ -1498,20 +1687,20 @@
                                     transform: scale(1.05);  
                                 }
                                 @include respond-to-v(md){
-                                    width: 3.5vw;
-                                    height: 3.5vw;
+                                    width: 3.5dvw;
+                                    height: 3.5dvw;
                                 }
                                 @include respond-to-v(s){
-                                    width: 6vw;
-                                    height: 6vw;
+                                    width: 6dvw;
+                                    height: 6dvw;
                                 }
                                  @include respond-to-v(sm){
-                                    width: 6vw;
-                                    height: 6vw;
+                                    width: 6dvw;
+                                    height: 6dvw;
                                 }
                                  @include respond-to-v(xs){
-                                    width: 6vw;
-                                    height: 6vw;
+                                    width: 6dvw;
+                                    height: 6dvw;
                                 }
                             }
                         }
@@ -1524,34 +1713,34 @@
 
     .newsletter{
         width: 100%;
-        height: 150vh;
+        height: 150dvh;
         display: flex;
         align-items: flex-start;
         justify-content: center;
-        margin-top: 25vh;
-        gap: 5vh;
+        margin-top: 25dvh;
+        gap: 5dvh;
         position: relative;
 
         @include respond-to-v(lg){
-            height: 30vh;
+            height: 100dvh;
         }
         @include respond-to-v(md){
-            height: 40vh;
+            height: 100dvh;
         }
         @include respond-to-v(s){
-            height: 50vh;
+            height: 150dvh;
         }
         @include respond-to-v(sm){
-            height: 50vh;
+            height: 150dvh;
         }
         @include respond-to-v(xs){
-            height: 50vh;
+            height: 150dvh;
         }
 
         .newsletter__sticky{
             width: 100%;
-            height: 75vh;
-            padding: 5vh 5vw;
+            height: 75dvh;
+            padding: 5dvh 5dvw;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -1563,7 +1752,7 @@
 
             .newsletter__title{
                 width: 100%;
-                height: 10vh;
+                height: 10dvh;
                 display: flex;
                 align-items: center;
                 justify-content: flex-start;
@@ -1575,16 +1764,19 @@
                     width: 50%;
 
                     @include respond-to-h(md){
-                        font-size: 2rem;
-                    }
-                    @include respond-to-h(sm){
-                        font-size: 2rem;
-                    }
-                    @include respond-to-h(xs){
                         font-size: 1.8rem;
                     }
-                    @include respond-to-h(xxs){
+                     @include respond-to-h(mdt){
+                        font-size: 1.8rem;
+                    }
+                    @include respond-to-h(sm){
+                        font-size: 1.8rem;
+                    }
+                    @include respond-to-h(xs){
                         font-size: 1.5rem;
+                    }
+                    @include respond-to-h(xxs){
+                        font-size: 1.3rem;
                     }
 
                     @include respond-to-v(lg){
@@ -1596,11 +1788,11 @@
                         width: 60%;
                     }
                     @include respond-to-v(s){
-                        font-size: 1.5rem;
+                        font-size: 1.4rem;
                         width: 100%;
                     }
                     @include respond-to-v(sm){
-                        font-size: 1.5rem;
+                        font-size: 1.3rem;
                         width: 100%;
                     }
                     @include respond-to-v(xs){
@@ -1612,39 +1804,39 @@
 
             .newsletter__input__container{
                 width: 100%;
-                height: 15vh;
+                height: 15dvh;
                 display: flex;
                 align-items: flex-end;
                 justify-content: center;
                 flex-direction: column;
-                padding: 0 1vw;
+                padding: 0 1dvw;
                 @include respond-to-h(md){
-                    height: 17.5vh;
+                    height: 17.5dvh;
                 }
                 @include respond-to-h(sm){
-                    height: 12.5vh;
+                    height: 12.5dvh;
                 }
                 @include respond-to-h(xs){
-                    height: 20vh;
+                    height: 20dvh;
                 }
                 @include respond-to-h(xxs){
-                    height: 20vh;
+                    height: 20dvh;
                 }
 
                 @include respond-to-v(lg){
-                    height: 12.5vh;
+                    height: 10dvh;
                 }
                 @include respond-to-v(md){
-                    height: 12.5vh;
+                    height: 10dvh;
                 }
                 @include respond-to-v(s){
-                    height: 12.5vh;
+                    height: 10dvh;
                 }
                 @include respond-to-v(sm){
-                    height: 12.5vh;
+                    height: 10dvh;
                 }
                 @include respond-to-v(xs){
-                    height: 12.5vh;
+                    height: 12.5dvh;
                 }
 
 
@@ -1659,13 +1851,13 @@
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
-                    padding: 1vh 1vh;
+                    padding: 1dvh 1dvh;
 
                     @include respond-to-v(lg){
-                        padding: 0.25vh 0.5vw;
+                        padding: 0.25dvh 0.5dvw;
                     }
                     @include respond-to-v(md){
-                        padding: 0.25vh 0.5vw;
+                        padding: 0.25dvh 0.5dvw;
                     }
                     @include respond-to-v(s){
                         width: 100%;
@@ -1681,7 +1873,7 @@
                     .newsletter__input__field{
                         width: 80%;
                         height: 100%;
-                        padding: 0 2vw;
+                        padding: 0 2dvw;
                         display: flex;
                         align-items: center;
                         justify-content: center;
@@ -1760,7 +1952,7 @@
                     }
 
                     .newsletter__input__button{
-                        width: 10vw;
+                        width: 10dvw;
                         height: 100%;
                         display: flex;
                         align-items: center;
@@ -1771,30 +1963,30 @@
                         cursor: pointer;
 
                         @include respond-to-h(sm){
-                            width: 12.5vw;
+                            width: 12.5dvw;
                         }
                         @include respond-to-h(xs){
-                            width: 15vw;
+                            width: 15dvw;
                         }
 
                         @include respond-to-h(xxs){
-                            width: 15vw;
+                            width: 15dvw;
                         }
 
                         @include respond-to-v(lg){
-                            width: 12.5vw;
+                            width: 12.5dvw;
                         }
                         @include respond-to-v(md){
-                            width: 12.5vw;
+                            width: 12.5dvw;
                         }
                         @include respond-to-v(s){
-                            width: 30vw;
+                            width: 30dvw;
                         }
                         @include respond-to-v(sm){
-                            width: 30vw;
+                            width: 30dvw;
                         }
                         @include respond-to-v(xs){
-                            width: 30vw;
+                            width: 30dvw;
                         }
 
                         p{
@@ -1835,7 +2027,7 @@
 
                 .newsletter__input__message{
                     width: 100%;
-                    height: 5vh;
+                    height: 5dvh;
                     display: flex;
                     align-items: center;
                     justify-content: flex-end;
@@ -1876,10 +2068,10 @@
 
     .ecom__scroll__to__top{
         position: fixed;
-        bottom: 5vh;
-        right: 1.5vw;
-        width: 2.5vw;
-        height: 2.5vw;
+        bottom: 5dvh;
+        right: 1.5dvw;
+        width: 2.5dvw;
+        height: 2.5dvw;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -1891,17 +2083,41 @@
         z-index: 100;
         transition: opacity 0.6s cubic-bezier(0.76, 0, 0.24, 1);
         opacity: 0.7;
+
+        @include respond-to-h(sm){
+            width: 3dvw;
+            height: 3dvw;
+        }
+        @include respond-to-h(xs){
+            width: 4dvw;
+            height: 4dvw;
+        }
+        @include respond-to-h(xxs){
+            width: 4dvw;
+            height: 4dvw;
+        }
+        @include respond-to-v(lg){
+            width: 4dvw;
+            height: 4dvw;
+        }
+        @include respond-to-v(md){
+            width: 4dvw;
+            height: 4dvw;
+        }
         @include respond-to-v(s){
-            width: 10vw;
-            height: 10vw;
+            width: 10dvw;
+            height: 10dvw;
+            bottom: 10dvh;
         }
         @include respond-to-v(sm){
-            width: 10vw;
-            height: 10vw;
+            width: 10dvw;
+            height: 10dvw;
+            bottom: 10dvh;
         }
         @include respond-to-v(xs){
-            width: 10vw;
-            height: 10vw;
+            width: 10dvw;
+            height: 10dvw;
+            bottom: 10dvh;
         }
 
         &:hover{
@@ -1925,20 +2141,40 @@
             }
 
             .scroll__to__top__icon{
-                width: 1vw;
-                height: 1vw;
+                width: 1dvw;
+                height: 1dvw;
                 object-fit: cover;
+                @include respond-to-h(sm){
+                    width: 1.5dvw;
+                    height: 1.5dvw;
+                }
+                 @include respond-to-h(xs){
+                    width: 1.5dvw;
+                    height: 1.5dvw;
+                }
+                 @include respond-to-h(xxs){
+                    width: 1.5dvw;
+                    height: 1.5dvw;
+                }
+                @include respond-to-v(lg){
+                    width: 1.5dvw;
+                    height: 1.5dvw;
+                }
+                @include respond-to-v(md){
+                    width: 1.5dvw;
+                    height: 1.5dvw;;
+                }
                 @include respond-to-v(s){
-                    width: 5vw;
-                    height: 5vw;
+                    width: 5dvw;
+                    height: 5dvw;
                 }
                 @include respond-to-v(sm){
-                    width: 5vw;
-                    height: 5vw;
+                    width: 5dvw;
+                    height: 5dvw;
                 }
                 @include respond-to-v(xs){
-                    width: 5vw;
-                    height: 5vw;
+                    width: 5dvw;
+                    height: 5dvw;
                 }
             }
         }

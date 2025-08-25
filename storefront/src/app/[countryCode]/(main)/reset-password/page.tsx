@@ -3,8 +3,8 @@ import { Metadata } from "next"
 
 
 export const metadata: Metadata = {
-  title: "Reset Password",
-  description: "Reset your password for your Medusa Store account.",
+  title: "Resetovat heslo",
+  description: "Resetujte své heslo pro svůj účet Keramická Zahrada.",
 }
 
 export default function ResetPassword() {

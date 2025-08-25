@@ -19,9 +19,9 @@ export default function Intro() {
         offset: ["start end", "end 0.3"]
     });
 
-    const image1 = useTransform(ImageScrollYProgress, [0, 0.2, 0.7, 0.8 ], ["0%", "17.5vw", "17.5vw", '0%']);
-    const image2 = useTransform(ImageScrollYProgress, [0, 0.2, 0.4, 0.8, 0.9], ["0%", "0%", "17.5vw", "17.5vw", "0%"]);
-    const image3 = useTransform(ImageScrollYProgress, [0, 0.4, 0.6, 0.9, 1], ["0%", "0%", "17.5vw", "17.5vw", "0%"]);
+    const image1 = useTransform(ImageScrollYProgress, [0, 0.2, 0.7, 0.8 ], ["0%", "17.5dvw", "17.5dvw", '0%']);
+    const image2 = useTransform(ImageScrollYProgress, [0, 0.2, 0.4, 0.8, 0.9], ["0%", "0%", "17.5dvw", "17.5dvw", "0%"]);
+    const image3 = useTransform(ImageScrollYProgress, [0, 0.4, 0.6, 0.9, 1], ["0%", "0%", "17.5dvw", "17.5dvw", "0%"]);
 
 
 
@@ -77,7 +77,7 @@ export default function Intro() {
                                 src="/assets/img/img/2.jpg" 
                                 alt="Intro Details"
                                 fill={true}
-                                sizes="50vw"
+                                sizes="50dvw"
                                 priority
                             />
                         </motion.div>
@@ -98,7 +98,7 @@ export default function Intro() {
                                 src="/assets/img/img/3.jpg" 
                                 alt="Intro Details"
                                 fill={true}
-                                sizes="50vw"
+                                sizes="50dvw"
                                 priority
                             />
                         </motion.div>
@@ -119,7 +119,7 @@ export default function Intro() {
                                 src="/assets/img/img/5.jpg" 
                                 alt="Intro Details"
                                 fill={true}
-                                sizes="50vw"
+                                sizes="50dvw"
                                 priority
                             />
                         </motion.div>
