@@ -1,0 +1,16 @@
+/* InteractiveLink component styles - SASS nesting */
+.root {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+  // .group modifier is handled by React class logic, no empty ruleset needed
+  .text {
+    color: var(--ui-fg-interactive, #2563EB);
+  }
+  .arrow {
+    transition: transform 0.15s ease-in-out;
+    &.rotate {
+      transform: rotate(45deg);
+    }
+  }
+}

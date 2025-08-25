@@ -1,0 +1,34 @@
+/* LineItemPrice component styles - SASS nesting */
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: var(--ui-fg-subtle, #6B7280);
+  align-items: flex-end;
+
+  .priceContainer {
+    text-align: left;
+
+    .originalLabel {
+      color: var(--ui-fg-subtle, #6B7280);
+    }
+
+    .originalPrice {
+      text-decoration: line-through;
+      color: var(--ui-fg-muted, #9CA3AF);
+    }
+
+    .discount {
+      color: var(--ui-fg-interactive, #2563EB);
+    }
+
+    .price {
+      font-size: 1rem;
+      font-weight: 400;
+
+      &.discounted {
+        color: var(--ui-fg-interactive, #2563EB);
+      }
+    }
+  }
+}

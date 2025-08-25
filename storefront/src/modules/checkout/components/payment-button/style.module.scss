@@ -1,0 +1,21 @@
+/* Payment Button styles using nested Sass structure */
+
+.root {
+  display: block;
+
+  /* Primary button styles */
+  .button {
+    min-width: 12rem; /* visual stability */
+  }
+
+  /* Error message wrapper spacing */
+  .errorWrap {
+    margin-top: 0.5rem; /* 8px */
+  }
+
+  /* Variant hook if needed later */
+  .comgate {
+    /* reserved for provider-specific tweaks */
+    min-height: 1px;
+  }
+}

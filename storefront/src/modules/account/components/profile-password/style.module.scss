@@ -1,0 +1,9 @@
+.root {
+  width: 100%;
+
+  .gridTwo {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem; /* gap-4 */
+  }
+}

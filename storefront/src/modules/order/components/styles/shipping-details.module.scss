@@ -1,0 +1,35 @@
+.root {
+  .title {
+    display: flex;
+    flex-direction: row;
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+    margin-block: 1.5rem;
+  }
+
+  .row {
+    display: flex;
+    align-items: flex-start;
+    column-gap: 2rem; // gap-x-8
+  }
+
+  .col {
+    display: flex;
+    flex-direction: column;
+    width: 33.3333%;
+  }
+
+  .label {
+    font-weight: 500;
+    color: var(--ui-fg-base, #111827);
+    margin-bottom: 0.25rem;
+  }
+
+  .value {
+    color: var(--ui-fg-subtle, #6b7280);
+  }
+
+  .divider {
+    margin-top: 2rem;
+  }
+}

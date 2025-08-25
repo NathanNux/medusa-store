@@ -1,0 +1,27 @@
+/* ShippingAddress component styles - SASS nesting */
+.root {
+  .addressPrompt {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.25rem;
+    p {
+      font-size: 0.875rem;
+    }
+  }
+  .formGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  .checkboxRow {
+    margin: 2rem 0;
+  }
+  .contactGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+}

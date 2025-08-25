@@ -1,0 +1,16 @@
+/* Checkout page styles - SASS nesting */
+.root {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  width: 100%;
+  box-sizing: border-box;
+
+  @media (min-width: 640px) {
+    grid-template-columns: 1fr 416px;
+  }
+
+  // If you have a content-container utility, add its styles here
+}

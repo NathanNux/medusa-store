@@ -1,0 +1,28 @@
+/* LineItemUnitPrice component styles - SASS nesting */
+.root {
+  display: flex;
+  flex-direction: column;
+  color: var(--ui-fg-muted, #6B7280);
+  justify-content: center;
+  height: 100%;
+
+  .originalLabel {
+    color: var(--ui-fg-muted, #6B7280);
+  }
+
+  .originalPrice {
+    text-decoration: line-through;
+  }
+
+  .discount {
+    color: var(--ui-fg-interactive, #2563EB);
+  }
+
+  .price {
+    font-size: 1rem;
+    font-weight: 400;
+    &.discounted {
+      color: var(--ui-fg-interactive, #2563EB);
+    }
+  }
+}

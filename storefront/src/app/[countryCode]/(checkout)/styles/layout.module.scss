@@ -1,0 +1,89 @@
+/* Checkout Layout styles - SASS nesting */
+.root {
+	width: 100%;
+	background: #fff;
+	position: relative;
+	@media (min-width: 640px) {
+		min-height: 100dv;
+	}
+
+	.header {
+		height: 4rem;
+		background: #fff;
+		border-bottom: 1px solid #e5e7eb;
+		nav {
+			display: flex;
+			height: 100%;
+			align-items: center;
+			justify-content: space-between;
+			width: 100%;
+			.backLink {
+				font-size: 0.875rem;
+				font-weight: 600;
+				color: var(--ui-fg-base, #111827);
+				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+				text-transform: uppercase;
+				flex: 1;
+				min-width: 0;
+				.chevron {
+					transform: rotate(90deg);
+				}
+				.backText {
+					margin-top: 1px;
+					display: none;
+					@media (min-width: 640px) {
+						display: block;
+					}
+					font-size: 0.875rem;
+					color: var(--ui-fg-subtle, #6B7280);
+					transition: color 0.15s;
+					&:hover {
+						color: var(--ui-fg-base, #111827);
+					}
+				}
+				.backTextMobile {
+					margin-top: 1px;
+					display: block;
+					@media (min-width: 640px) {
+						display: none;
+					}
+					font-size: 0.875rem;
+					color: var(--ui-fg-subtle, #6B7280);
+					transition: color 0.15s;
+					&:hover {
+						color: var(--ui-fg-base, #111827);
+					}
+				}
+			}
+			.storeLink {
+				font-size: 1.25rem;
+				color: var(--ui-fg-subtle, #6B7280);
+				text-transform: uppercase;
+				transition: color 0.15s;
+				&:hover {
+					color: var(--ui-fg-base, #111827);
+				}
+			}
+			.spacer {
+				flex: 1;
+				min-width: 0;
+			}
+		}
+	}
+
+	.checkoutContainer {
+		position: relative;
+		width: 100%;
+	}
+
+	.footer {
+		padding-top: 1rem;
+		padding-bottom: 1rem;
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+}

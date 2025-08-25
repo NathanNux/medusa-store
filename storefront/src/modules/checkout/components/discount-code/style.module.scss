@@ -1,0 +1,83 @@
+.root {
+  width: 100%;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+
+  .content {
+    font-size: 1rem;
+    line-height: 1.5rem;
+
+    .form {
+      width: 100%;
+      margin-bottom: 1.25rem;
+
+      .label {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        margin: 0.5rem 0;
+
+        .toggleBtn {
+          font-weight: 500;
+          color: var(--fg-interactive);
+          transition: color 150ms;
+
+          &:hover {
+            color: var(--fg-interactive-hover);
+          }
+        }
+      }
+
+      .row {
+        display: flex;
+        width: 100%;
+        gap: 0.5rem;
+
+        .input {
+          width: 100%;
+        }
+      }
+    }
+
+    .promotionsWrap {
+      width: 100%;
+      display: flex;
+      align-items: center;
+
+      .promotionsCol {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        .heading {
+          margin-bottom: 0.5rem;
+          font-weight: 500;
+        }
+
+        .promoRow {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          width: 100%;
+          max-width: 100%;
+          margin-bottom: 0.5rem;
+
+          .promoText {
+            display: flex;
+            align-items: baseline;
+            gap: 0.25rem;
+            width: 80%;
+            padding-right: 0.25rem;
+            font-size: 0.9375rem;
+          }
+
+          .removeBtn {
+            display: flex;
+            align-items: center;
+          }
+        }
+      }
+    }
+  }
+}

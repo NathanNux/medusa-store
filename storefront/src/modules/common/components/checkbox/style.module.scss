@@ -1,0 +1,19 @@
+/* CheckboxWithLabel component styles - SASS nesting */
+.root {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  .checkbox {
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .label {
+    font-size: 1rem;
+    font-weight: 500;
+    transform: none;
+  }
+}

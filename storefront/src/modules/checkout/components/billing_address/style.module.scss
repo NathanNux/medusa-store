@@ -1,0 +1,12 @@
+/* Billing address styles */
+.root {
+	width: 100%;
+
+	.formGrid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1rem;
+		width: 100%;
+		/* Add more nested selectors if needed for custom input styling */
+	}
+}

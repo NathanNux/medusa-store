@@ -1,0 +1,150 @@
+@use "../../../../styles/mixins.scss" as *;
+
+.root {
+	// CSS Modules root wrapper for nesting
+	--overview: 1; // no-op var to avoid empty ruleset
+
+	.contentVisibleOnSmall {
+		// hidden small:block
+		display: none;
+		@media (min-width: 768px) {
+			display: block;
+		}
+	}
+
+	.headerRow {
+		// text-xl-semi flex justify-between items-center mb-4
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 1rem;
+		font-size: 1.25rem;
+		line-height: 1.75rem;
+		font-weight: 600;
+	}
+
+	.headerSignedIn {
+		// text-small-regular text-ui-fg-base
+		font-size: 0.875rem;
+		line-height: 1.25rem;
+		color: var(--text-color, inherit);
+	}
+
+	.fontSemibold {
+		font-weight: 600;
+	}
+
+	.section {
+		// flex flex-col py-8 border-t border-gray-200
+		display: flex;
+		flex-direction: column;
+		padding-top: 2rem;
+		padding-bottom: 2rem;
+		border-top: 1px solid var(--border, #e5e7eb);
+	}
+
+	.cardsWrap {
+		// flex flex-col gap-y-4 h-full col-span-1 row-span-2 flex-1
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		height: 100%;
+		flex: 1 1 auto;
+	}
+
+	.profileRow {
+		// flex items-start gap-x-16 mb-6
+		display: flex;
+		align-items: flex-start;
+		column-gap: 4rem;
+		margin-bottom: 1.5rem;
+	}
+
+	.groupCol {
+		// flex flex-col gap-y-4
+		display: flex;
+		flex-direction: column;
+		row-gap: 1rem;
+	}
+
+	.titleLarge {
+		// text-large-semi
+		font-size: 1.125rem;
+		line-height: 1.75rem;
+		font-weight: 600;
+	}
+
+	.statRow {
+		// flex items-end gap-x-2
+		display: flex;
+		align-items: flex-end;
+		column-gap: 0.5rem;
+	}
+
+	.statValueLarge {
+		// text-3xl-semi leading-none
+		font-size: 1.875rem;
+		line-height: 1;
+		font-weight: 600;
+	}
+
+	.subtleUpper {
+		// uppercase text-base-regular text-ui-fg-subtle
+		text-transform: uppercase;
+		font-size: 1rem;
+		line-height: 1.5rem;
+		color: var(--text-subtle, #6b7280);
+	}
+
+	.ordersGroup {
+		// flex flex-col gap-y-4
+		display: flex;
+		flex-direction: column;
+		row-gap: 1rem;
+	}
+
+	.ordersHeadingRow {
+		// flex items-center gap-x-2
+		display: flex;
+		align-items: center;
+		column-gap: 0.5rem;
+	}
+
+	.ordersList {
+		// flex flex-col gap-y-4
+		display: flex;
+		flex-direction: column;
+		row-gap: 1rem;
+	}
+
+	.orderCard {
+		// bg-gray-50 flex justify-between items-center p-4
+		background-color: #f9fafb;
+		display: flex !important;
+		justify-content: space-between;
+		align-items: center;
+		padding: 1rem;
+	}
+
+	.orderGrid {
+		// grid grid-cols-3 grid-rows-2 text-small-regular gap-x-4 flex-1
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		grid-template-rows: repeat(2, minmax(0, auto));
+		font-size: 0.875rem;
+		line-height: 1.25rem;
+		column-gap: 1rem;
+		flex: 1 1 auto;
+	}
+
+	.orderOpenBtn {
+		// flex items-center justify-between
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.rotateNeg90 {
+		transform: rotate(-90deg);
+	}
+}

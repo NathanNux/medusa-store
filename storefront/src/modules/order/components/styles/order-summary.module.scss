@@ -1,0 +1,32 @@
+.root {
+  .title {
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  .content {
+    color: var(--ui-fg-base, #111827);
+    margin-block: 0.5rem;
+
+    .row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+    }
+
+    .meta {
+      display: flex;
+      flex-direction: column;
+      row-gap: 0.25rem;
+    }
+
+    .separator {
+      height: 1px;
+      width: 100%;
+      border-bottom: 1px dashed #e5e7eb;
+      margin-block: 1rem;
+    }
+  }
+}

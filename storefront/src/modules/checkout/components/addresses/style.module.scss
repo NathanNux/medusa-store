@@ -1,0 +1,76 @@
+/* Addresses panel styles */
+.root {
+	background: #fff;
+
+	.headerRow {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: 1.5rem;
+
+		.heading {
+			display: flex;
+			flex-direction: row;
+			gap: 0.5rem;
+			align-items: baseline;
+			font-size: 2rem;
+			font-weight: 400;
+		}
+		.editBtn {
+			color: var(--ui-fg-interactive);
+			&:hover {
+				color: var(--ui-fg-interactive-hover);
+			}
+		}
+	}
+
+	.form {
+		.shippingAddress {
+			padding-bottom: 2rem;
+		}
+		.billingAddress {
+			padding-bottom: 1.5rem;
+			padding-top: 2rem;
+		}
+		.submitBtn {
+			margin-top: 1.5rem;
+		}
+		// .errorMsg: add error styles if needed
+	}
+
+	.summary {
+		font-size: 0.875rem;
+		.row {
+			display: flex;
+			align-items: start;
+			gap: 2rem;
+		}
+		.col {
+			display: flex;
+			flex-direction: column;
+			width: 33.3333%;
+			// &.shipping: shipping address column
+			// &.contact: contact column
+			// &.billing: billing address column
+			.label {
+				font-weight: 600;
+				color: var(--ui-fg-base);
+				margin-bottom: 0.25rem;
+			}
+			.value {
+				font-weight: 400;
+				color: var(--ui-fg-subtle);
+				margin-bottom: 0.25rem;
+			}
+			.note {
+				font-weight: 400;
+				color: var(--ui-fg-subtle);
+			}
+		}
+	}
+
+	.divider {
+		margin-top: 2rem;
+	}
+}

@@ -1,0 +1,101 @@
+/* Payment component styles using nested Sass structure */
+
+.root {
+  background: #fff;
+
+  .headerRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem; /* 24px */
+  }
+
+  .heading {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem; /* 8px */
+    align-items: baseline;
+    font-size: 1.875rem; /* text-3xl-ish */
+    line-height: 2.25rem;
+  }
+
+  .headingDisabled {
+    opacity: 0.5;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .editBtn {
+    color: var(--fg-interactive);
+    transition: color 150ms;
+
+    &:hover {
+      color: var(--fg-interactive-hover);
+    }
+  }
+
+  .open {
+    display: block;
+  }
+
+  .closed {
+    display: none;
+  }
+
+  .colThird {
+    display: flex;
+    flex-direction: column;
+    width: 33.333333%;
+  }
+
+  .sectionTitle {
+    margin-bottom: 0.25rem; /* 4px */
+    font-weight: 600; /* medium-plus-ish */
+    color: var(--fg-base);
+  }
+
+  .sectionText {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: var(--fg-subtle);
+  }
+
+  .summaryRow {
+    display: flex;
+    align-items: flex-start;
+    column-gap: 0.25rem; /* 4px */
+    width: 100%;
+  }
+
+  .detailsRow {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; /* 8px */
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: var(--fg-subtle);
+  }
+
+  .iconBox {
+    display: flex;
+    align-items: center;
+    height: 1.75rem; /* 28px */
+    width: fit-content;
+    padding: 0.5rem; /* 8px */
+    background: var(--button-neutral-hover);
+  }
+
+  .submitBtn {
+    margin-top: 1.5rem; /* 24px */
+  }
+
+  .divider {
+    margin-top: 2rem; /* 32px */
+  }
+
+  #comgate-container {
+    /* reserved for Comgate iframe wrap styling */
+    min-height: 1px;
+  }
+}

@@ -1,0 +1,13 @@
+.root {
+  width: 100%;
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem; /* gap-4 */
+    flex: 1 1 auto;
+    margin-top: 1rem; /* mt-4 */
+  }
+}
+
+/* Note: responsiveness intentionally omitted per request */

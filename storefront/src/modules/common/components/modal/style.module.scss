@@ -1,0 +1,101 @@
+/* Modal component styles */
+.root {
+	position: relative;
+	z-index: 75;
+
+	.backdrop {
+		position: fixed;
+		inset: 0;
+		background: rgba(0,0,0,0.75);
+		backdrop-filter: blur(6px);
+		height: 100dvh;
+	}
+
+	.container {
+		position: fixed;
+		inset: 0;
+		overflow-y: hidden;
+		display: flex;
+		min-height: 100dvh;
+		height: 100dvh;
+		justify-content: center;
+		padding: 1rem;
+		text-align: center;
+		align-items: center;
+	}
+
+	.panel {
+		display: flex;
+		flex-direction: column;
+		justify-content: start;
+		width: 100%;
+		transform: none;
+		padding: 1.25rem;
+		text-align: left;
+		align-items: stretch;
+		transition: all 0.3s;
+		max-height: 75dvh;
+		height: fit-content;
+		background: #fff;
+		box-shadow: 0 10px 40px var(--ButtonBorder); // subtle shadow here
+
+		border-radius: 1rem;
+		border: 1px solid #e5e7eb;
+		&.small {
+			max-width: 28rem;
+		}
+		&.medium {
+			max-width: 36rem;
+		}
+		&.large {
+			max-width: 48rem;
+		}
+		&.transparent {
+			background: transparent;
+			box-shadow: none;
+			border: none;
+		}
+	}
+
+	.title {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		.text {
+			font-size: 1.25rem;
+			font-weight: 600;
+		}
+		.closeBtn {
+			background: none;
+			border: none;
+			cursor: pointer;
+			padding: 0;
+			margin-left: 1rem;
+			display: flex;
+			align-items: center;
+		}
+	}
+
+	.description {
+		display: flex;
+		font-size: 0.875rem;
+		color: var(--ui-fg-base, #111827);
+		align-items: center;
+		justify-content: center;
+		padding-top: 0.5rem;
+		padding-bottom: 1rem;
+		height: 100%;
+	}
+
+	.body {
+		display: flex;
+		justify-content: center;
+	}
+
+	.footer {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		gap: 1rem;
+	}
+}

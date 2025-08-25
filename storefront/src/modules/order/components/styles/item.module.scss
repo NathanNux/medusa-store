@@ -1,0 +1,47 @@
+// Styles for a single line item row
+.row {
+  width: 100%;
+}
+
+.cellThumb {
+  padding: 1rem;
+  padding-left: 0 !important;
+  width: 6rem; // w-24
+}
+
+.thumbWrap {
+  display: flex;
+  width: 4rem; // w-16
+}
+
+.cellInfo {
+  text-align: left;
+
+  .name {
+    // txt-medium-plus substitute
+    font-weight: 500;
+    color: var(--ui-fg-base, #111827);
+  }
+}
+
+.cellPrice {
+  padding-right: 0 !important;
+}
+
+.priceWrap {
+  padding-right: 0 !important;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  height: 100%;
+  justify-content: center;
+}
+
+.unitWrap {
+  display: flex;
+  column-gap: 0.25rem;
+}
+
+.quantity {
+  color: var(--ui-fg-subtle, #6b7280);
+}

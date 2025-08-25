@@ -1,0 +1,12 @@
+/* Preview items scroll container */
+.root {
+  padding-left: 1px;
+
+  &.scroll {
+    padding-left: 1px; /* pl-[1px] */
+    overflow-y: auto; /* overflow-y-scroll */
+    overflow-x: hidden; /* overflow-x-hidden */
+    max-height: 420px; /* max-h-[420px] */
+    /* no-scrollbar would require vendor-specific rules; omitted intentionally */
+  }
+}

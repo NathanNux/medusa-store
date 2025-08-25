@@ -1,0 +1,42 @@
+/* CheckoutSummary component styles - SASS nesting */
+.root {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 2rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+
+  @media (min-width: 640px) {
+    flex-direction: column;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .summary {
+    width: 100%;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    .heading {
+      display: flex;
+      flex-direction: row;
+      font-size: 2rem;
+      font-weight: 500;
+      align-items: baseline;
+      margin: 0;
+    }
+    .divider {
+      margin: 1.5rem 0;
+      @media (min-width: 640px) {
+        &.hidden {
+          display: none;
+        }
+      }
+    }
+    .discount {
+      margin: 1.5rem 0;
+    }
+  }
+}

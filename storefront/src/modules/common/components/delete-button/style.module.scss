@@ -1,0 +1,38 @@
+/* DeleteButton component styles - SASS nesting */
+.root {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  color: var(--ui-fg-subtle, #6B7280);
+
+  .button {
+    display: flex;
+    gap: 0.25rem;
+    color: var(--ui-fg-subtle, #6B7280);
+    cursor: pointer;
+    transition: color 0.15s;
+    align-items: center;
+    &:hover {
+      color: var(--ui-fg-base, #111827);
+    }
+    .spinner {
+      animation: spin 1s linear infinite;
+    }
+    svg{
+      width: 1rem;
+      height: 1rem;
+    }
+    span{ 
+      font-size: 1rem;
+    }
+  // .icon for Trash icon
+  // span for children text
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

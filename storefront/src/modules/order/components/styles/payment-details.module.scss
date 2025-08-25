@@ -1,0 +1,57 @@
+.root {
+  .title {
+    display: flex;
+    flex-direction: row;
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+    margin-block: 1.5rem;
+  }
+
+  .row {
+    display: flex;
+    align-items: flex-start;
+    column-gap: 0.25rem;
+    width: 100%;
+  }
+
+  .colLeft {
+    display: flex;
+    flex-direction: column;
+    width: 33.3333%;
+  }
+
+  .colRight {
+    display: flex;
+    flex-direction: column;
+    width: 66.6666%;
+  }
+
+  .label {
+    font-weight: 500;
+    color: var(--ui-fg-base, #111827);
+    margin-bottom: 0.25rem;
+  }
+
+  .value {
+    color: var(--ui-fg-subtle, #6b7280);
+  }
+
+  .detailsRow {
+    display: flex;
+    align-items: center;
+    column-gap: 0.5rem;
+  }
+
+  .iconWrap {
+    display: flex;
+    align-items: center;
+    height: 1.75rem;
+    width: fit-content;
+    padding: 0.5rem;
+    background: var(--ui-button-neutral-hover, #f3f4f6);
+  }
+
+  .divider {
+    margin-top: 2rem;
+  }
+}

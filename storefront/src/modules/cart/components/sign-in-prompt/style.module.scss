@@ -1,0 +1,40 @@
+/* Sign-in prompt styles in nested Sass structure */
+
+.root {
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem; /* mirrors common spacing */
+
+  .content {
+    display: flex;
+    flex-direction: column;
+
+    .title {
+      font-size: 1.25rem; /* approx txt-xlarge */
+      line-height: 1.75rem;
+      font-weight: 600;
+      color: var(--ui-fg-base, #111827);
+    }
+
+    .desc {
+      margin-top: 0.5rem; /* mt-2 */
+      font-size: 0.875rem; /* txt-medium-ish */
+      line-height: 1.25rem;
+      color: var(--ui-fg-subtle, #6b7280);
+    }
+  }
+
+  .ctaWrap {
+    display: flex;
+    align-items: center;
+
+    .link {
+        text-decoration: none;
+        .button {
+          height: 2.5rem; /* h-10 */
+        }
+    }
+  }
+}

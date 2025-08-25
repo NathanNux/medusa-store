@@ -1,0 +1,47 @@
+
+/* Items table styles */
+.root {
+  width: 100%;
+
+  .headerRow {
+    padding-bottom: 0.75rem; /* pb-3 */
+    display: flex;
+    align-items: center;
+
+    .title {
+      font-size: 2rem;
+      line-height: 2.75rem;
+      font-weight: 700;
+    }
+  }
+
+  .tableHeader {
+    border-top: 0; /* border-t-0 */
+
+    .tableHeaderRow {
+      color: var(--ui-fg-subtle, #6b7280);
+      font-weight: 600; /* txt-medium-plus approx */
+
+      .colItem {
+        padding-left: 0 !important; /* !pl-0 */
+      }
+
+      .colSpacer {
+        width: 1%;
+      }
+
+      .colQty {
+        text-align: left;
+      }
+
+      .colPrice {
+        text-align: left;
+      }
+
+      .colTotal {
+        padding-right: 0 !important; /* !pr-0 */
+        text-align: right;
+      }
+    }
+  }
+}

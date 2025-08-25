@@ -1,0 +1,278 @@
+@use '../../../../styles/mixins.scss' as *;
+
+.root {
+  height: 100%;
+  z-index: 50;
+
+  .popover {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .popoverButton {
+      height: 100%;
+    }
+    .cartLink {
+      display: flex;
+      gap: 2.5px;
+      align-items: flex-start;
+      justify-content: center;
+      flex-direction: row;
+      height: 100%;
+      color: inherit;
+      text-decoration: none;
+      &:hover {
+        color: var(--ui-fg-base);
+      }
+      .cartCount {
+        color: var(--Otext);
+        font-size: 0.875rem;
+
+        @include respond-to-h(sm){
+          font-size: 0.8rem;
+        }
+        @include respond-to-h(xs){
+          font-size: 0.75rem;
+        }
+        @include respond-to-h(xxs){
+          font-size: 0.75rem;
+        }
+
+        @include respond-to-v(lg){
+          font-size: 1.3rem;
+        }
+      }
+    }
+    .popoverPanel {
+      display: none;
+      @media (min-width: 640px) {
+        display: block;
+      }
+      position: absolute;
+      top: calc(100% + 1px);
+      right: -200px;
+      background: #fff;
+      border-left: 1px solid #e5e7eb;
+      border-right: 1px solid #e5e7eb;
+      border-bottom: 1px solid #e5e7eb;
+      width: 480px;
+      color: var(--ui-fg-base);
+      z-index: 100;
+      border-radius: 25px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
+
+      .panelHeader {
+        padding: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        h3 {
+          font-size: 1.25rem;
+          font-weight: 600;
+        }
+      }
+      .items {
+        overflow-y: scroll;
+        max-height: 402px;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        scrollbar-width: none;
+        padding-top: 1px;
+        padding-bottom: 1px;
+      }
+      .cartItem {
+        display: grid;
+        grid-template-columns: 122px 1fr;
+        gap: 1rem;
+        .productLink {
+          width: 6rem;
+        }
+        .itemDetails {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          flex: 1;
+          .itemInfo {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            .itemHeader {
+              display: flex;
+              align-items: flex-start;
+              justify-content: space-between;
+              .itemTitle {
+                font-size: 1rem;
+                font-weight: 400;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                margin-right: 1rem;
+                width: 180px;
+              }
+              .itemPrice {
+                display: flex;
+                justify-content: flex-end;
+              }
+            }
+          }
+          .removeBtn {
+            margin-top: 0.25rem;
+            font-size: 0.875rem;
+          }
+        }
+      }
+      .subtotal {
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        font-size: 0.875rem;
+        .subtotalRow {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          font-weight: 500;
+          .subtotalLabel {
+            color: var(--ui-fg-base);
+            font-weight: 600;
+            .normal {
+              font-weight: 400;
+            }
+          }
+          .subtotalValue {
+            font-size: 1.25rem;
+            font-weight: 600;
+          }
+        }
+        .goToCartBtn {
+          width: 100%;
+        }
+      }
+      .empty {
+        .emptyContent {
+          display: flex;
+          padding-top: 4rem;
+          padding-bottom: 4rem;
+          flex-direction: column;
+          gap: 1rem;
+          align-items: center;
+          justify-content: center;
+
+          .emptyIconContainer{
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+
+            .emptyIcon {
+                background: var(--CharcoalBg);
+                font-size: 1.1rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 2rem;
+                height: 2rem;
+                border-radius: 9999px;
+                color: var(--Wtext);
+            }
+          }
+          .emptyText {
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+.ClickButton.goToCartBtn {
+    width: auto;
+    height: auto;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .button{
+        position: relative;
+        width: 150px;
+        height: 40px;
+        cursor: pointer;
+        border-radius: 25px;
+        overflow: hidden;
+        border: none;
+        box-shadow: none;
+        background-color: transparent;
+
+        @include respond-to-v(s){
+            width: 90px;
+            height: 35px;
+        }
+
+        .slider{
+            position: relative;
+            width: 100%;
+            height: 100%;
+
+            .el{
+                width: 100%;
+                height: 100%;
+                p{
+                    margin: 0px;
+                    font-size: 1rem;
+                    color: var(--Wtext)
+                }
+                &:nth-of-type(2){
+                    p{
+                        color: var(--Wtext);
+                    }
+                }
+                &:hover{
+                    .perspectiveText{
+                        transform: rotateX(90deg);
+                        p{
+                            &:nth-of-type(1){
+                                transform: translateY(-100%);
+                                opacity: 0;
+                            }
+                            &:nth-of-type(2){
+                                opacity: 1;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+    }
+}
+
+.perspectiveText{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.75s cubic-bezier(0.76, 0, 0.24, 1);
+    p{
+        transition: all 0.75s cubic-bezier(0.76, 0, 0.24, 1);
+        pointer-events: none;
+        text-transform: capitalize;
+        &:nth-of-type(2){
+            position: absolute;
+            transform-origin: bottom center;
+            transform: rotateX(-90deg) translateY(12px);
+            opacity: 0;
+        }
+    }
+}

@@ -1,0 +1,61 @@
+/* CartTotals component styles - SASS nesting */
+.root {
+  .totalsList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--ui-fg-subtle, #6B7280);
+    .row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .label {
+        display: flex;
+        gap: 0.25rem;
+        align-items: center;
+      }
+      .discount, .giftCard {
+        color: var(--ui-fg-interactive, #2563EB);
+      }
+    }
+    .taxRow {
+      display: flex;
+      justify-content: space-between;
+      .label {
+        display: flex;
+        gap: 0.25rem;
+        align-items: center;
+      }
+    }
+  }
+  .divider {
+    height: 1px;
+    width: 100%;
+    border-bottom: 1px solid #e5e7eb;
+    margin: 1rem 0;
+    background: none;
+    &.mt {
+      margin-top: 1rem;
+      margin-bottom: 0;
+    }
+    &.mb {
+      margin-bottom: 0.5rem;
+      margin-top: 0;
+    }
+  }
+  .totalRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--ui-fg-base, #111827);
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    .total {
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+  }
+}

@@ -1,0 +1,110 @@
+/* Shipping component styles - SASS nesting */
+.root {
+  background: #fff;
+
+  .header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    .heading {
+      display: flex;
+      flex-direction: row;
+      font-size: 2rem;
+      font-weight: 500;
+      gap: 0.5rem;
+      align-items: baseline;
+      &.inactive {
+        opacity: 0.5;
+        pointer-events: none;
+        user-select: none;
+      }
+    }
+    .editBtn {
+      color: var(--ui-fg-interactive, #2563EB);
+      transition: color 0.15s;
+      &:hover {
+        color: var(--ui-fg-interactive-hover, #1d4ed8);
+      }
+    }
+  }
+
+  .deliveryOptions {
+    padding-bottom: 2rem;
+    padding-top: 0.5rem;
+    @media (min-width: 768px) {
+      padding-top: 0;
+    }
+  }
+
+  .radioRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.875rem;
+    cursor: pointer;
+    padding: 1rem 2rem 1rem 2rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 1rem;
+    margin-bottom: 0.5rem;
+    transition: box-shadow 0.15s;
+    &:hover {
+      box-shadow: 0 0 0 2px var(--ui-fg-interactive, #2563EB);
+    }
+    &.active {
+      border-color: var(--ui-border-interactive, #2563EB);
+    }
+    &.disabled {
+      box-shadow: none;
+      cursor: not-allowed;
+    }
+  }
+
+  .radioContent {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .radioLabel {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--ui-fg-base, #111827);
+  }
+
+  .radioPrice {
+    justify-self: end;
+    color: var(--ui-fg-base, #111827);
+  }
+
+  .radioAddress {
+    font-size: 1rem;
+    color: var(--ui-fg-muted, #6B7280);
+  }
+
+  .packetaSelector {
+    margin-top: 0.5rem;
+    font-weight: 500;
+  }
+
+  .divider {
+    margin-top: 2rem;
+  }
+
+  .methodSummary {
+    display: flex;
+    flex-direction: column;
+    width: 33%;
+    .methodLabel {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--ui-fg-base, #111827);
+      margin-bottom: 0.25rem;
+    }
+    .methodText {
+      font-size: 1rem;
+      color: var(--ui-fg-subtle, #6B7280);
+    }
+  }
+}

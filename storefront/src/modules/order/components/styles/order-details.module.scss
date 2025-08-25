@@ -1,0 +1,30 @@
+.root {
+  .text {
+    margin-top: 0.5rem;
+  }
+
+  .email {
+    color: var(--ui-fg-base, #111827);
+    font-weight: 600;
+  }
+
+  .orderNumber {
+    margin-top: 0.5rem;
+    color: var(--ui-fg-interactive, #2563eb);
+  }
+
+  .statusRow {
+    display: flex;
+    align-items: center;
+    column-gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .statusText {
+    font-size: 0.875rem;
+  }
+
+  .statusValue {
+    color: var(--ui-fg-subtle, #6b7280);
+  }
+}

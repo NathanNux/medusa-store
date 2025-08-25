@@ -1,0 +1,44 @@
+/* Review component styles - SASS nesting */
+.root {
+  background: #fff;
+
+  .header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    .heading {
+      display: flex;
+      flex-direction: row;
+      font-size: 2rem;
+      font-weight: 500;
+      gap: 0.5rem;
+      align-items: baseline;
+      &.inactive {
+        opacity: 0.5;
+        pointer-events: none;
+        user-select: none;
+      }
+    }
+  }
+
+  .reviewRow {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.25rem;
+    width: 100%;
+    margin-bottom: 1.5rem;
+  }
+
+  .reviewTextWrap {
+    width: 100%;
+  }
+
+  .reviewText {
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: var(--ui-fg-base, #111827);
+    margin-bottom: 0.25rem;
+  }
+}

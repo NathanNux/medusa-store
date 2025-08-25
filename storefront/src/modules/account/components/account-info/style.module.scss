@@ -1,0 +1,78 @@
+.root {
+  // container styles if needed
+
+  .headerRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .leftCol {
+      display: flex;
+      flex-direction: column;
+
+      .labelUpper {
+        font-size: 1rem;
+        font-weight: 500;
+        text-transform: uppercase;
+      }
+      .rightInfoRow {
+        margin-top: 0.25rem;
+
+        .fontSemibold {
+          font-weight: 600;
+        }
+      }
+    }
+    .editBtn {
+      // Button styles if needed
+    }
+  }
+
+  .successPanel,
+  .errorPanel,
+  .editPanel {
+    transition-property: max-height, opacity;
+    transition-duration: 300ms;
+    transition-timing-function: ease-in-out;
+    overflow: hidden;
+  }
+  .editPanel {
+    overflow: visible;
+  }
+  .panelOpen {
+    max-height: 1000px;
+    opacity: 1;
+  }
+  .panelClosed {
+    max-height: 0;
+    opacity: 0;
+  }
+  .badgeSuccess {
+    padding: 0.5rem;
+    margin: 1rem 0;
+  }
+  .badgeError {
+    padding: 0.5rem;
+    margin: 1rem 0;
+  }
+  .editContent {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem 0;
+
+    .editActions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      margin-top: 0.5rem;
+
+      .saveBtn {
+        width: 100%;
+        @media (min-width: 640px) {
+          max-width: 140px;
+        }
+      }
+    }
+  }
+}

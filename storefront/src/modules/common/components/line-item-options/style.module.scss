@@ -1,0 +1,10 @@
+/* LineItemOptions component styles - SASS nesting */
+.root {
+  display: inline-block;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--ui-fg-subtle, #6B7280);
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

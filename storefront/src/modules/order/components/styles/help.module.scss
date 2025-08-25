@@ -1,0 +1,29 @@
+.root {
+  margin-top: 1.5rem;
+
+  .title {
+    // base heading styles
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  .content {
+    margin-block: 0.5rem;
+
+    .list {
+      display: flex;
+      flex-direction: column;
+      row-gap: 0.5rem;
+
+      .link {
+        text-decoration: none;
+        color: var(--ui-fg-interactive, #111827);
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}

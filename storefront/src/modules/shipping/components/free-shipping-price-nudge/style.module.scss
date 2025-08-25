@@ -1,0 +1,188 @@
+.root {
+  background-color: #f5f5f5; // bg-neutral-100
+  padding: 0.5rem; // p-2
+  border-radius: 0.5rem; // rounded-lg
+  border: 1px solid #e5e5e5; // border
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem; // space-y-1.5
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem; // text-xs
+      color: #525252; // text-neutral-600
+
+      .unlocked {
+        display: flex;
+        align-items: center;
+        gap: 0.375rem; // gap-1.5
+
+        .icon {
+          color: #22c55e; // text-green-500
+          display: inline-block;
+        }
+      }
+      .remaining {
+        visibility: visible;
+        &.hidden {
+          opacity: 0;
+          visibility: hidden;
+        }
+        .remainingAmount {
+          color: #09090b; // text-neutral-950
+        }
+      }
+    }
+    .progressRow {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.25rem; // gap-1
+      .progressBar {
+        background: linear-gradient(to right, #a1a1aa, #71717a); // from-zinc-400 to-zinc-500
+        height: 0.25rem; // h-1
+        border-radius: 9999px; // rounded-full
+        max-width: 100%;
+        transition: width 0.5s ease-in-out;
+        &.progressBarReached {
+          background: linear-gradient(to right, #22c55e, #22d3ee); // from-green-400 to-green-500
+        }
+      }
+      .progressBg {
+        background: #d4d4d4; // bg-neutral-300
+        height: 0.25rem; // h-1
+        border-radius: 9999px; // rounded-full
+        width: fit-content; // w-fit
+        flex-grow: 1;
+      }
+    }
+  }
+}
+
+.popupRoot {
+  position: fixed;
+  bottom: 1.25rem; // bottom-5
+  right: 1.25rem; // right-5
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem; // gap-2
+  transition: all 0.5s ease-in-out;
+  z-index: 10; // z-10
+  &.popupHiddenDelayed {
+    opacity: 0;
+    visibility: hidden;
+    transition-delay: 1s; // delay-1000
+  }
+  &.popupHidden {
+    opacity: 0;
+    visibility: hidden;
+  }
+  &.popupVisible {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.closeBtn {
+  border-radius: 9999px; // rounded-full
+  background: #18181b; // bg-neutral-900
+  box-shadow: none; // shadow-none
+  outline: none; // outline-none
+  border: none; // border-none
+  font-size: 0.9375rem; // text-[15px]
+  padding: 0.5rem; // p-2
+}
+
+.popupContent {
+  width: 400px; // w-[400px]
+  background: #000; // bg-black
+  color: #fff; // text-white
+  padding: 1.5rem; // p-6
+  border-radius: 0.75rem; // rounded-lg
+}
+
+.popupHeader {
+  padding-bottom: 1rem; // pb-4
+  .popupHeaderContent {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem; // space-y-3
+    .popupHeaderRow {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9375rem; // text-[15px]
+      color: #a3a3a3; // text-neutral-400
+      .unlocked {
+        display: flex;
+        align-items: center;
+        gap: 0.375rem; // gap-1.5
+        .icon {
+          color: #22c55e; // text-green-500
+          display: inline-block;
+        }
+      }
+      .remaining {
+        visibility: visible;
+        &.hidden {
+          opacity: 0;
+          visibility: hidden;
+        }
+        .popupRemainingAmount {
+          color: #fff; // text-white
+        }
+      }
+    }
+    .popupProgressRow {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.25rem; // gap-1
+      .popupProgressBar {
+        background: linear-gradient(to right, #a1a1aa, #71717a); // from-zinc-400 to-zinc-500
+        height: 0.375rem; // h-1.5
+        border-radius: 9999px; // rounded-full
+        max-width: 100%;
+        transition: width 0.5s ease-in-out;
+        &.progressBarReached {
+          background: linear-gradient(to right, #22c55e, #22d3ee); // from-green-400 to-green-500
+        }
+      }
+      .popupProgressBg {
+        background: #52525b; // bg-zinc-600
+        height: 0.375rem; // h-1.5
+        border-radius: 9999px; // rounded-full
+        width: fit-content; // w-fit
+        flex-grow: 1;
+      }
+    }
+  }
+}
+
+.popupActions {
+  display: flex;
+  gap: 0.75rem; // gap-3
+  .popupCartBtn {
+    border-radius: 1rem; // rounded-2xl
+    background: transparent; // bg-transparent
+    box-shadow: none; // shadow-none
+    outline: none; // outline-none
+    border: 1px solid #fff; // border-white
+    font-size: 0.9375rem; // text-[15px]
+    padding: 0.625rem 1rem; // py-2.5 px-4
+    color: #fff; // text-white
+  }
+  .popupProductsBtn {
+    flex-grow: 1; // flex-grow
+    border-radius: 1rem; // rounded-2xl
+    background: #fff; // bg-white
+    color: #09090b; // text-neutral-950
+    box-shadow: none; // shadow-none
+    outline: none; // outline-none
+    border: 1px solid #fff; // border-white
+    font-size: 0.9375rem; // text-[15px]
+    padding: 0.625rem 1rem; // py-2.5 px-4
+    text-align: center; // text-center
+  }
+}

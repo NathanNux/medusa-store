@@ -1,0 +1,110 @@
+
+.root {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem; /* gap-y-4 */
+  width: 100%;
+
+  .headerRow {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr; /* responsiveness omitted */
+    column-gap: 2rem; /* gap-x-8 */
+    row-gap: 1rem; /* gap-y-4 */
+    width: 100%;
+
+    .intro {
+      display: flex;
+      flex-direction: column;
+      row-gap: 0.25rem; /* gap-y-1 */
+
+      .title {
+        font-size: 1.125rem;
+        line-height: 1.75rem;
+        color: #0a0a0a; /* neutral-950 */
+        font-weight: 600;
+      }
+
+      .desc {
+        font-size: 1rem;
+        line-height: 1.5rem; /* text-base-regular */
+        color: #6b7280; /* neutral-500 */
+      }
+    }
+
+    .form {
+      display: flex;
+      flex-direction: column;
+
+      .formInner {
+        display: flex;
+        flex-direction: column;
+        row-gap: 0.5rem; /* gap-y-2 */
+        width: 100%;
+
+        .input {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  .error {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: #f43f5e; /* rose-500 */
+    text-align: right;
+  }
+
+  .success {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem; /* p-4 */
+    background: #fafafa; /* neutral-50 */
+    box-shadow: 0 0 2px var(--ButtonBorder); // subtle shadow here
+
+    width: 100%;
+    align-self: stretch;
+    align-items: center;
+
+    .successLeft {
+      display: flex;
+      align-items: center;
+      column-gap: 0.5rem; /* gap-x-2 */
+
+      .iconSuccess {
+        width: 1rem; /* w-4 */
+        height: 1rem; /* h-4 */
+        color: #10b981; /* emerald-500 */
+      }
+
+      .successTextWrap {
+        display: flex;
+        flex-direction: column;
+        row-gap: 0.25rem; /* gap-y-1 */
+
+        .successTitle {
+          font-size: 0.938rem; /* approx text-medium */
+          line-height: 1.25rem;
+          color: #0a0a0a; /* neutral-950 */
+        }
+
+        .successDesc {
+          font-size: 1rem; /* text-base-regular */
+          line-height: 1.5rem;
+          color: #4b5563; /* neutral-600 */
+        }
+      }
+    }
+
+    .closeBtn {
+      height: auto; /* h-fit */
+
+      .iconClose {
+        width: 1rem; /* w-4 */
+        height: 1rem; /* h-4 */
+        color: #6b7280; /* neutral-500 */
+      }
+    }
+  }
+}
