@@ -10,11 +10,11 @@ export const metadata: Metadata = {
 export default async function NotFound() {
   return (
     <div className={styles.root}>
-      <h1 className={styles.heading}>Page not found</h1>
+      <h1 className={styles.heading}>Stránka nenalezena</h1>
       <p className={styles.message}>
-        The page you tried to access does not exist.
+        Stránka, kterou jste se pokusili otevřít, neexistuje.
       </p>
-      <InteractiveLink href="/">Go to frontpage</InteractiveLink>
+      <InteractiveLink href="/">Zpět na úvodní stránku</InteractiveLink>
     </div>
   );
 }

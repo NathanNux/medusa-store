@@ -1,5 +1,5 @@
 import { Metadata } from "next"
-import s from "../../styles/profile.module.scss"
+import s from "../styles/profile.module.scss"
 import { notFound } from "next/navigation"
 import { retrieveCustomer } from "@lib/data/customer"
 import { cookies } from "next/headers"

@@ -1,6 +1,12 @@
-import { Button } from "@medusajs/ui"
+"use client";
+// import { Button } from "@medusajs/ui"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import s from "./style.module.scss"
+
+
+import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { useFormStatus } from 'react-dom';
 
 const SignInPrompt = () => {
   return (
@@ -11,9 +17,13 @@ const SignInPrompt = () => {
       </div>
       <div className={s.ctaWrap}>
         <LocalizedClientLink className={s.link} href="/account">
-          <Button variant="secondary" className={s.button} data-testid="sign-in-button">
-            Přihlásit se
-          </Button>
+            <ClickButton
+                text="Přihlásit se"
+                type="button"
+                className={s.button}
+                data-testid="sign-in-button"
+                onClickAction={undefined} // navigation handled by Link
+            />
         </LocalizedClientLink>
       </div>
     </div>
@@ -21,3 +31,66 @@ const SignInPrompt = () => {
 }
 
 export default SignInPrompt
+
+
+type ClickButtonProps = {
+    text: string;
+    onClickAction?: () => void | Promise<void>;
+    ClickAction?: () => void | Promise<void>; // backward compatibility
+    disabled?: boolean;
+    type?: "button" | "submit";
+    className?: string;
+    "data-testid"?: string;
+}
+
+// Base animated button used across the site. Can act as a submit button in forms.
+function ClickButton({ onClickAction, ClickAction, disabled = false, text, type = "button", className, "data-testid": dataTestId }: ClickButtonProps) {
+    const [ isActive , setIsActive ] = useState<boolean>(false);
+    const { pending } = useFormStatus();
+    const isSubmitting = type === "submit" ? pending : false;
+    const isDisabled = disabled || isSubmitting;
+    const handleClick = onClickAction ?? ClickAction;
+
+    return (
+        <div className={className ? `ClickButton ${className}` : "ClickButton"}>
+            <button 
+                type={type}
+                className="button"
+                onClick={handleClick}
+                disabled={isDisabled}
+                aria-busy={isDisabled || undefined}
+                onMouseEnter={() => setIsActive(true)}
+                onMouseLeave={() => setIsActive(false)}
+                data-testid={dataTestId}
+            >
+                <motion.div 
+                    className="slider"
+                    animate={{top: isActive ? "-100%" : "0%"}}
+                    transition={{ duration: 0.5, type: "tween", ease: [0.76, 0, 0.24, 1]}}
+                >
+                    <div 
+                        className="el"
+                        style={{ backgroundColor: "var(--OButton)" }}
+                    >
+                        <PerspectiveText label={text}/>
+                    </div>
+                    <div 
+                        className="el"
+                        style={{ backgroundColor: "var(--CharcoalBg)" }}
+                    >
+                        <PerspectiveText label={text} />
+                    </div>
+                </motion.div>
+            </button>
+        </div>
+    )
+}
+
+function PerspectiveText({label}: {label: string}) {
+    return (    
+        <div className="perspectiveText">
+            <p>{label}</p>
+            <p>{label}</p>
+        </div>
+    )
+}

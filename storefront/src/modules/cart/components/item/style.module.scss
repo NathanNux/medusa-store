@@ -1,73 +1,85 @@
+
 .row {
   width: 100%;
-}
-
-.cellThumb {
-  padding-left: 0 !important;
-  padding: 1rem; /* p-4 */
-  width: 6rem; /* w-24 */
-}
-
-.thumbLink {
+  height: 10dvh;
   display: flex;
-}
-
-.thumbLinkPreview {
-  width: 4rem; /* w-16 */
-}
-
-.thumbLinkFull {
-  width: 3rem; /* w-12 */
-}
-
-.cellTitle {
-  text-align: left;
-}
-
-.title {
-  font-size: 1rem;
-  line-height: 1.5rem;
-  font-weight: 600; /* medium-plus analog */
-  color: var(--ui-fg-base, #111827);
-}
-
-.cellActions {
-  /* container for actions cell */
-  vertical-align: middle;
-}
-
-.actionsRow {
-  display: flex;
-  column-gap: 0.5rem; /* gap-2 */
   align-items: center;
-  width: 7rem; /* w-28 */
-}
+  justify-content: space-between;
 
-.cellUnit {
-  display: none;
-}
+  .cellThumb {
+    padding-left: 0 !important;
+    padding: 1rem; /* p-4 */
+    width: 6rem; /* w-24 */
+    height: 6rem; /* h-24 */
 
-.cellPrice {
-  padding-right: 0 !important;
-}
+    .thumbLink {
+      display: flex;
 
-.priceWrap {
-  padding-right: 0 !important;
-}
+      &.thumbLinkPreview {
+        width: 4rem; /* w-16 */
+      }
+      &.thumbLinkFull {
+        width: 3rem; /* w-12 */
+      }
+    }
+  }
 
-.previewPriceWrap {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  height: 100%;
-  justify-content: center;
-}
+  .cellTitle {
+    text-align: left;
+    width: fit-content; /* w-24 */
+    height: 6rem; /* h-24 */
+  
 
-.previewQtyRow {
-  display: flex;
-  column-gap: 0.25rem; /* gap-x-1 */
-}
+    .title {
+      font-size: 1rem;
+      line-height: 1.5rem;
+      font-weight: 600; /* medium-plus analog */
+      color: var(--ui-fg-base, #111827);
+    }
+  }
 
-.muted {
-  color: var(--ui-fg-muted, #6b7280);
+  .cellActions {
+    /* container for actions cell */
+    vertical-align: middle;
+    width: fit-content; /* w-24 */
+    height: 6rem; /* h-24 */
+    display: flex;
+    align-items: center;
+
+    .actionsRow {
+      display: flex;
+      column-gap: 0.5rem; /* gap-2 */
+      align-items: center;
+      width: 7rem; /* w-28 */
+    }
+  }
+
+  .cellUnit {
+    display: none;
+  }
+
+  .cellPrice {
+    padding-right: 0 !important;
+
+    .priceWrap {
+      padding-right: 0 !important;
+
+      &.previewPriceWrap {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        height: 100%;
+        justify-content: center;
+
+        .previewQtyRow {
+          display: flex;
+          column-gap: 0.25rem; /* gap-x-1 */
+        }
+      }
+    }
+  }
+
+  .muted {
+    color: var(--ui-fg-muted, #6b7280);
+  }
 }

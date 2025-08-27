@@ -27,7 +27,7 @@ const ItemsTemplate = ({ cart }: ItemsTemplateProps) => {
             <Table.HeaderCell className={s.colTotal}>Celkem</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
-        <Table.Body>
+        <Table.Body className={s.tableBody}>
           {items
             ? items
                 .sort((a, b) => {
