@@ -7,6 +7,7 @@ export default function PaymentConfirmed({ id }: { id: string }) {
         placeOrder(id)
         capturePayment({ cartId: id })
       }, [])
+      
   return (
     <div className="h-full w-full items-center justify-center">
       <h1>Payment Confirmed</h1>

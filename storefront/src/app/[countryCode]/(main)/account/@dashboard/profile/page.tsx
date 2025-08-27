@@ -6,6 +6,7 @@ import ProfileBillingAddress from "@modules/account/components/profile-billing-a
 import ProfileEmail from "@modules/account/components/profile-email"
 import ProfileName from "@modules/account/components/profile-name"
 import ProfilePassword from "@modules/account/components/profile-password"
+import { redirect } from "next/navigation"
 
 import { notFound } from "next/navigation"
 import { listRegions } from "@lib/data/regions"
@@ -45,6 +46,12 @@ export default async function Profile() {
         <Divider />
         {/* <ProfilePassword customer={customer} />
         <Divider /> */}
+        <div onClick={()=> redirect(`/account/@dashboard/reviews`)} style={{cursor: 'pointer', color: 'blue', textDecoration: 'underline', marginBottom: '20px'}}>
+          go to reviews
+        </div>
+        <div onClick={()=> redirect('/account/@dashboard/wishlist')} style={{cursor: 'pointer', color: 'blue', textDecoration: 'underline', marginBottom: '20px'}}>
+          go to wishlist
+        </div>
         <ProfileBillingAddress customer={customer} regions={regions} />
       </div>
     </div>
