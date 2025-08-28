@@ -54,13 +54,16 @@ export const POST = async (req: MedusaRequest, res: MedusaResponse) => {
   try {
     await customerModuleService.updateCustomers(customer.id, {
       metadata: {
-        ...customer.metadata,
         email_verified: true,
         email_verification_token: null,
         email_verification_expires_at: null,
       },
     })
     console.log("[VERIFY EMAIL] Email verified and customer updated:", customer.id)
+
+    // Retrieve updated customer to verify
+    const updatedCustomer = await customerModuleService.retrieveCustomer(customer.id)
+    console.log("[VERIFY EMAIL] Updated customer:", updatedCustomer)
   } catch (err) {
     console.log("[VERIFY EMAIL] Error updating customer:", err)
     res.status(500).json({ message: "Failed to update customer." })
