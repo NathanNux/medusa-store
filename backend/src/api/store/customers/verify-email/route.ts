@@ -13,7 +13,7 @@ export const POST = async (req: MedusaRequest, res: MedusaResponse) => {
   }
 
   const customerModuleService = req.scope.resolve(Modules.CUSTOMER)
-  let customer
+  let customer = null as any
   try {
     const customers = await customerModuleService.listCustomers({ email })
     customer = customers[0] || null
@@ -33,8 +33,7 @@ export const POST = async (req: MedusaRequest, res: MedusaResponse) => {
 
   const tokenMatches = customer.metadata.email_verification_token === token
   const expiresAt = customer.metadata.email_verification_expires_at
-  const isExpired =
-    expiresAt && new Date(expiresAt) < new Date()
+  const isExpired = expiresAt && new Date(expiresAt) < new Date()
 
   console.log("[VERIFY EMAIL] Token matches:", tokenMatches)
   console.log("[VERIFY EMAIL] Token expires at:", expiresAt, "Is expired:", isExpired)
@@ -52,23 +51,30 @@ export const POST = async (req: MedusaRequest, res: MedusaResponse) => {
   }
 
   try {
+    // preserve other metadata keys
     await customerModuleService.updateCustomers(customer.id, {
       metadata: {
+        ...customer.metadata,
         email_verified: true,
         email_verification_token: null,
         email_verification_expires_at: null,
       },
     })
     console.log("[VERIFY EMAIL] Email verified and customer updated:", customer.id)
-
-    // Retrieve updated customer to verify
-    const updatedCustomer = await customerModuleService.retrieveCustomer(customer.id)
-    console.log("[VERIFY EMAIL] Updated customer:", updatedCustomer)
   } catch (err) {
     console.log("[VERIFY EMAIL] Error updating customer:", err)
     res.status(500).json({ message: "Failed to update customer." })
     return
   }
 
-  res.status(200).json({ message: "Email verified successfully." })
-}
+  // retrieve updated customer to return to client
+  let updatedCustomer = null
+  try {
+    updatedCustomer = await customerModuleService.retrieveCustomer(customer.id)
+    console.log("[VERIFY EMAIL] Updated customer:", updatedCustomer)
+  } catch (err) {
+    console.log("[VERIFY EMAIL] Error retrieving updated customer:", err)
+  }
+
+  res.status(200).json({ ok: true, message: "Email verified successfully.", customer: updatedCustomer })
+  }

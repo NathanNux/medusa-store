@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { Button, Toaster, toast } from "@medusajs/ui"
-import { verifyCustomerEmail, resendVerification } from "@lib/data/customer"
+import { verifyCustomerEmail, resendVerification, retrieveCustomer } from "@lib/data/customer"
 import styles from "./styles/verify-email.module.scss"
 import { motion, useScroll, useTransform } from "framer-motion"
 import Image from "next/image"
@@ -33,6 +33,13 @@ export default function VerifyEmailPage() {
       if (result.ok) {
         toast.success(result.message || "Potvrzení e-mailu bylo úspěšné!")
         setSuccess(true)
+        // fetch fresh customer so UI reflects updated metadata
+        try {
+          await retrieveCustomer({ forceFresh: true })
+        } catch (e) {
+          // non-fatal
+          console.warn("verify-email: failed to refresh customer", e)
+        }
       } else {
         toast.error(result.message || "Ověření selhalo.")
       }

@@ -16,20 +16,19 @@ import {
 } from "./cookies"
 import { v4 as uuidv4 } from "uuid"
 
-export const retrieveCustomer =
-  async (): Promise<HttpTypes.StoreCustomer | null> => {
-    const authHeaders = await getAuthHeaders()
+export const retrieveCustomer = async (
+  opts?: { forceFresh?: boolean }
+): Promise<HttpTypes.StoreCustomer | null> => {
+  const authHeaders = await getAuthHeaders()
 
-    if (!authHeaders) return null
+  if (!authHeaders) return null
 
-    const headers = {
-      ...authHeaders,
-    }
+  const headers = {
+    ...authHeaders,
+  }
 
-    const next = {
-      ...(await getCacheOptions("customers")),
-    }
-
+  // If caller requests fresh data, bypass Next cache
+  if (opts?.forceFresh) {
     return await sdk.client
       .fetch<{ customer: HttpTypes.StoreCustomer }>(`/store/customers/me`, {
         method: "GET",
@@ -37,12 +36,29 @@ export const retrieveCustomer =
           fields: "*orders",
         },
         headers,
-        next,
-        cache: "force-cache",
+        cache: "no-store",
       })
       .then(({ customer }) => customer)
       .catch(() => null)
   }
+
+  const next = {
+    ...(await getCacheOptions("customers")),
+  }
+
+  return await sdk.client
+    .fetch<{ customer: HttpTypes.StoreCustomer }>(`/store/customers/me`, {
+      method: "GET",
+      query: {
+        fields: "*orders",
+      },
+      headers,
+      next,
+      cache: "force-cache",
+    })
+    .then(({ customer }) => customer)
+    .catch(() => null)
+}
 
 export const updateCustomer = async (body: HttpTypes.StoreUpdateCustomer) => {
   const headers = {
@@ -420,7 +436,21 @@ export async function verifyCustomerEmail(token: string, email: string) {
       }
     )
     // Ensure 'ok' is always present for frontend logic
-    return { ok: res.ok ?? true, message: res.message }
+    const result = { ok: res.ok ?? true, message: res.message }
+
+    // If verification succeeded, revalidate customer cache so updated metadata is visible
+    if (result.ok) {
+      try {
+        const cacheTag = await getCacheTag("customers")
+        revalidateTag(cacheTag)
+      } catch (e) {
+        // non-fatal: log and continue
+        // eslint-disable-next-line no-console
+        console.warn("verifyCustomerEmail: failed to revalidate customer cache", e)
+      }
+    }
+
+    return result
   } catch (e: any) {
     return { ok: false, message: e?.message || "Verification failed." }
   }
