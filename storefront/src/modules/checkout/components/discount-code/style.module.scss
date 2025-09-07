@@ -1,5 +1,7 @@
 @use "../../../../styles/mixins.scss" as *;
 
+@use "../../../../styles/mixins.scss" as *;
+
 .root {
   width: 100%;
   background: #fff;
@@ -24,6 +26,10 @@
           .button{ 
             width: 180px;
             height: 35px;
+        .ClickButton{
+          .button{ 
+            width: 180px;
+            height: 35px;
           }
         }
       }
@@ -31,11 +37,28 @@
       .row {
         display: flex;
         align-items: center;
+        align-items: center;
         width: 100%;
         gap: 0.5rem;
 
         .input {
           width: 100%;
+          max-width: 300px;
+          min-width: 200px;
+        }
+
+        .ClickButton{
+          .button{
+            width: 80px;
+            height: 35px;
+            .el{
+              p{
+                &:nth-of-type(2){
+                  transform: rotateX(-90deg) translateY(12px);
+                }
+              }
+            }
+          }
           max-width: 300px;
           min-width: 200px;
         }

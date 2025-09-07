@@ -1,11 +1,26 @@
 @use "../../../../styles/mixins.scss" as *;
 @use "../../../../styles/mixins.scss" as *;
+@use "../../../../styles/mixins.scss" as *;
 .row {
   width: 100%;
   height: 10dvh;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 0 2rem;
+
+  @include respond-to-h(md){
+    height: 12.5dvh;
+  }
+  @include respond-to-h(sm){
+    height: 12.5dvh;
+  }
+  @include respond-to-h(xs){
+    height: 20dvh;
+  }
+  @include respond-to-h(xxs){
+    height: 20dvh;
+  }
   padding: 0 1rem;
 
   @include respond-to-h(md){
@@ -35,10 +50,18 @@
     align-items: center;
     display: flex;
     align-items: center;
+    display: flex;
+    align-items: center;
     padding-left: 0 !important;
+    padding-right: 0 !important;
+    width: 4rem; /* w-24 */
     padding-right: 0.5rem !important;
     width: 4rem; /* w-24 */
     height: 6rem; /* h-24 */
+    @include respond-to-h(xxs){
+      width: 3rem;
+      height: 4rem;
+    }
     @include respond-to-h(xxs){
       width: 3rem;
       height: 4rem;
@@ -69,6 +92,9 @@
         @include respond-to-h(xxs){
           width: 3rem;
         }
+        @include respond-to-h(xxs){
+          width: 3rem;
+        }
          @include respond-to-v(md){
           width: 3rem;
         }
@@ -83,6 +109,10 @@
         }
       }
       &.thumbLinkFull {
+        width: 4rem; /* w-12 */
+        @include respond-to-h(xxs){
+          width: 3rem;
+        }
         width: 4rem; /* w-12 */
         @include respond-to-h(xxs){
           width: 3rem;
@@ -118,6 +148,13 @@
       width: 12rem;
       flex: 0 0 12rem;
     }
+    width: 18rem;
+    padding: 1rem 0;
+
+    @include respond-to-h(xxs){
+      width: 12rem;
+      flex: 0 0 12rem;
+    }
      @include respond-to-v(md){
       width: 14rem;
       flex: 0 0 14rem;
@@ -138,6 +175,8 @@
     .title {
       font-size: 1rem;
       line-height: 1.5rem;
+      font-weight: 600; /* medium-plus analog */
+      color: var(--ChText);
       font-weight: 400; /* medium-plus analog */
       color: var(--ChText);
       font-family: "Sansation-Regular";
@@ -191,6 +230,11 @@
     @include respond-to-h(xxs){
       width: 8rem;
     }
+    justify-content: center;
+    width: 12rem; /* w-28 */
+    @include respond-to-h(xxs){
+      width: 8rem;
+    }
     @include respond-to-v(md){
       width: 8rem;
     }
@@ -208,8 +252,14 @@
       display: flex;
       gap: 1rem; /* gap-2 */
       gap: 1rem; /* gap-2 */
+      gap: 1rem; /* gap-2 */
       column-gap: 0.5rem; /* gap-2 */
       align-items: center;
+      justify-content: center;
+      width: 12rem; /* w-28 */
+      @include respond-to-h(xxs){
+        width: 8rem;
+      }
       justify-content: center;
       width: 12rem; /* w-28 */
       @include respond-to-h(xxs){
@@ -239,9 +289,16 @@
     align-items: center;
     justify-content: center;
     width: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4rem;
   }
 
   .cellPrice {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     display: flex;
     align-items: center;
     justify-content: center;
