@@ -11,6 +11,10 @@ export const POST = async (req: MedusaRequest, res: MedusaResponse) => {
       res.status(400).json({ ok: false, message: "Missing token or email." })
       return
     }
+    if (!token || !email) {
+      res.status(400).json({ ok: false, message: "Missing token or email." })
+      return
+    }
 
   const customerModuleService = req.scope.resolve(Modules.CUSTOMER)
   let customer = null as any
