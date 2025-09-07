@@ -1,3 +1,5 @@
+@use "../../../../styles/mixins.scss" as *;
+
 /* Payment Container styles using nested Sass structure */
 
 .root {
@@ -9,19 +11,19 @@
     line-height: 1.25rem;
     cursor: pointer;
     padding: 1rem; /* py-4 */
-    border: 1px solid var(--ui-border-base);
-    border-radius: 0.5rem; /* rounded-rounded */
+    border: 1px solid #e5e7eb;
+    border-radius: 1rem; /* rounded-rounded */
     padding-left: 2rem; /* px-8 */
     padding-right: 2rem; /* px-8 */
     margin-bottom: 0.5rem; /* mb-2 */
 
     &:hover {
       /* hover:shadow-borders-interactive-with-active */
-      box-shadow: 0 0 0 1px var(--ui-border-interactive);
+      box-shadow: 0 0 0 1px var(--OliveBg);
     }
 
     &.selected {
-      border-color: var(--ui-border-interactive);
+      border-color: var(--OliveBg);
     }
   }
 
@@ -29,6 +31,27 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    @include respond-to-h(sm){
+      gap: 0.5rem;
+    }
+    @include respond-to-h(xs){
+      gap: 1rem;
+    }
+    @include respond-to-h(xxs){
+      gap: 1rem;
+    }
+    @include respond-to-v(md){
+      gap: 1rem;
+    }
+    @include respond-to-v(s){
+      gap: 1rem;
+    }
+    @include respond-to-v(sm){
+      gap: 1rem;
+    }
+    @include respond-to-v(xs){
+      gap: 1rem;
+    }
   }
 
   .left {
@@ -38,8 +61,55 @@
   }
 
   .titleText {
-    font-size: 1rem; /* text-base-regular */
-    line-height: 1.5rem;
+    font-family: "Sansation-Regular";
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--ChText);
+
+    @include respond-to-h(md){
+        font-size: 1rem;
+    }
+    @include respond-to-h(mdt){
+        font-size: 1rem;
+    }
+    @include respond-to-h(sm){
+      font-size: 1rem;
+      white-space: nowrap;
+    }
+    @include respond-to-h(xs){
+      font-size: 0.9rem;
+      font-weight: 300;
+      white-space: nowrap;
+    }
+    @include respond-to-h(xxs){
+      font-size: 0.9rem;
+      font-weight: 300;
+      white-space: nowrap;
+    }
+
+    @include respond-to-v(lg){
+      font-size: 1rem;
+      white-space: nowrap;
+    }
+    @include respond-to-v(md){
+      font-size: 1rem;
+      white-space: nowrap;
+    }
+    @include respond-to-v(s){
+      font-size: 0.9rem;
+      font-weight: 300;
+      white-space: nowrap;
+    }
+    @include respond-to-v(sm){
+      font-size: 0.9rem;
+      font-weight: 300;
+      white-space: nowrap;
+    }
+    @include respond-to-v(xs){
+      font-size: 0.9rem;
+      font-weight: 300;
+      white-space: nowrap;
+    }
   }
 
   .iconRight {
@@ -58,6 +128,9 @@
 
   /* Stripe card element container */
   .stripeWrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     margin: 1rem 0; /* my-4 */
     transition: all 150ms ease-in-out;
   }
@@ -79,7 +152,7 @@
     padding-right: 1rem;
     margin-top: 0; /* mt-0 */
     background: var(--ui-bg-field);
-    border: 1px solid var(--ui-border-base);
+    border: 1px solid var(--ButtonBorder);
     border-radius: 0.375rem; /* rounded-md */
     appearance: none;
     outline: none;
@@ -87,7 +160,7 @@
 
     &:focus {
       /* focus:shadow-borders-interactive-with-active */
-      box-shadow: 0 0 0 1px var(--ui-border-interactive);
+      box-shadow: 0 0 0 1px var(--ButtonBorder);
     }
 
     &:hover {

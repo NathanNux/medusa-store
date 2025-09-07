@@ -13,10 +13,11 @@ type InputProps = Omit<
   touched?: Record<string, unknown>
   name: string
   topLabel?: string
+  className?: string
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ type, name, label, touched, required, topLabel, ...props }, ref) => {
+  ({ type, name, label, touched, required, topLabel, className, ...props }, ref) => {
     const inputRef = React.useRef<HTMLInputElement>(null)
     const [showPassword, setShowPassword] = useState(false)
     const [inputType, setInputType] = useState(type)
@@ -34,7 +35,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     useImperativeHandle(ref, () => inputRef.current!)
 
     return (
-      <div className={styles.root}>
+      <div className={`${styles.root} ${className}`}>
         {topLabel && (
           <Label className={styles.topLabel}>{topLabel}</Label>
         )}

@@ -52,10 +52,10 @@ function ClickButton({ onClickAction, ClickAction, disabled = false, text, type 
     const handleClick = onClickAction ?? ClickAction;
 
     return (
-        <div className={className ? `ClickButton ${className}` : "ClickButton"}>
+        <div className={className ? `${s.ClickButton} ${className}` : s.ClickButton}>
             <button 
                 type={type}
-                className="button"
+                className={s.button}
                 onClick={handleClick}
                 disabled={isDisabled}
                 aria-busy={isDisabled || undefined}
@@ -64,19 +64,19 @@ function ClickButton({ onClickAction, ClickAction, disabled = false, text, type 
                 data-testid={dataTestId}
             >
                 <motion.div 
-                    className="slider"
+                    className={s.slider}
                     animate={{top: isActive ? "-100%" : "0%"}}
                     transition={{ duration: 0.5, type: "tween", ease: [0.76, 0, 0.24, 1]}}
                 >
                     <div 
-                        className="el"
+                        className={s.el}
                         style={{ backgroundColor: "var(--OButton)" }}
                     >
                         <PerspectiveText label={text}/>
                     </div>
                     <div 
-                        className="el"
-                        style={{ backgroundColor: "var(--CharcoalBg)" }}
+                        className={s.el}
+                        style={{ backgroundColor: "var(--CreamDetails)" }}
                     >
                         <PerspectiveText label={text} />
                     </div>
@@ -87,8 +87,8 @@ function ClickButton({ onClickAction, ClickAction, disabled = false, text, type 
 }
 
 function PerspectiveText({label}: {label: string}) {
-    return (    
-        <div className="perspectiveText">
+    return (
+        <div className={s.perspectiveText}>
             <p>{label}</p>
             <p>{label}</p>
         </div>

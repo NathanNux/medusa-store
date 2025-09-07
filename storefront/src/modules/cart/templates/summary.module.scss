@@ -23,6 +23,15 @@
       font-size: 1.8rem;
       line-height: 2rem;
     }
+
+    @include respond-to-v(md){
+      font-size: 1.8rem;
+      line-height: 2rem;
+    }
+    @include respond-to-v(s){
+      font-size: 1.8rem;
+      line-height: 2rem;
+    }
   }
 
   .link {
@@ -45,6 +54,27 @@
     align-items: center;
     box-shadow: 0 2px 8px var(--ButtonBorder); // subtle shadow here
     border-radius: 25px;
+
+    @include respond-to-v(lg){
+      width: fit-content;
+      height: fit-content;
+    }
+    @include respond-to-v(md){
+      width: fit-content;
+      height: fit-content;
+    }
+    @include respond-to-v(s){
+      width: fit-content;
+      height: fit-content;
+    }
+    @include respond-to-v(sm){
+      width: fit-content;
+      height: fit-content;
+    }
+    @include respond-to-v(xs){
+      width: fit-content;
+      height: fit-content;
+    }
     .button{
         position: relative;
         width: 100%;
@@ -56,9 +86,25 @@
         box-shadow: none;
         background-color: transparent;
 
+        @include respond-to-v(lg){
+          width: 250px;
+          height: 40px;
+        }
+         @include respond-to-v(md){
+          width: 250px;
+          height: 40px;
+        }
         @include respond-to-v(s){
-            width: 90px;
-            height: 35px;
+          width: 200px;
+          height: 40px;
+        }
+        @include respond-to-v(sm){
+          width: 200px;
+          height: 40px;
+        }
+        @include respond-to-v(xs){
+          width: 200px;
+          height: 40px;
         }
 
         .slider{

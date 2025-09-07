@@ -30,15 +30,15 @@
     }
     @include respond-to-v(s){
         overflow: hidden;
-        height: 120dvh;
+        height: 140dvh;
     }
     @include respond-to-v(sm){
         overflow: hidden;
-        height: 130dvh;
+        height: 150dvh;
     }
     @include respond-to-v(xs){
         overflow: hidden;
-        height: 140dvh;
+        height: 160dvh;
     }
 
     .product__details{
@@ -124,15 +124,15 @@
             }
             @include respond-to-v(s){
                 margin-top: 15dvh;
-                margin-bottom: 40dvh;
+                margin-bottom: 50dvh;
             }
              @include respond-to-v(sm){
                 margin-top: 15dvh;
-                margin-bottom: 45dvh;
+                margin-bottom: 55dvh;
             }
              @include respond-to-v(xs){
                 margin-top: 15dvh;
-                margin-bottom: 50dvh;
+                margin-bottom: 60dvh;
             }
         }
 
@@ -1404,12 +1404,18 @@
                     gap: 1dvw;
                     @include respond-to-v(s){
                         gap: 2.5dvw;
+                        width: 80%;
+                        height: 7dvh;
                     }  
                     @include respond-to-v(sm){
                         gap: 2.5dvw;
+                        width: 80%;
+                        height: 7dvh;
                     } 
                     @include respond-to-v(xs){
                         gap: 2.5dvw;
+                        width: 80%;
+                        height: 7dvh;
                     } 
 
                     .dot{

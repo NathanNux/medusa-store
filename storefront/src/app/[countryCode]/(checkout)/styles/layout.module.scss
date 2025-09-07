@@ -1,16 +1,25 @@
+@use "../../../../styles/mixins.scss" as *;
+
 /* Checkout Layout styles - SASS nesting */
 .root {
 	width: 100%;
 	background: #fff;
 	position: relative;
 	@media (min-width: 640px) {
-		min-height: 100dv;
+		min-height: 100dvh;
 	}
 
 	.header {
 		height: 4rem;
-		background: #fff;
+		background-color: #fff;
 		border-bottom: 1px solid #e5e7eb;
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		z-index: 1000;
+		width: 100%;
+		padding: 0 5vw;
 		nav {
 			display: flex;
 			height: 100%;
@@ -18,19 +27,19 @@
 			justify-content: space-between;
 			width: 100%;
 			.backLink {
-				font-size: 0.875rem;
 				font-weight: 600;
-				color: var(--ui-fg-base, #111827);
+				color: var(--ChText);
 				display: flex;
 				align-items: center;
 				gap: 0.5rem;
-				text-transform: uppercase;
+				text-transform: none;
 				flex: 1;
 				min-width: 0;
 				.chevron {
 					transform: rotate(90deg);
 				}
 				.backText {
+					font-size: 1.275rem;
 					margin-top: 1px;
 					display: none;
 					@media (min-width: 640px) {
@@ -39,31 +48,39 @@
 					font-size: 0.875rem;
 					color: var(--ui-fg-subtle, #6B7280);
 					transition: color 0.15s;
-					&:hover {
-						color: var(--ui-fg-base, #111827);
-					}
 				}
 				.backTextMobile {
+					font-size: 1.275rem;
 					margin-top: 1px;
 					display: block;
 					@media (min-width: 640px) {
 						display: none;
 					}
-					font-size: 0.875rem;
 					color: var(--ui-fg-subtle, #6B7280);
 					transition: color 0.15s;
-					&:hover {
-						color: var(--ui-fg-base, #111827);
-					}
 				}
 			}
 			.storeLink {
-				font-size: 1.25rem;
-				color: var(--ui-fg-subtle, #6B7280);
-				text-transform: uppercase;
-				transition: color 0.15s;
-				&:hover {
-					color: var(--ui-fg-base, #111827);
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				img{
+					max-width: 150px;
+					height: auto;
+					transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+
+					@include respond-to-v(sm){
+						max-width: 100px;
+					}
+					@include respond-to-v(xs){
+						max-width: 100px;
+					}
+				}
+				&:hover{
+					img{
+						transform: scale(1.05);
+					}
 				}
 			}
 			.spacer {
@@ -76,11 +93,20 @@
 	.checkoutContainer {
 		position: relative;
 		width: 100%;
+		padding: 0 5vw;
+
+		@include respond-to-v(s){
+			padding: 0 3.5vw 0 2.5vw;
+		}
+		@include respond-to-v(sm){
+			padding: 0 3.5vw 0 2.5vw;
+		}
+		@include respond-to-v(xs){
+			padding: 0 3.5vw 0 2.5vw;
+		}
 	}
 
 	.footer {
-		padding-top: 1rem;
-		padding-bottom: 1rem;
 		width: 100%;
 		display: flex;
 		align-items: center;

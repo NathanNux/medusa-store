@@ -3,12 +3,15 @@
 import { isManual, isStripe, isComgate } from "@lib/constants"
 import { placeOrder, capturePayment } from "@lib/data/cart"
 import { HttpTypes } from "@medusajs/types"
-import { Button } from "@medusajs/ui"
+// Button from @medusajs/ui replaced with local ClickButton
 import { useElements, useStripe } from "@stripe/react-stripe-js"
 import React, { useState } from "react"
 import ErrorMessage from "../error-message"
 import { redirect } from "next/navigation"
 import styles from "./style.module.scss"
+import { useFormStatus } from "react-dom"
+
+import { motion } from "framer-motion";
 
 type PaymentButtonProps = {
   cart: HttpTypes.StoreCart
@@ -52,8 +55,8 @@ const PaymentButton: React.FC<PaymentButtonProps> = ({
     default:
       return (
         <div className={styles.root}>
-          <Button disabled>Vyberte způsob platby</Button>
-        </div>
+            <ClickButton text="Vyberte způsob platby" disabled={true} />
+          </div>
       )
   }
 }
@@ -148,16 +151,13 @@ const StripePaymentButton = ({
 
   return (
     <div className={styles.root}>
-      <Button
+      <ClickButton
         className={styles.button}
+        text="Potvrdit objednávku"
+        onClickAction={handlePayment}
         disabled={disabled || notReady}
-        onClick={handlePayment}
-        size="large"
-        isLoading={submitting}
         data-testid={dataTestId}
-      >
-        Potvrdit objednávku
-      </Button>
+      />
       <div className={styles.errorWrap}>
         <ErrorMessage
           error={errorMessage}
@@ -189,17 +189,14 @@ const ManualTestPaymentButton = ({ notReady }: { notReady: boolean }) => {
   }
 
   return (
-    <div className={styles.root}>
-      <Button
+    <div className={styles.root} style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "center" }}>
+      <ClickButton
         className={styles.button}
+        text="Potvrdit objednávku"
+        onClickAction={handlePayment}
         disabled={notReady}
-        isLoading={submitting}
-        onClick={handlePayment}
-        size="large"
         data-testid="submit-order-button"
-      >
-        Potvrdit objednávku
-      </Button>
+      />
       <div className={styles.errorWrap}>
         <ErrorMessage
           error={errorMessage}
@@ -260,17 +257,14 @@ const ComgatePaymentButton = ({
   }
 
   return (
-    <div className={styles.root}>
-      <Button
+    <div className={styles.root} style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "center" }}>
+      <ClickButton
         className={`${styles.button} ${styles.comgate}`}
+        text="Zaplatit přes Comgate"
+        onClickAction={handlePayment}
         disabled={notReady || !redirectUrl}
-        isLoading={submitting}
-        onClick={handlePayment}
-        size="large"
         data-testid={dataTestId}
-      >
-        Zaplatit přes Comgate
-      </Button>
+      />
       <div className={styles.errorWrap}>
         <ErrorMessage
           error={errorMessage}
@@ -283,3 +277,67 @@ const ComgatePaymentButton = ({
 
 
 export default PaymentButton
+
+
+
+type ClickButtonProps = {
+    text: string;
+    onClickAction?: () => void | Promise<void>;
+    ClickAction?: () => void | Promise<void>; // backward compatibility
+    disabled?: boolean;
+    type?: "button" | "submit";
+    className?: string;
+    "data-testid"?: string;
+}
+
+// Base animated button used across the site. Can act as a submit button in forms.
+function ClickButton({ onClickAction, ClickAction, disabled = false, text, type = "button", className, "data-testid": dataTestId }: ClickButtonProps) {
+  const [ isActive , setIsActive ] = useState<boolean>(false);
+  const { pending } = useFormStatus();
+  const isSubmitting = type === "submit" ? pending : false;
+  const isDisabled = disabled || isSubmitting;
+  const handleClick = onClickAction ?? ClickAction;
+
+  return (
+      <div className={className ? `${styles.ClickButton} ${className}` : styles.ClickButton}>
+          <button 
+              type={type}
+              className={styles.button}
+              onClick={handleClick}
+              disabled={isDisabled}
+              aria-busy={isDisabled || undefined}
+              onMouseEnter={() => setIsActive(true)}
+              onMouseLeave={() => setIsActive(false)}
+              data-testid={dataTestId}
+          >
+              <motion.div 
+                  className={styles.slider}
+                  animate={{top: isActive ? "-100%" : "0%"}}
+                  transition={{ duration: 0.5, type: "tween", ease: [0.76, 0, 0.24, 1]}}
+              >
+                  <div 
+                      className={styles.el}
+                      style={{ backgroundColor: "var(--OButton)" }}
+                  >
+                      <PerspectiveText label={text}/>
+                  </div>
+                  <div 
+                      className={styles.el}
+                      style={{ backgroundColor: "var(--CharcoalBg)" }}
+                  >
+                      <PerspectiveText label={text} />
+                  </div>
+              </motion.div>
+          </button>
+      </div>
+  )
+}
+
+function PerspectiveText({label}: {label: string}) {
+    return (    
+        <div className={styles.perspectiveText}>
+            <p>{label}</p>
+            <p>{label}</p>
+        </div>
+    )
+}

@@ -13,13 +13,17 @@ const LineItemOptions = ({
   "data-testid": dataTestid,
   "data-value": dataValue,
 }: LineItemOptionsProps) => {
+  const rawTitle = variant?.title ?? ""
+  const titleKey = rawTitle.trim().toLowerCase()
+  const displayTitle = titleKey === "default variant" ? "Základ" : rawTitle
+
   return (
     <Text
       data-testid={dataTestid}
       data-value={dataValue}
       className={styles.root}
     >
-      Variace: {variant?.title}
+      Variace: {displayTitle}
     </Text>
   )
 }

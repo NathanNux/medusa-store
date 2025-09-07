@@ -1,16 +1,136 @@
+@use "../../../../styles/mixins.scss" as *;
 .root {
+  margin-bottom: 2rem;
   .text {
     margin-top: 0.5rem;
+    font-size: 1.3rem;
+    font-weight: 300;
+    font-family: "Sansation-Light";
+
+    @include respond-to-h(md){
+			font-size: 1.2rem;
+		}
+		@include respond-to-h(mdt){
+			font-size: 1.2rem;
+		}
+		@include respond-to-h(sm){
+			font-size: 1.2rem;
+		}
+		@include respond-to-h(xs){
+			font-size: 1.1rem;
+		}
+		@include respond-to-h(xxs){
+			font-size: 1.1rem;
+		}
+
+    @include respond-to-v(s){
+			font-size: 1.1rem;
+		}
+    @include respond-to-v(sm){
+			font-size: 1.1rem;
+		}
+    @include respond-to-v(xs){
+			font-size: 1.1rem;
+		}
+  }
+
+
+  .date{
+    color: var(--ChText);
+    font-weight: 400;
+    font-family: "Sansation-Regular";
+    font-size: 1.3rem;
+    @include respond-to-h(md){
+			font-size: 1.2rem;
+		}
+		@include respond-to-h(mdt){
+			font-size: 1.2rem;
+		}
+		@include respond-to-h(sm){
+			font-size: 1.2rem;
+		}
+		@include respond-to-h(xs){
+			font-size: 1.1rem;
+		}
+		@include respond-to-h(xxs){
+			font-size: 1.1rem;
+		}
+
+    @include respond-to-v(s){
+			font-size: 1.2rem;
+		}
+    @include respond-to-v(sm){
+			font-size: 1.2rem;
+		}
+    @include respond-to-v(xs){
+			font-size: 1.2rem;
+		}
   }
 
   .email {
-    color: var(--ui-fg-base, #111827);
-    font-weight: 600;
+    color: var(--ChText);
+    font-weight: 300;
+    font-family: "Sansation-Regular";
+    font-size: 1.3rem;
+    @include respond-to-h(md){
+			font-size: 1.2rem;
+		}
+		@include respond-to-h(mdt){
+			font-size: 1.2rem;
+		}
+		@include respond-to-h(sm){
+			font-size: 1.2rem;
+		}
+		@include respond-to-h(xs){
+			font-size: 1.1rem;
+		}
+		@include respond-to-h(xxs){
+			font-size: 1.1rem;
+		}
+
+
+    @include respond-to-v(s){
+			font-size: 1.2rem;
+		}
+    @include respond-to-v(sm){
+			font-size: 1.2rem;
+		}
+    @include respond-to-v(xs){
+			font-size: 1.2rem;
+		}
   }
 
   .orderNumber {
     margin-top: 0.5rem;
-    color: var(--ui-fg-interactive, #2563eb);
+    color: var(--disabled);
+    font-weight: 400;
+    font-family: "Sansation-Regular";
+    font-size: 1.3rem;
+    @include respond-to-h(md){
+			font-size: 1.2rem;
+		}
+		@include respond-to-h(mdt){
+			font-size: 1.2rem;
+		}
+		@include respond-to-h(sm){
+			font-size: 1.2rem;
+		}
+		@include respond-to-h(xs){
+			font-size: 1.1rem;
+		}
+		@include respond-to-h(xxs){
+			font-size: 1.1rem;
+		}
+
+    @include respond-to-v(s){
+			font-size: 1.2rem;
+		}
+    @include respond-to-v(sm){
+			font-size: 1.2rem;
+		}
+    @include respond-to-v(xs){
+			font-size: 1.2rem;
+		}
   }
 
   .statusRow {
@@ -21,10 +141,65 @@
   }
 
   .statusText {
-    font-size: 0.875rem;
+    font-size: 1.2rem;
+    color: var(--ChText);
+    font-weight: 300;
+    font-family: "Sansation-Light";
+    @include respond-to-h(md){
+			font-size: 1.1rem;
+		}
+		@include respond-to-h(mdt){
+			font-size: 1.1rem;
+		}
+		@include respond-to-h(sm){
+			font-size: 1.1rem;
+		}
+		@include respond-to-h(xs){
+			font-size: 1rem;
+		}
+		@include respond-to-h(xxs){
+			font-size: 1rem;
+		}
+    @include respond-to-v(s){
+			font-size: 1.2rem;
+		}
+    @include respond-to-v(sm){
+			font-size: 1.2rem;
+		}
+    @include respond-to-v(xs){
+			font-size: 1.2rem;
+		}
   }
 
   .statusValue {
-    color: var(--ui-fg-subtle, #6b7280);
+    color: var(--handle);
+    font-size: 1.1rem;
+    font-weight: 300;
+    font-family: "Sansation-Regular";
+    @include respond-to-h(md){
+			font-size: 1rem;
+		}
+		@include respond-to-h(mdt){
+			font-size: 1rem;
+		}
+		@include respond-to-h(sm){
+			font-size: 1rem;
+		}
+		@include respond-to-h(xs){
+			font-size: 0.9rem;
+		}
+		@include respond-to-h(xxs){
+			font-size: 0.9rem;
+		}
+
+    @include respond-to-v(s){
+			font-size: 1.1rem;
+		}
+    @include respond-to-v(sm){
+			font-size: 1.1rem;
+		}
+    @include respond-to-v(xs){
+			font-size: 1.1rem;
+		}
   }
 }

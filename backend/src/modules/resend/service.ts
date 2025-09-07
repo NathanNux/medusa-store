@@ -25,6 +25,10 @@ enum Templates {
   EMAIL_VERIFICATION = "email-verification",
   VARIANT_RESTOCK = "variant-restock",
   ABANDONED_CART = "abandoned-cart",
+  //WIP add in more templates and triggers
+  // Add in Order Status
+  // Add in payment status
+  // Add in other relevant templates
 }
 
 // WIP: Create a type for the templates - for all needed emails that will be send to customers

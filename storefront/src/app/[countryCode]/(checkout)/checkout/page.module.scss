@@ -1,12 +1,97 @@
+@use "../../../../styles/mixins.scss" as *;
+
 /* Checkout page styles - SASS nesting */
 .root {
   display: grid;
   grid-template-columns: 1fr;
   gap: 2.5rem;
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+  padding: 10dvh 5vw;
   width: 100%;
   box-sizing: border-box;
+
+  @include respond-to-v(lg){
+    padding: 10dvh 0;
+  }
+  @include respond-to-v(md){
+    padding: 10dvh 10vw;
+  }
+  @include respond-to-v(s){
+    padding: 10dvh 0;
+  }
+  @include respond-to-v(sm){
+    padding: 10dvh 0;
+  }
+  @include respond-to-v(xs){
+    padding: 10dvh 0;
+  }
+
+  @include respond-to-h(sm){
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column-reverse;
+    height: auto;
+    gap: 2.5dvw;
+    div{
+      width: 100%;
+    };
+  }
+  @include respond-to-v(md){
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column-reverse;
+    div{
+      width: 100%;
+    };
+  }
+  @include respond-to-v(s){
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column-reverse;
+    div{
+      width: 100%;
+    };
+  }
+  @include respond-to-v(sm){
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column-reverse;
+    div{
+      width: 100%;
+    };
+  }
+  @include respond-to-v(xs){
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column-reverse;
+    div{
+      width: 100%;
+    };
+  }
+
+  @include respond-to-h(xs){
+    flex-direction: column-reverse;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    div{
+      width: 100%;
+    }
+  }
+  @include respond-to-h(xxs){
+    flex-direction: column-reverse;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    div{
+      width: 100%;
+    }
+  }
 
   @media (min-width: 640px) {
     grid-template-columns: 1fr 416px;

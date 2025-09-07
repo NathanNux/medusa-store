@@ -1,6 +1,29 @@
+@use "../../../styles/mixins.scss" as *;
+
 /* Preview items scroll container */
 .root {
   padding-left: 1px;
+  @include respond-to-h(sm){
+    width: 100%;
+  }
+  @include respond-to-h(xs){
+    width: 100%;
+  }
+  @include respond-to-h(xxs){
+    width: 100%;
+  }
+  @include respond-to-v(md){
+    width: 100%;
+  }
+  @include respond-to-v(s){
+    width: 100%;
+  }
+  @include respond-to-v(sm){
+    width: 100%;
+  }
+  @include respond-to-v(xs){
+    width: 100%;
+  }
 
   &.scroll {
     padding-left: 1px; /* pl-[1px] */

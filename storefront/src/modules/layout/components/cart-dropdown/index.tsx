@@ -9,7 +9,6 @@ import {
 import styles from "./style.module.scss"
 import { convertToLocale } from "@lib/util/money"
 import { HttpTypes } from "@medusajs/types"
-import { Button } from "@medusajs/ui"
 import LinkButton from "@modules/common/components/Buttons/LinkButton"
 import Magnetic from "@modules/common/components/Buttons/Magnetic"
 import DeleteButton from "@modules/common/components/delete-button"
@@ -19,7 +18,7 @@ import LocalizedClientLink from "@modules/common/components/localized-client-lin
 import Cart from "@modules/common/icons/cart"
 import Thumbnail from "@modules/products/components/thumbnail"
 import { usePathname } from "next/navigation"
-import { Fragment, useEffect, useRef, useState } from "react"
+import { Fragment, useEffect, useRef, useState, type WheelEvent, type TouchEvent } from "react"
 import { motion } from 'framer-motion';
 import { useFormStatus } from 'react-dom';
 
@@ -43,6 +42,10 @@ const CartDropdown = ({
 
   const subtotal = cartState?.subtotal ?? 0
   const itemRef = useRef<number>(totalItems || 0)
+  const itemsRef = useRef<HTMLDivElement | null>(null)
+  const longPressTimerRef = useRef<number | null>(null)
+  const longPressActivatedRef = useRef(false)
+  const LONG_PRESS_MS = 500
 
   const timedOpen = () => {
     open()
@@ -66,6 +69,9 @@ const CartDropdown = ({
       if (activeTimer) {
         clearTimeout(activeTimer)
       }
+      if (longPressTimerRef.current) {
+        clearTimeout(longPressTimerRef.current)
+      }
     }
   }, [activeTimer])
 
@@ -79,6 +85,70 @@ const CartDropdown = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [totalItems, itemRef.current])
 
+  const handleWheel = (e: WheelEvent<HTMLDivElement>) => {
+    const el = itemsRef.current
+    if (!el) return
+
+    const delta = e.deltaY
+    const atTop = el.scrollTop === 0
+    const atBottom = Math.ceil(el.scrollTop + el.clientHeight) >= el.scrollHeight
+
+    const tryingToScrollUpPastTop = atTop && delta < 0
+    const tryingToScrollDownPastBottom = atBottom && delta > 0
+
+    // If the container can scroll in the wheel direction, keep the event inside.
+    // If the user is trying to scroll past the top or bottom, prevent the event so the page doesn't scroll.
+    const canScrollUp = el.scrollTop > 0
+    const canScrollDown = Math.ceil(el.scrollTop + el.clientHeight) < el.scrollHeight
+
+    if ((delta < 0 && canScrollUp) || (delta > 0 && canScrollDown)) {
+      // inner scrolling — stop propagation so the page doesn't pick up the event
+      e.stopPropagation()
+      return
+    }
+
+    if (tryingToScrollUpPastTop || tryingToScrollDownPastBottom) {
+      // prevent the page from scrolling when flinging past edges
+      e.preventDefault()
+      e.stopPropagation()
+    }
+  }
+
+  // Touch long-press handlers: hold > LONG_PRESS_MS opens the dropdown panel
+  const handleTouchStart = (e: TouchEvent) => {
+    // start long-press timer
+    if (longPressTimerRef.current) clearTimeout(longPressTimerRef.current)
+    longPressActivatedRef.current = false
+    // Use window.setTimeout to get a numeric id that's compatible with clearTimeout
+    longPressTimerRef.current = window.setTimeout(() => {
+      setCartDropdownOpen(true)
+      longPressActivatedRef.current = true
+    }, LONG_PRESS_MS)
+  }
+
+  const handleTouchEnd = (e: TouchEvent) => {
+    // clear timer
+    if (longPressTimerRef.current) {
+      clearTimeout(longPressTimerRef.current)
+      longPressTimerRef.current = null
+    }
+
+    if (longPressActivatedRef.current) {
+      // if long-press was activated, prevent the tap/click navigation
+      e.preventDefault()
+      e.stopPropagation()
+      longPressActivatedRef.current = false
+    }
+  }
+
+  const handleTouchCancel = (e: TouchEvent) => {
+    if (longPressTimerRef.current) {
+      clearTimeout(longPressTimerRef.current)
+      longPressTimerRef.current = null
+    }
+    longPressActivatedRef.current = false
+  }
+
   return (
     <div
       className={styles.root}
@@ -86,7 +156,12 @@ const CartDropdown = ({
       onMouseLeave={close}
     >
       <Popover className={styles.popover}>
-        <PopoverButton className={styles.popoverButton}>
+        <PopoverButton
+          className={styles.popoverButton}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          onTouchCancel={handleTouchCancel}
+        >
           <LocalizedClientLink
             className={styles.cartLink}
             href="/cart"
@@ -120,7 +195,7 @@ const CartDropdown = ({
             </div>
             {cartState && cartState.items?.length ? (
               <>
-                <div className={styles.items}>
+                <div className={styles.items} ref={itemsRef} onWheel={handleWheel}>
                   {cartState.items
                     .sort((a, b) => {
                       return (a.created_at ?? "") > (b.created_at ?? "")

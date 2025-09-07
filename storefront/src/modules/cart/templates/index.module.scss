@@ -15,6 +15,16 @@
     padding: 10dvh 2.5dvw;
   }
 
+  @include respond-to-v(s) {
+    padding: 5dvh 2.5dvw;
+  }
+    @include respond-to-v(sm) {
+    padding: 5dvh 2.5dvw;
+  }
+    @include respond-to-v(xs) {
+    padding: 7.5dvh 2.5dvw;
+  }
+
   .container {
     width: 100%;
     height: 100%;
@@ -58,6 +68,22 @@
         flex-direction: column;
         gap: 1rem;
       }
+       @include respond-to-v(md){
+        flex-direction: column;
+        gap: 1rem;
+      } 
+      @include respond-to-v(s){
+        flex-direction: column;
+        gap: 1rem;
+      }
+      @include respond-to-v(sm){
+        flex-direction: column;
+        gap: 1rem;
+      }
+      @include respond-to-v(xs){
+        flex-direction: column;
+        gap: 1rem;
+      }
 
 
       .left {
@@ -78,11 +104,28 @@
         @include respond-to-h(lg){
           flex: 0 0 400px;
         }
+        
         @include respond-to-h(mdt){
           flex: 0 0 400px;
         }
         @include respond-to-h(md){
           flex: 0 0 400px;
+        }
+
+        @include respond-to-v(lg){
+          flex: 0 0 400px;
+        }
+        @include respond-to-v(md){
+          flex: 0 0 400px;
+        }
+        @include respond-to-v(s){
+          flex: 0 0 400px;
+        }
+        @include respond-to-v(sm){
+          flex: 0 0 380px;
+        }
+        @include respond-to-v(xs){
+          flex: 0 0 360px;
         }
 
         .sticky {
@@ -109,6 +152,37 @@
             gap: 1rem;
           }
 
+          @include respond-to-v(lg){
+            top: 0;
+            position: relative;
+            gap: 1rem;
+            width: 70%;
+          }
+          @include respond-to-v(md){
+            top: 0;
+            position: relative;
+            gap: 1rem;
+            width: 90%;
+          }
+          @include respond-to-v(s){
+            top: 0;
+            position: relative;
+            gap: 1rem;
+            width: 90%;
+          }
+          @include respond-to-v(sm){
+            top: 0;
+            position: relative;
+            gap: 1rem;
+            width: 90%;
+          }
+          @include respond-to-v(xs){
+            top: 0;
+            position: relative;
+            gap: 1rem;
+            width: 90%;
+          }
+
           .summaryBox {
             background-color: #ffffff;
           }
@@ -116,6 +190,30 @@
       }
 
       @include respond-to-v(md) {
+        flex-direction: column;
+        gap: 2rem;
+
+        .right {
+          flex: 1 1 0%;
+        }
+      }
+      @include respond-to-v(s) {
+        flex-direction: column;
+        gap: 2rem;
+
+        .right {
+          flex: 1 1 0%;
+        }
+      }
+      @include respond-to-v(sm) {
+        flex-direction: column;
+        gap: 2rem;
+
+        .right {
+          flex: 1 1 0%;
+        }
+      }
+      @include respond-to-v(xs) {
         flex-direction: column;
         gap: 2rem;
 

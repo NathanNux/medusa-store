@@ -9,12 +9,14 @@ import { Heading, Text, useToggleState } from "@medusajs/ui"
 import Divider from "@modules/common/components/divider"
 import Spinner from "@modules/common/icons/spinner"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import { useActionState } from "react"
+import { useActionState, useState } from "react"
 import BillingAddress from "../billing_address"
 import ErrorMessage from "../error-message"
 import ShippingAddress from "../shipping-address"
-import { SubmitButton } from "../submit-button"
+// SubmitButton replaced by local ClickButton defined below
 import s from "./style.module.scss"
+import { useFormStatus } from "react-dom"
+import { motion } from "framer-motion";
 
 const Addresses = ({
   cart,
@@ -52,15 +54,13 @@ const Addresses = ({
           {!isOpen && <CheckCircleSolid />}
         </Heading>
         {!isOpen && cart?.shipping_address && (
-          <Text>
-            <button
-              onClick={handleEdit}
-              className={s.editBtn}
-              data-testid="edit-address-button"
-            >
-              Upravit
-            </button>
-          </Text>
+          <ClickButton
+            type="button"
+            onClickAction={handleEdit}
+            className={s.editBtn}
+            data-testid="edit-address-button"
+            text={"Upravit"}
+          />
         )}
       </div>
       {isOpen ? (
@@ -75,19 +75,21 @@ const Addresses = ({
 
             {!sameAsBilling && (
               <div className={s.billingAddress}>
-                <Heading
-                  level="h2"
+                <h2
                   className={s.heading}
                 >
                   Doručovací adresa
-                </Heading>
+                </h2>
 
                 <BillingAddress cart={cart} />
               </div>
             )}
-            <SubmitButton className={s.submitBtn} data-testid="submit-address-button">
-              Pokračovat k doručení
-            </SubmitButton>
+            <ClickButton
+              type="submit"
+              className={s.submitBtn}
+              data-testid="submit-address-button"
+              text={"Pokračovat k doručení"}
+            />
             <ErrorMessage error={message} data-testid="address-error-message" />
           </div>
         </form>
@@ -167,3 +169,67 @@ const Addresses = ({
 }
 
 export default Addresses
+
+
+
+type ClickButtonProps = {
+    text: string;
+    onClickAction?: () => void | Promise<void>;
+    ClickAction?: () => void | Promise<void>; // backward compatibility
+    disabled?: boolean;
+    type?: "button" | "submit";
+    className?: string;
+    "data-testid"?: string;
+}
+
+// Base animated button used across the site. Can act as a submit button in forms.
+function ClickButton({ onClickAction, ClickAction, disabled = false, text, type = "button", className, "data-testid": dataTestId }: ClickButtonProps) {
+    const [ isActive , setIsActive ] = useState<boolean>(false);
+    const { pending } = useFormStatus();
+    const isSubmitting = type === "submit" ? pending : false;
+    const isDisabled = disabled || isSubmitting;
+    const handleClick = onClickAction ?? ClickAction;
+
+    return (
+        <div className={className ? `${s.ClickButton} ${className}` : s.ClickButton}>
+            <button 
+                type={type}
+                className={s.button}
+                onClick={handleClick}
+                disabled={isDisabled}
+                aria-busy={isDisabled || undefined}
+                onMouseEnter={() => setIsActive(true)}
+                onMouseLeave={() => setIsActive(false)}
+                data-testid={dataTestId}
+            >
+                <motion.div 
+                    className={s.slider}
+                    animate={{top: isActive ? "-100%" : "0%"}}
+                    transition={{ duration: 0.5, type: "tween", ease: [0.76, 0, 0.24, 1]}}
+                >
+                    <div 
+                        className={s.el}
+                        style={{ backgroundColor: "var(--OButton)" }}
+                    >
+                        <PerspectiveText label={text}/>
+                    </div>
+                    <div 
+                        className={s.el}
+                        style={{ backgroundColor: "var(--CharcoalBg)" }}
+                    >
+                        <PerspectiveText label={text} />
+                    </div>
+                </motion.div>
+            </button>
+        </div>
+    )
+}
+
+function PerspectiveText({label}: {label: string}) {
+    return (    
+        <div className={s.perspectiveText}>
+            <p>{label}</p>
+            <p>{label}</p>
+        </div>
+    )
+}

@@ -94,7 +94,7 @@ const ShippingAddress = ({
   }
 
   return (
-    <>
+    <div className={styles.root}>
       {customer && (addressesInRegion?.length || 0) > 0 && (
         <Container className={styles.addressPrompt}>
           <p>{`Dobrý den, ${customer.first_name}, chcete použít jednu z vašich uložených adres?`}</p>
@@ -118,6 +118,7 @@ const ShippingAddress = ({
           onChange={handleChange}
           required
           data-testid="shipping-first-name-input"
+          className={styles.input}
         />
         <Input
           label="Příjmení"
@@ -127,6 +128,7 @@ const ShippingAddress = ({
           onChange={handleChange}
           required
           data-testid="shipping-last-name-input"
+          className={styles.input}
         />
         <Input
           label="Adresa"
@@ -136,6 +138,7 @@ const ShippingAddress = ({
           onChange={handleChange}
           required
           data-testid="shipping-address-input"
+          className={styles.input}
         />
         <Input
           label="Společnost"
@@ -144,6 +147,7 @@ const ShippingAddress = ({
           onChange={handleChange}
           autoComplete="organization"
           data-testid="shipping-company-input"
+          className={styles.input}
         />
         <Input
           label="PSČ"
@@ -153,6 +157,7 @@ const ShippingAddress = ({
           onChange={handleChange}
           required
           data-testid="shipping-postal-code-input"
+          className={styles.input}
         />
         <Input
           label="Město"
@@ -162,6 +167,7 @@ const ShippingAddress = ({
           onChange={handleChange}
           required
           data-testid="shipping-city-input"
+          className={styles.input}
         />
         <CountrySelect
           name="shipping_address.country_code"
@@ -179,9 +185,10 @@ const ShippingAddress = ({
           value={formData["shipping_address.province"]}
           onChange={handleChange}
           data-testid="shipping-province-input"
+          className={styles.input}
         />
       </div>
-  <div className={styles.checkboxRow}>
+      <div className={styles.checkboxRow}>
         <Checkbox
           label="Fakturační adresa je stejná jako dodací adresa"
           name="same_as_billing"
@@ -190,7 +197,7 @@ const ShippingAddress = ({
           data-testid="billing-address-checkbox"
         />
       </div>
-  <div className={styles.contactGrid}>
+      <div className={styles.contactGrid}>
         <Input
           label="E-mail"
           name="email"
@@ -201,6 +208,7 @@ const ShippingAddress = ({
           onChange={handleChange}
           required
           data-testid="shipping-email-input"
+          className={styles.input}
         />
         <Input
           label="Telefon"
@@ -209,9 +217,10 @@ const ShippingAddress = ({
           value={formData["shipping_address.phone"]}
           onChange={handleChange}
           data-testid="shipping-phone-input"
+          className={styles.input}
         />
       </div>
-    </>
+    </div>
   )
 }
 

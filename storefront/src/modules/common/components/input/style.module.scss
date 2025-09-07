@@ -1,3 +1,5 @@
+@use "../../../../styles/mixins.scss" as *;
+
 /* Input component styles - SASS nesting */
 .root {
   display: flex;
@@ -6,8 +8,31 @@
 
   .topLabel {
     margin-bottom: 0.5rem;
-    font-size: 0.9375rem;
+    font-size: 1rem;
     font-weight: 500;
+
+    @include respond-to-h(md){
+      font-size: 0.9rem;
+    }
+    @include respond-to-h(sm){
+      font-size: 0.9rem;
+    }
+    @include respond-to-h(xs){
+      font-size: 0.9rem;
+    }
+    @include respond-to-h(xxs){
+      font-size: 0.9rem;
+    }
+
+    @include respond-to-v(s){
+      font-size: 0.9rem;
+    }
+    @include respond-to-v(sm){
+      font-size: 0.9rem;
+    }
+    @include respond-to-v(xs){
+      font-size: 0.9rem;
+    }
   }
 
   .inputWrapper {
@@ -15,8 +40,31 @@
     position: relative;
     z-index: 0;
     width: 100%;
-    font-size: 0.9375rem;
+    font-size: 1rem;
     font-weight: 500;
+
+    @include respond-to-h(md){
+      font-size: 0.9rem;
+    }
+    @include respond-to-h(sm){
+      font-size: 0.9rem;
+    }
+    @include respond-to-h(xs){
+      font-size: 0.9rem;
+    }
+    @include respond-to-h(xxs){
+      font-size: 0.9rem;
+    }
+
+    @include respond-to-v(s){
+      font-size: 0.9rem;
+    }
+    @include respond-to-v(sm){
+      font-size: 0.9rem;
+    }
+    @include respond-to-v(xs){
+      font-size: 0.9rem;
+    }
 
     input {
       padding-top: 1rem;

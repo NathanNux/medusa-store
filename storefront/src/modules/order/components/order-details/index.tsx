@@ -1,5 +1,6 @@
 import { HttpTypes } from "@medusajs/types"
 import styles from "../styles/order-details.module.scss"
+import { translateStatus } from "@lib/i18n/statuses"
 
 type OrderDetailsProps = {
   order: HttpTypes.StoreOrder
@@ -7,24 +8,20 @@ type OrderDetailsProps = {
 }
 
 const OrderDetails = ({ order, showStatus }: OrderDetailsProps) => {
-  const formatStatus = (str: string) => {
-    const formatted = str.split("_").join(" ")
-
-    return formatted.slice(0, 1).toUpperCase() + formatted.slice(1)
-  }
+  // use translateStatus to show localized (Czech) status labels
 
   return (
     <div className={styles.root}>
       <p className={styles.text}>
-        Potvrzení objednávky bylo odesláno na{" "}
+        Potvrzení objednávky bylo odesláno na: {" "}
         <span className={styles.email} data-testid="order-email">
           {order.email}
         </span>
         .
       </p>
       <p className={styles.text}>
-        Datum objednávky:{" "}
-        <span data-testid="order-date">
+        Datum objednávky: {" "}
+        <span data-testid="order-date" className={styles.date}>
           {new Date(order.created_at).toDateString()}
         </span>
       </p>
@@ -36,15 +33,15 @@ const OrderDetails = ({ order, showStatus }: OrderDetailsProps) => {
         {showStatus && (
           <>
             <p className={styles.statusText}>
-              Stav objednávky:{" "}
+              Stav objednávky: {" "}
               <span className={styles.statusValue} data-testid="order-status">
-                {formatStatus(order.fulfillment_status)}
+                {translateStatus(order.fulfillment_status, "fulfillment", "cs")}
               </span>
             </p>
             <p className={styles.statusText}>
               Stav platby:{" "}
               <span className={styles.statusValue} data-testid="order-payment-status">
-                {formatStatus(order.payment_status)}
+                {translateStatus(order.payment_status, "payment", "cs")}
               </span>
             </p>
           </>

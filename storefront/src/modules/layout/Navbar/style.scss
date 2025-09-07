@@ -652,6 +652,19 @@
     z-index: 900;
     mix-blend-mode: difference;
 
+    @include respond-to-h(md){
+        top: 7.5dvh;
+    }
+    @include respond-to-h(sm){
+        top: 7.5dvh;
+    }
+    @include respond-to-h(xs){
+        top: 12.5dvh;
+    }
+    @include respond-to-h(xxs){
+        top: 12.5dvh;
+    }
+
     @include respond-to-v(md){
         width: 50%;
         height: 5dvh;

@@ -2,32 +2,34 @@ import type { MedusaRequest, MedusaResponse } from "@medusajs/framework/http"
 import { Modules } from "@medusajs/framework/utils"
 
 export const POST = async (req: MedusaRequest, res: MedusaResponse) => {
-  try {
-    const { token, email } = req.body as { token?: string; email?: string }
+  const { token, email } = req.body as { token: string; email: string }
 
-    if (!token || !email) {
-      res.status(400).json({ ok: false, message: "Missing token or email." })
-      return
-    }
+  console.log("[VERIFY EMAIL] Incoming request:", { token, email })
+
+  if (!token || !email) {
+    console.log("[VERIFY EMAIL] Missing token or email.")
+    res.status(400).json({ message: "Missing token or email." })
+    return
+  }
 
   const customerModuleService = req.scope.resolve(Modules.CUSTOMER)
   let customer = null as any
   try {
     const customers = await customerModuleService.listCustomers({ email })
-    const customer = customers[0] || null
+    customer = customers[0] || null
+    console.log("[VERIFY EMAIL] Retrieved customer:", customer)
+  } catch (err) {
+    console.log("[VERIFY EMAIL] Error retrieving customer:", err)
+    customer = null
+  }
 
-    if (!customer) {
-      res.status(404).json({ ok: false, message: "Customer not found." })
-      return
-    }
-
-    const storedToken = customer.metadata?.email_verification_token
-    const expiresAt = customer.metadata?.email_verification_expires_at as string | undefined
-
-    if (!storedToken || storedToken !== token) {
-      res.status(400).json({ ok: false, message: "Invalid verification token." })
-      return
-    }
+  if (!customer || !customer.metadata?.email_verification_token) {
+    console.log("[VERIFY EMAIL] No customer or missing verification token.", {
+      customer,
+    })
+    res.status(404).json({ message: "Invalid token or email." })
+    return
+  }
 
   const tokenMatches = customer.metadata.email_verification_token === token
   const expiresAt = customer.metadata.email_verification_expires_at
@@ -51,13 +53,18 @@ export const POST = async (req: MedusaRequest, res: MedusaResponse) => {
   try {
     // preserve other metadata keys
     await customerModuleService.updateCustomers(customer.id, {
-      metadata: newMetadata,
+      metadata: {
+        ...customer.metadata,
+        email_verified: true,
+        email_verification_token: null,
+        email_verification_expires_at: null,
+      },
     })
-
-    res.status(200).json({ ok: true, message: "Email verified." })
+    console.log("[VERIFY EMAIL] Email verified and customer updated:", customer.id)
   } catch (err) {
-    console.error("Error in verify-email route:", err)
-    res.status(500).json({ ok: false, message: "Internal server error." })
+    console.log("[VERIFY EMAIL] Error updating customer:", err)
+    res.status(500).json({ message: "Failed to update customer." })
+    return
   }
 
   // retrieve updated customer to return to client

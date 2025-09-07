@@ -1,5 +1,35 @@
+@use "../../../../styles/mixins.scss" as *;
 /* Radio component styles */
 .root {
+	width: fit-content;
+	height: fit-content;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	@include respond-to-h(sm){
+		justify-content: flex-start;
+	}
+	@include respond-to-h(xs){
+		justify-content: flex-start;
+	}
+	@include respond-to-h(xxs){
+		justify-content: flex-start;
+	}
+
+	@include respond-to-v(md){
+		justify-content: flex-start;
+	}
+	@include respond-to-v(s){
+		justify-content: flex-start;
+	}
+	@include respond-to-v(sm){
+		justify-content: flex-start;
+	}
+	@include respond-to-v(xs){
+		justify-content: flex-start;
+	}
+
 	.button {
 		position: relative;
 		display: flex;
@@ -8,43 +38,46 @@
 		align-items: center;
 		justify-content: center;
 		outline: none;
-	}
 
-	.outer {
-		box-shadow: var(--borders-base);
-		background: var(--ui-bg-base);
-		display: flex;
-		height: 14px;
-		width: 14px;
-		align-items: center;
-		justify-content: center;
-		border-radius: 9999px;
-		transition: all 0.2s;
-		&.checked {
-			background: var(--ui-bg-interactive);
-			box-shadow: var(--borders-interactive);
-		}
-		&:hover {
-			box-shadow: var(--borders-strong-with-shadow);
-		}
-		&:focus {
-			box-shadow: var(--borders-interactive-with-focus);
-		}
-		&.disabled {
-			background: var(--ui-bg-disabled);
+		.outer {
 			box-shadow: var(--borders-base);
+			background-color: var(--ui-bg-base);
+			border: 0.25px solid var(--ButtonBorder);
+			display: flex;
+			height: 14px;
+			width: 14px;
+			align-items: center;
+			justify-content: center;
+			border-radius: 9999px;
+			transition: all 0.2s;
+			&.checked {
+				border: 0.25px solid var(--ButtonBorder);
+				box-shadow: var(--borders-interactive);
+			}
+			&:hover {
+				box-shadow: var(--borders-strong-with-shadow);
+			}
+			&:focus {
+				box-shadow: var(--borders-interactive-with-focus);
+			}
+			&.disabled {
+				background-color: var(--ui-bg-disabled);
+				box-shadow: var(--borders-base);
+			}
+
+
+			.inner {
+				background-color: var(--CharcoalBg);
+				box-shadow: var(--details-contrast-on-bg-interactive);
+				border-radius: 9999px;
+				height: 10px;
+				width: 10px;
+				&.disabled {
+					background-color: var(--disabled);
+					box-shadow: none;
+				}
+			}
 		}
 	}
 
-	.inner {
-		background: var(--ui-bg-base);
-		box-shadow: var(--details-contrast-on-bg-interactive);
-		border-radius: 9999px;
-		height: 0.375rem;
-		width: 0.375rem;
-		&.disabled {
-			background: var(--ui-fg-disabled);
-			box-shadow: none;
-		}
-	}
 }

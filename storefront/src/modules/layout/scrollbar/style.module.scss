@@ -6,10 +6,9 @@
     left: 0;
     width: 100dvw;
     height: 5px;
-    z-index: 1000;
+    z-index: 2000;
     pointer-events: none;
     border-radius: 4px 0 0 4px;
-    mix-blend-mode: difference;
     transform-origin: 0% 0%;
     background-color: var(--CreamDetails);
     /* ensure hidden when no progress due to scaleX */

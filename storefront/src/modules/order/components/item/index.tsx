@@ -1,5 +1,5 @@
 import { HttpTypes } from "@medusajs/types"
-import { Table } from "@medusajs/ui"
+import { Divider, Table } from "@medusajs/ui"
 import styles from "../styles/item.module.scss"
 
 import LineItemOptions from "@modules/common/components/line-item-options"
@@ -44,12 +44,17 @@ const Item = ({ item, currencyCode }: ItemProps) => {
               currencyCode={currencyCode}
             />
           </span>
-
-          <LineItemPrice
-            item={item}
-            style="tight"
-            currencyCode={currencyCode}
-          />
+          <div className={styles.divider} />
+          <span className={styles.totalWrap}>
+            <span className={styles.totalLabel}>
+              Celkem: 
+            </span>
+            <LineItemPrice
+              item={item}
+              style="tight"
+              currencyCode={currencyCode}
+            />
+          </span>
         </span>
       </Table.Cell>
     </Table.Row>

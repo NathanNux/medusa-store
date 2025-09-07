@@ -12,6 +12,22 @@ type PaymentDetailsProps = {
 
 const PaymentDetails = ({ order }: PaymentDetailsProps) => {
   const payment = order.payment_collections?.[0].payments?.[0]
+  const formattedCreated = payment?.created_at
+    ? (() => {
+        const d = new Date(payment.created_at)
+        const datePart = d.toLocaleDateString("cs-CZ", {
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric",
+        })
+        const timePart = d.toLocaleTimeString("cs-CZ", {
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: false,
+        })
+        return `${datePart}, ${timePart}`
+      })()
+    : ""
 
   return (
     <div className={styles.root}>
@@ -37,9 +53,7 @@ const PaymentDetails = ({ order }: PaymentDetailsProps) => {
                     : `${convertToLocale({
                         amount: payment.amount,
                         currency_code: order.currency_code,
-                      })} paid at ${new Date(
-                        payment.created_at ?? ""
-                      ).toLocaleString()}`}
+                      })} zaplaceno ${formattedCreated}`}
                 </p>
               </div>
             </div>

@@ -1,3 +1,5 @@
+@use "../../../../styles/mixins.scss" as *;
+
 /* Review component styles - SASS nesting */
 .root {
   background: #fff;
@@ -12,9 +14,46 @@
       display: flex;
       flex-direction: row;
       font-size: 2rem;
-      font-weight: 500;
+      font-weight: 400;
       gap: 0.5rem;
       align-items: baseline;
+      font-family: "Sansation-Regular";
+
+      @include respond-to-h(lg){
+        font-size: 1.8rem;
+      }
+      @include respond-to-h(md){
+        font-size: 1.8rem;
+      }
+      @include respond-to-h(mdt){
+        font-size: 1.8rem;
+      }
+      @include respond-to-h(sm){
+        font-size: 1.8rem;
+      }
+      @include respond-to-h(xs){
+        font-size: 1.6rem;
+      }
+      @include respond-to-h(xxs){
+        font-size: 1.6rem;
+      }
+
+      @include respond-to-v(lg){
+        font-size: 1.8rem;
+      }
+      @include respond-to-v(md){
+        font-size: 1.8rem;
+      }
+      @include respond-to-v(s){
+        font-size: 1.6rem;
+      }
+      @include respond-to-v(sm){
+        font-size: 1.6rem;
+      }
+      @include respond-to-v(xs){
+        font-size: 1.6rem;
+      }
+
       &.inactive {
         opacity: 0.5;
         pointer-events: none;
@@ -36,9 +75,46 @@
   }
 
   .reviewText {
-    font-size: 1.125rem;
-    font-weight: 500;
-    color: var(--ui-fg-base, #111827);
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: var(--ChText);
     margin-bottom: 0.25rem;
+
+    @include respond-to-h(md){
+        font-size: 1rem;
+    }
+    @include respond-to-h(mdt){
+        font-size: 1rem;
+    }
+    @include respond-to-h(sm){
+        font-size: 1rem;
+    }
+    @include respond-to-h(xs){
+        font-size: 0.9rem;
+        font-weight: 300;
+    }
+    @include respond-to-h(xxs){
+        font-size: 0.9rem;
+        font-weight: 300;
+    }
+
+    @include respond-to-v(lg){
+        font-size: 1rem;
+    }
+    @include respond-to-v(md){
+        font-size: 1rem;
+    }
+    @include respond-to-v(s){
+        font-size: 0.9rem;
+        font-weight: 300;
+    }
+    @include respond-to-v(sm){
+        font-size: 0.9rem;
+        font-weight: 300;
+    }
+    @include respond-to-v(xs){
+        font-size: 0.9rem;
+        font-weight: 300;
+    }
   }
 }

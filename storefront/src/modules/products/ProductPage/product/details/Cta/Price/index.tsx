@@ -33,9 +33,9 @@ export default function ProductPrice({
           data-testid="product-price"
           data-value={selectedPrice?.calculated_price_number}
         >
-            {cheapestPrice?.calculated_price !== undefined
-                    ? `${String(cheapestPrice.calculated_price).replace(/czk/i, "")}${countryCode === "cz" ? ",-" : ""}`
-                : "Cena není k dispozici"}
+      {cheapestPrice?.calculated_price !== undefined
+          ? `${String(cheapestPrice.calculated_price).replace(/czk/i, "")}`
+        : "Cena není k dispozici"}
         </span>
         {selectedPrice?.price_type === "sale" && (
           <>
@@ -47,7 +47,7 @@ export default function ProductPrice({
                 data-value={selectedPrice.original_price_number}
               >
                  {cheapestPrice?.original_price !== undefined
-                ? `${String(cheapestPrice.original_price).replace(/czk/i, "")}${countryCode === "cz" ? ",-" : ""}`
+                ? `${String(cheapestPrice.original_price).replace(/czk/i, "")}`
                 : "Cena není k dispozici"}
               </span>
             </p>

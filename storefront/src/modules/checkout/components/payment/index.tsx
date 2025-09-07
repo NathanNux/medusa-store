@@ -13,6 +13,9 @@ import Divider from "@modules/common/components/divider"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { useCallback, useEffect, useState } from "react"
 import styles from "./style.module.scss"
+import { useFormStatus } from "react-dom"
+
+import { motion } from "framer-motion"
 
 const Payment = ({
   cart,
@@ -86,6 +89,76 @@ const Payment = ({
         console.warn("Failed to init Comgate metadata:", init.message)
       }
       console.log("Comgate initialized")
+    }
+  }
+
+
+  // const handleComgatePay = async () => {
+  //   setIsLoading(true)
+  //   setError(null)
+  //   try {
+  //     const firstName = cart?.billing_address?.first_name || cart?.shipping_address?.first_name || null
+  //     const lastName = cart?.billing_address?.last_name || cart?.shipping_address?.last_name || null
+  //     const email = cart?.email || null
+
+  //     const resp = await initiatePaymentSession(cart, {
+  //       provider_id: selectedPaymentMethod,
+  //       data: {
+  //         email,
+  //         first_name: firstName,
+  //         last_name: lastName,
+  //         cart_id: cart.id,
+  //       } as any,
+  //     })
+
+  // const anyResp: any = resp
+  // const url = anyResp?.url || anyResp?.payment_url || anyResp?.redirect_url || anyResp?.data?.url
+  //     if (url) {
+  //       setComgateUrl(url)
+  //     } else if ((resp as any)?.message) {
+  //       setError((resp as any).message)
+  //     } else {
+  //       setError("Nelze zahájit platbu Comgate. Zkuste to znovu.")
+  //     }
+  //   } catch (err: any) {
+  //     console.error('Comgate init error', err)
+  //     setError(err?.message || 'Chyba při inicializaci platby Comgate')
+  //   } finally {
+  //     setIsLoading(false)
+  //   }
+  // }
+  const handleComgatePay = async () => {
+    setIsLoading(true)
+    setError(null)
+    try {
+      const firstName = cart?.billing_address?.first_name || cart?.shipping_address?.first_name || null
+      const lastName = cart?.billing_address?.last_name || cart?.shipping_address?.last_name || null
+      const email = cart?.email || null
+
+      const resp = await initiatePaymentSession(cart, {
+        provider_id: selectedPaymentMethod,
+        data: {
+          email,
+          first_name: firstName,
+          last_name: lastName,
+          cart_id: cart.id,
+        } as any,
+      })
+
+  const anyResp: any = resp
+  const url = anyResp?.url || anyResp?.payment_url || anyResp?.redirect_url || anyResp?.data?.url
+      if (url) {
+        setComgateUrl(url)
+      } else if ((resp as any)?.message) {
+        setError((resp as any).message)
+      } else {
+        setError("Nelze zahájit platbu Comgate. Zkuste to znovu.")
+      }
+    } catch (err: any) {
+      console.error('Comgate init error', err)
+      setError(err?.message || 'Chyba při inicializaci platby Comgate')
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -197,25 +270,21 @@ const Payment = ({
   return (
     <div className={styles.root}>
       <div className={styles.headerRow}>
-        <Heading
-          level="h2"
+        <h2
           className={clx(styles.heading, {
             [styles.headingDisabled]: !isOpen && !paymentReady,
           })}
         >
           Platba
           {!isOpen && paymentReady && <CheckCircleSolid />}
-        </Heading>
+        </h2>
         {!isOpen && paymentReady && (
-          <Text>
-            <button
-              onClick={handleEdit}
-              className={styles.editBtn}
-              data-testid="edit-payment-button"
-            >
-              Upravit
-            </button>
-          </Text>
+          <ClickButton
+            text="Upravit"
+            onClickAction={handleEdit}
+            className={styles.editBtn}
+            data-testid="edit-delivery-button"
+          />
         )}
       </div>
       <div>
@@ -266,21 +335,26 @@ const Payment = ({
             data-testid="payment-method-error-message"
           />
 
-          <Button
-            size="large"
-            className={styles.submitBtn}
-            onClick={handleSubmit}
-            isLoading={isLoading}
-            disabled={
-              (isStripe && !cardComplete) ||
-              (!selectedPaymentMethod && !paidByGiftcard)
-            }
-            data-testid="submit-payment-button"
-          >
-            {!activeSession && isStripeFunc(selectedPaymentMethod)
-              ? " Zadat údaje o kartě"
-              : "Pokračovat k přehledu"}
-          </Button>
+          {/* Use ClickButton to keep consistent animated button UI */}
+          <div className={styles.buttonRow}>
+            {isComgate(selectedPaymentMethod) ? (
+              <ClickButton
+                text={comgateUrl ? 'Otevřít platbu' : 'Zaplatit přes Comgate'}
+                onClickAction={handleComgatePay}
+                className={styles.submitBtn}
+                data-testid="submit-payment-button"
+                disabled={!selectedPaymentMethod || isLoading}
+              />
+            ) : (
+              <ClickButton
+                text={!activeSession && isStripeFunc(selectedPaymentMethod) ? ' Zadat údaje o kartě' : 'Pokračovat k přehledu'}
+                onClickAction={handleSubmit}
+                className={styles.submitBtn}
+                data-testid="submit-payment-button"
+                disabled={(isStripe && !cardComplete) || (!selectedPaymentMethod && !paidByGiftcard) || isLoading}
+              />
+          )}
+          </div>
         </div>
 
         <div className={isOpen ? styles.closed : styles.open}>
@@ -342,3 +416,66 @@ const Payment = ({
 }
 
 export default Payment
+
+
+type ClickButtonProps = {
+    text: string;
+    onClickAction?: () => void | Promise<void>;
+    ClickAction?: () => void | Promise<void>; // backward compatibility
+    disabled?: boolean;
+    type?: "button" | "submit";
+    className?: string;
+    "data-testid"?: string;
+}
+
+// Base animated button used across the site. Can act as a submit button in forms.
+function ClickButton({ onClickAction, ClickAction, disabled = false, text, type = "button", className, "data-testid": dataTestId }: ClickButtonProps) {
+    const [ isActive , setIsActive ] = useState<boolean>(false);
+    const { pending } = useFormStatus();
+    const isSubmitting = type === "submit" ? pending : false;
+    const isDisabled = disabled || isSubmitting;
+    const handleClick = onClickAction ?? ClickAction;
+
+    return (
+        <div className={className ? `${styles.ClickButton} ${className}` : styles.ClickButton}>
+            <button 
+                type={type}
+                className={styles.button}
+                onClick={handleClick}
+                disabled={isDisabled}
+                aria-busy={isDisabled || undefined}
+                onMouseEnter={() => setIsActive(true)}
+                onMouseLeave={() => setIsActive(false)}
+                data-testid={dataTestId}
+            >
+                <motion.div 
+                    className={styles.slider}
+                    animate={{top: isActive ? "-100%" : "0%"}}
+                    transition={{ duration: 0.5, type: "tween", ease: [0.76, 0, 0.24, 1]}}
+                >
+                    <div 
+                        className={styles.el}
+                        style={{ backgroundColor: "var(--OButton)" }}
+                    >
+                        <PerspectiveText label={text}/>
+                    </div>
+                    <div 
+                        className={styles.el}
+                        style={{ backgroundColor: "var(--CharcoalBg)" }}
+                    >
+                        <PerspectiveText label={text} />
+                    </div>
+                </motion.div>
+            </button>
+        </div>
+    )
+}
+
+function PerspectiveText({label}: {label: string}) {
+    return (    
+        <div className={styles.perspectiveText}>
+            <p>{label}</p>
+            <p>{label}</p>
+        </div>
+    )
+}

@@ -57,13 +57,13 @@ const ProductPreview = ({ product, countryCode }: { product: StoreProductWithPri
             {cheapestPrice?.price_type === "sale" && 
                 <p className="product__sale__price line-through">
                     {cheapestPrice?.original_price !== undefined
-                    ? `${String(cheapestPrice.original_price).replace(/czk/i, "")}${countryCode === "cz" ? ",-" : ""}`
+                    ? `${String(cheapestPrice.original_price).replace(/czk/i, "")}`
                 : ""}
                 </p>
             }
             <p className="product__price">
                 {cheapestPrice?.calculated_price !== undefined
-                    ? `${String(cheapestPrice.calculated_price).replace(/czk/i, "")}${countryCode === "cz" ? ",-" : ""}`
+                    ? `${String(cheapestPrice.calculated_price).replace(/czk/i, "")}`
                 : "Cena není k dispozici"}
             </p>
             {/* <div className="product__sale__container">

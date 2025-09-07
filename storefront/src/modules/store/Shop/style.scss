@@ -1375,7 +1375,7 @@
 
                     .product__title__color_container{
                         width: 100%;
-                        height: 5dvh;
+                        height: 7.5dvh;
                         display: flex;
                         flex-direction: row;
                         align-items: center;
@@ -1390,6 +1390,7 @@
                             color: var(--ChText);
                             font-weight: 300;
                             text-align: left;
+                            line-height: 1;
 
                             @include respond-to-h(md){
                                font-size: 1.3rem;
@@ -1566,7 +1567,7 @@
 
                     .product__price__container{
                         width: 100%;
-                        height: 10dvh;
+                        height: 7.5dvh;
                         display: flex;
                         align-items: center;
                         justify-content: center;
@@ -1619,6 +1620,7 @@
                             font-weight: 400;
                             text-align: right;
                             font-family: "Sansation-Light";
+                            white-space: nowrap;
 
                             @include respond-to-h(mdt){
                                font-size: 1.8rem;

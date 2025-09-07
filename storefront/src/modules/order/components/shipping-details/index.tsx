@@ -36,7 +36,7 @@ const ShippingDetails = ({ order }: ShippingDetailsProps) => {
         </div>
 
         <div className={styles.col} data-testid="shipping-method-summary">
-          <p className={styles.label}>Metoda</p>
+          <p className={styles.label}>Platební metoda</p>
           <p className={styles.value}>
             {(order as any).shipping_methods[0]?.name} (
             {convertToLocale({

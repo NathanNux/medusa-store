@@ -1,3 +1,5 @@
+@use '../../../../styles/mixins.scss' as *;
+
 .root {
   // container styles if needed
 
@@ -5,6 +7,27 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    @include respond-to-h(sm){
+      gap: 0.5rem;
+    }
+    @include respond-to-h(xs){
+      gap: 1rem;
+    }
+    @include respond-to-h(xxs){
+      gap: 1rem;
+    }
+    @include respond-to-v(md){
+      gap: 1rem;
+    }
+    @include respond-to-v(s){
+      gap: 1rem;
+    }
+    @include respond-to-v(sm){
+      gap: 1rem;
+    }
+    @include respond-to-v(xs){
+      gap: 1rem;
+    }
 
     .leftCol {
       display: flex;

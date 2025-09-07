@@ -39,6 +39,7 @@ const BillingAddress = ({ cart }: { cart: HttpTypes.StoreCart | null }) => {
           onChange={handleChange}
           required
           data-testid="billing-first-name-input"
+          className={s.input}
         />
         <Input
           label="Příjmení"
@@ -48,6 +49,7 @@ const BillingAddress = ({ cart }: { cart: HttpTypes.StoreCart | null }) => {
           onChange={handleChange}
           required
           data-testid="billing-last-name-input"
+          className={s.input}
         />
         <Input
           label="Adresa"
@@ -57,6 +59,7 @@ const BillingAddress = ({ cart }: { cart: HttpTypes.StoreCart | null }) => {
           onChange={handleChange}
           required
           data-testid="billing-address-input"
+          className={s.input}
         />
         <Input
           label="Společnost"
@@ -65,6 +68,7 @@ const BillingAddress = ({ cart }: { cart: HttpTypes.StoreCart | null }) => {
           onChange={handleChange}
           autoComplete="organization"
           data-testid="billing-company-input"
+          className={s.input}
         />
         <Input
           label="PSČ"
@@ -74,6 +78,7 @@ const BillingAddress = ({ cart }: { cart: HttpTypes.StoreCart | null }) => {
           onChange={handleChange}
           required
           data-testid="billing-postal-input"
+          className={s.input}
         />
         <Input
           label="Město"
@@ -81,6 +86,7 @@ const BillingAddress = ({ cart }: { cart: HttpTypes.StoreCart | null }) => {
           autoComplete="address-level2"
           value={formData["billing_address.city"]}
           onChange={handleChange}
+          className={s.input}
         />
         <CountrySelect
           name="billing_address.country_code"
@@ -106,6 +112,7 @@ const BillingAddress = ({ cart }: { cart: HttpTypes.StoreCart | null }) => {
           value={formData["billing_address.phone"]}
           onChange={handleChange}
           data-testid="billing-phone-input"
+          className={s.input}
         />
       </div>
     </div>

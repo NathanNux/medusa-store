@@ -10,12 +10,14 @@ import { calculatePriceForShippingOption } from "@lib/data/fulfillment"
 import { convertToLocale } from "@lib/util/money"
 import { CheckCircleSolid, Loader } from "@medusajs/icons"
 import { HttpTypes, StoreOrderAddress } from "@medusajs/types"
-import { Button, Heading, Text, clx } from "@medusajs/ui"
+import { clx } from "@medusajs/ui"
 import ErrorMessage from "@modules/checkout/components/error-message"
 import Divider from "@modules/common/components/divider"
 import MedusaRadio from "@modules/common/components/radio"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
+import { useFormStatus } from "react-dom"
+import { motion } from "framer-motion";
 
 const PICKUP_OPTION_ON = "__PICKUP_ON"
 const PICKUP_OPTION_OFF = "__PICKUP_OFF"
@@ -69,32 +71,52 @@ const Shipping: React.FC<ShippingProps> = ({
   >({})
   const [error, setError] = useState<string | null>(null)
   const [packetaPickupPointSelected, setPacketaPickupPointSelected] = useState<boolean | null>(false)
+  const [packetaPickupPointInfo, setPacketaPickupPointInfo] = useState<string | null>(null)
   const [shippingMethodId, setShippingMethodId] = useState<string | null>(
     cart.shipping_methods?.at(-1)?.shipping_option_id || null
   )
 
   async function onPointSelected(pickupPoint: string) {
+    const base = (process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL || "").replace(/\/+$/, "")
+    const url = `${base}/store/carts/${cart.id}`
+    const metadataUrl = `${base}/store/carts/${cart.id}/metadata`
 
-    await fetch(`${process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL}/store/carts/${cart.id}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-publishable-api-key": process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY?.toString() || ""
-      },
-      body: JSON.stringify({
-        metadata: { packeta_pickup_point: pickupPoint }
-      }),
-    })
+    try {
+      console.log('Fetching URL:', url)
+      const res = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-publishable-api-key": process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY?.toString() || ""
+        },
+        body: JSON.stringify({ metadata: { packeta_pickup_point: pickupPoint } }),
+      })
 
-    await fetch(`${process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL}/store/carts/${cart.id}/metadata`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "x-publishable-api-key": process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY?.toString() || ""
+      if (!res.ok) {
+        const body = await res.text().catch(() => "<unreadable>")
+        console.error('Failed to POST pickup metadata', res.status, res.statusText, body)
+        setError('Nepodařilo se uložit místo vyzvednutí. Zkuste to znovu.')
+        return
       }
-    })
 
-    setPacketaPickupPointSelected(true)
+      // optional: re-fetch metadata to confirm
+      const md = await fetch(metadataUrl, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "x-publishable-api-key": process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY?.toString() || ""
+        }
+      })
+      if (!md.ok) {
+        console.warn('Metadata GET returned', md.status, md.statusText)
+      }
+
+      setPacketaPickupPointSelected(true)
+      setError(null)
+    } catch (err: any) {
+      console.error('Network error while saving pickup point:', err)
+      setError('Došlo k síťové chybě při ukládání místa vyzvednutí.')
+    }
   }
 
   const searchParams = useSearchParams()
@@ -139,6 +161,8 @@ const Shipping: React.FC<ShippingProps> = ({
     }
   }, [availableShippingMethods])
 
+  // (removed debug logging)
+
   useEffect(() => {
     if (typeof window === 'undefined'){
       console.warn("Window is not defined, skipping Packeta widget initialization")
@@ -168,6 +192,84 @@ const Shipping: React.FC<ShippingProps> = ({
 
     const handleOpenWidget = () => {
     const key = packetaApiKey
+
+    const packetaOptions = {
+      language: "en",
+      valueFormat: "\"Packeta\",id,carrierId,carrierPickupPointId,name,city,street",
+      view: "modal",
+      vendors: [
+        { country: "cz" },
+        { country: "hu" },
+        { country: "sk" },
+        { country: "ro" },
+        { country: "cz", group: "zbox" },
+        { country: "sk", group: "zbox" },
+        { country: "hu", group: "zbox" },
+        { country: "pl" },
+        { country: "ro", group: "zbox" },
+      ],
+    };
+
+    function showSelectedPickupPoint(point: any) {
+      try {
+        const saveElement: any = document.querySelector(".packeta-selector-value");
+        if (saveElement) {
+          saveElement.innerText = "";
+        } else {
+          console.warn(".packeta-selector-value element not found in DOM")
+        }
+
+        if (point) {
+          console.log("Selected point", point);
+          if (saveElement) {
+            saveElement.innerText = "Address2: " + point.formatedValue;
+          }
+          // store a normalized formatted value for confirmation UI
+          try {
+            const formatted = point.formatedValue || String(point)
+            const normalize = (val: string) => {
+              if (!val) return val
+              const parts = val.split(',').map((p: string) => p.trim()).filter(Boolean)
+
+              // Heuristic 1: look for repeating city pattern like [.., city, street, city, street]
+              for (let i = 0; i + 2 < parts.length; i++) {
+                if (parts[i] === parts[i + 2]) {
+                  return `${parts[i]}, ${parts[i + 1]}`
+                }
+              }
+
+              // Heuristic 2: find a part that looks like a street (contains a digit or parentheses)
+              for (let i = 1; i < parts.length; i++) {
+                if (/\d/.test(parts[i]) || parts[i].includes('(')) {
+                  const city = parts[i - 1] ?? parts[i]
+                  const street = parts[i]
+                  return `${city}, ${street}`
+                }
+              }
+
+              // Fallback: return last two parts joined by comma, or the whole string
+              if (parts.length >= 2) {
+                return `${parts[parts.length - 2]}, ${parts[parts.length - 1]}`
+              }
+              return val
+            }
+
+            setPacketaPickupPointInfo(normalize(formatted))
+            setPacketaPickupPointSelected(true)
+          } catch (e) {
+            // ignore state set errors in odd environments
+          }
+
+          const parts = point.formatedValue.split(",");
+          const number = parts[1]?.trim(); // druhý prvek (index 1)
+          console.log("Číslo výdejního místa:", number);
+          onPointSelected(number);
+        }
+      } catch (err) {
+        console.error("Error in showSelectedPickupPoint:", err)
+      }
+    }
+
     const open = () => {
       if (!(window as any).Packeta?.Widget) return
       if (!key) {
@@ -175,72 +277,30 @@ const Shipping: React.FC<ShippingProps> = ({
         setError('Pickup point selector is not configured.')
         return
       }
-      (window as any).Packeta.Widget.pick(key, showSelectedPickupPoint, packetaOptions)
+      try {
+        ;(window as any).Packeta.Widget.pick(key, showSelectedPickupPoint, packetaOptions)
+      } catch (err) {
+        console.error('Packeta.Widget.pick threw:', err)
+      }
     }
+
     if (!(window as any).Packeta?.Widget) {
       console.warn('Widget is not loaded yet, will open when ready')
-      const script = document.getElementById('packeta-widget-script') as HTMLScriptElement | null
-      if (script) {
-        script.addEventListener('load', () => open(), { once: true })
+      let script = document.getElementById('packeta-widget-script') as HTMLScriptElement | null
+      if (!script) {
+        script = document.createElement('script')
+        script.id = 'packeta-widget-script'
+        script.src = 'https://widget.packeta.com/v6/www/js/library.js'
+        script.async = true
+        document.body.appendChild(script)
       }
+      script.addEventListener('load', () => open(), { once: true })
+      script.addEventListener('error', () => console.error('Failed to load Packeta widget script'), { once: true })
       setError('Loading pickup point selector…')
       return
     }
 
-    const packetaOptions = {
-      language: "en",
-      valueFormat: "\"Packeta\",id,carrierId,carrierPickupPointId,name,city,street", 
-      view: "modal", 
-      vendors: [
-        { 
-          country: "cz"
-        },
-        { 
-          country: "hu"
-        },
-        { 
-          country: "sk"
-        },
-        { 
-          country: "ro"
-        },
-        { 
-          country: "cz", 
-          group: "zbox"
-        },
-        { 
-          country: "sk", 
-          group: "zbox"
-        },
-        { 
-          country: "hu", 
-          group: "zbox"
-        },
-        { 
-          country: "pl"
-        },
-        { 
-          country: "ro", 
-          group: "zbox"
-        }
-      ]
-    };
-                
-    function showSelectedPickupPoint(point:any) {
-        const saveElement:any = document.querySelector(".packeta-selector-value");
-        // Add here an action on pickup point selection
-        saveElement.innerText = '';
-        if (point) {
-          console.log("Selected point", point);
-          saveElement.innerText = "Address2: " + point.formatedValue; 
-          const parts = point.formatedValue.split(",");
-          const number = parts[1]?.trim(); // druhý prvek (index 1)
-          console.log("Číslo výdejního místa:", number);
-          onPointSelected(number);
-        }
-    }
-
-  open()
+    open()
   }
 
   const handleSetShippingMethod = async (
@@ -257,16 +317,17 @@ const Shipping: React.FC<ShippingProps> = ({
     }
     let currentId: string | null = null
     setIsLoading(true)
-  setShippingMethodId((prev) => {
-      console.log("Setting shipping method ID:", prev, "to", id)
-      if (id === packetaShippingMethodId?.toString()) {
-        // This is a special case for the "Zásilkovna - výdejní místo" option
-        console.log("Opening Packeta widget")
-        handleOpenWidget()
-      }
-      else{
-        setPacketaPickupPointSelected(false)
-      }
+
+    console.log("Setting shipping method ID (pre-set):", shippingMethodId, "->", id)
+    // If this is the special Packeta / Zásilkovna method, open the widget immediately
+    if (id === packetaShippingMethodId?.toString()) {
+      console.log("Opening Packeta widget (user gesture preserved)")
+      handleOpenWidget()
+    } else {
+      setPacketaPickupPointSelected(false)
+    }
+
+    setShippingMethodId((prev) => {
       currentId = prev
       return id
     })
@@ -283,6 +344,9 @@ const Shipping: React.FC<ShippingProps> = ({
     setError(null)
   }, [isOpen])
 
+  console.log('Fetching URL:', `${process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL}/store/carts/${cart.id}`);
+  console.log('Using publishable key:', process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY);  
+
 
   return (
     <div className={styles.root}>
@@ -297,25 +361,24 @@ const Shipping: React.FC<ShippingProps> = ({
             <CheckCircleSolid />
           )}
         </h2>
-        {!isOpen &&
+          {!isOpen &&
           cart?.shipping_address &&
           cart?.billing_address &&
           cart?.email && (
-            <button
-              onClick={handleEdit}
+            <ClickButton
+              text="Upravit"
+              onClickAction={handleEdit}
               className={styles.editBtn}
               data-testid="edit-delivery-button"
-            >
-              Upravit
-            </button>
+            />
           )}
       </div>
 
       {isOpen ? (
         <>
           <div className={styles.deliveryOptions}>
-            <div>
-              <span className={clx(styles.radioLabel, "font-medium")}>Způsob dopravy</span>
+            <div className={styles.deliveryOptionsHeader}>
+              <span className={clx(styles.radioLabel, "font-medium")}>Způsob dopravy:</span>
               <span className={clx(styles.radioAddress, "mb-4")}>Jak byste chtěli, aby byla vaše objednávka doručena?</span>
             </div>
             <div data-testid="delivery-options-container">
@@ -349,7 +412,7 @@ const Shipping: React.FC<ShippingProps> = ({
                 )}
                 <RadioGroup
                   value={shippingMethodId}
-                  onChange={(v) => handleSetShippingMethod(v, "shipping")}
+                  onChange={(v) => v && handleSetShippingMethod(v, "shipping")}
                 >
                   {_shippingMethods?.map((option) => {
                     const isDisabled =
@@ -406,7 +469,7 @@ const Shipping: React.FC<ShippingProps> = ({
                 <div className={styles.deliveryOptions}>
                   <RadioGroup
                     value={shippingMethodId}
-                    onChange={(v) => handleSetShippingMethod(v, "pickup")}
+                    onChange={(v) => v && handleSetShippingMethod(v, "pickup")}
                   >
                     {_pickupMethods?.map((option) => {
                       return (
@@ -426,7 +489,7 @@ const Shipping: React.FC<ShippingProps> = ({
                               <span className={styles.methodLabel}>{option.name}</span>
                               <span className={styles.methodText}>
                                 {formatAddress(
-                                  option.service_zone?.fulfillment_set?.location?.address
+                                  (option as any).service_zone?.fulfillment_set?.location?.address
                                 )}
                               </span>
                             </div>
@@ -448,21 +511,39 @@ const Shipping: React.FC<ShippingProps> = ({
 
           <div className={styles.packetaSelector}></div>
 
-          <div>
+          {/* If packeta shipping method is selected but no pickup point chosen, show notice and reopen button */}
+          {shippingMethodId === packetaShippingMethodId?.toString() && !packetaPickupPointSelected && (
+            <div className={styles.packetaNotice}>
+              <p className={styles.packetaNoticeText}>Prosím, zvolte místo vyzvednutí v okně výdejního místa.</p>
+              <ClickButton
+                text="Znovu vybrat místo"
+                onClickAction={handleOpenWidget}
+                className={styles.openPacketaBtn}
+                data-testid="reopen-packeta-button"
+              />
+            </div>
+          )}
+
+          {/* Show confirmation of selected pickup point once chosen */}
+          {shippingMethodId === packetaShippingMethodId?.toString() && packetaPickupPointSelected && packetaPickupPointInfo && (
+            <div className={styles.packetaConfirmation} data-testid="packeta-confirmation">
+              <p className={styles.packetaConfirmationLabel}>Vybrané výdejní místo:</p>
+              <p className={styles.packetaConfirmationValue}>{packetaPickupPointInfo}</p>
+            </div>
+          )}
+
+          <div className={styles.actions}>
             <ErrorMessage
               error={error}
               data-testid="delivery-option-error-message"
             />
-            <Button
-              size="large"
+            <ClickButton
+              text="Pokračovat k platbě"
+              onClickAction={handleSubmit}
               className={styles.divider}
-              onClick={handleSubmit}
-              isLoading={isLoading}
-              disabled={!cart.shipping_methods?.[0] || (shippingMethodId === packetaShippingMethodId?.toString() && !packetaPickupPointSelected)}
+              disabled={!cart.shipping_methods?.[0] || (shippingMethodId === packetaShippingMethodId?.toString() && !packetaPickupPointSelected) || isLoading}
               data-testid="submit-delivery-option-button"
-            >
-              Pokračovat k platbě
-            </Button>
+            />
           </div>
         </>
       ) : (
@@ -489,3 +570,67 @@ const Shipping: React.FC<ShippingProps> = ({
 }
 
 export default Shipping
+
+
+
+type ClickButtonProps = {
+    text: string;
+    onClickAction?: () => void | Promise<void>;
+    ClickAction?: () => void | Promise<void>; // backward compatibility
+    disabled?: boolean;
+    type?: "button" | "submit";
+    className?: string;
+    "data-testid"?: string;
+}
+
+// Base animated button used across the site. Can act as a submit button in forms.
+function ClickButton({ onClickAction, ClickAction, disabled = false, text, type = "button", className, "data-testid": dataTestId }: ClickButtonProps) {
+    const [ isActive , setIsActive ] = useState<boolean>(false);
+    const { pending } = useFormStatus();
+    const isSubmitting = type === "submit" ? pending : false;
+    const isDisabled = disabled || isSubmitting;
+    const handleClick = onClickAction ?? ClickAction;
+
+    return (
+        <div className={className ? `${styles.ClickButton} ${className}` : styles.ClickButton}>
+            <button 
+                type={type}
+                className={styles.button}
+                onClick={handleClick}
+                disabled={isDisabled}
+                aria-busy={isDisabled || undefined}
+                onMouseEnter={() => setIsActive(true)}
+                onMouseLeave={() => setIsActive(false)}
+                data-testid={dataTestId}
+            >
+                <motion.div 
+                    className={styles.slider}
+                    animate={{top: isActive ? "-100%" : "0%"}}
+                    transition={{ duration: 0.5, type: "tween", ease: [0.76, 0, 0.24, 1]}}
+                >
+                    <div 
+                        className={styles.el}
+                        style={{ backgroundColor: "var(--OButton)" }}
+                    >
+                        <PerspectiveText label={text}/>
+                    </div>
+                    <div 
+                        className={styles.el}
+                        style={{ backgroundColor: "var(--CharcoalBg)" }}
+                    >
+                        <PerspectiveText label={text} />
+                    </div>
+                </motion.div>
+            </button>
+        </div>
+    )
+}
+
+function PerspectiveText({label}: {label: string}) {
+    return (    
+        <div className={styles.perspectiveText}>
+            <p>{label}</p>
+            <p>{label}</p>
+        </div>
+    )
+}

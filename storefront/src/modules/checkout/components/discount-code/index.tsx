@@ -63,7 +63,8 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
           <Label className={styles.label}>
             <ClickButton
               text="Zadat slevový kód(y)"
-              onClickAction={() => setIsOpen(!isOpen)}
+                onClickAction={() => setIsOpen(!isOpen)}
+                active={isOpen}
               type="button"
               className={styles.toggleBtn}
               data-testid="add-discount-button"
@@ -185,18 +186,20 @@ type ClickButtonProps = {
     onClickAction?: () => void | Promise<void>;
     ClickAction?: () => void | Promise<void>; // backward compatibility
     disabled?: boolean;
+  active?: boolean; // external state to force animation (e.g. open)
     type?: "button" | "submit";
     className?: string;
     "data-testid"?: string;
 }
 
 // Base animated button used across the site. Can act as a submit button in forms.
-function ClickButton({ onClickAction, ClickAction, disabled = false, text, type = "button", className, "data-testid": dataTestId }: ClickButtonProps) {
-    const [ isActive , setIsActive ] = useState<boolean>(false);
+function ClickButton({ onClickAction, ClickAction, disabled = false, text, type = "button", className, active = false, "data-testid": dataTestId }: ClickButtonProps) {
+  const [ isActive , setIsActive ] = useState<boolean>(false);
     const { pending } = useFormStatus();
     const isSubmitting = type === "submit" ? pending : false;
     const isDisabled = disabled || isSubmitting;
     const handleClick = onClickAction ?? ClickAction;
+  const animateActive = isActive || active;
 
     return (
         <div className={className ? `${styles.ClickButton} ${className}` : styles.ClickButton}>
@@ -210,11 +213,11 @@ function ClickButton({ onClickAction, ClickAction, disabled = false, text, type 
                 onMouseLeave={() => setIsActive(false)}
                 data-testid={dataTestId}
             >
-                <motion.div 
-                    className={styles.slider}
-                    animate={{top: isActive ? "-100%" : "0%"}}
-                    transition={{ duration: 0.5, type: "tween", ease: [0.76, 0, 0.24, 1]}}
-                >
+        <motion.div 
+          className={styles.slider}
+          animate={{top: animateActive ? "-100%" : "0%"}}
+          transition={{ duration: 0.5, type: "tween", ease: [0.76, 0, 0.24, 1]}}
+        >
                     <div 
                         className={styles.el}
                         style={{ backgroundColor: "var(--OButton)" }}

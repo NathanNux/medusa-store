@@ -27,6 +27,15 @@
         font-size: 1.8rem;
         line-height: 2rem;
       }
+
+      @include respond-to-v(md){
+        font-size: 1.8rem;
+        line-height: 2rem;
+      }
+      @include respond-to-v(s){
+        font-size: 1.8rem;
+        line-height: 2rem;
+      }
     }
   }
 
@@ -44,7 +53,7 @@
       color: var(--ui-fg-subtle, #6b7280);
       font-weight: 600; /* txt-medium-plus approx */
       width: 100%;
-      padding: 0 1rem 0 2rem;
+      padding: 0 1rem 0 1rem;
 
       .colItem {
         padding-left: 0 !important; /* !pl-0 */
@@ -57,6 +66,12 @@
 
         @include respond-to-h(xxs){
           width: 3rem;
+        }
+        @include respond-to-v(md){
+          width: 3rem;
+        }
+        @include respond-to-v(s){
+          width: 4rem;
         }
       }
 
@@ -72,6 +87,14 @@
           width: 12rem;
           flex: 0 0 12rem;
         }
+        @include respond-to-v(md){
+          width: 12rem;
+          flex: 0 0 12rem;
+        }
+        @include respond-to-v(s){
+          width: 12rem;
+          flex: 0 0 12rem;
+        }
       }
 
       .colQty {
@@ -84,6 +107,14 @@
         justify-content: center;
 
         @include respond-to-h(xxs){
+          width: 8rem;
+          flex: 0 0 8rem;
+        }
+        @include respond-to-v(md){
+          width: 8rem;
+          flex: 0 0 8rem;
+        }
+        @include respond-to-v(s){
           width: 8rem;
           flex: 0 0 8rem;
         }

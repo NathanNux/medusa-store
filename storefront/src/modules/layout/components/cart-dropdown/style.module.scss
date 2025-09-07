@@ -74,7 +74,11 @@
         }
       }
       .items {
-        overflow-y: scroll;
+        /* allow internal scrolling and prevent scroll chaining to the page */
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch; /* smooth scrolling on iOS */
+        overscroll-behavior: contain; /* prevent parent page from scrolling when at edges */
+        overscroll-behavior-y: contain;
         max-height: 402px;
         padding-left: 1rem;
         padding-right: 1rem;

@@ -1,3 +1,5 @@
+@use "../../../../styles/mixins.scss" as *;
+
 // Styles for a single line item row
 .row {
   width: 100%;
@@ -19,8 +21,35 @@
 
   .name {
     // txt-medium-plus substitute
-    font-weight: 500;
+    font-size: 1.1rem;
+    font-weight: 400;
+    font-family: "Sansation-Regular";
     color: var(--ui-fg-base, #111827);
+    @include respond-to-h(md){
+			font-size: 1rem;
+		}
+		@include respond-to-h(mdt){
+			font-size: 1rem;
+		}
+		@include respond-to-h(sm){
+			font-size: 1rem;
+		}
+		@include respond-to-h(xs){
+			font-size: 0.9rem;
+		}
+		@include respond-to-h(xxs){
+			font-size: 0.9rem;
+		}
+
+    @include respond-to-v(s){
+			font-size: 1rem;
+		}
+    @include respond-to-v(sm){
+			font-size: 1rem;
+		}
+    @include respond-to-v(xs){
+			font-size: 1rem;
+		}
   }
 }
 
@@ -42,6 +71,81 @@
   column-gap: 0.25rem;
 }
 
+.totalWrap{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+
+  .totalLabel {
+    font-size: 1.3rem;
+    font-weight: 300;
+    color: var(--ChText);
+    font-family: "Sansation-Light";
+    @include respond-to-h(md){
+			font-size: 1.2rem;
+		}
+		@include respond-to-h(mdt){
+			font-size: 1.2rem;
+		}
+		@include respond-to-h(sm){
+			font-size: 1.2rem;
+		}
+		@include respond-to-h(xs){
+			font-size: 1.1rem;
+		}
+		@include respond-to-h(xxs){
+			font-size: 1.1rem;
+		}
+
+    @include respond-to-v(s){
+			font-size: 1.1rem;
+		}
+    @include respond-to-v(sm){
+			font-size: 1.1rem;
+		}
+    @include respond-to-v(xs){
+			font-size: 1.1rem;
+		}
+  }
+}
+
+.divider{
+  width: 30%;
+  height: 0.5px;
+  background-color: var(--ButtonBorder);
+  margin: 0.25rem 0;
+}
+
 .quantity {
-  color: var(--ui-fg-subtle, #6b7280);
+  color: var(--handle);
+  font-size: 1.1rem;
+  font-family: "Sansation-Regular";
+  font-weight: 500;
+  @include respond-to-h(md){
+    font-size: 1rem;
+  }
+  @include respond-to-h(mdt){
+    font-size: 1rem;
+  }
+  @include respond-to-h(sm){
+    font-size: 1rem;
+  }
+  @include respond-to-h(xs){
+    font-size: 0.9rem;
+  }
+  @include respond-to-h(xxs){
+    font-size: 0.9rem;
+  }
+
+  @include respond-to-v(s){
+    font-size: 1rem;
+  }
+  @include respond-to-v(sm){
+    font-size: 1rem;
+  }
+  @include respond-to-v(xs){
+    font-size: 1rem;
+  }
 }

@@ -5,8 +5,11 @@
 	.formGrid {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
-		gap: 1rem;
+		gap: 0.25rem;
 		width: 100%;
 		/* Add more nested selectors if needed for custom input styling */
+		.input {
+			margin: 0.25rem 0.25rem;
+		}
 	}
 }

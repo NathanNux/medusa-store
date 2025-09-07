@@ -1,12 +1,43 @@
+@use "../../../../styles/mixins.scss" as *;
+
 /* CheckoutSummary component styles - SASS nesting */
 .root {
   position: sticky;
-  top: 0;
+  top: 10dvh;
   display: flex;
   flex-direction: column-reverse;
   gap: 2rem;
   padding-top: 2rem;
   padding-bottom: 2rem;
+
+  @include respond-to-h(sm){
+    width: 100%;
+    position: relative;
+  }
+  @include respond-to-v(md){
+    width: 100%;
+    position: relative;
+  }
+  @include respond-to-h(xs){
+    position: relative;
+    width: 100%;
+  }
+  @include respond-to-h(xxs){
+    position: relative;
+    width: 100%;
+  }
+  @include respond-to-v(s){
+    width: 100%;
+    position: relative;
+  }
+  @include respond-to-v(sm){
+    width: 100%;
+    position: relative;
+  }
+  @include respond-to-v(xs){
+    width: 100%;
+    position: relative;
+  }
 
   @media (min-width: 640px) {
     flex-direction: column;
@@ -18,14 +49,52 @@
     width: 100%;
     background: #fff;
     display: flex;
+    align-items: center;
     flex-direction: column;
     .heading {
+      width: 100%;
+      justify-content: flex-start;
       display: flex;
       flex-direction: row;
       font-size: 2rem;
       font-weight: 500;
       align-items: baseline;
       margin: 0;
+
+      @include respond-to-h(lg){
+        font-size: 1.8rem;
+      }
+      @include respond-to-h(md){
+        font-size: 1.8rem;
+      }
+      @include respond-to-h(sm){
+        font-size: 1.8rem;
+      }
+      @include respond-to-h(xs){
+        font-size: 1.6rem;
+      }
+      @include respond-to-h(xxs){
+        font-size: 1.6rem;
+      }
+
+      @include respond-to-v(lg){
+        font-size: 1.8rem;
+      }
+      @include respond-to-v(md){
+        font-size: 1.8rem;
+      }
+      @include respond-to-v(s){
+        font-size: 1.6rem;
+        padding-left: 1rem;
+      }
+      @include respond-to-v(sm){
+        font-size: 1.6rem;
+        padding-left: 1rem;
+      }
+      @include respond-to-v(xs){
+        font-size: 1.6rem;
+        padding-left: 1rem;
+      }
     }
     .divider {
       margin: 1.5rem 0;
@@ -37,6 +106,20 @@
     }
     .discount {
       margin: 1.5rem 0;
+      display: flex;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+
+      @include respond-to-v(s){
+        padding-left: 1rem;
+      }
+      @include respond-to-v(sm){
+        padding-left: 1rem;
+      }
+      @include respond-to-v(xs){
+        padding-left: 1rem;
+      }
     }
   }
 }
