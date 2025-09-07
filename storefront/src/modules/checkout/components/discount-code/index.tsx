@@ -1,15 +1,13 @@
 "use client"
 
-import { Badge, Heading, Input, Label, Text, Tooltip } from "@medusajs/ui"
+import { Badge, Heading, Input, Label, Text } from "@medusajs/ui"
 import React, { useActionState } from "react";
 
 import { applyPromotions, submitPromotionForm } from "@lib/data/cart"
 import { convertToLocale } from "@lib/util/money"
-import { InformationCircleSolid } from "@medusajs/icons"
 import { HttpTypes } from "@medusajs/types"
 import Trash from "@modules/common/icons/trash"
 import ErrorMessage from "../error-message"
-import { SubmitButton } from "../submit-button"
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { useFormStatus } from 'react-dom';
@@ -203,35 +201,35 @@ function ClickButton({ onClickAction, ClickAction, disabled = false, text, type 
 
     return (
         <div className={className ? `${styles.ClickButton} ${className}` : styles.ClickButton}>
-            <button 
-                type={type}
-                className={styles.button}
-                onClick={handleClick}
-                disabled={isDisabled}
-                aria-busy={isDisabled || undefined}
-                onMouseEnter={() => setIsActive(true)}
-                onMouseLeave={() => setIsActive(false)}
-                data-testid={dataTestId}
+          <button 
+            type={type}
+            className={styles.button}
+            onClick={handleClick}
+            disabled={isDisabled}
+            aria-busy={isDisabled || undefined}
+            onMouseEnter={() => setIsActive(true)}
+            onMouseLeave={() => setIsActive(false)}
+            data-testid={dataTestId}
+          >
+            <motion.div 
+              className={styles.slider}
+              animate={{top: animateActive ? "-100%" : "0%"}}
+              transition={{ duration: 0.5, type: "tween", ease: [0.76, 0, 0.24, 1]}}
             >
-        <motion.div 
-          className={styles.slider}
-          animate={{top: animateActive ? "-100%" : "0%"}}
-          transition={{ duration: 0.5, type: "tween", ease: [0.76, 0, 0.24, 1]}}
-        >
-                    <div 
-                        className={styles.el}
-                        style={{ backgroundColor: "var(--OButton)" }}
-                    >
-                        <PerspectiveText label={text}/>
-                    </div>
-                    <div 
-                        className={styles.el}
-                        style={{ backgroundColor: "var(--CharcoalBg)" }}
-                    >
-                        <PerspectiveText label={text} />
-                    </div>
-                </motion.div>
-            </button>
+              <div 
+                  className={styles.el}
+                  style={{ backgroundColor: "var(--OButton)" }}
+              >
+                  <PerspectiveText label={text}/>
+              </div>
+              <div 
+                  className={styles.el}
+                  style={{ backgroundColor: "var(--CharcoalBg)" }}
+              >
+                  <PerspectiveText label={text} />
+              </div>
+            </motion.div>
+          </button>
         </div>
     )
 }

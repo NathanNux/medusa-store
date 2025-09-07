@@ -1,4 +1,5 @@
 @use "../../../styles/mixins.scss" as *;
+@use "../../../styles/mixins.scss" as *;
 
 /* Items table styles */
 .root {
@@ -42,10 +43,17 @@
   .tableHeader {
     /* Prevent default table header grouping so padding and widths apply */
     display: block;
+    /* Prevent default table header grouping so padding and widths apply */
+    display: block;
     border-top: 0; /* border-t-0 */
+    position: relative;
     position: relative;
 
     .tableHeaderRow {
+      /* switch the row to flex so th cells become flex items and respond to padding/width */
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       /* switch the row to flex so th cells become flex items and respond to padding/width */
       display: flex;
       align-items: center;
@@ -99,6 +107,7 @@
 
       .colQty {
         padding-right: 0 !important; /* !pr-0 */
+        padding-right: 0 !important; /* !pr-0 */
         text-align: left;
         width: 12rem;
         flex: 0 0 12rem;
@@ -122,7 +131,13 @@
 
       .colPrice {
         padding-right: 1rem; /* !pr-0 */
+        padding-right: 1rem; /* !pr-0 */
         text-align: left;
+        width: 4rem;
+        flex: 0 0 4rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         width: 4rem;
         flex: 0 0 4rem;
         display: flex;
@@ -138,11 +153,18 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        width: 4rem;
+        flex: 0 0 4rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
     }
   }
 
   .tableBody {
+    /* make tbody block so rows align under the header flex layout */
+    display: block;
     /* make tbody block so rows align under the header flex layout */
     display: block;
   }

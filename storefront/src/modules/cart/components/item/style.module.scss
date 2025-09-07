@@ -1,4 +1,5 @@
 @use "../../../../styles/mixins.scss" as *;
+@use "../../../../styles/mixins.scss" as *;
 .row {
   width: 100%;
   height: 10dvh;
@@ -30,6 +31,8 @@
   }
 
   .cellThumb {
+    display: flex;
+    align-items: center;
     display: flex;
     align-items: center;
     padding-left: 0 !important;
@@ -204,6 +207,7 @@
     .actionsRow {
       display: flex;
       gap: 1rem; /* gap-2 */
+      gap: 1rem; /* gap-2 */
       column-gap: 0.5rem; /* gap-2 */
       align-items: center;
       justify-content: center;
@@ -231,9 +235,16 @@
     align-items: center;
     justify-content: center;
     width: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4rem;
   }
 
   .cellPrice {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     display: flex;
     align-items: center;
     justify-content: center;
