@@ -15,12 +15,28 @@ export const convertToLocale = ({
   maximumFractionDigits,
   locale = "en-US",
 }: ConvertToLocaleParams) => {
-  return currency_code && !isEmpty(currency_code)
-    ? new Intl.NumberFormat(locale, {
-        style: "currency",
-        currency: currency_code,
-        minimumFractionDigits,
-        maximumFractionDigits,
+  if (currency_code && !isEmpty(currency_code)) {
+    const code = currency_code.toString().toUpperCase()
+
+    // Special-case for Czech koruna: format as integer with grouping and
+    // append ',-' (e.g. 1 234,-)
+    if (code === "CZK") {
+      const fmt = new Intl.NumberFormat("cs-CZ", {
+        style: "decimal",
+        minimumFractionDigits: minimumFractionDigits ?? 0,
+        maximumFractionDigits: maximumFractionDigits ?? 0,
       }).format(amount)
-    : amount.toString()
+
+      return `${fmt},-`
+    }
+
+    return new Intl.NumberFormat(locale, {
+      style: "currency",
+      currency: currency_code,
+      minimumFractionDigits,
+      maximumFractionDigits,
+    }).format(amount)
+  }
+
+  return amount.toString()
 }

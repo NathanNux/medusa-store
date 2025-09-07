@@ -17,7 +17,7 @@ const ItemsTemplate = ({ cart }: ItemsTemplateProps) => {
       <div className={s.headerRow}>
         <h1 className={s.title}>Košík</h1>
       </div>
-      <Table>
+      <Table className="p-2 rounded-[25px] overflow-hidden">
         <Table.Header className={s.tableHeader}>
           <Table.Row className={s.tableHeaderRow}>
             <Table.HeaderCell className={s.colItem}>Produkt</Table.HeaderCell>

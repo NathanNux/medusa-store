@@ -33,16 +33,7 @@ const LineItemPrice = ({
                 className={styles.originalPrice}
                 data-testid="product-original-price"
               >
-                {(() => {
-                  const price = convertToLocale({
-                    amount: originalPrice,
-                    currency_code: currencyCode,
-                  });
-                  if (currencyCode?.toLowerCase() === "czk") {
-                    return price.replace(/czk/i, "") + ",-";
-                  }
-                  return price;
-                })()}
+                {convertToLocale({ amount: originalPrice, currency_code: currencyCode })}
               </span>
             </p>
             {style === "default" && (
@@ -58,16 +49,7 @@ const LineItemPrice = ({
           })}
           data-testid="product-price"
         >
-          {(() => {
-            const price = convertToLocale({
-              amount: currentPrice,
-              currency_code: currencyCode,
-            });
-            if (currencyCode?.toLowerCase() === "czk") {
-              return price.replace(/czk/i, "") + ",-";
-            }
-            return price;
-          })()}
+          {convertToLocale({ amount: currentPrice, currency_code: currencyCode })}
         </span>
       </div>
     </div>

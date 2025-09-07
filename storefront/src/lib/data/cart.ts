@@ -366,12 +366,15 @@ export async function applyPromotions(codes: string[]) {
 
   return sdk.store.cart
     .update(cartId, { promo_codes: codes }, {}, headers)
-    .then(async () => {
+    .then(async ({ cart }) => {
       const cartCacheTag = await getCacheTag("carts")
       if (cartCacheTag) revalidateTag(cartCacheTag)
 
       const fulfillmentCacheTag = await getCacheTag("fulfillment")
       if (fulfillmentCacheTag) revalidateTag(fulfillmentCacheTag)
+
+      // return the updated cart so callers can inspect applied promotions
+      return cart
     })
     .catch(medusaError)
 }
@@ -425,7 +428,16 @@ export async function submitPromotionForm(
 ) {
   const code = formData.get("code") as string
   try {
-    await applyPromotions([code])
+    const cart = await applyPromotions([code])
+
+    // If the backend accepted the update but did not apply a promotion for the
+    // provided code, surface a user-friendly message so the UI can show it.
+    if (cart) {
+      const found = (cart.promotions || []).some((p: any) => p.code === code)
+      if (!found) {
+        return "Slevový kód není platný." // Czech: "Promotion code is not valid."
+      }
+    }
   } catch (e: any) {
     return e.message
   }

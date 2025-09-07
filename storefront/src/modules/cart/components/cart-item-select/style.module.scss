@@ -1,5 +1,8 @@
 .root {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
 
   .badge {
     position: relative;
@@ -9,6 +12,7 @@
     line-height: 1.25rem;
     border: 1px solid currentColor; /* matches original border */
     color: var(--ui-fg-base, #111827);
+    width: fit-content;
 
     &.placeholder {
       color: var(--ui-fg-subtle, #6b7280);
@@ -18,11 +22,11 @@
       appearance: none;
       background: transparent;
       border: none;
-      padding-left: 1rem; /* px-4 */
-      padding-right: 1rem;
+      padding-left: 0.5rem; /* px-4 */
+      padding-right: 0.5rem;
       transition: color 150ms ease-in-out;
       outline: none;
-      width: 4rem; /* w-16 */
+      width: 2.5rem; /* w-16 */
       height: 4rem; /* h-16 */
       display: inline-flex;
       align-items: center;

@@ -79,7 +79,7 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
               data-testid="product-delete-button" 
               bundle_id={item.metadata?.bundle_id as string}
             >
-                {item.metadata?.bundle_id !== undefined ? "Remove bundle" : "Remove"}
+                {item.metadata?.bundle_id !== undefined ? "Odebrat Balíček" : "Odebrat"}
             </DeleteButton>
             <CartItemSelect
               value={item.quantity}

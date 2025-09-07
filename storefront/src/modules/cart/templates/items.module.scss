@@ -1,3 +1,4 @@
+@use "../../../styles/mixins.scss" as *;
 
 /* Items table styles */
 .root {
@@ -11,41 +12,107 @@
     .title {
       font-size: 2rem;
       line-height: 2.75rem;
-      font-weight: 700;
+      font-weight: 400;
+      font-family: "Sansation-Light";
+
+      @include respond-to-h(lg){
+        font-size: 1.8rem;
+        line-height: 2rem;
+      }
+      @include respond-to-h(md){
+        font-size: 1.8rem;
+        line-height: 2rem;
+      }
+      @include respond-to-h(mdt){
+        font-size: 1.8rem;
+        line-height: 2rem;
+      }
     }
   }
 
   .tableHeader {
+    /* Prevent default table header grouping so padding and widths apply */
+    display: block;
     border-top: 0; /* border-t-0 */
+    position: relative;
 
     .tableHeaderRow {
+      /* switch the row to flex so th cells become flex items and respond to padding/width */
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       color: var(--ui-fg-subtle, #6b7280);
       font-weight: 600; /* txt-medium-plus approx */
+      width: 100%;
+      padding: 0 1rem 0 2rem;
 
       .colItem {
         padding-left: 0 !important; /* !pl-0 */
+        padding-right: 0 !important; /* !pr-0 */
+        width: 4rem;
+        flex: 0 0 4rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        @include respond-to-h(xxs){
+          width: 3rem;
+        }
       }
 
       .colSpacer {
-        width: 1%;
+        padding-right: 0 !important; /* !pr-0 */
+        width: 18rem;
+        flex: 0 0 18rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        @include respond-to-h(xxs){
+          width: 12rem;
+          flex: 0 0 12rem;
+        }
       }
 
       .colQty {
+        padding-right: 0 !important; /* !pr-0 */
         text-align: left;
+        width: 12rem;
+        flex: 0 0 12rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        @include respond-to-h(xxs){
+          width: 8rem;
+          flex: 0 0 8rem;
+        }
       }
 
       .colPrice {
+        padding-right: 1rem; /* !pr-0 */
         text-align: left;
+        width: 4rem;
+        flex: 0 0 4rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
 
       .colTotal {
         padding-right: 0 !important; /* !pr-0 */
         text-align: right;
+        width: 4rem;
+        flex: 0 0 4rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
     }
   }
 
   .tableBody {
-    
+    /* make tbody block so rows align under the header flex layout */
+    display: block;
   }
 }

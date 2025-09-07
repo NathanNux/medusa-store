@@ -28,7 +28,7 @@ const CartDropdown = ({
 }: {
   cart?: HttpTypes.StoreCart | null
 }) => {
-  const [activeTimer, setActiveTimer] = useState<NodeJS.Timer | undefined>(
+  const [activeTimer, setActiveTimer] = useState<ReturnType<typeof setTimeout> | undefined>(
     undefined
   )
   const [cartDropdownOpen, setCartDropdownOpen] = useState(false)
@@ -198,16 +198,10 @@ const CartDropdown = ({
                       data-testid="cart-subtotal"
                       data-value={subtotal}
                     >
-                      {(() => {
-                        const price = convertToLocale({
-                          amount: subtotal,
-                          currency_code: cartState.currency_code,
-                        });
-                        if (cartState.currency_code?.toLowerCase() === "czk") {
-                          return price.replace(/czk/i, "") + ",-";
-                        }
-                        return price;
-                      })()}
+                      {convertToLocale({
+                        amount: subtotal,
+                        currency_code: cartState.currency_code,
+                      })}
                     </span>
                   </div>
                   <LocalizedClientLink href="/cart" passHref>
