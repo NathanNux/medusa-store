@@ -2,82 +2,71 @@ import type { MedusaRequest, MedusaResponse } from "@medusajs/framework/http"
 import { Modules } from "@medusajs/framework/utils"
 
 export const POST = async (req: MedusaRequest, res: MedusaResponse) => {
-<<<<<<< Updated upstream
   const { token, email } = req.body as { token: string; email: string }
 
   console.log("[VERIFY EMAIL] Incoming request:", { token, email })
 
-    if (!token || !email) {
-      res.status(400).json({ ok: false, message: "Missing token or email." })
-      return
-    }
-    if (!token || !email) {
-      res.status(400).json({ ok: false, message: "Missing token or email." })
-      return
-    }
+  if (!token || !email) {
+    console.log("[VERIFY EMAIL] Missing token or email.")
+    res.status(400).json({ message: "Missing token or email." })
+    return
+  }
 
   const customerModuleService = req.scope.resolve(Modules.CUSTOMER)
   let customer = null as any
-=======
->>>>>>> Stashed changes
   try {
-    const { token, email } = req.body as { token?: string; email?: string }
-
-    if (!token || !email) {
-      res.status(400).json({ ok: false, message: "Missing token or email." })
-      return
-    }
-
-    const customerModuleService = req.scope.resolve(Modules.CUSTOMER)
-
-    // Find customer by email
     const customers = await customerModuleService.listCustomers({ email })
-    const customer = customers[0] || null
+    customer = customers[0] || null
+    console.log("[VERIFY EMAIL] Retrieved customer:", customer)
+  } catch (err) {
+    console.log("[VERIFY EMAIL] Error retrieving customer:", err)
+    customer = null
+  }
 
-    if (!customer) {
-      res.status(404).json({ ok: false, message: "Customer not found." })
-      return
-    }
+  if (!customer || !customer.metadata?.email_verification_token) {
+    console.log("[VERIFY EMAIL] No customer or missing verification token.", {
+      customer,
+    })
+    res.status(404).json({ message: "Invalid token or email." })
+    return
+  }
 
-<<<<<<< Updated upstream
   const tokenMatches = customer.metadata.email_verification_token === token
   const expiresAt = customer.metadata.email_verification_expires_at
   const isExpired = expiresAt && new Date(expiresAt) < new Date()
-=======
-    const storedToken = customer.metadata?.email_verification_token
-    const expiresAt = customer.metadata?.email_verification_expires_at as string | undefined
->>>>>>> Stashed changes
 
-    if (!storedToken || storedToken !== token) {
-      res.status(400).json({ ok: false, message: "Invalid verification token." })
-      return
-    }
+  console.log("[VERIFY EMAIL] Token matches:", tokenMatches)
+  console.log("[VERIFY EMAIL] Token expires at:", expiresAt, "Is expired:", isExpired)
 
-    if (!expiresAt || new Date(expiresAt).getTime() < Date.now()) {
-      res.status(400).json({ ok: false, message: "Verification token has expired." })
-      return
-    }
+  if (!tokenMatches || isExpired) {
+    console.log("[VERIFY EMAIL] Invalid or expired token.", {
+      tokenMatches,
+      isExpired,
+      customerToken: customer.metadata.email_verification_token,
+      providedToken: token,
+      expiresAt,
+    })
+    res.status(400).json({ message: "Invalid or expired token." })
+    return
+  }
 
-    // Update customer metadata: mark verified and remove token/expiry
-    const newMetadata: Record<string, any> = {
-      ...(customer.metadata || {}),
-      email_verified: true,
-    }
-
-    // Remove token and expiry fields if present
-    delete newMetadata.email_verification_token
-    delete newMetadata.email_verification_expires_at
-
-<<<<<<< Updated upstream
   try {
     // preserve other metadata keys
-=======
->>>>>>> Stashed changes
     await customerModuleService.updateCustomers(customer.id, {
-      metadata: newMetadata,
+      metadata: {
+        ...customer.metadata,
+        email_verified: true,
+        email_verification_token: null,
+        email_verification_expires_at: null,
+      },
     })
+    console.log("[VERIFY EMAIL] Email verified and customer updated:", customer.id)
+  } catch (err) {
+    console.log("[VERIFY EMAIL] Error updating customer:", err)
+    res.status(500).json({ message: "Failed to update customer." })
+    return
+  }
 
-<<<<<<< Updated upstream
   // retrieve updated customer to return to client
   let updatedCustomer = null
   try {
@@ -89,11 +78,3 @@ export const POST = async (req: MedusaRequest, res: MedusaResponse) => {
 
   res.status(200).json({ ok: true, message: "Email verified successfully.", customer: updatedCustomer })
   }
-=======
-    res.status(200).json({ ok: true, message: "Email verified." })
-  } catch (err) {
-    console.error("Error in verify-email route:", err)
-    res.status(500).json({ ok: false, message: "Internal server error." })
-  }
-}
->>>>>>> Stashed changes

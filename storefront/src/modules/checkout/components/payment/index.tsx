@@ -4,7 +4,7 @@ import { RadioGroup } from "@headlessui/react"
 import { isStripe as isStripeFunc, paymentInfoMap, isComgate } from "@lib/constants"
 import { initiatePaymentSession, initComgateMetadata } from "@lib/data/cart"
 import { CheckCircleSolid, CreditCard } from "@medusajs/icons"
-import { Button, Container, Heading, Text, clx } from "@medusajs/ui"
+import { Container, Text, clx } from "@medusajs/ui"
 import ErrorMessage from "@modules/checkout/components/error-message"
 import PaymentContainer, {
   StripeCardContainer,
@@ -234,35 +234,35 @@ const Payment = ({
   }, [isOpen])
 
   useEffect(() => {
-  const listener = (event: MessageEvent) => {
-    if (!event?.data) return;
+    const listener = (event: MessageEvent) => {
+      if (!event?.data) return;
 
-    const { scope, action, value } = event.data;
+      const { scope, action, value } = event.data;
 
-    if (
-      scope === "comgate-to-eshop" &&
-      action === "status" &&
-      value?.status
-    ) {
-      const { status, id, refId } = value;
+      if (
+        scope === "comgate-to-eshop" &&
+        action === "status" &&
+        value?.status
+      ) {
+        const { status, id, refId } = value;
 
-      if (["PAID", "AUTHORIZED"].includes(status)) {
-        // Např. rovnou zavoláš placeOrder()
-        handleSubmit()
-          .then(() => {
-            console.log("Order placed after Comgate payment")
-            // třeba redirect na thank you page
-          })
-          .catch(console.error);
-      } else if (status === "CANCELLED") {
-        // zobrazíš chybovou hlášku nebo zavřeš iframe
+        if (["PAID", "AUTHORIZED"].includes(status)) {
+          // Např. rovnou zavoláš placeOrder()
+          handleSubmit()
+            .then(() => {
+              console.log("Order placed after Comgate payment")
+              // třeba redirect na thank you page
+            })
+            .catch(console.error);
+        } else if (status === "CANCELLED") {
+          // zobrazíš chybovou hlášku nebo zavřeš iframe
+        }
       }
     }
-  }
 
-  window.addEventListener("message", listener)
-  return () => window.removeEventListener("message", listener)
-}, [])
+    window.addEventListener("message", listener)
+    return () => window.removeEventListener("message", listener)
+  }, [])
 
 
 

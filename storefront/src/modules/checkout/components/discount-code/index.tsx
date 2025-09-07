@@ -58,7 +58,6 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
     <div className={styles.root}>
       <div className={styles.content}>
         <form action={formAction} className={styles.form}>
-        <form action={formAction} className={styles.form}>
           <Label className={styles.label}>
             <ClickButton
               text="Zadat slevový kód(y)"
@@ -67,7 +66,6 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
               type="button"
               className={styles.toggleBtn}
               data-testid="add-discount-button"
-            />
             />
 
             {/* <Tooltip content="You can add multiple promotion codes">
@@ -89,12 +87,7 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
                 <ClickButton
                   text="Použít"
                   type="submit"
-                <ClickButton
-                  text="Použít"
-                  type="submit"
                   data-testid="discount-apply-button"
-                  className={styles.applyBtn}
-                />
                   className={styles.applyBtn}
                 />
               </div>
