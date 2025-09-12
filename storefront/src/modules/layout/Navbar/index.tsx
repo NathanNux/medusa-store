@@ -177,7 +177,7 @@ export default function Navbar({ cart, regions }: NavbarProps) {
                             </li>
                             <li>
                                 <Magnetic>
-                                    <LocalizedClientLink href="/account">
+                                    <LocalizedClientLink href="/account/wishlist">
                                         <Image 
                                             src="/assets/icons/bookmark.svg"
                                             alt="search Icon button"
@@ -323,7 +323,9 @@ export const  MobileIconsNavbar = ({ cart }: MobileIconsNavbarProps) => {
                                 </Suspense>
                             ) : (
                                 <LocalizedClientLink href={item.href} className={item.href === "/search" ? "Navbar__Icons__Search" : ""}>
-                                    {item.icon}
+                                    <Magnetic>
+                                        {item.icon}
+                                    </Magnetic>
                                 </LocalizedClientLink>
                             )}
                         </li>

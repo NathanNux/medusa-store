@@ -27,6 +27,7 @@ const CartDropdown = ({
 }: {
   cart?: HttpTypes.StoreCart | null
 }) => {
+  const pathaname = usePathname()
   const [activeTimer, setActiveTimer] = useState<ReturnType<typeof setTimeout> | undefined>(
     undefined
   )
@@ -189,6 +190,9 @@ const CartDropdown = ({
             static
             className={styles.popoverPanel}
             data-testid="nav-cart-dropdown"
+            style={{
+              right: pathaname.includes("/checkout") ? "0px" : "-200px",
+            }}
           >
             <div className={styles.panelHeader}>
               <h3>Košík</h3>

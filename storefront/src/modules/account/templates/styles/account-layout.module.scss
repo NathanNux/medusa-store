@@ -7,11 +7,12 @@
 	// small:py-12 and margin previously set via m-[5vh]
     overflow: hidden;
     max-width: 100%;
-	height: 100dvh;
+	min-height: 100dvh;
 	padding: 10dvh 2.5dvw;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	flex-direction: column;
 
 	@media (min-width: 768px) {
 		padding-top: 3rem; // py-12
@@ -19,441 +20,505 @@
 	}
 
 	@include respond-to-h(lg) {
-		height: 110dvh;
+		min-height: 110dvh;
 	}
 	@include respond-to-h(mdt) {
-		height: 120dvh;
+		min-height: 120dvh;
 	}
 	@include respond-to-h(md) {
-		height: 150dvh;
+		min-height: 150dvh;
 	}
 	@include respond-to-h(sm) {
-		height: 120dvh;
+		min-height: 120dvh;
 	}
 	@include respond-to-h(xs) {
-		height: 240dvh;
+		min-height: 240dvh;
 	}
 
 	@include respond-to-h(xxs) {
-		height: 240dvh;
+		min-height: 240dvh;
 	}
 
 	@include respond-to-v(lg) {
-		height: 80dvh;
+		min-height: 80dvh;
 	}
 	@include respond-to-v(md) {
-		height: 110dvh;
+		min-height: 110dvh;
 	}
 	@include respond-to-v(s) {
-		height: 130dvh;
+		min-height: 130dvh;
 	}
 	@include respond-to-v(sm) {
-		height: 140dvh;
+		min-height: 140dvh;
 	}
 	@include respond-to-v(xs) {
-		height: 180dvh;
-	}
-}
-
-.container {
-	// exact mapping of: flex-1 h-full max-w-5xl mx-auto pt-[2.5dvh] bg-white flex flex-col rounded-2xl content-container
-	flex: 1; // flex-1
-	width: 100%; // content-container w-full
-	height: 90%; // h-full
-	max-width: 70rem; // max-w-5xl overrides content-container
-	margin-left: auto; // mx-auto
-	margin-right: auto;
-	background: var(--WhiteBg); // bg-white
-	display: flex; // flex
-	flex-direction: column; // flex-col
-	border-radius: 25px !important;
-
-	// --- Horizontal (landscape) responsiveness ---
-	@include respond-to-h(huge) {
-		max-width: 70rem;
-		margin-top: 5dvh;
-	}
-
-	@include respond-to-h(xl) {
-		max-width: 66rem;
-		margin-top: 5dvh;
-	}
-
-	@include respond-to-h(lg) {
-		max-width: 60rem;
-		margin-top: 5dvh;
-	}
-	@include respond-to-h(md) {
-		max-width: 56rem;
-		height: 90%;
-		margin-top: 5dvh;
-	}
-	@include respond-to-h(mdt) {
-		max-width: 56rem; 
-		height: 80%;
-		margin-top: 5dvh;
+		min-height: 180dvh;
 	}
 
 
-	@include respond-to-h(sm) {
-		max-width: 50rem;
-		height: 100%;
-		margin-top: 5dvh;
-	}
+	.container {
+		// exact mapping of: flex-1 h-full max-w-5xl mx-auto pt-[2.5dvh] bg-white flex flex-col rounded-2xl content-container
+		flex: 1; // flex-1
+		width: 100%; // content-container w-full
+		height: 90%; // h-full
+		max-width: 70rem; // max-w-5xl overrides content-container
+		background: var(--WhiteBg); // bg-white
+		display: flex; // flex
+		flex-direction: column; // flex-col
+		border-radius: 25px 25px 0 0;
 
-	@include respond-to-h(xs) {
-		max-width: 40rem;
-		margin-top: 5dvh;
-		height: 100%;
-	}
+		// --- Horizontal (landscape) responsiveness ---
+		@include respond-to-h(huge) {
+			max-width: 80vw;
+			margin-top: 5dvh;
+		}
 
-	@include respond-to-h(xxs) {
-		max-width: 32rem;
-		margin-top: 5dvh;
-		height: 100%;
-	}
+		@include respond-to-h(xl) {
+			max-width: 80vw;
+			margin-top: 5dvh;
+		}
 
-	// --- Vertical (portrait) responsiveness ---
-	@include respond-to-v(lg) {
-		max-width: 44rem;
-	}
-	@include respond-to-v(md) {
-		max-width: 40rem;
-	}
-
-
-	@include respond-to-v(s) {
-		max-width: 52rem;
-		padding: 0 2.5dvw;
-	}
-
-	@include respond-to-v(sm) {
-		max-width: 44rem;
-	}
-
-	@include respond-to-v(xs) {
-		max-width: 36rem;
-	}
-}
-
-.verifiedGrid {
-	display: grid;
-	grid-template-columns: 1fr;
-	padding-top: 3rem; // py-12
-	padding-bottom: 3rem;
-
-	@media (min-width: 768px) {
-		// small:grid-cols-[240px_1fr]
-		grid-template-columns: 240px 1fr;
-	}
-
-	// --- Horizontal (landscape) responsiveness ---
-	@include respond-to-h(huge) {
-		padding-top: 4rem;
-		padding-bottom: 4rem;
-	}
-
-	@include respond-to-h(lg) {
-		grid-template-columns: 260px 1fr;
-	}
-
-	@include respond-to-h(md) {
-		grid-template-columns: 240px 1fr;
-		padding-top: 3rem;
-		padding-bottom: 3rem;
-	}
-
-	@include respond-to-h(mdt) {
-		grid-template-columns: 240px 1fr;
-	}
-
-	@include respond-to-h(xxs) {
-		grid-template-columns: 1fr;
-		gap: 1.5rem;
-		padding-top: 2rem;
-		padding-bottom: 2rem;
-	}
-
-	// --- Vertical (portrait) responsiveness ---
-	@include respond-to-v(lg) {
-		grid-template-columns: 280px 1fr;
-	}
-
-	@include respond-to-v(md) {
-		grid-template-columns: 260px 1fr;
-	}
-
-	@include respond-to-v(s) {
-		grid-template-columns: 220px 1fr;
-	}
-
-	@include respond-to-v(sm) {
-		grid-template-columns: 1fr;
-		gap: 1.25rem;
-	}
-	@include respond-to-v(xs) {
-		grid-template-columns: 1fr;
-		gap: 1.25rem;
-	}
-}
-
-.children {
-	flex: 1;
-}
-
-.center {
-	display: flex;
-	width: 100%;
-	height: 80%;
-	align-items: center;
-	justify-content: center;
-
-	@include respond-to-h(lg) {
-		height: 80%;
-	}
-}
-
-.centerZ1 {
-	display: flex;
-	width: 100%;
-	height: 80%;
-	align-items: center;
-	justify-content: center;
-	z-index: 1; // z-1
-}
-
-.footer {
-	position: relative; // to allow layering if needed
-	z-index: 2; // preserve z-2 intent
-	display: flex;
-	flex-direction: row;
-	align-items: flex-end;
-	justify-content: space-between;
-	gap: 2rem; // gap-8
-	border-top: none;
-    background-color: var(--WhiteBg);
-    border-radius: 0 0 25px 25px;
-    padding: 3rem 2.5dvw 3rem 2.5dvw;
-
-	@include respond-to-h(lg){
-		padding: 2rem 2.5dvw;
-	}
-	@include respond-to-h(mdt){
-		padding: 1.5rem 2.5dvw;
-	}
-	@include respond-to-h(md){
-		padding: 1rem 2.5dvw;
-	}
-	@include respond-to-h(sm){
-		padding: 1rem 2.5dvw;
-	}
-	@include respond-to-h(xs){
-		padding: 1rem 2.5dvw;
-		gap: 1rem;
-	}
-	@include respond-to-h(xxs){
-		padding: 0.5rem 0.5dvw;
-		gap: 1rem;
-	}
+		@include respond-to-h(lg) {
+			max-width: 80vw;
+			margin-top: 5dvh;
+		}
+		@include respond-to-h(md) {
+			max-width: 80vw;
+			height: 90%;
+			margin-top: 5dvh;
+		}
+		@include respond-to-h(mdt) {
+			max-width: 80vw;
+			height: 80%;
+			margin-top: 5dvh;
+		}
 
 
-	@include respond-to-v(s){
-		padding: 2rem 2.5dvw;
-		gap: 1rem;
-	}
-	@include respond-to-v(sm){
-		padding: 1rem 2.5dvw;
-		gap: 1rem;
-	}
-	@include respond-to-v(xs){
-		padding: 1rem 2.5dvw;
-		gap: 1rem;
-	}
+		@include respond-to-h(sm) {
+			max-width: 80vw;
+			height: 100%;
+			margin-top: 5dvh;
+		}
 
-    .text{
-        width: 70%;
-        height: auto;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: center;
-        gap: 1rem;
+		@include respond-to-h(xs) {
+			max-width: 80vw;
+			margin-top: 5dvh;
+			height: 100%;
+		}
 
+		@include respond-to-h(xxs) {
+			max-width: 80vw;
+			margin-top: 5dvh;
+			height: 100%;
+		}
+
+		// --- Vertical (portrait) responsiveness ---
+		@include respond-to-v(lg) {
+			max-width: 80vw;
+		}
+		@include respond-to-v(md) {
+			max-width: 80vw;
+		}
+
+
+		@include respond-to-v(s) {
+			max-width: 90vw;
+			padding: 0 2.5dvw;
+		}
+
+		@include respond-to-v(sm) {
+			max-width: 90vw;
+		}
+
+		@include respond-to-v(xs) {
+			max-width: 90vw;
+		}
+
+		.verifiedGrid {
+			display: grid;
+			grid-template-columns: 1fr;
+			width: 100%;
+			height: 100%;
+
+			@media (min-width: 768px) {
+				// small:grid-cols-[240px_1fr]
+				grid-template-columns: 240px 1fr;
+			}
+
+			// --- Horizontal (landscape) responsiveness ---
+			@include respond-to-h(huge) {
+				padding-top: 4rem;
+				padding-bottom: 4rem;
+			}
+
+			@include respond-to-h(lg) {
+				grid-template-columns: 260px 1fr;
+			}
+
+			@include respond-to-h(md) {
+				grid-template-columns: 240px 1fr;
+				padding-top: 3rem;
+				padding-bottom: 3rem;
+			}
+
+			@include respond-to-h(mdt) {
+				grid-template-columns: 240px 1fr;
+			}
+
+			@include respond-to-h(xxs) {
+				grid-template-columns: 1fr;
+				gap: 1.5rem;
+				padding-top: 2rem;
+				padding-bottom: 2rem;
+			}
+
+			// --- Vertical (portrait) responsiveness ---
+			@include respond-to-v(lg) {
+				grid-template-columns: 280px 1fr;
+			}
+
+			@include respond-to-v(md) {
+				grid-template-columns: 260px 1fr;
+			}
+
+			@include respond-to-v(s) {
+				grid-template-columns: 220px 1fr;
+			}
+
+			@include respond-to-v(sm) {
+				grid-template-columns: 1fr;
+				gap: 1.25rem;
+			}
+			@include respond-to-v(xs) {
+				grid-template-columns: 1fr;
+				gap: 1.25rem;
+			}
+
+			.nav{
+				padding: 5vh 2.5vw;
+				width: 100%;
+				height: 100%;
+				border-right: 1px solid var(--border, #e5e7eb); // border-gray-200
+			}
+			.children {
+				flex: 1;
+			}
+		}
+
+		.center {
+			display: flex;
+			width: 100%;
+			height: 80%;
+			align-items: center;
+			justify-content: center;
+			margin-top: 5dvh;
+
+			@include respond-to-h(lg) {
+				height: 80%;
+			}
+		}
+
+		.centerZ1 {
+			display: flex;
+			width: 100%;
+			height: 80%;
+			align-items: center;
+			justify-content: center;
+			z-index: 1; // z-1
+		}
+	}
+	.footer {
+		position: relative; // to allow layering if needed
+		z-index: 2; // preserve z-2 intent
+		display: flex;
+		flex-direction: row;
+		align-items: flex-end;
+		justify-content: space-between;
+		gap: 2rem; // gap-8
+		border-top: none;
+		background-color: var(--WhiteBg);
+		border-radius: 0 0 25px 25px;
+		padding: 3rem 2.5dvw 3rem 2.5dvw;
+		width: 100%;
+		// --- Horizontal (landscape) responsiveness ---
+		@include respond-to-h(huge) {
+			max-width: 80vw;
+		}
+
+		@include respond-to-h(xl) {
+			max-width: 80vw;
+		}
+
+		@include respond-to-h(lg) {
+			max-width: 80vw;
+		}
+		@include respond-to-h(md) {
+			max-width: 80vw;
+			height: 90%;
+		}
+		@include respond-to-h(mdt) {
+			max-width: 80vw;
+			height: 80%;
+		}
+
+
+		@include respond-to-h(sm) {
+			max-width: 80vw;
+			height: 100%;
+		}
+
+		@include respond-to-h(xs) {
+			max-width: 80vw;
+			height: 100%;
+		}
+
+		@include respond-to-h(xxs) {
+			max-width: 80vw;
+			height: 100%;
+		}
+
+		// --- Vertical (portrait) responsiveness ---
+		@include respond-to-v(lg) {
+			max-width: 80vw;
+		}
+		@include respond-to-v(md) {
+			max-width: 80vw;
+		}
+
+
+		@include respond-to-v(s) {
+			max-width: 90vw;
+			padding: 0 2.5dvw;
+		}
+
+		@include respond-to-v(sm) {
+			max-width: 90vw;
+		}
+
+		@include respond-to-v(xs) {
+			max-width: 90vw;
+		}
+
+		@include respond-to-h(lg){
+			padding: 2rem 2.5dvw;
+		}
+		@include respond-to-h(mdt){
+			padding: 1.5rem 2.5dvw;
+		}
+		@include respond-to-h(md){
+			padding: 1rem 2.5dvw;
+		}
 		@include respond-to-h(sm){
-			width: 80%;
+			padding: 1rem 2.5dvw;
 		}
 		@include respond-to-h(xs){
-			width: 90%;
-			gap: 0.25rem;
+			padding: 1rem 2.5dvw;
+			gap: 1rem;
 		}
 		@include respond-to-h(xxs){
-			width: 100%;
-			gap: 0.25rem;
+			padding: 0.5rem 0.5dvw;
+			gap: 1rem;
 		}
 
-        .title{
-            font-size: 2rem;
-            font-weight: 300;
-            font-family: "Sansation-regular";
-            margin: 0;
-            color: var(--ChText);
 
-			// --- Responsive typography ---
-			@include respond-to-h(huge) {
-				font-size: 2rem !important;
+		@include respond-to-v(s){
+			padding: 2rem 2.5dvw;
+			gap: 1rem;
+		}
+		@include respond-to-v(sm){
+			padding: 1rem 2.5dvw;
+			gap: 1rem;
+		}
+		@include respond-to-v(xs){
+			padding: 1rem 2.5dvw;
+			gap: 1rem;
+		}
+
+		.text{
+			width: 70%;
+			height: auto;
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			justify-content: center;
+			gap: 1rem;
+
+			@include respond-to-h(sm){
+				width: 80%;
+			}
+			@include respond-to-h(xs){
+				width: 90%;
+				gap: 0.25rem;
+			}
+			@include respond-to-h(xxs){
+				width: 100%;
+				gap: 0.25rem;
 			}
 
-			@include respond-to-h(xl) {
-				font-size: 2rem !important;
+			.title{
+				font-size: 2rem;
+				font-weight: 300;
+				font-family: "Sansation-regular";
+				margin: 0;
+				color: var(--ChText);
+
+				// --- Responsive typography ---
+				@include respond-to-h(huge) {
+					font-size: 2rem !important;
+				}
+
+				@include respond-to-h(xl) {
+					font-size: 2rem !important;
+				}
+
+				@include respond-to-h(xs) {
+					font-size: 1.3rem !important;
+				}
+				@include respond-to-h(xxs) {
+					font-size: 1.3rem !important;
+				}
+
+				@include respond-to-v(s) {
+					font-size: 1.6rem;
+				}
+				@include respond-to-v(sm) {
+					font-size: 1.6rem;
+				}
+
+				@include respond-to-v(xs) {
+					font-size: 1.45rem;
+				}
 			}
 
-			@include respond-to-h(xs) {
-				font-size: 1.3rem !important;
-			}
-			@include respond-to-h(xxs) {
-				font-size: 1.3rem !important;
-			}
-
-			@include respond-to-v(s) {
-				font-size: 1.6rem;
-			}
-			@include respond-to-v(sm) {
-				font-size: 1.6rem;
-			}
-
-			@include respond-to-v(xs) {
-				font-size: 1.45rem;
-			}
-        }
-
-        .textSpan{
-            font-size: 1.1rem;
-            font-weight: 300;
-            font-family: "Sansation-light";
-            margin: 0;
-            color: var(--ChText);
-
-			// --- Responsive typography ---
-			@include respond-to-h(huge) {
+			.textSpan{
 				font-size: 1.1rem;
-			}
-			@include respond-to-h(xl) {
-				font-size: 1rem;
-			}
-			@include respond-to-h(lg) {
-				font-size: 1rem;
-			}
-			@include respond-to-h(md) {
-				font-size: 1rem;
-			}
-			@include respond-to-h(mdt) {
-				font-size: 1rem;
-			}
-			@include respond-to-h(sm) {
-				font-size: 0.9rem;
-			}
+				font-weight: 300;
+				font-family: "Sansation-light";
+				margin: 0;
+				color: var(--ChText);
 
-			@include respond-to-h(xs) {
-				font-size: 0.8rem !important;
-			}
-			@include respond-to-h(xxs) {
-				font-size: 0.8rem !important;
-			}
-
-			@include respond-to-v(s) {
-				font-size: 0.9rem !important;
-			}	
-			@include respond-to-v(sm) {
-				font-size: 0.9rem !important;
-			}	
-			@include respond-to-v(xs) {
-				font-size: 0.8rem !important;
-			}	
-        }
-
-
-    }
-
-    .Link{
-        width: 30%;
-        height: auto;
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        a{
-            font-size: 1.3rem;
-            font-weight: 300;
-            font-family: "Sansation-light";
-            color: var(--ChText);
-            text-decoration: underline;
-
-            p{
-                font-size: 1.3rem;
-                font-weight: 300;
-                font-family: "Sansation-light";
-                color: var(--ChText);
-
-				@include respond-to-h(md){
-					font-size: 1.2rem !important;
+				// --- Responsive typography ---
+				@include respond-to-h(huge) {
+					font-size: 1.1rem;
 				}
-				@include respond-to-h(sm){
-					font-size: 1.2rem !important;
+				@include respond-to-h(xl) {
+					font-size: 1rem;
 				}
-				@include respond-to-h(xs){
-					font-size: 1.1rem !important;
+				@include respond-to-h(lg) {
+					font-size: 1rem;
 				}
-				@include respond-to-h(xxs){
-					font-size: 1rem !important;
+				@include respond-to-h(md) {
+					font-size: 1rem;
+				}
+				@include respond-to-h(mdt) {
+					font-size: 1rem;
+				}
+				@include respond-to-h(sm) {
+					font-size: 0.9rem;
 				}
 
-				@include respond-to-v(md){
-					font-size: 1.2rem !important;
+				@include respond-to-h(xs) {
+					font-size: 0.8rem !important;
 				}
-				@include respond-to-v(s){
-					font-size: 1.1rem !important;
+				@include respond-to-h(xxs) {
+					font-size: 0.8rem !important;
 				}
-				@include respond-to-v(sm){
-					font-size: 1.1rem !important;
-				}
-				@include respond-to-v(xs){
-					font-size: 1rem !important;
-				}
-            }
-        }
-    }
 
-	@media (min-width: 768px) {
-		// small:flex-row
-		flex-direction: row;
-		border-top: 1px solid var(--border, #e5e7eb); // small:border-t border-gray-200
+				@include respond-to-v(s) {
+					font-size: 0.9rem !important;
+				}	
+				@include respond-to-v(sm) {
+					font-size: 0.9rem !important;
+				}	
+				@include respond-to-v(xs) {
+					font-size: 0.8rem !important;
+				}	
+			}
+
+
+		}
+
+		.Link{
+			width: 30%;
+			height: auto;
+			display: flex;
+			justify-content: flex-end;
+			align-items: center;
+			a{
+				font-size: 1.3rem;
+				font-weight: 300;
+				font-family: "Sansation-light";
+				color: var(--ChText);
+				text-decoration: underline;
+
+				p{
+					font-size: 1.3rem;
+					font-weight: 300;
+					font-family: "Sansation-light";
+					color: var(--ChText);
+
+					@include respond-to-h(md){
+						font-size: 1.2rem !important;
+					}
+					@include respond-to-h(sm){
+						font-size: 1.2rem !important;
+					}
+					@include respond-to-h(xs){
+						font-size: 1.1rem !important;
+					}
+					@include respond-to-h(xxs){
+						font-size: 1rem !important;
+					}
+
+					@include respond-to-v(md){
+						font-size: 1.2rem !important;
+					}
+					@include respond-to-v(s){
+						font-size: 1.1rem !important;
+					}
+					@include respond-to-v(sm){
+						font-size: 1.1rem !important;
+					}
+					@include respond-to-v(xs){
+						font-size: 1rem !important;
+					}
+				}
+			}
+		}
+
+		@media (min-width: 768px) {
+			// small:flex-row
+			flex-direction: row;
+			border-top: 1px solid var(--border, #e5e7eb); // small:border-t border-gray-200
+		}
+
+		// --- Horizontal (landscape) responsiveness ---
+		@include respond-to-h(huge) {
+			padding: 4rem 3dvw;
+			gap: 2.5rem;
+		}
+
+		@include respond-to-h(xl) {
+			padding: 3.5rem 3dvw;
+		}
+
+		@include respond-to-h(sm) {
+			padding: 3rem 2.5dvw;
+		}
+
+		@include respond-to-h(xxs) {
+			flex-direction: column;
+			gap: 1.5rem;
+			padding: 2rem 4dvw;
+			border-radius: 0 0 20px 20px;
+		}
+
+		// --- Vertical (portrait) responsiveness ---
+		@include respond-to-v(lg) {
+			padding: 3.5rem 3dvw;
+		}
+		
+
 	}
-
-	// --- Horizontal (landscape) responsiveness ---
-	@include respond-to-h(huge) {
-		padding: 4rem 3dvw;
-		gap: 2.5rem;
-	}
-
-	@include respond-to-h(xl) {
-		padding: 3.5rem 3dvw;
-	}
-
-	@include respond-to-h(sm) {
-		padding: 3rem 2.5dvw;
-	}
-
-	@include respond-to-h(xxs) {
-		flex-direction: column;
-		gap: 1.5rem;
-		padding: 2rem 4dvw;
-		border-radius: 0 0 20px 20px;
-	}
-
-	// --- Vertical (portrait) responsiveness ---
-	@include respond-to-v(lg) {
-		padding: 3.5rem 3dvw;
-	}
-	
-
 }
 

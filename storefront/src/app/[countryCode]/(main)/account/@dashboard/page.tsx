@@ -12,7 +12,12 @@ export const metadata: Metadata = {
 
 export default async function OverviewTemplate() {
   const customer = await retrieveCustomer().catch(() => null)
-  const orders = (await listOrders().catch(() => null)) || null
+  let orders = (await listOrders().catch(() => null)) || null
+
+  // If orders API failed but customer has orders, use customer orders
+  if (!orders && (customer as any)?.orders && (customer as any).orders.length > 0) {
+    orders = (customer as any).orders
+  }
 
   if (!customer) {
     notFound()

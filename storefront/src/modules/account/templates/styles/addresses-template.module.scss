@@ -1,0 +1,43 @@
+.content {
+    width: 100%;
+    min-height: 70dvh;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 2rem;
+    padding-bottom: 2.5dvh;
+
+    .header {
+      margin-bottom: 2rem;
+      display: flex;
+      flex-direction: column;
+      row-gap: 1rem;
+    }
+
+    .title {
+      font-size: 1.8rem;
+      line-height: 1.2;
+      font-weight: 300;
+      font-family: "Sansation-Light";
+      color: var(--ChText);
+    }
+
+    .desc {
+        // text-base-regular
+        font-size: 1.1rem;
+        line-height: 1.25rem;
+        color: var(--ChText);
+        font-weight: 300;
+        font-family: "Sansation-Light";
+        width: 70%;
+    }
+
+    .divider {
+		// w-full h-px bg-gray-200
+		width: 100%;
+		height: 1px;
+		background-color: var(--border, #e5e7eb);
+	}
+}

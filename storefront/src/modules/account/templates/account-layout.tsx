@@ -22,7 +22,7 @@ const AccountLayout: React.FC<AccountLayoutProps> = ({
       <div className={s.container}>
         {customer && isVerified && (
           <div className={s.verifiedGrid}>
-            <div>
+            <div className={s.nav}>
               <AccountNav customer={customer} />
             </div>
             <div className={s.children}>
@@ -46,19 +46,19 @@ const AccountLayout: React.FC<AccountLayoutProps> = ({
         </div>
         
        )}
-        <div className={s.footer}>
-          <div className={s.text}>
-            <h3 className={s.title}>Máte dotaz?</h3>
-            <span className={s.textSpan}>
-              Nejčastější dotazy a odpovědi najdete na naší stránce
-              zákaznického servisu.
-            </span>
-          </div>
-          <div className={s.Link}>
-            <UnderlineLink href="/customer-service">
-              Zákaznický servis
-            </UnderlineLink>
-          </div>
+      </div>
+      <div className={s.footer}>
+        <div className={s.text}>
+          <h3 className={s.title}>Máte dotaz?</h3>
+          <span className={s.textSpan}>
+            Nejčastější dotazy a odpovědi najdete na naší stránce
+            zákaznického servisu.
+          </span>
+        </div>
+        <div className={s.Link}>
+          <UnderlineLink href="/customer-service">
+            Zákaznický servis
+          </UnderlineLink>
         </div>
       </div>
     </div>

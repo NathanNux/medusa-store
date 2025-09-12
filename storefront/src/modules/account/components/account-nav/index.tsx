@@ -1,6 +1,6 @@
 "use client"
 
-import { Button, clx } from "@medusajs/ui"
+import { clx, Divider } from "@medusajs/ui"
 import styles from "./style.module.scss"
 import { ArrowRightOnRectangle } from "@medusajs/icons"
 import { useParams, usePathname } from "next/navigation"
@@ -14,6 +14,7 @@ import { HttpTypes } from "@medusajs/types"
 import { deleteAccount, signout } from "@lib/data/customer"
 import { useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
+import { useFormStatus } from "react-dom"
 
 const AccountNav = ({
   customer,
@@ -111,10 +112,11 @@ const AccountNav = ({
           </>
         )}
       </div>
-  <div className={styles.desktopNav} data-testid="account-nav">
+      <div className={styles.desktopNav} data-testid="account-nav">
         <div className={styles.container}>
           <div className={styles.header}>
             <h3>Account</h3>
+            <Divider />
           </div>
           <div className={styles.navList}>
             <ul>
@@ -123,62 +125,70 @@ const AccountNav = ({
                   href="/account"
                   route={route!}
                   data-testid="overview-link"
-                  className={styles.overviewLink}
-                >
-                  Přehled
-                </AccountNavLink>
+                  className={styles.Link}
+                  text="Přehled"
+                />
               </li>
               <li>
                 <AccountNavLink
                   href="/account/profile"
                   route={route!}
                   data-testid="profile-link"
-                  className={styles.profileLink}
-                >
-                  Profil
-                </AccountNavLink>
+                  className={styles.Link}
+                  text="Nastavení"
+                />
               </li>
               <li>
                 <AccountNavLink
                   href="/account/addresses"
                   route={route!}
                   data-testid="addresses-link"
-                  className={styles.addressesLink}
-                >
-                  Adresy
-                </AccountNavLink>
+                  className={styles.Link}
+                  text="Adresy"
+                />
               </li>
               <li>
                 <AccountNavLink
                   href="/account/orders"
                   route={route!}
                   data-testid="orders-link"
-                  className={styles.ordersLink}
-                >
-                  Objednávky
-                </AccountNavLink>
+                  className={styles.Link}
+                  text="Objednávky"
+                />
               </li>
               <li>
-                <Button
-                  type="button"
-                  onClick={handleLogout}
-                  variant="primary"
-                  data-testid="logout-button"
-                  className={styles.logoutBtn}
-                >
-                  Odhlásit se
-                </Button>
+                <AccountNavLink
+                  href="/account/reviews"
+                  route={route!}
+                  data-testid="reviews-link"
+                  className={styles.Link}
+                  text="Recenze"
+                />
               </li>
               <li>
-                <Button
-                  type="button"
-                  onClick={() => setOpenModal(true)}
-                  variant="danger"
+                <AccountNavLink
+                  href="/account/wishlist"
+                  route={route!}
+                  data-testid="wishlist-link"
+                  className={styles.Link}
+                  text="Seznam přání"
+                />
+              </li>
+              <li>
+                <ClickButton
+                    text="Odhlásit se"
+                    onClickAction={handleLogout}
+                    data-testid="logout-button"
+                    className={styles.logoutBtn}
+                  />
+              </li>
+              <li>
+                <ClickButton
+                  text="Smazat účet"
+                  onClickAction={() => setOpenModal(true)}
                   data-testid="delete-account-button"
                   className={styles.deleteAccountBtn}
-                >
-                  Smazat účet
-                </Button>
+                />
                 <AnimatePresence mode="wait">
                   {openModal && (
                     <motion.div
@@ -208,7 +218,7 @@ const AccountNav = ({
 type AccountNavLinkProps = {
   href: string
   route: string
-  children: React.ReactNode
+  text: string
   "data-testid"?: string
   className?: string
 }
@@ -232,20 +242,16 @@ const Modal = ({
         <h2>Smazat účet</h2>
         <p>Opravdu chcete smazat svůj účet? Tuto akci nelze vrátit zpět.</p>
         <div className={styles.modalActions}>
-          <Button
-            onClick={handleDeleteAccount}
-            variant="danger"
-            className={styles.deleteBtn}
-          >
-            Smazat účet
-          </Button>
-          <Button
-            onClick={() => setIsOpen(false)}
-            variant="secondary"
+          <ClickButton
+            text="Zrušit"
+            onClickAction={() => setIsOpen(false)}
             className={styles.cancelBtn}
-          >
-            Zrušit
-          </Button>
+          />
+          <ClickButton
+            text="Smazat účet"
+            onClickAction={handleDeleteAccount}
+            className={styles.deleteBtn}
+          />
         </div>
       </div>
     </div>
@@ -255,24 +261,153 @@ const Modal = ({
 const AccountNavLink = ({
   href,
   route,
-  children,
+  text,
   "data-testid": dataTestId,
   className,
 }: AccountNavLinkProps) => {
   const { countryCode }: { countryCode: string } = useParams()
 
   const active = route.split(countryCode)[1] === href
+  // ensure CSS module active class is added so `.ScrollLink.active` rules match
   return (
-    <LocalizedClientLink
+    <ScrollLink
       href={href}
-      className={clx(className, "text-ui-fg-subtle hover:text-ui-fg-base", {
-        "text-ui-fg-base font-semibold": active,
-      })}
+      text={text}
+      className={clx(className, active && styles.active)}
       data-testid={dataTestId}
-    >
-      {children}
-    </LocalizedClientLink>
+    />
   )
 }
 
 export default AccountNav
+
+
+type ClickButtonProps = {
+    text: string;
+    onClickAction?: () => void | Promise<void>;
+    ClickAction?: () => void | Promise<void>; // backward compatibility
+    disabled?: boolean;
+    type?: "button" | "submit";
+    className?: string;
+    "data-testid"?: string;
+}
+
+// Base animated button used across the site. Can act as a submit button in forms.
+function ClickButton({ onClickAction, ClickAction, disabled = false, text, type = "button", className, "data-testid": dataTestId }: ClickButtonProps) {
+    const [ isActive , setIsActive ] = useState<boolean>(false);
+    const { pending } = useFormStatus();
+    const isSubmitting = type === "submit" ? pending : false;
+    const isDisabled = disabled || isSubmitting;
+    const handleClick = onClickAction ?? ClickAction;
+
+  return (
+    <div className={className ? `${styles.ClickButton} ${className}` : styles.ClickButton}>
+            <button
+              type={type}
+              className={styles.button}
+              onClick={handleClick}
+              disabled={isDisabled}
+              aria-busy={isDisabled || undefined}
+              onMouseEnter={() => setIsActive(true)}
+              onMouseLeave={() => setIsActive(false)}
+              data-testid={dataTestId}
+            >
+              <motion.div
+                className={styles.slider}
+                animate={{top: isActive ? "-100%" : "0%"}}
+                transition={{ duration: 0.5, type: "tween", ease: [0.76, 0, 0.24, 1]}}
+              >
+                  <div
+                    className={styles.el}
+                    style={{ backgroundColor: "var(--OButton)" }}
+                  >
+                    <PerspectiveText label={text}/>
+                  </div>
+                  <div
+                    className={styles.el}
+                    style={{ backgroundColor: "var(--CharcoalBg)" }}
+                  >
+                    <PerspectiveText label={text} />
+                  </div>
+              </motion.div>
+            </button>
+        </div>
+    )
+}
+
+function PerspectiveText({label}: {label: string}) {
+    return (    
+    <div className={styles.perspectiveText}>
+            <p>{label}</p>
+            <p>{label}</p>
+        </div>
+    )
+}
+
+
+
+function ScrollLink({
+  href,
+  text,
+  className,
+  textColor,
+  borderColor,
+  borderR = false,
+  borderL = false,
+  "data-testid": dataTestId,
+}: {
+  href: string;
+  text: string;
+  className?: string;
+  textColor?: string;
+  borderColor?: string;
+  borderR?: boolean;
+  borderL?: boolean;
+  "data-testid"?: string;
+}) {
+  return (
+    <LocalizedClientLink href={href} className={clx(styles.ScrollLink, className)} data-testid={dataTestId}
+      style={{
+      }}
+    >
+        <button 
+          className={styles.button}
+            style={{
+            textDecoration: "none",
+          }}
+        >
+            <div className={styles.slider}>
+                <div className={styles.el}>
+                    <PerspectiveText2 label={text} className={className} textColor={textColor}/>
+                </div>
+                <div className={styles.el}>
+                    <PerspectiveText2 label={text} className={className} textColor={textColor}/>
+                </div>
+            </div>
+        </button>
+    </LocalizedClientLink>
+  );
+}
+
+function PerspectiveText2({label, className, textColor}: {label: string; className?: string; textColor?: string}) {
+  return (    
+      <div className={styles.perspectiveText}>
+          <p 
+            className={className}
+            style={{
+              color: textColor || "var(--ChText)",
+            }}
+          >
+            {label}
+          </p>
+          <p 
+            className={className}
+            style={{
+              color: textColor || "var(--ChText)",
+            }}
+          >
+            {label}
+          </p>
+      </div>
+  )
+}

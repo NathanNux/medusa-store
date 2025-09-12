@@ -1,10 +1,11 @@
 import { Disclosure } from "@headlessui/react"
-import { Badge, Button, clx } from "@medusajs/ui"
+import { Badge, clx, Divider } from "@medusajs/ui"
 import s from "./style.module.scss"
 import { useEffect } from "react"
 
 import useToggleState from "@lib/hooks/use-toggle-state"
 import { useFormStatus } from "react-dom"
+import ClickButton from "../edit-button"
 
 type AccountInfoProps = {
   label: string
@@ -46,26 +47,27 @@ const AccountInfo = ({
     <div className={s.root} data-testid={dataTestid}>
       <div className={s.headerRow}>
         <div className={s.leftCol}>
-          <span className={s.labelUpper}>{label}</span>
-          <div className={s.rightInfoRow}>
-            {typeof currentInfo === "string" ? (
-              <span className={s.fontSemibold} data-testid="current-info">{currentInfo}</span>
-            ) : (
-              currentInfo
-            )}
+          <div className={s.leftColContent}>
+            <span className={s.labelUpper}>{label}:{" "}</span>
+            <div className={s.rightInfoRow}>
+              {typeof currentInfo === "string" ? (
+                <span className={s.fontSemibold} data-testid="current-info">{currentInfo}</span>
+              ) : (
+                currentInfo
+              )}
+            </div>
           </div>
+          <Divider />
         </div>
         <div>
-          <Button
-            variant="secondary"
+          <ClickButton
+            text={state ? "Cancel" : "Edit"}
+            onClickAction={handleToggle}
+            type={state ? "button" : "button"}
             className={s.editBtn}
-            onClick={handleToggle}
-            type={state ? "reset" : "button"}
+            active={state}
             data-testid="edit-button"
-            data-active={state}
-          >
-            {state ? "Cancel" : "Edit"}
-          </Button>
+          />
         </div>
       </div>
 
@@ -121,14 +123,13 @@ const AccountInfo = ({
           <div className={s.editContent}>
             <div>{children}</div>
             <div className={s.editActions}>
-              <Button
-                isLoading={pending}
-                className={s.saveBtn}
+              <ClickButton
+                text="Uložit změny"
                 type="submit"
+                disabled={pending}
+                className={s.saveBtn}
                 data-testid="save-button"
-              >
-                Uložit změny
-              </Button>
+              />
             </div>
           </div>
         </Disclosure.Panel>

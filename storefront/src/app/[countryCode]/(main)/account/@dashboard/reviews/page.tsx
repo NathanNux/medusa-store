@@ -3,6 +3,7 @@ import s from "../styles/profile.module.scss"
 import { notFound } from "next/navigation"
 import { retrieveCustomer } from "@lib/data/customer"
 import { cookies } from "next/headers"
+import BgImage from "@modules/account/components/BgImage"
 
 export const metadata: Metadata = {
   title: "My Reviews",
@@ -30,27 +31,30 @@ export default async function ReviewsPage() {
   const reviews = await getCustomerReviews(customer.id)
 
   return (
-    <div className={s.root}>
-      <div className={s.header}>
-        <h1 className={s.title}>My Reviews</h1>
-        <p className={s.desc}>All the reviews you’ve submitted.</p>
-      </div>
+    <main className={s.root}>
+      <div className={s.content} data-testid="reviews-page-wrapper">
+        <div className={s.header}>
+          <h1 className={s.title}>My Reviews</h1>
+          <p className={s.desc}>All the reviews you’ve submitted.</p>
+        </div>
 
-      <div className={s.body}>
-        {reviews.length === 0 ? (
-          <p>You haven’t written any reviews yet.</p>
-        ) : (
-          <ul>
-            {reviews.map((review: any) => (
-              <li key={review.id}>
-                <strong>{review.title}</strong> – {review.rating}/5
-                <br />
-                {review.content}
-              </li>
-            ))}
-          </ul>
-        )}
+        <div className={s.body}>
+          {reviews.length === 0 ? (
+            <p>You haven’t written any reviews yet.</p>
+          ) : (
+            <ul>
+              {reviews.map((review: any) => (
+                <li key={review.id}>
+                  <strong>{review.title}</strong> – {review.rating}/5
+                  <br />
+                  {review.content}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
       </div>
-    </div>
+      <BgImage src="/assets/img/img/2.jpg" />
+    </main>
   )
 }

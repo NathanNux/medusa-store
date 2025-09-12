@@ -3,6 +3,7 @@ import s from "../styles/profile.module.scss"
 import { notFound } from "next/navigation"
 import { retrieveCustomer } from "@lib/data/customer"
 import { cookies } from "next/headers"
+import BgImage from "@modules/account/components/BgImage"
 
 export const metadata: Metadata = {
   title: "Wishlist",
@@ -31,25 +32,28 @@ export default async function WishlistPage() {
   const wishlists = await getCustomerWishlists(customer.id)
 
   return (
-    <div className={s.root}>
-      <div className={s.header}>
-        <h1 className={s.title}>Wishlist</h1>
-        <p className={s.desc}>Products you’ve saved for later.</p>
-      </div>
+    <main className={s.root}>
+      <div className={s.content} data-testid="wishlist-page-wrapper">
+        <div className={s.header}>
+          <h1 className={s.title}>Wishlist</h1>
+          <p className={s.desc}>Products you’ve saved for later.</p>
+        </div>
 
-      <div className={s.body}>
-        {wishlists.length === 0 ? (
-          <p>No items in wishlist.</p>
-        ) : (
-          <ul>
-            {wishlists.map((item: any) => (
-              <li key={item.id}>
-                {item.product?.title ?? "Unknown product"}
-              </li>
-            ))}
-          </ul>
-        )}
+        <div className={s.body}>
+          {wishlists.length === 0 ? (
+            <p>No items in wishlist.</p>
+          ) : (
+            <ul>
+              {wishlists.map((item: any) => (
+                <li key={item.id}>
+                  {item.product?.title ?? "Unknown product"}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
       </div>
-    </div>
+      <BgImage src="/assets/img/img/2.jpg" />
+    </main>
   )
 }

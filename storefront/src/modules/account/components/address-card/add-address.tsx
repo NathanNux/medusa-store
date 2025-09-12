@@ -1,7 +1,7 @@
 "use client"
 
 import { Plus } from "@medusajs/icons"
-import { Button } from "@medusajs/ui"
+import { Button, Divider, Text } from "@medusajs/ui"
 import { useEffect, useState, useActionState } from "react"
 
 import useToggleState from "@lib/hooks/use-toggle-state"
@@ -49,14 +49,18 @@ const AddAddress = ({
 
   return (
     <>
-      <button
-        className={s.cardButton}
-        onClick={open}
-        data-testid="add-address-button"
-      >
-        <span className={s.newLabel}>Nová adresa</span>
-        <Plus />
-      </button>
+      <div className={s.addButtonContainer}>
+        <div className={s.addButton}>
+          <Text className={s.addressText}>Vaše adresy:</Text>
+          <ScrollButton
+            text="Nová adresa"
+            className={s.cardButton}
+            onClickAction={open}
+            data-testid="add-address-button"
+          />
+        </div>
+        <Divider />
+      </div>
 
       <Modal isOpen={state} close={close} data-testid="add-address-modal">
         <Modal.Title>
@@ -164,3 +168,65 @@ const AddAddress = ({
 }
 
 export default AddAddress
+
+
+function ScrollButton({
+  text,
+  className,
+  textColor,
+  "data-testid": dataTestId,
+  onClickAction
+}: {
+  text: string;
+  className?: string;
+  textColor?: string;
+  "data-testid"?: string;
+  onClickAction?: () => void | Promise<void>;
+}) {
+  return (
+    <div className={s.ScrollLink} data-testid={dataTestId}
+      onClick={onClickAction}
+    >
+        <button 
+          className={s.button}
+            style={{
+            textDecoration: "none",
+          }}
+        >
+            <div className={s.slider}>
+                <div className={s.el}>
+                    <PerspectiveText label={text} className={className} textColor={textColor}/>
+                </div>
+                <div className={s.el}>
+                    <PerspectiveText label={text} className={className} textColor={textColor}/>
+                </div>
+            </div>
+        </button>
+    </div>
+  );
+}
+
+function PerspectiveText({label, className, textColor}: {label: string; className?: string; textColor?: string}) {
+  return (    
+    <div className={s.perspectiveText}>
+        <p 
+          className={className}
+          style={{
+            color: textColor || "var(--ChText)",
+          }}
+        >
+          {label}
+          <Plus />
+        </p>
+        <p 
+          className={className}
+          style={{
+            color: textColor || "var(--Wtext)",
+          }}
+        >
+          {label}
+          <Plus />
+        </p>
+    </div>
+  )
+}
