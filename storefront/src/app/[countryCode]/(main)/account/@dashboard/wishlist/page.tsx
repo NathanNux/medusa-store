@@ -10,27 +10,41 @@ export const metadata: Metadata = {
   description: "Your saved products",
 }
 
-async function getCustomerWishlists(customerId: string) {
-  // volání na backend (musíš mít endpoint, co vrací wishlisty pro zákazníka)
-  const res = await fetch(
-  `${process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL}/store/customers/me/wishlists`,
-  { cache: "no-store", headers: { cookie: cookies().toString() } }
-)
+async function getCustomerWishlists(_customerId: string) {
+  const cookieStore = await cookies()
+  const token = cookieStore.get("_medusa_jwt")?.value
+  const pk = process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY
+  const headers: Record<string, string> = {
+    accept: "application/json",
+    "content-type": "application/json",
+    ...(pk ? { "x-publishable-api-key": pk, "x-publishable-key": pk } : {}),
+    cookie: cookieStore.toString(),
+  }
+  if (token) headers.authorization = `Bearer ${token}`
 
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL}/store/customers/me/wishlists`,
+    {
+      cache: "no-store",
+      headers,
+    }
+  )
 
   if (!res.ok) {
     return []
   }
   const data = await res.json()
-  return data.wishlists ?? []
+  // Backend returns { wishlist: {..., items: [...] } }
+  console.log("Wishlist data", data)
+  return data.wishlist?.items ?? []
 }
 
 export default async function WishlistPage() {
   const customer = await retrieveCustomer()
   if (!customer) notFound()
 
-  const wishlists = await getCustomerWishlists(customer.id)
-
+  const wishlistItems = await getCustomerWishlists(customer.id)
+  console.log("Fetched wishlist items", wishlistItems)
   return (
     <main className={s.root}>
       <div className={s.content} data-testid="wishlist-page-wrapper">
@@ -40,13 +54,13 @@ export default async function WishlistPage() {
         </div>
 
         <div className={s.body}>
-          {wishlists.length === 0 ? (
+          {wishlistItems.length === 0 ? (
             <p>No items in wishlist.</p>
           ) : (
             <ul>
-              {wishlists.map((item: any) => (
+              {wishlistItems.map((item: any) => (
                 <li key={item.id}>
-                  {item.product?.title ?? "Unknown product"}
+                  {item?.product_variant?.product?.title || item?.product_variant?.title || "Unknown product"}
                 </li>
               ))}
             </ul>

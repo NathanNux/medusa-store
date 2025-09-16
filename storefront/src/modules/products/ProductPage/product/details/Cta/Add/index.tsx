@@ -1,5 +1,6 @@
 import { HttpTypes } from "@medusajs/types";
 import Image from "next/image";
+import { toast } from "@medusajs/ui";
 import CartButton from "./button/cart-button";
 
 type CTAProps = {
@@ -25,7 +26,33 @@ export default function CTA({
   variant,
   product
 }: CTAProps) {
-    // WIP: Create new button that will accept variants to change the text and might even the colors, plus can be disabled. like the button bellow from medusa ui
+        // WIP: Create new button that will accept variants to change the text and might even the colors, plus can be disabled. like the button bellow from medusa ui
+
+        const addToWishlist = async () => {
+            try {
+                if (!selectedVariant?.id) {
+                    toast.error("Vyberte variantu pro wishlist")
+                    return
+                }
+                        const res = await fetch("/api/wishlist/items", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ variant_id: selectedVariant.id }),
+                })
+                        const data = await res.json()
+                        if (res.status === 401) {
+                            toast.error("Pro přidání do wishlistu se prosím přihlaste")
+                            return
+                        }
+                if (!res.ok || !data?.success) {
+                    toast.error(data?.message || "Nepodařilo se přidat do wishlistu")
+                    return
+                }
+                toast.success("Přidáno do wishlistu")
+            } catch (e: any) {
+                toast.error(e?.message || "Chyba při přidání do wishlistu")
+            }
+        }
     return (
         <div className="product__details__cta__buy">
             <div className="product__details__cta__buy__buttons">
@@ -35,7 +62,7 @@ export default function CTA({
                         alt="Add to Wishlist"
                         width={24}
                         height={24}
-                        // create a button that will add the product to wishlist - if there is any
+                                                onClick={addToWishlist}
                     />
                 </div>
                 <CartButton

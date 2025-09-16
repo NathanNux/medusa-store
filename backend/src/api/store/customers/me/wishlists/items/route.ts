@@ -16,10 +16,19 @@ export async function POST (
       "At least one sales channel ID is required to be associated with the publishable API key in the request header."
     )
   }
+
+  // Validate and read variant_id from request body to avoid undefined validatedBody
+  const parsed = PostStoreCreateWishlistItem.safeParse((req as any).body)
+  if (!parsed.success) {
+    return res.status(400).json({ message: "Invalid request body" })
+  }
+
+  const { variant_id } = parsed.data
+
   const { result } = await createWishlistItemWorkflow(req.scope)
     .run({
       input: {
-        variant_id: req.validatedBody.variant_id,
+        variant_id,
         customer_id: req.auth_context.actor_id,
         sales_channel_id: req.publishable_key_context?.sales_channel_ids[0]
       }
