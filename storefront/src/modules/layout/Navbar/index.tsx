@@ -19,10 +19,10 @@ import { useStateContext } from "@lib/context/StateContext";
 type NavbarProps = {
     cart: StoreCart | null;
     regions: StoreRegion[];
+    isLoggedIn?: boolean;
 }
 
-
-export default function Navbar({ cart, regions }: NavbarProps) {
+export default function Navbar({ cart, regions, isLoggedIn }: NavbarProps) {
     const [isMobile, setIsMobile] = useState<boolean>(false)
     const [isTablet, setIsTablet] = useState<boolean>(false)
     const dimension = useRef<{ width: number; height: number }>({ width: 0, height: 0 });
@@ -175,19 +175,21 @@ export default function Navbar({ cart, regions }: NavbarProps) {
                                     </LocalizedClientLink>
                                 </Magnetic>
                             </li>
-                            <li>
-                                <Magnetic>
-                                    <LocalizedClientLink href="/account/wishlist">
-                                        <Image 
-                                            src="/assets/icons/bookmark.svg"
-                                            alt="search Icon button"
-                                            width={24}
-                                            height={24}
-                                            className="Navbar__Icon"
-                                        />
-                                    </LocalizedClientLink>
-                                </Magnetic>
-                            </li>
+                            {isLoggedIn && (
+                              <li>
+                                  <Magnetic>
+                                      <LocalizedClientLink href="/account/wishlist">
+                                          <Image 
+                                              src="/assets/icons/bookmark.svg"
+                                              alt="wishlist Icon button"
+                                              width={24}
+                                              height={24}
+                                              className="Navbar__Icon"
+                                          />
+                                      </LocalizedClientLink>
+                                  </Magnetic>
+                              </li>
+                            )}
                             <li>
                                 <Suspense
                                     fallback={
@@ -247,7 +249,7 @@ export default function Navbar({ cart, regions }: NavbarProps) {
                     </div>
                 )}
             </motion.nav>
-            {isMobile && <MobileIconsNavbar cart={cart} />}
+            {isMobile && <MobileIconsNavbar cart={cart} isLoggedIn={isLoggedIn} />}
 
             <NewsPopup firstLoad={firstLoad}/>
         </>
@@ -255,17 +257,18 @@ export default function Navbar({ cart, regions }: NavbarProps) {
 }
 type MobileIconsNavbarProps = {
   cart: StoreCart | null;
+  isLoggedIn?: boolean;
 };
 
-export const  MobileIconsNavbar = ({ cart }: MobileIconsNavbarProps) => {
+export const  MobileIconsNavbar = ({ cart, isLoggedIn }: MobileIconsNavbarProps) => {
     const { firstLoad } = useStateContext();
     const [activeIdx, setActiveIdx] = useState<number | null>(null);
     const icons = useMemo(() => [
         { href: "/search", icon: <Image src="/assets/icons/search.svg" alt="search Icon button" width={40} height={40} className="Navbar__Icon" /> },
-        { href: "/account", icon: <Image src="/assets/icons/bookmark.svg" alt="bookmark Icon button" width={40} height={40} className="Navbar__Icon" /> },
+        ...(isLoggedIn ? [{ href: "/account/wishlist", icon: <Image src="/assets/icons/bookmark.svg" alt="bookmark Icon button" width={40} height={40} className="Navbar__Icon" /> }] : []),
         { href: "/cart", icon: <Cart />, isCart: true },
         { href: "/account", icon: <Image src="/assets/icons/user.svg" alt="user Icon button" width={40} height={40} className="Navbar__Icon" /> },
-    ], []);
+    ], [isLoggedIn]);
     const PreloaderAnim = {
         initial: {
             y: "100%",

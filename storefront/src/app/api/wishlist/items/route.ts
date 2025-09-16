@@ -4,6 +4,48 @@ import { getAuthHeaders } from "@lib/data/cookies"
 
 export const runtime = "nodejs"
 
+export async function GET(req: NextRequest) {
+  try {
+    const authHeaders = await getAuthHeaders()
+
+    if (!("authorization" in authHeaders)) {
+      return NextResponse.json(
+        { success: false, message: "Not authenticated" },
+        { status: 401 }
+      )
+    }
+
+    const incomingPk = req.headers.get("x-publishable-api-key") || req.headers.get("x-publishable-key")
+    const publishableKey = incomingPk || process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY
+    if (!publishableKey) {
+      return NextResponse.json(
+        { success: false, message: "Missing publishable key configuration" },
+        { status: 500 }
+      )
+    }
+    const cookieHeader = req.headers.get("cookie") || undefined
+    const headers: Record<string, string> = {
+      accept: "application/json",
+      "content-type": "application/json",
+      ...authHeaders,
+      "x-publishable-api-key": publishableKey,
+      "x-publishable-key": publishableKey,
+      ...(cookieHeader ? { cookie: cookieHeader } : {}),
+    }
+
+    const data = await sdk.client.fetch(`/store/customers/me/wishlists`, {
+      method: "GET",
+      headers,
+      cache: "no-store",
+    })
+    // data is expected to be { wishlist: {...} }
+    return NextResponse.json({ success: true, wishlist: (data as any).wishlist })
+  } catch (e: any) {
+    const message = e?.message || "Failed to load wishlist"
+    return NextResponse.json({ success: false, message }, { status: 500 })
+  }
+}
+
 export async function POST(req: NextRequest) {
   try {
     const { variant_id } = await req.json()

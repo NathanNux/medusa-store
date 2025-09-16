@@ -314,3 +314,26 @@ export const getCustomVariantPrice = async ({
     )
     .then(({ price }) => price)
 }
+
+export const retrieveProduct = async (
+  id: string,
+  query?: HttpTypes.StoreProductParams & HttpTypes.FindParams
+) => {
+  const headers = {
+    ...(await getAuthHeaders()),
+  }
+
+  const next = {
+    ...(await getCacheOptions(`product-${id}`)),
+  }
+
+  return sdk.client
+    .fetch<{ product: HttpTypes.StoreProduct }>(`/store/products/${id}`, {
+      method: "GET",
+      headers,
+      query,
+      next,
+      cache: "force-cache",
+    })
+    .then(({ product }) => product)
+}

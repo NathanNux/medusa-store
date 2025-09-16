@@ -3,7 +3,11 @@ import s from "../styles/profile.module.scss"
 import { notFound } from "next/navigation"
 import { retrieveCustomer } from "@lib/data/customer"
 import { cookies } from "next/headers"
+import Link from "next/link"
 import BgImage from "@modules/account/components/BgImage"
+import "./styles.scss"
+import { retrieveProduct } from "@lib/data/products"
+import DeleteButton from "./DeleteButton"
 
 export const metadata: Metadata = {
   title: "Wishlist",
@@ -39,11 +43,55 @@ async function getCustomerWishlists(_customerId: string) {
   return data.wishlist?.items ?? []
 }
 
-export default async function WishlistPage() {
+type PageProps = { params: Promise<{ countryCode: string }> }
+
+function getVariantOptionsSummary(variant: any): string {
+  if (!variant) return ""
+  const values: string[] = Array.isArray(variant.options)
+    ? variant.options.map((o: any) => o?.value).filter(Boolean)
+    : []
+  if (values.length) return values.join(" / ")
+  return variant.title || ""
+}
+
+export default async function WishlistPage(props: PageProps) {
+  const { countryCode } = await props.params
   const customer = await retrieveCustomer()
-  if (!customer) notFound()
+  if (!customer) {
+    return(
+      <div>
+        <p>Pro přístup k wishlistu se prosím přihlaste</p>
+        <Link href={`/${countryCode}/account`}>Přihlásit se</Link>
+      </div>
+    )
+  }
 
   const wishlistItems = await getCustomerWishlists(customer.id)
+  const enrichedItems = await Promise.all(
+    wishlistItems.map(async (item: any) => {
+      const variant = item?.product_variant
+      const product = variant?.product
+      const hasHandle = !!product?.handle
+      const hasThumb = !!product?.thumbnail
+      if (hasHandle && hasThumb) return item
+
+      const productId = product?.id || variant?.product_id
+      if (!productId) return item
+
+      try {
+        const p = await retrieveProduct(productId, { fields: "id,handle,thumbnail,title" })
+        return {
+          ...item,
+          product_variant: {
+            ...variant,
+            product: { ...product, ...p },
+          },
+        }
+      } catch {
+        return item
+      }
+    })
+  )
   console.log("Fetched wishlist items", wishlistItems)
   return (
     <main className={s.root}>
@@ -54,15 +102,46 @@ export default async function WishlistPage() {
         </div>
 
         <div className={s.body}>
-          {wishlistItems.length === 0 ? (
+          {enrichedItems.length === 0 ? (
             <p>No items in wishlist.</p>
           ) : (
-            <ul>
-              {wishlistItems.map((item: any) => (
-                <li key={item.id}>
-                  {item?.product_variant?.product?.title || item?.product_variant?.title || "Unknown product"}
-                </li>
-              ))}
+            <ul className="wishlist-list">
+              {enrichedItems.map((item: any) => {
+                const variant = item?.product_variant
+                const product = variant?.product
+                const title = product?.title || variant?.title || "Unknown product"
+                const handle = product?.handle
+                const thumb = product?.thumbnail
+                const subtitle = getVariantOptionsSummary(variant)
+                console.log("Rendering wishlist item", item)
+
+                return (
+                  <li key={item.id} className="wishlist-card">
+                    <Link
+                      className="wishlist-link"
+                      href={handle ? `/${countryCode}/products/${handle}` : `/${countryCode}`}
+                    >
+                      <div className="wishlist-thumb">
+                        {thumb ? (
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img src={thumb} alt={title} />
+                        ) : (
+                          <div className="wishlist-thumb placeholder" />
+                        )}
+                      </div>
+                      <div className="wishlist-info">
+                        <h3 className="wishlist-title">{title}</h3>
+                        {subtitle ? (
+                          <div className="wishlist-subtitle">{subtitle}</div>
+                        ) : null}
+                      </div>
+                    </Link>
+                    <div className="wishlist-actions">
+                      <DeleteButton itemId={item.id} />
+                    </div>
+                  </li>
+                )
+              })}
             </ul>
           )}
         </div>
