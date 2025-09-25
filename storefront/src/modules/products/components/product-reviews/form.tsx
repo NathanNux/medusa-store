@@ -7,7 +7,7 @@ import { retrieveCustomer } from "../../../../lib/data/customer"
 import { HttpTypes } from "@medusajs/types"
 import { Button, Input, Label, Textarea, toast, Toaster } from "@medusajs/ui"
 import { Star, StarSolid } from "@medusajs/icons"
-import { addProductReview } from "../../../../lib/data/products"
+import { addProductReview } from "../../../../lib/client/reviews"
 import styles from "./form.module.scss"
 import { useFormStatus } from "react-dom"
 
@@ -46,7 +46,7 @@ export default function ProductReviewsForm({ productId }: ProductReviewsFormProp
     )
   }
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const submitReview = async () => {
     if (!content || !rating) {
       toast.error("Chyba", {
         description: "Prosím vyplňte povinná pole.",
@@ -54,7 +54,6 @@ export default function ProductReviewsForm({ productId }: ProductReviewsFormProp
       return
     }
 
-    e.preventDefault()
     setIsLoading(true)
     addProductReview({
       title,
@@ -99,7 +98,12 @@ export default function ProductReviewsForm({ productId }: ProductReviewsFormProp
             Přidat recenzi
             </span>
             
-            <form onSubmit={handleSubmit} className={styles.form}>
+            <form
+              onSubmit={(e) => { e.preventDefault(); submitReview(); }}
+              action="#"
+              className={styles.form}
+              noValidate
+            >
             <div className={styles.field}>
                 <Label>Název</Label>
                 <Input name="title" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Název" />
@@ -123,7 +127,8 @@ export default function ProductReviewsForm({ productId }: ProductReviewsFormProp
             </div>
             <ClickButton
               text="Odeslat"
-              type="submit"
+              type="button"
+              onClickAction={submitReview}
               disabled={isLoading}
               className={styles.submitButton}
             />

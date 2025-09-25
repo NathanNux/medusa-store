@@ -39,16 +39,21 @@ export default function ProductReviews({
       offset: (page - 1) * defaultLimit,
     }).then(({ reviews, average_rating, count, limit }) => {
       console.log("CLIENT got reviews:", reviews, average_rating, count, limit)
+      const incoming = Array.isArray(reviews) ? reviews : []
+      const safeIncoming = incoming.filter(
+        (r): r is StoreProductReview => !!r && typeof r.id === "string"
+      )
+
       setReviews((prev) => {
-        const newReviews = reviews.filter(
+        const newReviews = safeIncoming.filter(
           (review) => !prev.some((r) => r.id === review.id)
         )
         return [...prev, ...newReviews]
       })
-      setRating(Math.round(average_rating))
-      console.log("Reviews after filtering:", reviews)
-      console.log("Count:", count, limit, page, count > limit * page)
-      setHasMoreReviews(count > limit * page)
+      setRating(Math.round(average_rating || 0))
+      console.log("Reviews after filtering:", safeIncoming)
+      console.log("Count:", count, limit, page, count > (limit || 0) * page)
+      setHasMoreReviews(!!(count && limit && count > limit * page))
       setCount(count)
     })
   }, [page])
@@ -67,13 +72,13 @@ export default function ProductReviews({
 
   function Review({ review }: { review: StoreProductReview }) {
     return (
-      <div key={review.id} className={styles.review}>
+      <div key={review?.id ?? Math.random()} className={styles.review}>
         <div className={styles.reviewHeader}>
-          {review.title && <strong>{review.title}</strong>}
+          {review?.title ? <strong>{review.title}</strong> : null}
           <div className={styles.reviewStars}>
             {Array.from({ length: 5 }).map((_, index) => (
               <span key={index}>
-                {index <= review.rating ? (
+                {review && index < (review.rating ?? 0) ? (
                   <StarSolid className="text-ui-tag-orange-icon" />
                 ) : (
                   <Star />
@@ -82,9 +87,9 @@ export default function ProductReviews({
             ))}
           </div>
         </div>
-        <div>{review.content}</div>
+        <div>{review?.content ?? ""}</div>
         <div className={styles.reviewFooter}>
-          {review.first_name} {review.last_name}
+          {(review?.first_name ?? "")} {(review?.last_name ?? "")}
         </div>
       </div>
     )
@@ -115,9 +120,11 @@ export default function ProductReviews({
         </div>
 
         <div className={styles.reviewsGrid}>
-          {reviews.map((review) => (
+          {reviews
+            .filter((r): r is StoreProductReview => !!r)
+            .map((review) => (
               <Review key={review.id} review={review} />
-          ))}
+            ))}
         </div>
 
         {hasMoreReviews && (

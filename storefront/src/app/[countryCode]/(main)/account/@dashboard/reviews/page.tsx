@@ -3,6 +3,7 @@ import s from "../styles/profile.module.scss"
 import { notFound } from "next/navigation"
 import { retrieveCustomer } from "@lib/data/customer"
 import { cookies } from "next/headers"
+import Link from "next/link"
 import BgImage from "@modules/account/components/BgImage"
 
 export const metadata: Metadata = {
@@ -11,9 +12,10 @@ export const metadata: Metadata = {
 }
 
 async function getCustomerReviews(customerId: string) {
+  const cookieStore = await cookies()
   const res = await fetch(
   `${process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL}/store/customers/me/reviews`,
-  { cache: "no-store", headers: { cookie: cookies().toString() } }
+  { cache: "no-store", headers: { cookie: cookieStore.toString() } }
 )
 
 
@@ -24,9 +26,19 @@ async function getCustomerReviews(customerId: string) {
   return data.reviews ?? []
 }
 
-export default async function ReviewsPage() {
+type PageProps = { params: Promise<{ countryCode: string }> }
+
+export default async function ReviewsPage(props: PageProps) {
+  const { countryCode } = await props.params
   const customer = await retrieveCustomer()
-  if (!customer) notFound()
+  if (!customer) {
+    return(
+      <div>
+        <p>Pro přístup k recenzím se prosím přihlaste</p>
+        <Link href={`/${countryCode}/account`}>Přihlásit se</Link>
+      </div>
+    )
+  }
 
   const reviews = await getCustomerReviews(customer.id)
 
@@ -39,17 +51,19 @@ export default async function ReviewsPage() {
         </div>
 
         <div className={s.body}>
-          {reviews.length === 0 ? (
+          {(!reviews || reviews.length === 0) ? (
             <p>You haven’t written any reviews yet.</p>
           ) : (
             <ul>
-              {reviews.map((review: any) => (
-                <li key={review.id}>
-                  <strong>{review.title}</strong> – {review.rating}/5
-                  <br />
-                  {review.content}
-                </li>
-              ))}
+              {reviews
+                .filter((r: any) => !!r)
+                .map((review: any) => (
+                  <li key={review.id}>
+                    <strong>{review?.title || "Bez názvu"}</strong> – {(review?.rating ?? 0)}/5
+                    <br />
+                    {review?.content ?? ""}
+                  </li>
+                ))}
             </ul>
           )}
         </div>

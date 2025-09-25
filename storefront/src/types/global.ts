@@ -25,9 +25,9 @@ export type StoreFreeShippingPrice = StorePrice & {
 
 export type StoreProductReview = {
   id: string
-  title: string
-  rating: number
-  content: string
-  first_name: string
-  last_name: string
+  title?: string | null
+  rating?: number | null
+  content?: string | null
+  first_name?: string | null
+  last_name?: string | null
 }

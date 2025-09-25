@@ -215,19 +215,20 @@ export const addProductReview = async (input: {
   rating: number,
   product_id: string
 }) => {
-  const headers = {
-    ...(await getAuthHeaders()),
-  }
-
-  return sdk.client.fetch(`/store/reviews`, {
+  // Call local API route to avoid server action context issues
+  const res = await fetch(`/api/reviews`, {
     method: "POST",
-    headers,
-    body: input,
-    next: {
-      ...(await getCacheOptions(`product-reviews-${input.product_id}`)),
-    },
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify(input),
     cache: "no-store",
   })
+
+  if (!res.ok) {
+    const data = await res.json().catch(() => ({}))
+    throw new Error(data?.message || "Failed to create review")
+  }
+
+  return res.json()
 }
 
 
