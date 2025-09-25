@@ -169,8 +169,10 @@ export const getProductReviews = async ({
   limit?: number
   offset?: number 
 }) => {
+  const pk = process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY
   const headers = {
     ...(await getAuthHeaders()),
+    ...(pk ? { "x-publishable-api-key": pk, "x-publishable-key": pk } : {}),
   }
 
   const next = {

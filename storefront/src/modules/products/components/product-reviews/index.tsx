@@ -1,6 +1,6 @@
 "use client"
 
-import { getProductReviews } from "../../../../lib/data/products"
+// Using local API to aggregate public approved reviews with user's own pending ones for the product
 import { Star, StarSolid } from "@medusajs/icons"
 import { StoreProductReview } from "../../../../types/global"
 // import { Button } from "@medusajs/ui"
@@ -30,14 +30,21 @@ export default function ProductReviews({
   const [rating, setRating] = useState(initialRating)
   const [hasMoreReviews, setHasMoreReviews] = useState(false)
   const [count, setCount] = useState(initialCount)
+  const [error, setError] = useState<string | null>(null)
+
+  // Mount debug to verify hydration
+  useEffect(() => {
+    console.log("[ProductReviews] mounted", { productId, initialCount, initialRating })
+  }, [])
 
   useEffect(() => {
     console.log("Fetching reviews for product:", productId, "Page:", page)
-    getProductReviews({
-      productId,
-      limit: defaultLimit,
-      offset: (page - 1) * defaultLimit,
-    }).then(({ reviews, average_rating, count, limit }) => {
+    fetch(`/api/product-reviews/${productId}?limit=${defaultLimit}&offset=${(page - 1) * defaultLimit}`, {
+      method: "GET",
+      cache: "no-store",
+    })
+    .then((r) => r.json())
+    .then(({ reviews, average_rating, count, limit }) => {
       console.log("CLIENT got reviews:", reviews, average_rating, count, limit)
       const incoming = Array.isArray(reviews) ? reviews : []
       const safeIncoming = incoming.filter(
@@ -56,7 +63,19 @@ export default function ProductReviews({
       setHasMoreReviews(!!(count && limit && count > limit * page))
       setCount(count)
     })
+    .catch((e) => {
+      console.error("[ProductReviews] fetch failed", e)
+      setError(e?.message || "Chyba při načítání recenzí")
+    })
   }, [page])
+
+  // Refetch first page when productId changes (navigating between products client-side)
+  useEffect(() => {
+    setPage(1)
+    setReviews(initialReviews)
+    setRating(initialRating)
+    setCount(initialCount)
+  }, [productId])
 
 
   console.log("ProductReviews", { productId, page, reviews, rating, hasMoreReviews, count })
@@ -101,6 +120,11 @@ export default function ProductReviews({
         <p className={styles.title}>
             Podívejte se, co o tomto produktu říkají naši zákazníci.
         </p>
+        {error && (
+          <p className={styles.error} style={{ color: "#c00" }}>
+            Nepodařilo se načíst recenze: {error}
+          </p>
+        )}
         <div className={styles.starsAndCount}>
             <div className={styles.stars}>
             {Array.from({ length: 5 }).map((_, index) => (
