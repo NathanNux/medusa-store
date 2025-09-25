@@ -23,5 +23,7 @@ export async function GET(
     ...req.queryConfig,
   })
 
+  // eslint-disable-next-line no-console
+  console.log("[Reviews][GET me] actor:", customerId, "count:", count)
   return res.json({ reviews, count, limit: take, offset: skip })
 }

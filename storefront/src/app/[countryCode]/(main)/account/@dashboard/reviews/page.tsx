@@ -6,6 +6,7 @@ import { cookies } from "next/headers"
 import { sdk } from "@lib/config"
 import Link from "next/link"
 import BgImage from "@modules/account/components/BgImage"
+import DebugReviewsLogger from "./DebugReviewsLogger"
 
 export const metadata: Metadata = {
   title: "My Reviews",
@@ -20,7 +21,7 @@ async function getCustomerReviews() {
   if (!token) return []
 
   try {
-    const data = await sdk.client.fetch<{ reviews: any[] }>(
+    const data = await sdk.client.fetch<{ reviews: any[]; count?: number; limit?: number; offset?: number }>(
       `/store/customers/me/reviews`,
       {
         method: "GET",
@@ -31,8 +32,15 @@ async function getCustomerReviews() {
         cache: "no-store",
       }
     )
+    console.log("[Account] fetched reviews:", {
+      count: (data as any)?.count,
+      limit: (data as any)?.limit,
+      offset: (data as any)?.offset,
+      length: Array.isArray((data as any)?.reviews) ? (data as any)?.reviews.length : "n/a",
+    })
     return data.reviews ?? []
   } catch {
+    console.log("[Account] failed to fetch customer reviews")
     return []
   }
 }
@@ -52,6 +60,7 @@ export default async function ReviewsPage(props: PageProps) {
   }
 
   const reviews = await getCustomerReviews()
+  console.log("[Account] reviews to render:", Array.isArray(reviews) ? reviews.length : "n/a")
 
   return (
     <main className={s.root}>
@@ -62,6 +71,7 @@ export default async function ReviewsPage(props: PageProps) {
         </div>
 
         <div className={s.body}>
+          <DebugReviewsLogger reviews={reviews} />
           {(!reviews || reviews.length === 0) ? (
             <p>You haven’t written any reviews yet.</p>
           ) : (

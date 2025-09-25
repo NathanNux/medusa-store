@@ -23,7 +23,16 @@ export const createReviewStep = createStep(
       PRODUCT_REVIEW_MODULE
     )
 
-    const review = await reviewModuleService.createReviews(input)
+    const review = await reviewModuleService.createReviews({
+      title: input.title,
+      content: input.content,
+      rating: input.rating,
+      product_id: input.product_id,
+      customer_id: input.customer_id,
+      first_name: input.first_name,
+      last_name: input.last_name,
+      status: input.status ?? "čeká na schválení",
+    })
 
     return new StepResponse(review, review.id)
   },

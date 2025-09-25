@@ -30,6 +30,17 @@ export const POST = async (
   res: MedusaResponse
 ) => {
   const input = req.validatedBody
+  const actorId = req.auth_context?.actor_id
+
+  // Debug logs to trace creation
+  // eslint-disable-next-line no-console
+  console.log("[Reviews][POST] incoming body:", input)
+  // eslint-disable-next-line no-console
+  console.log("[Reviews][POST] actor_id:", actorId)
+
+  if (!actorId) {
+    return res.status(401).json({ message: "Unauthorized" })
+  }
 
   const { result } = await createReviewWorkflow(req.scope)
     .run({
@@ -42,10 +53,12 @@ export const POST = async (
   first_name: input.first_name,
   last_name: input.last_name,
   // add customer id
-        customer_id: req.auth_context?.actor_id
+        customer_id: actorId
       }
     })
 
+  // eslint-disable-next-line no-console
+  console.log("[Reviews][POST] created:", result)
   res.json(result)
 }
 
