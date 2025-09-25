@@ -3,6 +3,7 @@ import s from "../styles/profile.module.scss"
 import { notFound } from "next/navigation"
 import { retrieveCustomer } from "@lib/data/customer"
 import { cookies } from "next/headers"
+import { sdk } from "@lib/config"
 import Link from "next/link"
 import BgImage from "@modules/account/components/BgImage"
 
@@ -11,19 +12,29 @@ export const metadata: Metadata = {
   description: "See the reviews you’ve written",
 }
 
-async function getCustomerReviews(customerId: string) {
+async function getCustomerReviews() {
   const cookieStore = await cookies()
-  const res = await fetch(
-  `${process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL}/store/customers/me/reviews`,
-  { cache: "no-store", headers: { cookie: cookieStore.toString() } }
-)
+  const token = cookieStore.get("_medusa_jwt")?.value
+  const pk = process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY
 
+  if (!token) return []
 
-  if (!res.ok) {
+  try {
+    const data = await sdk.client.fetch<{ reviews: any[] }>(
+      `/store/customers/me/reviews`,
+      {
+        method: "GET",
+        headers: {
+          authorization: `Bearer ${token}`,
+          ...(pk ? { "x-publishable-api-key": pk, "x-publishable-key": pk } : {}),
+        },
+        cache: "no-store",
+      }
+    )
+    return data.reviews ?? []
+  } catch {
     return []
   }
-  const data = await res.json()
-  return data.reviews ?? []
 }
 
 type PageProps = { params: Promise<{ countryCode: string }> }
@@ -40,7 +51,7 @@ export default async function ReviewsPage(props: PageProps) {
     )
   }
 
-  const reviews = await getCustomerReviews(customer.id)
+  const reviews = await getCustomerReviews()
 
   return (
     <main className={s.root}>
