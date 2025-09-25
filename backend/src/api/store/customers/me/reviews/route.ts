@@ -36,7 +36,43 @@ export async function GET(
   })
 
   const safe = Array.isArray(reviews) ? reviews.filter((r: any) => !!r) : []
+
+  // Enrich with product info (title, handle, thumbnail) so UI can show which product the review belongs to
+  const productIds = Array.from(
+    new Set(
+      safe
+        .map((r: any) => r?.product_id)
+        .filter((id: any): id is string => typeof id === "string" && id.length > 0)
+    )
+  )
+
+  let productsById: Record<string, { id: string; title?: string; handle?: string; thumbnail?: string }> = {}
+  if (productIds.length > 0) {
+    try {
+      const { data: products } = await query.graph({
+        entity: "product",
+        fields: ["id", "title", "handle", "thumbnail"],
+        filters: { id: productIds },
+      })
+
+      if (Array.isArray(products)) {
+        productsById = products.reduce((acc: any, p: any) => {
+          if (p && p.id) acc[p.id] = { id: p.id, title: p.title, handle: p.handle, thumbnail: p.thumbnail }
+          return acc
+        }, {} as Record<string, { id: string; title?: string; handle?: string; thumbnail?: string }>)
+      }
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.log("[Reviews][GET me] failed to fetch products for enrichment", e)
+    }
+  }
+
+  const enriched = safe.map((r: any) => ({
+    ...r,
+    product: r?.product_id ? productsById[r.product_id] : undefined,
+  }))
+
   // eslint-disable-next-line no-console
-  console.log("[Reviews][GET me] actor:", customerId, "count:", count, "returned:", safe.length)
-  return res.json({ reviews: safe, count, limit: take, offset: skip })
+  console.log("[Reviews][GET me] actor:", customerId, "count:", count, "returned:", enriched.length)
+  return res.json({ reviews: enriched, count, limit: take, offset: skip })
 }

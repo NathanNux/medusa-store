@@ -83,6 +83,16 @@ export default async function ReviewsPage(props: PageProps) {
                     <strong>{review?.title || "Bez názvu"}</strong> – {(review?.rating ?? 0)}/5
                     <br />
                     {review?.content ?? ""}
+                    <div style={{ marginTop: 4, opacity: 0.9 }}>
+                      <span style={{ marginRight: 6, color: "var(--fg-muted)" }}>Produkt:</span>
+                      {review?.product?.handle ? (
+                        <Link href={`/${countryCode}/products/${review.product.handle}`}>
+                          {review?.product?.title || review?.product?.handle}
+                        </Link>
+                      ) : (
+                        <span>{review?.product?.title || review?.product?.id || review?.product_id || "neznámý produkt"}</span>
+                      )}
+                    </div>
                   </li>
                 ))}
             </ul>

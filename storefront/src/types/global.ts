@@ -30,4 +30,11 @@ export type StoreProductReview = {
   content?: string | null
   first_name?: string | null
   last_name?: string | null
+  product_id?: string | null
+  product?: {
+    id: string
+    title?: string | null
+    handle?: string | null
+    thumbnail?: string | null
+  } | null
 }
