@@ -25,6 +25,18 @@ export const GET = async (
     skip
   } = { count: 0, take: 10, skip: 0 } } = await query.graph({
     entity: "review",
+    fields: [
+      "id",
+      "title",
+      "content",
+      "rating",
+      "first_name",
+      "last_name",
+      "status",
+      "product_id",
+      "customer_id",
+      "created_at",
+    ],
     filters: {
       product_id: id,
       status: "schváleno" 
@@ -32,9 +44,9 @@ export const GET = async (
     ...req.queryConfig
   })
 
-  // WIP: Find a reason why this is not working inside the storefront - it wont show the reviews inside the product page
+  const safe = Array.isArray(reviews) ? reviews.filter((r: any) => !!r) : []
   res.json({
-    reviews,
+    reviews: safe,
     count,
     limit: take,
     offset: skip,

@@ -38,7 +38,7 @@ async function getCustomerReviews() {
       offset: (data as any)?.offset,
       length: Array.isArray((data as any)?.reviews) ? (data as any)?.reviews.length : "n/a",
     })
-    return data.reviews ?? []
+  return Array.isArray(data.reviews) ? data.reviews.filter((r) => !!r) : []
   } catch {
     console.log("[Account] failed to fetch customer reviews")
     return []
