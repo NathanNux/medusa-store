@@ -100,8 +100,13 @@ export default function ProductReviewsForm({ productId }: ProductReviewsFormProp
                 </span>
                 <Divider />
               </div>
-            
-              <form onSubmit={handleSubmit} className={styles.form}>
+
+            <form
+              onSubmit={(e) => { e.preventDefault(); submitReview(); }}
+              action="#"
+              className={styles.form}
+              noValidate
+            >
               <div className={styles.field}>
                   <Label className={styles.label}>Název</Label>
                   <Input name="title" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Váš název" />

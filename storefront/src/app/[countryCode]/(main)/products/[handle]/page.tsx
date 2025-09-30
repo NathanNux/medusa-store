@@ -168,6 +168,8 @@ export default async function ProductPage(props: Props) {
         wishlistItems={wishlistItems}
         onWishlistUpdateAction={refreshWishlist}
         isAuthenticated={isAuthenticated}
+        initialRating={reviewsData.average_rating}
+        initialCount={reviewsData.count}
       />
       {ENABLE_BUNDLES && bundleProduct && (
         <BundleActions 
@@ -179,9 +181,6 @@ export default async function ProductPage(props: Props) {
       )}
       <Details 
         product={pricedProduct} 
-        wishlistItems={wishlistItems}
-        onWishlistUpdateAction={refreshWishlist}
-        isAuthenticated={isAuthenticated}
       />
       <ProductReviews productId={pricedProduct.id} initialReviews={reviewsData.reviews} initialRating={reviewsData.average_rating} initialCount={reviewsData.count} />
       <SoldProducts />

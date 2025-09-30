@@ -15,32 +15,133 @@ export const metadata: Metadata = {
 }
 
 async function getCustomerWishlists(_customerId: string) {
-  const cookieStore = await cookies()
-  const token = cookieStore.get("_medusa_jwt")?.value
-  const pk = process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY
-  const headers: Record<string, string> = {
-    accept: "application/json",
-    "content-type": "application/json",
-    ...(pk ? { "x-publishable-api-key": pk, "x-publishable-key": pk } : {}),
-    cookie: cookieStore.toString(),
-  }
-  if (token) headers.authorization = `Bearer ${token}`
+  // const cookieStore = await cookies()
+  // const token = cookieStore.get("_medusa_jwt")?.value
+  // const pk = process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY
+  // const headers: Record<string, string> = {
+  //   accept: "application/json",
+  //   "content-type": "application/json",
+  //   ...(pk ? { "x-publishable-api-key": pk, "x-publishable-key": pk } : {}),
+  //   cookie: cookieStore.toString(),
+  // }
+  // if (token) headers.authorization = `Bearer ${token}`
 
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL}/store/customers/me/wishlists`,
+  // const res = await fetch(
+  //   `${process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL}/store/customers/me/wishlists`,
+  //   {
+  //     cache: "no-store",
+  //     headers,
+  //   }
+  // )
+
+  // if (!res.ok) {
+  //   return []
+  // }
+  // const data = await res.json()
+  // // Backend returns { wishlist: {..., items: [...] } }
+  // console.log("Wishlist data", data)
+  // return data.wishlist?.items ?? []
+
+  const mockWishlistItems = [
     {
-      cache: "no-store",
-      headers,
+      id: "wishlist_item_1",
+      product_variant: {
+        id: "variant_01K2JKVDFXEEBTD7W4BH4KGSNC",
+        product: {
+          id: "prod_01K2JKVDCGDD9FD6YCRNSCN9CT",
+          handle: "t-shirt",
+          thumbnail: "/assets/img/products/t-shirt.jpg",
+          title: "Medusa T-Shirt"
+        },
+        options: [
+          { value: "Large" },
+          { value: "Black" }
+        ]
+      }
+    },
+    {
+      id: "wishlist_item_2",
+      product_variant: {
+        id: "variant_01K2JKVDFXEEBTD7W4BH4KGSND",
+        product: {
+          id: "prod_01K2JKVDCGDD9FD6YCRNSCN9CU",
+          handle: "hoodie",
+          thumbnail: "/assets/img/products/hoodie.jpg",
+          title: "Medusa Hoodie"
+        },
+        options: [
+          { value: "Medium" },
+          { value: "Gray" }
+        ]
+      }
+    },
+    {
+      id: "wishlist_item_3",
+      product_variant: {
+        id: "variant_01K2JKVDFXEEBTD7W4BH4KGSNE",
+        product: {
+          id: "prod_01K2JKVDCGDD9FD6YCRNSCN9CV",
+          handle: "mug",
+          thumbnail: "/assets/img/products/mug.jpg",
+          title: "Medusa Mug"
+        },
+        options: [
+          { value: "11oz" },
+          { value: "White" }
+        ]
+      }
+    },
+    {
+      id: "wishlist_item_4",
+      product_variant: {
+        id: "variant_01K2JKVDFXEEBTD7W4BH4KGSNF",
+        product: {
+          id: "prod_01K2JKVDCGDD9FD6YCRNSCN9CW",
+          handle: "cap",
+          thumbnail: "/assets/img/products/cap.jpg",
+          title: "Medusa Cap"
+        },
+        options: [
+          { value: "One Size" },
+          { value: "Black" }
+        ]
+      }
+    },
+    {
+      id: "wishlist_item_5",
+      product_variant: {
+        id: "variant_01K2JKVDFXEEBTD7W4BH4KGSNG",
+        product: {
+          id: "prod_01K2JKVDCGDD9FD6YCRNSCN9CX",
+          handle: "sticker",
+          thumbnail: "/assets/img/products/sticker.jpg",
+          title: "Medusa Sticker Pack"
+        },
+        options: [
+          { value: "Pack of 3" }
+        ]
+      }
+    },
+    {
+      id: "wishlist_item_6",
+      product_variant: {
+        id: "variant_01K2JKVDFXEEBTD7W4BH4KGSNH",
+        product: {
+          id: "prod_01K2JKVDCGDD9FD6YCRNSCN9CY",
+          handle: "notebook",
+          thumbnail: "/assets/img/products/notebook.jpg",
+          title: "Medusa Notebook"
+        },
+        options: [
+          { value: "A5" },
+          { value: "Black Cover" }
+        ]
+      }
     }
-  )
+  ]
 
-  if (!res.ok) {
-    return []
-  }
-  const data = await res.json()
-  // Backend returns { wishlist: {..., items: [...] } }
-  console.log("Wishlist data", data)
-  return data.wishlist?.items ?? []
+  console.log("Using mock wishlist items:", mockWishlistItems.length)
+  return mockWishlistItems
 }
 
 type PageProps = { params: Promise<{ countryCode: string }> }

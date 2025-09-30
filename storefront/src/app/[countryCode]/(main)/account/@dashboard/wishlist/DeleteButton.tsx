@@ -19,6 +19,7 @@ export default function DeleteButton({ itemId }: { itemId: string }) {
       if (!res.ok) {
         // optionally surface error
         console.error("Failed to delete wishlist item", await res.text())
+        // WIP: finish all functionality to this page
       }
     } catch (e) {
       console.error(e)

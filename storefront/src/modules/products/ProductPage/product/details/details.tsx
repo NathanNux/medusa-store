@@ -1,11 +1,11 @@
 'use client';
 
-import { Suspense, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Title from "./Info/Title";
 import Desc from "./Info/Desc";
 import Colors from "./Options/Colors";
 import { HttpTypes } from "@medusajs/types";
-import { useIntersection } from "@lib/hooks/use-in-view";
+import { Star, StarSolid } from "@medusajs/icons";
 import Sizes from "./Options/Sizes";
 import ProductPrice from "./Cta/Price";
 import CTA from "./Cta/Add";
@@ -22,6 +22,8 @@ type ProductTemplateProps = {
   wishlistItems?: any[]
   onWishlistUpdateAction?: () => Promise<void>
   isAuthenticated?: boolean
+  initialRating?: number
+  initialCount?: number
 }
 
 const optionsAsKeymap = (
@@ -34,7 +36,7 @@ const optionsAsKeymap = (
 }
 
 
-const Details: React.FC<ProductTemplateProps> = ({ product, region, countryCode, categories, wishlistItems, onWishlistUpdateAction, isAuthenticated }) => {
+const Details: React.FC<ProductTemplateProps> = ({ product, region, countryCode, categories, wishlistItems, onWishlistUpdateAction, isAuthenticated, initialRating, initialCount }) => {
     const [options, setOptions] = useState<Record<string, string | undefined>>({})
     const [isAdding, setIsAdding] = useState(false)
   
@@ -132,41 +134,61 @@ const Details: React.FC<ProductTemplateProps> = ({ product, region, countryCode,
     return (
         <div className="product__details">
             <div className="product__details__mainDetails">
-                <Title product={product} categories={categories} />
-                <Desc product={product} />
+              <Title product={product} categories={categories} />
+              <Desc product={product} />
             </div>
 
             <div className="product__details__subDetails">
                 <Colors
-                    product={product}
-                    region={region}
-                    isAdding={isAdding}
-                    options={options}
-                    setOptionValue={setOptionValue}
+                  product={product}
+                  region={region}
+                  isAdding={isAdding}
+                  options={options}
+                  setOptionValue={setOptionValue}
                 />
                 <Sizes
-                    product={product}
-                    region={region}
-                    isAdding={isAdding}
-                    options={options}
-                    setOptionValue={setOptionValue}
+                  product={product}
+                  region={region}
+                  isAdding={isAdding}
+                  options={options}
+                  setOptionValue={setOptionValue}
                 />
             </div>
             <div className="product__details__cta">
                 <ProductPrice product={product} variant={selectedVariant} countryCode={countryCode} />
                 <CTA
-                    inStock={inStock}
-                    selectedVariant={selectedVariant}
-                    isAdding={isAdding}
-                    isValidVariant={!!isValidVariant}
-                    handleAddToCart={handleAddToCart}
-                    options={options}
-                    product={product}
-                    wishlistItems={wishlistItems}
-                    onWishlistUpdateAction={onWishlistUpdateAction}
-                    isAuthenticated={isAuthenticated}
+                  inStock={inStock}
+                  selectedVariant={selectedVariant}
+                  isAdding={isAdding}
+                  isValidVariant={!!isValidVariant}
+                  handleAddToCart={handleAddToCart}
+                  options={options}
+                  product={product}
+                  wishlistItems={wishlistItems}
+                  onWishlistUpdateAction={onWishlistUpdateAction}
+                  isAuthenticated={isAuthenticated}
                 />
                 <div className="divider"/>
+            </div>
+            <div className="product__reviews">
+              {initialRating !== undefined && (
+                <div className="flex items-center gap-2">
+                    <div className="flex items-center">
+                      {Array.from({ length: 5 }).map((_, index) => (
+                        <span key={index}>
+                          {index >= Math.round(initialRating || 0) ? (
+                              <Star/>
+                          ) : (
+                              <StarSolid className="text-ui-tag-orange-icon" />
+                          )}
+                        </span>
+                      ))}
+                    </div>
+                    <span>
+                      {initialCount} {initialCount === 1 ? "recenze" : "recenzí"}
+                    </span>
+                </div>
+              )}
             </div>
             {selectedVariant && !inStock && (
               <RestockForm variant={selectedVariant} product={product} />

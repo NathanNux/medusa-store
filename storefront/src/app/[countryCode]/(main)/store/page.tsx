@@ -18,7 +18,7 @@ export default async function StorePage({ params }: { params: { countryCode: str
     countryCode,
   })
 
-    let region: HttpTypes.StoreRegion | undefined | null
+  let region: HttpTypes.StoreRegion | undefined | null
   
   // Fetch region information based on country code
   if (countryCode) {
