@@ -1,93 +1,507 @@
+@use "../../../../styles/mixins.scss" as *;
+
 .root {
   background: #fff;
   display: flex;
   flex-direction: column;
+  max-width: 400px;
+  max-height: 850px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  padding: 1.5rem;
 
   .header {
-    text-transform: uppercase;
-    font-size: 1.125rem; /* text-large-semi analog */
-    line-height: 1.75rem;
-    font-weight: 600;
-    margin-bottom: 0.25rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.08);
+
+    .headerText {
+      margin-right: 0.25rem;
+      font-size: 1.5rem;
+      line-height: 1.25rem;
+      font-weight: 300;
+      margin-bottom: 0.25rem;
+      font-family: "Sansation-Light";
+      color: var(--ui-fg-muted, #6b7280);
+
+      @include respond-to-h(lg){
+        font-size: 1.3rem;
+      }
+      @include respond-to-h(md){
+        font-size: 1.3rem;
+      }
+      @include respond-to-h(mdt){
+        font-size: 1.3rem;
+      }
+      @include respond-to-h(sm){
+        font-size: 1.3rem;;
+      }
+      @include respond-to-h(xs){
+        font-size: 1.1rem;
+      }
+      @include respond-to-h(xxs){
+        font-size: 1.1rem;
+      }
+
+      @include respond-to-v(lg){
+        font-size: 1.3rem;
+      }
+      @include respond-to-v(md){
+        font-size: 1.3rem;
+      }
+      @include respond-to-v(s){
+        font-size: 1.1rem;
+      }
+      @include respond-to-v(sm){
+        font-size: 1.1rem;
+      }
+      @include respond-to-v(xs){
+        font-size: 1.1rem;
+      }
+    }
+
+    .headerNumber{
+      font-size: 1.6rem;
+      line-height: 1.25rem;
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+      font-family: "Sansation-Regular";
+      color: var(--ui-fg-base, #111827);
+      background: linear-gradient(135deg, var(--OButton, #ff6b35), var(--CharcoalBg, #2d3748));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+
+      @include respond-to-h(lg){
+        font-size: 1.4rem;
+      }
+      @include respond-to-h(md){
+        font-size: 1.4rem;
+      }
+      @include respond-to-h(mdt){
+        font-size: 1.4rem;
+      }
+      @include respond-to-h(sm){
+        font-size: 1.4rem;
+      }
+      @include respond-to-h(xs){
+        font-size: 1.3rem;
+      }
+      @include respond-to-h(xxs){
+        font-size: 1.3rem;
+      }
+
+      @include respond-to-v(lg){
+        font-size: 1.4rem;
+      }
+      @include respond-to-v(md){
+        font-size: 1.4rem;
+      }
+      @include respond-to-v(s){
+        font-size: 1.3rem;
+      }
+      @include respond-to-v(sm){
+        font-size: 1.3rem;
+      }
+      @include respond-to-v(xs){
+        font-size: 1.3rem;
+      }
+    }
   }
 
   .meta {
     display: flex;
-    align-items: center;
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-    color: var(--ui-fg-base, #111827);
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    color: var(--ChText);
 
-    > * + * {
-      border-left: 1px solid #e5e7eb; /* divide-gray-200 */
+    .metaLabel{
+      font-weight: 300;
+      font-size: 1.3rem;
+      font-family: "Sansation-Light";
+      margin-bottom: 0.5rem;
+
+      @include respond-to-h(lg){
+        font-size: 1.2rem;
+      }
+      @include respond-to-h(md){
+        font-size: 1.2rem;
+      }
+      @include respond-to-h(mdt){
+        font-size: 1.2rem;
+      }
+      @include respond-to-h(sm){
+        font-size: 1.2rem;
+      }
+      @include respond-to-h(xs){
+        font-size: 1.1rem;
+      }
+      @include respond-to-h(xxs){
+        font-size: 1.1rem;
+      }
+
+      @include respond-to-v(lg){
+        font-size: 1.2rem;
+      }
+      @include respond-to-v(md){
+        font-size: 1.2rem;
+      }
+      @include respond-to-v(s){
+        font-size: 1.1rem;
+      }
+      @include respond-to-v(sm){
+        font-size: 1.1rem;
+      }
+      @include respond-to-v(xs){
+        font-size: 1.1rem;
+      }
     }
 
-    .metaDate {
-      padding-right: 0.5rem;
+    .metaList {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.02);
+      border-radius: 8px;
+      overflow: hidden;
+
+      .metaItem {
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        transition: background-color 0.2s ease;
+        gap: 0.5rem;
+        cursor: pointer; 
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        &:hover {
+          background: rgba(0, 0, 0, 0.04);
+        }
+
+        .metaDate {
+          font-weight: 400;
+          font-size: 1.1rem;
+          font-family: "Sansation-Light";
+          color: var(--ui-fg-base, #111827);
+          display: flex;
+          align-items: center;
+
+          @include respond-to-h(lg){
+            font-size: 1.05rem;
+          }
+          @include respond-to-h(md){
+            font-size: 1.05rem;
+          }
+          @include respond-to-h(mdt){
+            font-size: 1.05rem;
+          }
+          @include respond-to-h(sm){
+            font-size: 1.05rem;
+          }
+          @include respond-to-h(xs){
+            font-size: 1rem;
+          }
+          @include respond-to-h(xxs){
+            font-size: 1rem;
+          }
+
+          @include respond-to-v(lg){
+            font-size: 1.05rem;
+          }
+          @include respond-to-v(md){
+            font-size: 1.05rem;
+          }
+          @include respond-to-v(s){
+            font-size: 1rem;
+          }
+          @include respond-to-v(sm){
+            font-size: 1rem;
+          }
+          @include respond-to-v(xs){
+            font-size: 1rem;
+          }
+        }
+
+        .metaAmount {
+          font-weight: 500;
+          font-size: 1.1rem;
+          font-family: "Sansation-Regular";
+          color: var(--OButton, #ff6b35);
+          display: flex;
+          align-items: center;
+
+          @include respond-to-h(lg){
+            font-size: 1.05rem;
+          }
+          @include respond-to-h(md){
+            font-size: 1.05rem;
+          }
+          @include respond-to-h(mdt){
+            font-size: 1.05rem;
+          }
+          @include respond-to-h(sm){
+            font-size: 1.05rem;
+          }
+          @include respond-to-h(xs){
+            font-size: 1rem;
+          }
+          @include respond-to-h(xxs){
+            font-size: 1rem;
+          }
+
+          @include respond-to-v(lg){
+            font-size: 1.05rem;
+          }
+          @include respond-to-v(md){
+            font-size: 1.05rem;
+          }
+          @include respond-to-v(s){
+            font-size: 1rem;
+          }
+          @include respond-to-v(sm){
+            font-size: 1rem;
+          }
+          @include respond-to-v(xs){
+            font-size: 1rem;
+          }
+        }
+
+        .metaLines {
+          font-weight: 400;
+          font-size: 1.1rem;
+          font-family: "Sansation-Light";
+          color: var(--ui-fg-muted, #6b7280);
+          display: flex;
+          align-items: center;
+
+          @include respond-to-h(lg){
+            font-size: 1.05rem;
+          }
+          @include respond-to-h(md){
+            font-size: 1.05rem;
+          }
+          @include respond-to-h(mdt){
+            font-size: 1.05rem;
+          }
+          @include respond-to-h(sm){
+            font-size: 1.05rem;
+          }
+          @include respond-to-h(xs){
+            font-size: 1rem;
+          }
+          @include respond-to-h(xxs){
+            font-size: 1rem;
+          }
+
+          @include respond-to-v(lg){
+            font-size: 1.05rem;
+          }
+          @include respond-to-v(md){
+            font-size: 1.05rem;
+          }
+          @include respond-to-v(s){
+            font-size: 1rem;
+          }
+          @include respond-to-v(sm){
+            font-size: 1rem;
+          }
+          @include respond-to-v(xs){
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+  }
+
+  .productsContainer {
+    max-height: 350px;
+    height: fit-content;
+    min-height: 200px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.02);
+    margin-top: 1rem;
+
+    &::-webkit-scrollbar {
+      height: 6px;
     }
 
-    .metaAmount {
-      padding-left: 0.5rem;
-      padding-right: 0.5rem;
+    &::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.05);
+      border-radius: 3px;
     }
 
-    .metaLines {
-      padding-left: 0.5rem;
+    &::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 3px;
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.3);
+      }
     }
   }
 
   .grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem; /* gap-4 */
-    margin-top: 1rem; /* my-4 */
-    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    margin: 0;
+    min-width: max-content;
+    padding: 0 0.5rem;
   }
 
   .item {
     display: flex;
     flex-direction: column;
-    row-gap: 0.5rem; /* gap-y-2 */
+    row-gap: 0.5rem;
+    min-width: 140px;
+    padding: 0.75rem;
+    margin: 0.5rem 0;
+    height: fit-content;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+      border-color: rgba(0, 0, 0, 0.1);
+    }
 
     .itemInfo {
       display: flex;
       align-items: center;
-      font-size: 0.875rem;
+      font-size: 0.9rem;
       line-height: 1.25rem;
-      color: var(--ui-fg-base, #111827);
+      color: var(--ChText);
 
       .itemTitle {
-        color: var(--ui-fg-base, #111827);
-        font-weight: 600;
+        color: var(--ChText);
+        font-size: 1rem;
+        font-family: "Sansation-Regular";
+        font-weight: 400;
+        flex: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
 
       .multiply {
-        margin-left: 0.5rem; /* ml-2 */
+        
+        margin: 0 0.25rem;
+        color: var(--ChText);
+        font-family: "Sansation-Light";
+        font-weight: 400;
       }
     }
   }
 
-  .more {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
 
-    .moreText {
-      font-size: 0.875rem;
-      line-height: 1.25rem;
-      color: var(--ui-fg-base, #111827);
-    }
-  }
 
   .actions {
     display: flex;
     justify-content: flex-end;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
 
     .detailsLink {
       display: inline-block;
+      transition: transform 0.2s ease;
+
+      &:hover {
+        transform: translateY(-1px);
+      }
     }
   }
+}
+
+
+
+.LinkButton{
+    width: fit-content;
+    height: fit-content;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 8px var(--ButtonBorder); // subtle shadow here
+    border-radius: 25px;
+    .button{
+        position: relative;
+        width: 200px;
+        height: 40px;
+        cursor: pointer;
+        border-radius: 25px;
+        overflow: hidden;
+        border: none;
+        box-shadow: none;
+        background-color: transparent;
+
+        .slider{
+            position: relative;
+            width: 100%;
+            height: 100%;
+
+            .el{
+                width: 100%;
+                height: 100%;
+                p{
+                    margin: 0px;
+                    color: var(--Wtext);
+                }
+                &:nth-of-type(2){
+                    p{
+                        color: var(--ChText);
+                    }
+                }
+                &:hover{
+                    .perspectiveText{
+                        transform: rotateX(90deg);
+                        p{
+                            &:nth-of-type(1){
+                                transform: translateY(-100%);
+                                opacity: 0;
+                            }
+                            &:nth-of-type(2){
+                                opacity: 1;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+    }
+}
+
+.perspectiveText{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.75s cubic-bezier(0.76, 0, 0.24, 1);
+    p{
+        transition: all 0.75s cubic-bezier(0.76, 0, 0.24, 1);
+        pointer-events: none;
+        text-transform: capitalize;
+        &:nth-of-type(2){
+            position: absolute;
+            transform-origin: bottom center;
+            transform: rotateX(-90deg) translateY(12px);
+            opacity: 0;
+        }
+    }
 }

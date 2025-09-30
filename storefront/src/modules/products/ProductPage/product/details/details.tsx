@@ -19,6 +19,9 @@ type ProductTemplateProps = {
   region: HttpTypes.StoreRegion
   countryCode: string
   categories?: HttpTypes.StoreProductCategory[]
+  wishlistItems?: any[]
+  onWishlistUpdateAction?: () => Promise<void>
+  isAuthenticated?: boolean
 }
 
 const optionsAsKeymap = (
@@ -31,7 +34,7 @@ const optionsAsKeymap = (
 }
 
 
-const Details: React.FC<ProductTemplateProps> = ({ product, region, countryCode, categories }) => {
+const Details: React.FC<ProductTemplateProps> = ({ product, region, countryCode, categories, wishlistItems, onWishlistUpdateAction, isAuthenticated }) => {
     const [options, setOptions] = useState<Record<string, string | undefined>>({})
     const [isAdding, setIsAdding] = useState(false)
   
@@ -159,6 +162,9 @@ const Details: React.FC<ProductTemplateProps> = ({ product, region, countryCode,
                     handleAddToCart={handleAddToCart}
                     options={options}
                     product={product}
+                    wishlistItems={wishlistItems}
+                    onWishlistUpdateAction={onWishlistUpdateAction}
+                    isAuthenticated={isAuthenticated}
                 />
                 <div className="divider"/>
             </div>

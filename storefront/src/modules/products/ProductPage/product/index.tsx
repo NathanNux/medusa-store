@@ -10,9 +10,12 @@ type ProductTemplateProps = {
   region: HttpTypes.StoreRegion
   countryCode: string
   categories?: HttpTypes.StoreProductCategory[]
+  wishlistItems?: any[]
+  onWishlistUpdateAction?: () => Promise<void>
+  isAuthenticated?: boolean
 }
 
-const Product: React.FC<ProductTemplateProps> = ({ product, region, countryCode, categories }) => {
+const Product: React.FC<ProductTemplateProps> = ({ product, region, countryCode, categories, wishlistItems, onWishlistUpdateAction, isAuthenticated }) => {
 
     // If the product is not found return not found page
     if (!product || !product.id) {
@@ -23,7 +26,7 @@ const Product: React.FC<ProductTemplateProps> = ({ product, region, countryCode,
     // WIP: Update the neccessary fields to match the product data structure, and add more like available colors, sizes, etc.
     return(
         <section className="product">
-            <Details product={product} categories={categories} region={region} countryCode={countryCode} />
+            <Details product={product} categories={categories} region={region} countryCode={countryCode} wishlistItems={wishlistItems} onWishlistUpdateAction={onWishlistUpdateAction} isAuthenticated={isAuthenticated} />
             <Gallery product={product} region={region} countryCode={countryCode} />
         </section>
     )

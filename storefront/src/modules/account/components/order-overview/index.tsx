@@ -1,6 +1,7 @@
 "use client"
 
-import { Button } from "@medusajs/ui"
+import { useState } from "react"
+import { motion } from 'framer-motion';
 
 import OrderCard from "../order-card"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
@@ -22,19 +23,69 @@ const OrderOverview = ({ orders }: { orders: HttpTypes.StoreOrder[] }) => {
 
   return (
     <div className={s.empty} data-testid="no-orders-container">
-      <h2 className={s.title}>Nic k vidění</h2>
-      <p className={s.desc}>
-        Zatím nemáte žádné objednávky, pojďme to změnit {":)"}
-      </p>
+      <div className={s.emptyContent}>
+        <h2 className={s.title}>Nic tu nemáte...</h2>
+        <p className={s.desc}>
+          Zatím nemáte žádné objednávky, pojďme to změnit {":)"}
+        </p>
+      </div>
       <div className={s.ctaWrap}>
-        <LocalizedClientLink className={s.link} href="/" passHref>
-          <Button data-testid="continue-shopping-button">
-            Pokračovat v nakupování
-          </Button>
-        </LocalizedClientLink>
+        <LinkButton 
+          text="Pokračovat v nakupování" 
+          href="/" 
+        />
       </div>
     </div>
   )
 }
 
 export default OrderOverview
+
+
+type LinkButtonProps = {
+    text: string;
+    href: string; 
+}
+
+// This is base button for every button animation inside the website.
+
+function LinkButton({ text, href } : LinkButtonProps) {
+    const [ isActive , setIsActive ] = useState<boolean>(false);
+    return (
+        <LocalizedClientLink href={href} className={s.LinkButton}>
+            <button 
+                className={s.button}
+                onMouseEnter={() => setIsActive(true)}
+                onMouseLeave={() => setIsActive(false)}
+            >
+                <motion.div 
+                    className={s.slider}
+                    animate={{top: isActive ? "-100%" : "0%"}}
+                    transition={{ duration: 0.5, type: "tween", ease: [0.76, 0, 0.24, 1]}}
+                >
+                    <div 
+                        className={s.el}
+                        style={{ backgroundColor: "var(--OButton)" }}
+                    >
+                        <PerspectiveText label={text}/>
+                    </div>
+                    <div 
+                        className={s.el}
+                        style={{ backgroundColor: "var(--CreamDetails)" }}
+                    >
+                        <PerspectiveText label={text}/>
+                    </div>
+                </motion.div>
+            </button>
+        </LocalizedClientLink>
+    )
+}
+
+function PerspectiveText({label}: {label: string}) {
+    return (    
+        <div className={s.perspectiveText}>
+            <p>{label}</p>
+            <p>{label}</p>
+        </div>
+    )
+}

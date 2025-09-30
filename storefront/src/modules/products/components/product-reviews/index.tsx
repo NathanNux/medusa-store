@@ -37,6 +37,8 @@ export default function ProductReviews({
     console.log("[ProductReviews] mounted", { productId, initialCount, initialRating })
   }, [])
 
+  //WIP: Test and correct if needed - there is/was error on local hosting
+
   useEffect(() => {
     console.log("Fetching reviews for product:", productId, "Page:", page)
     fetch(`/api/product-reviews/${productId}?limit=${defaultLimit}&offset=${(page - 1) * defaultLimit}`, {
@@ -118,7 +120,7 @@ export default function ProductReviews({
     <div className={`product-page-constraint ${styles.container}`}>
         <div className={styles.header}>
         <p className={styles.title}>
-            Podívejte se, co o tomto produktu říkají naši zákazníci.
+          Podívejte se, co o tomto produktu říkají naši zákazníci.
         </p>
         {error && (
           <p className={styles.error} style={{ color: "#c00" }}>

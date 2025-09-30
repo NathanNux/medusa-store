@@ -17,6 +17,9 @@ type BundleActionsProps = {
   onExpressAddToCart?: () => void
   handle?: string
   router?: { push: (path: string) => void }
+  wishlistItems?: any[]
+  onWishlistUpdateAction?: () => Promise<void>
+  isAuthenticated?: boolean
 }
 
 const optionsAsKeymap = (
@@ -34,6 +37,9 @@ export default function BundleActions({
   handle,
   router,
   onExpressAddToCart,
+  wishlistItems,
+  onWishlistUpdateAction,
+  isAuthenticated,
 }: BundleActionsProps) {
   const [productOptions, setProductOptions] = useState<
     Record<string, Record<string, string>>

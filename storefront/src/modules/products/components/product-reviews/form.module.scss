@@ -15,12 +15,24 @@
 		display: flex;
 		flex-direction: column;
 		row-gap: 1rem; // gap-y-4
+        color: var(--Wtext);
 
-		.formTitle {
-			font-size: 1.5rem; // text-xl-regular
-			line-height: 2.25rem; // 36px
-			color: var(--ui-fg-base, inherit);
-		}
+
+        .formTitleContainer{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            
+            .formTitle {
+                font-size: 1.8rem; // text-xl-regular
+                line-height: 1.25rem; // 36px
+                font-weight: 300;
+                font-family: "Sansation-Regular";
+                margin-bottom: 1rem; // mb-2
+            }
+        }
 
 		.form {
 			display: flex;
@@ -32,6 +44,15 @@
 			display: flex;
 			flex-direction: column;
 			row-gap: 0.5rem; // gap-y-2
+
+            .label{
+                font-size: 1.1rem; // text-base-regular → text-sm
+                line-height: 1.25rem;
+                font-weight: 300;
+                font-family: "Sansation-Regular";
+                color: var(--Wtext); // gray-600
+                margin-bottom: 0.05rem; // mb-6
+            }
 		}
 
 		.starsRow {
@@ -47,6 +68,19 @@
 			.starBtn {
 				padding: 0; // p-0
 				min-width: auto;
+                background-color: transparent;
+
+                &:hover {
+                    background-color: transparent;
+                }
+
+                svg {
+                    width: 1.5rem; // w-6
+                    height: 1.5rem; // h-6
+                    color: var(--Wtext); // gray-600
+                    cursor: pointer;
+                    overflow: hidden;
+                }
 			}
 		}
 	}
@@ -63,7 +97,7 @@
 
     .button{
         position: relative;
-        width: 100px;
+        width: 150px;
         height: 40px;
         cursor: pointer;
         border-radius: 25px;
@@ -88,6 +122,7 @@
                 height: 100%;
 				background-color: var(--CreamDetails);
                 p{
+                    color: var(--ChText);
                     margin: 0px;
                 }
                 &:nth-of-type(2){
@@ -132,7 +167,7 @@
         &:nth-of-type(2){
             position: absolute;
             transform-origin: bottom center;
-            transform: rotateX(-90deg) translateY(9px);
+            transform: rotateX(-90deg) translateY(11px);
             opacity: 0;
         }
     }

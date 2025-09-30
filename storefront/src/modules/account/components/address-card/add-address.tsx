@@ -1,17 +1,20 @@
 "use client"
 
 import { Plus } from "@medusajs/icons"
-import { Button, Divider, Text } from "@medusajs/ui"
+import { Divider, Text } from "@medusajs/ui"
 import { useEffect, useState, useActionState } from "react"
 
 import useToggleState from "@lib/hooks/use-toggle-state"
 import CountrySelect from "@modules/checkout/components/country-select"
 import Input from "@modules/common/components/input"
 import Modal from "@modules/common/components/modal"
-import { SubmitButton } from "@modules/checkout/components/submit-button"
 import { HttpTypes } from "@medusajs/types"
 import { addCustomerAddress } from "@lib/data/customer"
 import s from "./add-address.module.scss"
+import { useFormStatus } from "react-dom"
+import { motion } from "framer-motion"
+
+
 
 const AddAddress = ({
   region,
@@ -64,7 +67,10 @@ const AddAddress = ({
 
       <Modal isOpen={state} close={close} data-testid="add-address-modal">
         <Modal.Title>
-          <h2 className={s.modalTitle}>Přidat adresu</h2>
+          <div className={s.modalTitleContent}>
+            <h2 className={s.modalTitle}>Přidat adresu</h2>
+            <Divider />
+          </div>
         </Modal.Title>
         <form action={formAction}>
           <Modal.Body>
@@ -149,16 +155,19 @@ const AddAddress = ({
           </Modal.Body>
           <Modal.Footer>
             <div className={s.actions}>
-              <Button
-                type="reset"
-                variant="secondary"
-                onClick={close}
-                className={s.btnHeight}
+              <ClickButton
+                text="Zrušit"
+                type="button"
+                onClickAction={close}
+                className={s.cancelBtn}
                 data-testid="cancel-button"
-              >
-                Zrušit
-              </Button>
-              <SubmitButton data-testid="save-button">Uložit</SubmitButton>
+              />
+              <ClickButton
+                text="Uložit"
+                type="submit"
+                className={s.saveBtn}
+                data-testid="save-button"
+              />
             </div>
           </Modal.Footer>
         </form>
@@ -195,10 +204,10 @@ function ScrollButton({
         >
             <div className={s.slider}>
                 <div className={s.el}>
-                    <PerspectiveText label={text} className={className} textColor={textColor}/>
+                    <PerspectiveText component={<Plus />} label={text} className={className} textColor={textColor}/>
                 </div>
                 <div className={s.el}>
-                    <PerspectiveText label={text} className={className} textColor={textColor}/>
+                    <PerspectiveText component={<Plus />} label={text} className={className} textColor={"var(--Wtext)"}/>
                 </div>
             </div>
         </button>
@@ -206,27 +215,82 @@ function ScrollButton({
   );
 }
 
-function PerspectiveText({label, className, textColor}: {label: string; className?: string; textColor?: string}) {
+function PerspectiveText({label, className, textColor, component}: {label: string; className?: string; textColor?: string, component?: React.ReactNode}) {
   return (    
     <div className={s.perspectiveText}>
         <p 
           className={className}
           style={{
-            color: textColor || "var(--ChText)",
+            color: textColor,
           }}
         >
           {label}
-          <Plus />
+          {component}
         </p>
         <p 
           className={className}
           style={{
-            color: textColor || "var(--Wtext)",
+            color: textColor,
           }}
         >
           {label}
-          <Plus />
+          {component}
         </p>
+    </div>
+  )
+}
+
+
+
+type ClickButtonProps = {
+  text: string;
+  onClickAction?: () => void | Promise<void>;
+  ClickAction?: () => void | Promise<void>; // backward compatibility
+  disabled?: boolean;
+  type?: "button" | "submit";
+  className?: string;
+  "data-testid"?: string;
+}
+
+// Base animated button used across the site. Can act as a submit button in forms.
+function ClickButton({ onClickAction, ClickAction, disabled = false, text, type = "button", className, "data-testid": dataTestId }: ClickButtonProps) {
+  const [ isActive , setIsActive ] = useState<boolean>(false);
+  const { pending } = useFormStatus();
+  const isSubmitting = type === "submit" ? pending : false;
+  const isDisabled = disabled || isSubmitting;
+  const handleClick = onClickAction ?? ClickAction;
+
+  return (
+    <div className={className ? `${s.ClickButton} ${className}` : s.ClickButton}>
+      <button
+        type={type}
+        className={s.button}
+        onClick={handleClick}
+        disabled={isDisabled}
+        aria-busy={isDisabled || undefined}
+        onMouseEnter={() => setIsActive(true)}
+        onMouseLeave={() => setIsActive(false)}
+        data-testid={dataTestId}
+      >
+        <motion.div
+          className={s.slider}
+          animate={{top: isActive ? "-100%" : "0%"}}
+          transition={{ duration: 0.5, type: "tween", ease: [0.76, 0, 0.24, 1]}}
+        >
+          <div
+            className={s.el}
+            style={{ backgroundColor: "var(--OButton)" }}
+          >
+            <PerspectiveText label={text}/>
+          </div>
+          <div
+            className={s.el}
+            style={{ backgroundColor: "var(--CharcoalBg)" }}
+          >
+            <PerspectiveText label={text} />
+          </div>
+        </motion.div>
+      </button>
     </div>
   )
 }

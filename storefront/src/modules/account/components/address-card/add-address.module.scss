@@ -8,6 +8,16 @@
   align-items: flex-start;
   flex-direction: column;
   margin-bottom: 1rem;
+
+  @include respond-to-v(s) {
+    margin-bottom: 2.5rem;
+  }
+  @include respond-to-v(sm) {
+    margin-bottom: 2.5rem;
+  }
+  @include respond-to-v(xs) {
+    margin-bottom: 2.5rem;
+  }
   .addButton{
     width: 100%;
     display: flex;
@@ -24,6 +34,41 @@
       font-weight: 300;
       font-family: "Sansation-Regular";
       text-transform: capitalize;
+
+      @include respond-to-h(lg){
+				font-size: 1.2rem;
+			}
+			@include respond-to-h(md){
+				font-size: 1.2rem;
+			}
+			@include respond-to-h(mdt){
+				font-size: 1.2rem;
+			}
+			@include respond-to-h(sm){
+				font-size: 1.2rem;
+			}
+			@include respond-to-h(xs){
+				font-size: 1.1rem;
+			}
+			@include respond-to-h(xxs){
+				font-size: 1.1rem;
+			}
+
+			@include respond-to-v(lg){
+				font-size: 1.2rem;
+			}
+			@include respond-to-v(md){
+				font-size: 1.2rem;
+			}
+			@include respond-to-v(s){
+				font-size: 1.1rem;
+			}
+			@include respond-to-v(sm){
+				font-size: 1.1rem;
+			}
+			@include respond-to-v(xs){
+				font-size: 1.1rem;
+			}
     }
     .cardButton {
       display: flex;
@@ -33,11 +78,71 @@
   }
 }
 
-.modalTitle {
-  margin-bottom: 0.5rem;
-  font-size: 1.125rem;
-  line-height: 1.75rem;
-  font-weight: 600;
+.modalTitleContent{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+
+  .title{
+    @include respond-to-v(s){
+      font-size: 1.3rem;
+    }
+    @include respond-to-v(sm){
+      font-size: 1.3rem;
+      margin-bottom: 0;
+    }
+    @include respond-to-v(xs){
+      font-size: 1.3rem;
+      margin-bottom: 0;
+    }
+  }
+  .modalTitle {
+    margin-bottom: 0.5rem;
+    font-size: 1.8rem;
+    line-height: 1.25rem;
+    font-weight: 300;
+    font-family: "Sansation-Regular";
+
+    @include respond-to-h(lg){
+      font-size: 1.6rem;
+    }
+    @include respond-to-h(md){
+      font-size: 1.6rem;
+    }
+    @include respond-to-h(mdt){
+      font-size: 1.6rem;
+    }
+    @include respond-to-h(sm){
+      font-size: 1.6rem;;
+    }
+    @include respond-to-h(xs){
+      font-size: 1.3rem;
+    }
+    @include respond-to-h(xxs){
+      font-size: 1.3rem;
+    }
+
+    @include respond-to-v(lg){
+      font-size: 1.6rem;
+    }
+    @include respond-to-v(md){
+      font-size: 1.6rem;
+    }
+    @include respond-to-v(s){
+      font-size: 1.3rem;
+    }
+    @include respond-to-v(sm){
+      font-size: 1.3rem;
+      margin-bottom: 0;
+    }
+    @include respond-to-v(xs){
+      font-size: 1.3rem;
+      margin-bottom: 0;
+    }
+
+  }
 }
 
 .form {
@@ -50,30 +155,129 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   column-gap: 0.5rem; /* gap-x-2 */
+
 }
 
 .rowPostal {
   display: grid;
   grid-template-columns: 144px 1fr;
   column-gap: 0.5rem;
+  
 }
 
 .error {
   color: #f43f5e; /* rose-500 */
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   line-height: 1.25rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
+
+  @include respond-to-h(lg){
+    font-size: 0.85rem;
+  }
+  @include respond-to-h(md){
+    font-size: 0.85rem;
+  }
+  @include respond-to-h(mdt){
+    font-size: 0.85rem;
+  }
+  @include respond-to-h(sm){
+    font-size: 0.85rem;
+  }
+  @include respond-to-h(xs){
+    font-size: 0.8rem;
+  }
+  @include respond-to-h(xxs){
+    font-size: 0.8rem;
+  }
+
+  @include respond-to-v(lg){
+    font-size: 0.85rem;
+  }
+  @include respond-to-v(md){
+    font-size: 0.85rem;
+  }
+  @include respond-to-v(s){
+    font-size: 0.8rem;
+  }
+  @include respond-to-v(sm){
+    font-size: 0.8rem;
+  }
+  @include respond-to-v(xs){
+    font-size: 0.8rem;
+  }
 }
 
 .actions {
   display: flex;
   column-gap: 0.75rem; /* gap-3 */
   margin-top: 1.5rem; /* mt-6 */
+
+  @include respond-to-v(s){
+    margin-top: 0.5rem; /* mt-6 */
+  }
+  @include respond-to-v(sm){
+    margin-top: 0.5rem; /* mt-6 */
+  }
+  @include respond-to-v(xs){
+    margin-top: 0.5rem; /* mt-6 */
+  }
+
+  .cancelBtn {
+    width: 120px;
+    cursor: pointer;
+    .button{
+    width: 100%;
+    cursor: pointer;
+    .slider{
+        .el{
+            background-color: var(--danger,  #f80e0e) !important;
+            .perspectiveText{
+                p{
+                margin-bottom: 0;
+                &:nth-of-type(2){
+                    transform: rotateX(-90deg) translateY(11px);
+                }
+                }
+            }
+            }
+        }
+    }
+}
+
+.saveBtn {
+    width: 120px;
+    cursor: pointer;
+
+    .button{
+        width: 100%;
+        cursor: pointer;
+        .slider{
+            .el{
+                .perspectiveText{
+                  p{
+                      margin-bottom: 0;
+                      &:nth-of-type(2){
+                          transform: rotateX(-90deg) translateY(11px);
+                      }
+                  }
+                }
+            }
+        }
+    }
+}
 }
 
 .btnHeight {
   height: 2.5rem; /* h-10 */
+}
+
+.cancelBtn {
+  width: 120px;
+}
+
+.saveBtn {
+  width: 120px;
 }
 
 .perspectiveText{
@@ -161,6 +365,74 @@
     border: 1px solid var(--border, #e5e7eb);
     border-radius: 15px; /* rounded */
 
+    @include respond-to-h(lg){
+      height: 60px;
+      width: 200px;
+      max-width: 250px;
+      max-height: 80px;
+    }
+    @include respond-to-h(md){
+      height: 50px;
+      width: 150px;
+      max-width: 200px;
+      max-height: 60px;
+    }
+    @include respond-to-h(mdt){
+      height: 50px;
+      width: 150px;
+      max-width: 200px;
+      max-height: 60px;
+    }
+    @include respond-to-h(sm){
+      height: 50px;
+      width: 150px;
+      max-width: 200px;
+      max-height: 60px;
+    }
+    @include respond-to-h(xs){
+      height: 50px;
+      width: 150px;
+      max-width: 200px;
+      max-height: 60px;
+    }
+    @include respond-to-h(xxs){
+      height: 50px;
+      width: 150px;
+      max-width: 200px;
+      max-height: 60px;
+    }
+
+    @include respond-to-v(lg){
+      height: 60px;
+      width: 200px;
+      max-width: 250px;
+      max-height: 80px;
+    }
+    @include respond-to-v(md){
+      height: 60px;
+      width: 200px;
+      max-width: 250px;
+      max-height: 80px;
+    }
+    @include respond-to-v(s){
+      height: 50px;
+      width: 150px;
+      max-width: 200px;
+      max-height: 60px;
+    }
+    @include respond-to-v(sm){
+      height: 50px;
+      width: 150px;
+      max-width: 200px;
+      max-height: 60px;
+    }
+    @include respond-to-v(xs){
+      height: 50px;
+      width: 150px;
+      max-width: 200px;
+      max-height: 60px;
+    }
+
     &:hover{
       .slider{
         .el{
@@ -180,11 +452,15 @@
         transition: all 0.5s cubic-bezier(0.76, 0, 0.24, 1);
         p{
           margin: 0px;
-          color: var(--Wtext)
+          color: var(--ChText);
+
+          &:nth-of-type(2){
+            color: var(--Wtext) !important;
+          }
         }
         &:nth-of-type(2){
           p{
-            color: var(--Wtext);
+            color: var(--Wtext) !important;
           }
         }
         &:hover{
@@ -205,5 +481,64 @@
       }
     }
       
+  }
+}
+
+
+.ClickButton{
+  width: auto;
+  height: auto;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  .button{
+      position: relative;
+      width: 100%;
+      max-width: 280px;
+      height: 40px;
+      cursor: pointer;
+      border-radius: 25px;
+      overflow: hidden;
+      border: none;
+      box-shadow: none;
+      background-color: transparent;
+
+      .slider{
+          position: relative;
+          width: 100%;
+          height: 100%;
+
+          .el{
+              width: 100%;
+              height: 100%;
+              p{
+                  margin: 0px;
+                  color: var(--Wtext)
+              }
+              &:nth-of-type(2){
+                  p{
+                      color: var(--Wtext);
+                  }
+              }
+              &:hover{
+                  .perspectiveText{
+                      transform: rotateX(90deg);
+                      p{
+                          &:nth-of-type(1){
+                              transform: translateY(-100%);
+                              opacity: 0;
+                          }
+                          &:nth-of-type(2){
+                              opacity: 1;
+                          }
+                      }
+                  }
+              }
+          }
+      }
+
   }
 }

@@ -28,14 +28,14 @@ const AccountLayout: React.FC<AccountLayoutProps> = ({
             <div className={s.children}>
               {children}
             </div>
-        </div>
+          </div>
         )}
         {!customer && (
           <div className={s.center}>
             <div>
               {children}
             </div>
-        </div>
+          </div>
         )}
        {customer && !isVerified && (
          <div className={s.centerZ1}>

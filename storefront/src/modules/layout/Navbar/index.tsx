@@ -20,9 +20,10 @@ type NavbarProps = {
     cart: StoreCart | null;
     regions: StoreRegion[];
     isLoggedIn?: boolean;
+    wishlistItems?: any[];
 }
 
-export default function Navbar({ cart, regions, isLoggedIn }: NavbarProps) {
+export default function Navbar({ cart, regions, isLoggedIn, wishlistItems = [] }: NavbarProps) {
     const [isMobile, setIsMobile] = useState<boolean>(false)
     const [isTablet, setIsTablet] = useState<boolean>(false)
     const dimension = useRef<{ width: number; height: number }>({ width: 0, height: 0 });
@@ -178,7 +179,7 @@ export default function Navbar({ cart, regions, isLoggedIn }: NavbarProps) {
                             {isLoggedIn && (
                               <li>
                                   <Magnetic>
-                                      <LocalizedClientLink href="/account/wishlist">
+                                      <LocalizedClientLink href="/account/wishlist" className="relative">
                                           <Image 
                                               src="/assets/icons/bookmark.svg"
                                               alt="wishlist Icon button"
@@ -186,6 +187,11 @@ export default function Navbar({ cart, regions, isLoggedIn }: NavbarProps) {
                                               height={24}
                                               className="Navbar__Icon"
                                           />
+                                          {wishlistItems.length > 0 && (
+                                              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                                                  {wishlistItems.length}
+                                              </span>
+                                          )}
                                       </LocalizedClientLink>
                                   </Magnetic>
                               </li>
@@ -249,7 +255,7 @@ export default function Navbar({ cart, regions, isLoggedIn }: NavbarProps) {
                     </div>
                 )}
             </motion.nav>
-            {isMobile && <MobileIconsNavbar cart={cart} isLoggedIn={isLoggedIn} />}
+            {isMobile && <MobileIconsNavbar cart={cart} isLoggedIn={isLoggedIn} wishlistItems={wishlistItems} />}
 
             <NewsPopup firstLoad={firstLoad}/>
         </>
@@ -258,17 +264,18 @@ export default function Navbar({ cart, regions, isLoggedIn }: NavbarProps) {
 type MobileIconsNavbarProps = {
   cart: StoreCart | null;
   isLoggedIn?: boolean;
+  wishlistItems?: any[];
 };
 
-export const  MobileIconsNavbar = ({ cart, isLoggedIn }: MobileIconsNavbarProps) => {
+export const  MobileIconsNavbar = ({ cart, isLoggedIn, wishlistItems = [] }: MobileIconsNavbarProps) => {
     const { firstLoad } = useStateContext();
     const [activeIdx, setActiveIdx] = useState<number | null>(null);
     const icons = useMemo(() => [
         { href: "/search", icon: <Image src="/assets/icons/search.svg" alt="search Icon button" width={40} height={40} className="Navbar__Icon" /> },
-        ...(isLoggedIn ? [{ href: "/account/wishlist", icon: <Image src="/assets/icons/bookmark.svg" alt="bookmark Icon button" width={40} height={40} className="Navbar__Icon" /> }] : []),
+        ...(isLoggedIn ? [{ href: "/account/wishlist", icon: <Image src="/assets/icons/bookmark.svg" alt="bookmark Icon button" width={40} height={40} className="Navbar__Icon" />, hasCounter: true, counter: wishlistItems.length }] : []),
         { href: "/cart", icon: <Cart />, isCart: true },
         { href: "/account", icon: <Image src="/assets/icons/user.svg" alt="user Icon button" width={40} height={40} className="Navbar__Icon" /> },
-    ], [isLoggedIn]);
+    ], [isLoggedIn, wishlistItems.length]);
     const PreloaderAnim = {
         initial: {
             y: "100%",
@@ -325,9 +332,14 @@ export const  MobileIconsNavbar = ({ cart, isLoggedIn }: MobileIconsNavbarProps)
                                     <CartButton cart={cart} />
                                 </Suspense>
                             ) : (
-                                <LocalizedClientLink href={item.href} className={item.href === "/search" ? "Navbar__Icons__Search" : ""}>
+                                <LocalizedClientLink href={item.href} className={`relative ${item.href === "/search" ? "Navbar__Icons__Search" : ""}`}>
                                     <Magnetic>
                                         {item.icon}
+                                        {item.hasCounter && item.counter > 0 && (
+                                            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                                                {item.counter}
+                                            </span>
+                                        )}
                                     </Magnetic>
                                 </LocalizedClientLink>
                             )}

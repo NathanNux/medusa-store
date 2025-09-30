@@ -8,6 +8,34 @@
 	min-height: 60dvh;
 	max-height: 100dvh;
 	padding: 5dvh 5vw 0 5vw;
+
+
+	@include respond-to-h(sm) {
+		min-height: 80dvh;
+		max-height: 120dvh;
+	}
+	@include respond-to-h(xs) {
+		min-height: 200dvh;
+		max-height: 250dvh;
+	}
+	@include respond-to-h(xxs) {
+		min-height: 200dvh;
+		max-height: 250dvh;
+	}
+
+	@include respond-to-v(s) {
+		padding: 0 2.5dvw;
+		align-items: flex-start;
+	}
+	@include respond-to-v(sm) {
+		padding: 0 2.5dvw;
+		align-items: flex-start;
+	}
+	@include respond-to-v(xs) {
+		padding: 0 2.5dvw;
+		min-height: 150dvh;
+		align-items: flex-start;
+	}
 	.content {
 		min-height: 60vh;
 		width: 100%;
@@ -17,6 +45,10 @@
 		justify-content: center;
 		// CSS Modules root wrapper for nesting
 		--overview: 1; // no-op var to avoid empty ruleset
+		@include respond-to-v(xs) {
+			padding: 0 2.5dvw;
+			min-height: 100dvh;
+		}
 
 		.contentVisibleOnSmall {
 			width: 100%;
@@ -25,11 +57,7 @@
 			justify-content: flex-start;
 			flex-direction: column;
 			// hidden small:block
-			display: none;
-			@media (min-width: 768px) {
-				display: flex;
-				
-			}
+			display: flex;
 
 			.headerRow {
 				// text-xl-semi flex justify-between items-center mb-4
@@ -50,11 +78,59 @@
 					align-items: flex-end;
 					justify-content: space-between;
 
+					@include respond-to-v(s) {
+						flex-direction: column;
+						align-items: flex-start;
+					}
+					@include respond-to-v(sm) {
+						flex-direction: column;
+						align-items: flex-start;
+					}
+					@include respond-to-v(xs) {
+						flex-direction: column;
+						align-items: flex-start;
+					}
+
 					.welcomeMessage{
 						font-size: 1.8rem;
 						line-height: 1.2;
 						font-weight: 300;
 						font-family: "Sansation-Light";
+
+						@include respond-to-h(lg){
+							font-size: 1.6rem;
+						}
+						@include respond-to-h(md){
+							font-size: 1.6rem;
+						}
+						@include respond-to-h(mdt){
+							font-size: 1.6rem;
+						}
+						@include respond-to-h(sm){
+							font-size: 1.6rem;
+						}
+						@include respond-to-h(xs){
+							font-size: 1.3rem;
+						}
+						@include respond-to-h(xxs){
+							font-size: 1.3rem;
+						}
+
+						@include respond-to-v(lg){
+							font-size: 1.6rem;
+						}
+						@include respond-to-v(md){
+							font-size: 1.6rem;
+						}
+						@include respond-to-v(s){
+							font-size: 1.3rem;
+						}
+						@include respond-to-v(sm){
+							font-size: 1.3rem;
+						}
+						@include respond-to-v(xs){
+							font-size: 1.3rem;
+						}
 
 						span{
 							font-weight: 400;
@@ -69,6 +145,46 @@
 						color: var(--ChText);
 						font-weight: 300;
 						font-family: "Sansation-Light";
+
+						@include respond-to-h(huge) {
+							font-size: 1.1rem;
+						}
+
+						@include respond-to-h(xl) {
+							font-size: 1.1rem;
+						}
+
+						@include respond-to-h(md) {
+							font-size: 1.05rem;
+						}
+
+						@include respond-to-h(sm) {
+							font-size: 1.05rem;
+						}
+
+						@include respond-to-h(xs) {
+							font-size: 0.95rem;
+						}
+						@include respond-to-h(xxs) {
+							font-size: 0.95rem;
+						}
+
+						// --- Vertical (portrait) responsiveness ---
+						@include respond-to-v(lg) {
+							font-size: 1.05rem;
+						}
+
+						@include respond-to-v(s) {
+							font-size: 0.95rem;
+						}
+
+						@include respond-to-v(sm) {
+							font-size: 0.9rem;
+						}
+
+						@include respond-to-v(xs) {
+							font-size: 0.85rem;
+						}
 						.fontSemibold {
 							font-weight: 400;
 							font-family: "Sansation-Regular";
@@ -103,6 +219,40 @@
 					column-gap: 4rem;
 					margin-bottom: 1.5rem;
 
+					@include respond-to-h(sm) {
+						flex-direction: column;
+						row-gap: 1rem;
+						column-gap: 0;
+					}
+					@include respond-to-h(xs) {
+						flex-direction: column;
+						row-gap: 1rem;
+						column-gap: 0;
+					}
+					@include respond-to-h(xxs) {
+						flex-direction: column;
+						row-gap: 1rem;
+						column-gap: 0;
+					}
+					@include respond-to-v(s) {
+						flex-direction: column;
+						align-items: center;
+						row-gap: 1rem;
+						column-gap: 0;
+					}
+					@include respond-to-v(sm) {
+						flex-direction: column;
+						align-items: center;
+						row-gap: 1rem;
+						column-gap: 0;
+					}
+					@include respond-to-v(xs) {
+						flex-direction: column;
+						align-items: center;
+						row-gap: 1rem;
+						column-gap: 0;
+					}
+
 					.groupCol {
 						// flex flex-col gap-y-4
 						display: flex;
@@ -124,6 +274,45 @@
 						cursor: pointer;
 
 
+						@include respond-to-h(sm) {
+							width: 90%;
+							height: 250px;
+							max-width: 600px;
+							max-height: 350px;
+						}
+						@include respond-to-h(xs) {
+							width: 90%;
+							height: 250px;
+							max-width: 600px;
+							max-height: 350px;
+						}
+						@include respond-to-h(xxs) {
+							width: 90%;
+							height: 250px;
+							max-width: 600px;
+							max-height: 350px;
+						}
+
+						@include respond-to-v(s) {
+							width: 90%;
+							height: 250px;
+							max-width: 600px;
+							max-height: 350px;
+						}
+						@include respond-to-v(sm) {
+							width: 90%;
+							height: 250px;
+							max-width: 600px;
+							max-height: 350px;
+						}
+						@include respond-to-v(xs) {
+							width: 90%;
+							height: 250px;
+							max-width: 600px;
+							max-height: 350px;
+						}
+
+
 						&:hover {
 							box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 							background-color: #d3d4a7; // light gray background on hover
@@ -137,6 +326,41 @@
 							line-height: 1rem;
 							font-weight: 400;
 							font-family: "Sansation-Regular";
+
+							@include respond-to-h(lg){
+								font-size: 1.2rem;
+							}
+							@include respond-to-h(md){
+								font-size: 1.2rem;
+							}
+							@include respond-to-h(mdt){
+								font-size: 1.2rem;
+							}
+							@include respond-to-h(sm){
+								font-size: 1.2rem;
+							}
+							@include respond-to-h(xs){
+								font-size: 1.1rem;
+							}
+							@include respond-to-h(xxs){
+								font-size: 1.1rem;
+							}
+
+							@include respond-to-v(lg){
+								font-size: 1.2rem;
+							}
+							@include respond-to-v(md){
+								font-size: 1.2rem;
+							}
+							@include respond-to-v(s){
+								font-size: 1.1rem;
+							}
+							@include respond-to-v(sm){
+								font-size: 1.1rem;
+							}
+							@include respond-to-v(xs){
+								font-size: 1.1rem;
+							}
 						}
 
 						.statRow {
@@ -151,14 +375,89 @@
 								font-size: 1.5rem;
 								line-height: 1;
 								font-weight: 600;
+
+								@include respond-to-h(lg){
+									font-size: 1.3rem;
+								}
+								@include respond-to-h(md){
+									font-size: 1.3rem;
+								}
+								@include respond-to-h(mdt){
+									font-size: 1.3rem;
+								}
+								@include respond-to-h(sm){
+									font-size: 1.3rem;
+								}
+								@include respond-to-h(xs){
+									font-size: 1.2rem;
+								}
+								@include respond-to-h(xxs){
+									font-size: 1.2rem;
+								}
+
+								@include respond-to-v(lg){
+									font-size: 1.3rem;
+								}
+								@include respond-to-v(md){
+									font-size: 1.3rem;
+								}
+								@include respond-to-v(s){
+									font-size: 1.2rem;
+								}
+								@include respond-to-v(sm){
+									font-size: 1.2rem;
+								}
+								@include respond-to-v(xs){
+									font-size: 1.2rem;
+								}
 							}
 
 							.subtleUpper {
 								// uppercase text-base-regular text-ui-fg-subtle
 								text-transform: capitalize;
-								font-size: 1rem;
+								font-size: 1.1rem;
 								line-height: 1.5rem;
-								color: var(--text-subtle, #6b7280);
+								color: var(--placeholder, #9ca3af);
+
+								@include respond-to-h(huge) {
+									font-size: 1.1rem;
+								}
+
+								@include respond-to-h(xl) {
+									font-size: 1.1rem;
+								}
+
+								@include respond-to-h(md) {
+									font-size: 1.05rem;
+								}
+
+								@include respond-to-h(sm) {
+									font-size: 1.05rem;
+								}
+
+								@include respond-to-h(xs) {
+									font-size: 0.95rem;
+								}
+								@include respond-to-h(xxs) {
+									font-size: 0.95rem;
+								}
+
+								// --- Vertical (portrait) responsiveness ---
+								@include respond-to-v(lg) {
+									font-size: 1.05rem;
+								}
+
+								@include respond-to-v(s) {
+									font-size: 0.95rem;
+								}
+
+								@include respond-to-v(sm) {
+									font-size: 0.9rem;
+								}
+
+								@include respond-to-v(xs) {
+									font-size: 0.85rem;
+								}
 							}
 						}
 						.LinkButton{
@@ -222,6 +521,46 @@
 									color: var(--OliveBg);
 									font-size: 3.5rem;
 									flex-shrink: 0;
+
+									@include respond-to-h(huge) {
+										font-size: 3.5rem;
+									}
+
+									@include respond-to-h(xl) {
+										font-size: 3.2rem;
+									}
+
+									@include respond-to-h(md) {
+										font-size: 3rem;
+									}
+
+									@include respond-to-h(sm) {
+										font-size: 3rem;
+									}
+
+									@include respond-to-h(xs) {
+										font-size: 2.5rem;
+									}
+									@include respond-to-h(xxs) {
+										font-size: 2.5rem;
+									}
+
+									// --- Vertical (portrait) responsiveness ---
+									@include respond-to-v(lg) {
+										font-size: 3rem;
+									}
+
+									@include respond-to-v(s) {
+										font-size: 2.5rem;
+									}
+
+									@include respond-to-v(sm) {
+										font-size: 2.5rem;
+									}
+
+									@include respond-to-v(xs) {
+										font-size: 2.5rem;
+									}
 								}
 
 								.stepText {
@@ -267,6 +606,41 @@
 							line-height: 1rem;
 							font-weight: 400;
 							font-family: "Sansation-Regular";
+
+							@include respond-to-h(lg){
+								font-size: 1.2rem;
+							}
+							@include respond-to-h(md){
+								font-size: 1.2rem;
+							}
+							@include respond-to-h(mdt){
+								font-size: 1.2rem;
+							}
+							@include respond-to-h(sm){
+								font-size: 1.2rem;
+							}
+							@include respond-to-h(xs){
+								font-size: 1.1rem;
+							}
+							@include respond-to-h(xxs){
+								font-size: 1.1rem;
+							}
+
+							@include respond-to-v(lg){
+								font-size: 1.2rem;
+							}
+							@include respond-to-v(md){
+								font-size: 1.2rem;
+							}
+							@include respond-to-v(s){
+								font-size: 1.1rem;
+							}
+							@include respond-to-v(sm){
+								font-size: 1.1rem;
+							}
+							@include respond-to-v(xs){
+								font-size: 1.1rem;
+							}
 						}
 					}
 
@@ -344,6 +718,46 @@
 							line-height: 1.25rem;
 							font-weight: 300;
 							font-family: "Sansation-Light";
+
+							@include respond-to-h(huge) {
+								font-size: 1.1rem;
+							}
+
+							@include respond-to-h(xl) {
+								font-size: 1.1rem;
+							}
+
+							@include respond-to-h(md) {
+								font-size: 1.05rem;
+							}
+
+							@include respond-to-h(sm) {
+								font-size: 1.05rem;
+							}
+
+							@include respond-to-h(xs) {
+								font-size: 0.95rem;
+							}
+							@include respond-to-h(xxs) {
+								font-size: 0.95rem;
+							}
+
+							// --- Vertical (portrait) responsiveness ---
+							@include respond-to-v(lg) {
+								font-size: 1.05rem;
+							}
+
+							@include respond-to-v(s) {
+								font-size: 0.95rem;
+							}
+
+							@include respond-to-v(sm) {
+								font-size: 0.9rem;
+							}
+
+							@include respond-to-v(xs) {
+								font-size: 0.85rem;
+							}
 						}
 					}
 				}

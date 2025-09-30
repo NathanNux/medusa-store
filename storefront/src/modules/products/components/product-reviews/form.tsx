@@ -5,7 +5,7 @@ import { useState } from "react"
 import { useEffect } from "react"
 import { retrieveCustomer } from "../../../../lib/data/customer"
 import { HttpTypes } from "@medusajs/types"
-import { Button, Input, Label, Textarea, toast, Toaster } from "@medusajs/ui"
+import { Button, Divider, Input, Label, Textarea, toast, Toaster } from "@medusajs/ui"
 import { Star, StarSolid } from "@medusajs/icons"
 import { addProductReview } from "../../../../lib/client/reviews"
 import styles from "./form.module.scss"
@@ -94,45 +94,42 @@ export default function ProductReviewsForm({ productId }: ProductReviewsFormProp
         {showForm && (
         <div className={styles.formSection}>
             <div className={styles.field}>
-            <span className={styles.formTitle}>
-            Přidat recenzi
-            </span>
+              <div className={styles.formTitleContainer}>
+                <span className={styles.formTitle}>
+                  Přidat recenzi
+                </span>
+                <Divider />
+              </div>
             
-            <form
-              onSubmit={(e) => { e.preventDefault(); submitReview(); }}
-              action="#"
-              className={styles.form}
-              noValidate
-            >
-            <div className={styles.field}>
-                <Label>Název</Label>
-                <Input name="title" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Název" />
-            </div>
-            <div className={styles.field}>
-                <Label>Obsah</Label>
-                <Textarea name="content" value={content} onChange={(e) => setContent(e.target.value)} placeholder="Content" />
-            </div>
-            <div className={styles.starsRow}>
-                <Label>Hodnocení</Label>
-                <div className={styles.stars}>
-                {Array.from({ length: 5 }).map((_, index) => (
-                    <Button key={index} variant="transparent" onClick={(e) => {
-                    e.preventDefault()
-                    setRating(index + 1)
-                    }} className={styles.starBtn}>
-                    {rating >= index + 1 ? <StarSolid className="text-ui-tag-orange-icon" /> : <Star />}
-                    </Button>
-                ))}
-                </div>
-            </div>
-            <ClickButton
-              text="Odeslat"
-              type="button"
-              onClickAction={submitReview}
-              disabled={isLoading}
-              className={styles.submitButton}
-            />
-            </form>
+              <form onSubmit={handleSubmit} className={styles.form}>
+              <div className={styles.field}>
+                  <Label className={styles.label}>Název</Label>
+                  <Input name="title" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Váš název" />
+              </div>
+              <div className={styles.field}>
+                  <Label className={styles.label}>Obsah</Label>
+                  <Textarea name="content" value={content} onChange={(e) => setContent(e.target.value)} placeholder="Váš obsah" />
+              </div>
+              <div className={styles.starsRow}>
+                  <Label className={styles.label}>Hodnocení</Label>
+                  <div className={styles.stars}>
+                  {Array.from({ length: 5 }).map((_, index) => (
+                      <Button key={index} variant="transparent" onClick={(e) => {
+                        e.preventDefault()
+                        setRating(index + 1)
+                        }} className={styles.starBtn}>
+                        {rating >= index + 1 ? <StarSolid className="text-ui-tag-orange-icon" /> : <Star />}
+                      </Button>
+                  ))}
+                  </div>
+              </div>
+              <ClickButton
+                text="Odeslat"
+                type="submit"
+                disabled={isLoading}
+                className={styles.submitButton}
+              />
+              </form>
             </div>
         </div>
         )}

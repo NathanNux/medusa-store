@@ -477,16 +477,15 @@ export async function deleteAccount(): Promise<{ success: boolean; message: stri
     // Get current customer to obtain their email
     const customer = await retrieveCustomer()
     if (!customer?.email) {
-      return { success: false, message: "No authenticated customer found." }
+      return { success: false, message: "Customer not found." }
     }
 
-    const res = await fetch("/store/customers/delete-account", {
-      method: "POST",
+    const res = await fetch(`${process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL}/store/customers/me`, {
+      method: "DELETE",
       headers: {
         ...headers,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email: customer.email }),
     })
 
     if (!res.ok) {
@@ -497,5 +496,36 @@ export async function deleteAccount(): Promise<{ success: boolean; message: stri
     return { success: true, message: "Your account has been deleted." }
   } catch (e: any) {
     return { success: false, message: e?.message || "Failed to delete account." }
+  }
+}
+
+export const getCustomerWishlistItems = async (): Promise<any[]> => {
+  const authHeaders = await getAuthHeaders()
+
+  if (!authHeaders) return []
+
+  const headers = {
+    ...authHeaders,
+  }
+
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL}/store/customers/me/wishlists`,
+      {
+        method: "GET",
+        headers,
+        cache: "no-store",
+      }
+    )
+
+    if (!res.ok) {
+      return []
+    }
+
+    const data = await res.json()
+    return data.wishlist?.items ?? []
+  } catch (error) {
+    console.error("Failed to fetch wishlist items:", error)
+    return []
   }
 }

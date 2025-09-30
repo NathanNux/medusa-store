@@ -2,19 +2,22 @@
 
 import { clx, Divider } from "@medusajs/ui"
 import styles from "./style.module.scss"
-import { ArrowRightOnRectangle } from "@medusajs/icons"
 import { useParams, usePathname } from "next/navigation"
 
-import ChevronDown from "@modules/common/icons/chevron-down"
 import User from "@modules/common/icons/user"
 import MapPin from "@modules/common/icons/map-pin"
 import Package from "@modules/common/icons/package"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { HttpTypes } from "@medusajs/types"
 import { deleteAccount, signout } from "@lib/data/customer"
-import { useState } from "react"
+import React, { useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 import { useFormStatus } from "react-dom"
+import SettingsIcon from "@modules/common/icons/settings"
+import Bookmark from "@modules/common/icons/bookmark"
+import ReviewsIcon from "@modules/common/icons/reviews"
+import Trash from "@modules/common/icons/trash"
+import LogoutIcon from "@modules/common/icons/logout"
 
 const AccountNav = ({
   customer,
@@ -32,90 +35,119 @@ const AccountNav = ({
   return (
     <div className={styles.root}>
       <div className={styles.mobileNav} data-testid="mobile-account-nav">
-        {route !== `/${countryCode}/account` ? (
-          <LocalizedClientLink
-            href="/account"
-            className={styles.mainLink}
-            data-testid="account-main-link"
-          >
-            <>
-              <ChevronDown className={styles.mainLinkIcon} />
-              <span>Account</span>
-            </>
-          </LocalizedClientLink>
-        ) : (
-          <>
-            <div className={styles.greeting}>
-              Hello {customer?.first_name}
-            </div>
-            <div className={styles.navList}>
-              <ul>
+        <div className={styles.container}>
+          <div className={styles.header}>
+            <h3>Zákaznický účet</h3>
+            <Divider />
+          </div>
+          <div className={styles.navList}>
+            <ul>
+              <div className={styles.links}>
                 <li>
-                  <LocalizedClientLink
+                  <AccountNavLinkMobile
+                    href="/account"
+                    route={route!}
+                    data-testid="overview-link"
+                    className={styles.Link}
+                    text="Přehled"
+                    component={<User color="#000" />}
+                  />
+                </li>
+                <li>
+                  <AccountNavLinkMobile
                     href="/account/profile"
-                    className={styles.navLink}
+                    route={route!}
                     data-testid="profile-link"
-                  >
-                    <>
-                      <div className={styles.navLinkLabel}>
-                        <User size={20} />
-                        <span>Profile</span>
-                      </div>
-                      <ChevronDown className={styles.navLinkIcon} />
-                    </>
-                  </LocalizedClientLink>
+                    className={styles.Link}
+                    text="Nastavení"
+                    component={<SettingsIcon color="#000" />}
+                  />
                 </li>
                 <li>
-                  <LocalizedClientLink
+                  <AccountNavLinkMobile
                     href="/account/addresses"
-                    className={styles.navLink}
+                    route={route!}
                     data-testid="addresses-link"
-                  >
-                    <>
-                      <div className={styles.navLinkLabel}>
-                        <MapPin size={20} />
-                        <span>Addresses</span>
-                      </div>
-                      <ChevronDown className={styles.navLinkIcon} />
-                    </>
-                  </LocalizedClientLink>
+                    className={styles.Link}
+                    text="Adresy"
+                    component={<MapPin color="#000" />}
+                  />
                 </li>
                 <li>
-                  <LocalizedClientLink
+                  <AccountNavLinkMobile
                     href="/account/orders"
-                    className={styles.navLink}
+                    route={route!}
                     data-testid="orders-link"
-                  >
-                    <div className={styles.navLinkLabel}>
-                      <Package size={20} />
-                      <span>Orders</span>
-                    </div>
-                    <ChevronDown className={styles.navLinkIcon} />
-                  </LocalizedClientLink>
+                    className={styles.Link}
+                    text="Objednávky"
+                    component={<Package color="#000" />}
+                  />
                 </li>
                 <li>
-                  <button
-                    type="button"
-                    className={styles.logoutBtn}
-                    onClick={handleLogout}
-                    data-testid="logout-button"
-                  >
-                    <div className={styles.logoutBtnIcon}>
-                      <ArrowRightOnRectangle />
-                      <span>Log out</span>
-                    </div>
-                    <ChevronDown className={styles.navLinkIcon} />
-                  </button>
+                  <AccountNavLinkMobile
+                    href="/account/reviews"
+                    route={route!}
+                    data-testid="reviews-link"
+                    className={styles.Link}
+                    text="Recenze"
+                    component={<ReviewsIcon color="#000" />}
+                  />
                 </li>
-              </ul>
-            </div>
-          </>
-        )}
+                <li>
+                  <AccountNavLinkMobile
+                    href="/account/wishlist"
+                    route={route!}
+                    data-testid="wishlist-link"
+                    className={styles.Link}
+                    text="Seznam přání"
+                    component={<Bookmark color="#000"/>}
+                  />
+                </li>
+              </div>
+              <Divider />
+              <div className={styles.actions}>
+                <li>
+                  <ClickButtonMobile
+                      component={<LogoutIcon color="#fff" />}
+                      onClickAction={handleLogout}
+                      data-testid="logout-button"
+                      className={styles.logoutBtn}
+                    />
+                </li>
+                <li>
+                  <ClickButtonMobile
+                    component={<Trash color="#fff" />}
+                    onClickAction={() => setOpenModal(true)}
+                    data-testid="delete-account-button"
+                    className={styles.deleteAccountBtn}
+                  />
+                  <AnimatePresence mode="wait">
+                    {openModal && (
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                        className={styles.deleteAccountModal}
+                        data-testid="delete-account-modal"
+                      >
+                        <Modal
+                          isOpen={openModal}
+                          setIsOpen={setOpenModal}
+                        />
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </li>
+              </div>
+            </ul>
+          </div>
+        </div>
       </div>
       <div className={styles.desktopNav} data-testid="account-nav">
         <div className={styles.container}>
           <div className={styles.header}>
-            <h3>Account</h3>
+            <h3>Zákaznický účet</h3>
             <Divider />
           </div>
           <div className={styles.navList}>
@@ -215,12 +247,15 @@ const AccountNav = ({
   )
 }
 
+export default AccountNav
+
 type AccountNavLinkProps = {
   href: string
   route: string
   text: string
   "data-testid"?: string
   className?: string
+  component?: React.ReactNode
 }
 
 const Modal = ({
@@ -279,11 +314,35 @@ const AccountNavLink = ({
   )
 }
 
-export default AccountNav
+const AccountNavLinkMobile = ({
+  href,
+  route,
+  text,
+  "data-testid": dataTestId,
+  className,
+  component
+}: AccountNavLinkProps) => {
+  const { countryCode }: { countryCode: string } = useParams()
+
+  const active = route.split(countryCode)[1] === href
+  // ensure CSS module active class is added so `.ScrollLink.active` rules match
+  return (
+    <ScrollLinkMobile
+      href={href}
+      text={text}
+      className={clx(className, active && styles.active)}
+      data-testid={dataTestId}
+      component={component}
+    />
+  )
+}
+
+export { ClickButtonMobile }
 
 
 type ClickButtonProps = {
-    text: string;
+    text?: string;
+    component?: React.ReactNode;
     onClickAction?: () => void | Promise<void>;
     ClickAction?: () => void | Promise<void>; // backward compatibility
     disabled?: boolean;
@@ -293,7 +352,7 @@ type ClickButtonProps = {
 }
 
 // Base animated button used across the site. Can act as a submit button in forms.
-function ClickButton({ onClickAction, ClickAction, disabled = false, text, type = "button", className, "data-testid": dataTestId }: ClickButtonProps) {
+function ClickButton({ onClickAction, ClickAction, disabled = false, text, component, type = "button", className, "data-testid": dataTestId }: ClickButtonProps) {
     const [ isActive , setIsActive ] = useState<boolean>(false);
     const { pending } = useFormStatus();
     const isSubmitting = type === "submit" ? pending : false;
@@ -321,13 +380,13 @@ function ClickButton({ onClickAction, ClickAction, disabled = false, text, type 
                     className={styles.el}
                     style={{ backgroundColor: "var(--OButton)" }}
                   >
-                    <PerspectiveText label={text}/>
+                    {component ? <PerspectiveTextMobile component={component} /> : <PerspectiveText label={text || ""}/>}
                   </div>
                   <div
                     className={styles.el}
                     style={{ backgroundColor: "var(--CharcoalBg)" }}
                   >
-                    <PerspectiveText label={text} />
+                    {component ? <PerspectiveTextMobile component={component} /> : <PerspectiveText label={text || ""} />}
                   </div>
               </motion.div>
             </button>
@@ -340,6 +399,58 @@ function PerspectiveText({label}: {label: string}) {
     <div className={styles.perspectiveText}>
             <p>{label}</p>
             <p>{label}</p>
+        </div>
+    )
+}
+
+function PerspectiveTextMobile({component}: {component: React.ReactNode}) {
+    return (    
+    <div className={styles.perspectiveText}>
+            <p>{component}</p>
+            <p>{component}</p>
+        </div>
+    )
+}
+
+// Mobile version of ClickButton that accepts components instead of text
+function ClickButtonMobile({ onClickAction, ClickAction, disabled = false, component, type = "button", className, "data-testid": dataTestId }: Omit<ClickButtonProps, 'text'> & { component: React.ReactNode }) {
+    const [ isActive , setIsActive ] = useState<boolean>(false);
+    const { pending } = useFormStatus();
+    const isSubmitting = type === "submit" ? pending : false;
+    const isDisabled = disabled || isSubmitting;
+    const handleClick = onClickAction ?? ClickAction;
+
+  return (
+    <div className={className ? `${styles.ClickButton} ${className}` : styles.ClickButton}>
+            <button
+              type={type}
+              className={styles.button}
+              onClick={handleClick}
+              disabled={isDisabled}
+              aria-busy={isDisabled || undefined}
+              onMouseEnter={() => setIsActive(true)}
+              onMouseLeave={() => setIsActive(false)}
+              data-testid={dataTestId}
+            >
+              <motion.div
+                className={styles.slider}
+                animate={{top: isActive ? "-100%" : "0%"}}
+                transition={{ duration: 0.5, type: "tween", ease: [0.76, 0, 0.24, 1]}}
+              >
+                  <div
+                    className={styles.el}
+                    style={{ backgroundColor: "var(--OButton)" }}
+                  >
+                    <PerspectiveTextMobile component={component} />
+                  </div>
+                  <div
+                    className={styles.el}
+                    style={{ backgroundColor: "var(--CharcoalBg)" }}
+                  >
+                    <PerspectiveTextMobile component={component} />
+                  </div>
+              </motion.div>
+            </button>
         </div>
     )
 }
@@ -387,6 +498,54 @@ function ScrollLink({
         </button>
     </LocalizedClientLink>
   );
+}
+function ScrollLinkMobile({
+  href,
+  className,
+  "data-testid": dataTestId,
+  component
+}: {
+  href: string;
+  text: string;
+  className?: string;
+  textColor?: string;
+  borderColor?: string;
+  borderR?: boolean;
+  borderL?: boolean;
+  "data-testid"?: string;
+  component?: React.ReactNode
+}) {
+  return (
+    <LocalizedClientLink href={href} className={clx(styles.ScrollLinkMobile, className)} data-testid={dataTestId}
+      style={{
+      }}
+    >
+        <button 
+          className={styles.button}
+            style={{
+            textDecoration: "none",
+          }}
+        >
+            <div className={styles.slider}>
+                <div className={styles.el}>
+                    <PerspectiveMobile component={component}/>
+                </div>
+                <div className={styles.el}>
+                    <PerspectiveMobile component={component}/>
+                </div>
+            </div>
+        </button>
+    </LocalizedClientLink>
+  );
+}
+
+function PerspectiveMobile({component}: {component: React.ReactNode}) {
+  return (    
+  <div className={styles.perspectiveText}>
+        <p>{component}</p>
+        <p>{component}</p>
+    </div>
+  )
 }
 
 function PerspectiveText2({label, className, textColor}: {label: string; className?: string; textColor?: string}) {

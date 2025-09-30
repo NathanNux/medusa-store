@@ -1,7 +1,7 @@
 import { Metadata } from "next"
 
 import { listCartOptions, retrieveCart } from "@lib/data/cart"
-import { retrieveCustomer } from "@lib/data/customer"
+import { retrieveCustomer, getCustomerWishlistItems } from "@lib/data/customer"
 import { getBaseURL } from "@lib/util/env"
 import { StoreCartShippingOption, StoreRegion } from "@medusajs/types"
 import CartMismatchBanner from "@modules/layout/components/cart-mismatch-banner"
@@ -22,6 +22,8 @@ export default async function PageLayout(props: { children: React.ReactNode }) {
   let shippingOptions: StoreCartShippingOption[] = []
   const regions = await listRegions().then((regions: StoreRegion[]) => regions)
   
+  // Fetch customer wishlist items
+  const wishlistItems = await getCustomerWishlistItems()
 
   if (cart) {
     try {
@@ -35,7 +37,7 @@ export default async function PageLayout(props: { children: React.ReactNode }) {
 
   return (
     <>
-      <Navbar cart={cart} regions={regions} isLoggedIn={!!customer} />
+      <Navbar cart={cart} regions={regions} isLoggedIn={!!customer} wishlistItems={wishlistItems} />
       {customer && cart && (
         <CartMismatchBanner customer={customer} cart={cart} />
       )}

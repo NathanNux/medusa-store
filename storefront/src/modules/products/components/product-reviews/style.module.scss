@@ -64,12 +64,14 @@
             .stars {
                 display: flex;
                 column-gap: 0.5rem; // gap-x-2
+                color: var(--Wtext);
             }
 
             .count {
-                font-size: 0.875rem;
-                line-height: 1.5rem;
-                font-weight: 400;
+                font-size: 1.1rem;
+                line-height: 1.25rem;
+                font-weight: 300;
+                font-family: "Sansation-Regular";
                 color: var(--Wtext); // gray-600
             }
         }

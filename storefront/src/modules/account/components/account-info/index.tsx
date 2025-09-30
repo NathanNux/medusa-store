@@ -61,7 +61,7 @@ const AccountInfo = ({
         </div>
         <div>
           <ClickButton
-            text={state ? "Cancel" : "Edit"}
+            text={state ? "Zrušit" : "Upravit"}
             onClickAction={handleToggle}
             type={state ? "button" : "button"}
             className={s.editBtn}

@@ -9,6 +9,9 @@ import { listCategories } from "@lib/data/categories"
 import ProductReviews from "@modules/products/components/product-reviews"
 import ProductTemplate from "@modules/products/templates"
 import BundleActions from "@modules/products/components/bundle-actions"
+import { getCustomerWishlistItems, retrieveCustomer } from "@lib/data/customer"
+import { revalidatePath, revalidateTag } from "next/cache"
+import { getCacheTag } from "@lib/data/cookies"
 
 type Props = {
   params: Promise<{ countryCode: string; handle: string }>
@@ -96,6 +99,10 @@ export default async function ProductPage(props: Props) {
     notFound()
   }
 
+  // Check if user is authenticated
+  const customer = await retrieveCustomer()
+  const isAuthenticated = !!customer
+
    // @ts-ignore 
   const pricedProduct = await listProducts({
     countryCode,
@@ -134,6 +141,17 @@ export default async function ProductPage(props: Props) {
     offset: 0,
   })
 
+  // Fetch customer wishlist items
+  const wishlistItems = await getCustomerWishlistItems()
+
+  async function refreshWishlist() {
+    'use server'
+    revalidatePath(`/${params.countryCode}/products/${params.handle}`)
+    // Also revalidate customer data to ensure wishlist is updated
+    const customerCacheTag = await getCacheTag("customers")
+    revalidateTag(customerCacheTag)
+  }
+
   return (
     // <ProductTemplate
     //   product={pricedProduct}
@@ -147,13 +165,24 @@ export default async function ProductPage(props: Props) {
         region={region}
         countryCode={countryCode}
         categories={productCategories}
+        wishlistItems={wishlistItems}
+        onWishlistUpdateAction={refreshWishlist}
+        isAuthenticated={isAuthenticated}
       />
       {ENABLE_BUNDLES && bundleProduct && (
         <BundleActions 
           bundle={bundleProduct?.bundle_product}
+          wishlistItems={wishlistItems}
+          onWishlistUpdateAction={refreshWishlist}
+          isAuthenticated={isAuthenticated}
         />
       )}
-      <Details product={pricedProduct} />
+      <Details 
+        product={pricedProduct} 
+        wishlistItems={wishlistItems}
+        onWishlistUpdateAction={refreshWishlist}
+        isAuthenticated={isAuthenticated}
+      />
       <ProductReviews productId={pricedProduct.id} initialReviews={reviewsData.reviews} initialRating={reviewsData.average_rating} initialCount={reviewsData.count} />
       <SoldProducts />
     </main>

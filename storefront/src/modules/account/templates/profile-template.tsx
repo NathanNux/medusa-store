@@ -19,11 +19,11 @@ export const ProfileTemplate = ({ customer, regions }: ProfileTemplateProps) => 
         <section className={s.content}>
             <div className={s.content} data-testid="profile-page-wrapper">
                 <div className={s.header}>
-                <h1 className={s.title}>Profil</h1>
-                <Divider />
-                <p className={s.desc}>
-                    Zde můžete zobrazit a aktualizovat informace o svém profilu, včetně svého jména, e-mailu a telefonního čísla. Také můžete aktualizovat svou fakturační adresu nebo změnit heslo.
-                </p>
+                    <h1 className={s.title}>Profil</h1>
+                    <Divider />
+                    <p className={s.desc}>
+                        Zde můžete zobrazit a aktualizovat informace o svém profilu, včetně svého jména, e-mailu a telefonního čísla. Také můžete aktualizovat svou fakturační adresu nebo změnit heslo.
+                    </p>
                 </div>
                 <div className={s.body}>
                     <ProfileName customer={customer} />

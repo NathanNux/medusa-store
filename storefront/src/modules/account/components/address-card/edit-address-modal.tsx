@@ -2,20 +2,21 @@
 
 import React, { useEffect, useState, useActionState } from "react"
 import { PencilSquare as Edit, Trash } from "@medusajs/icons"
-import { Button, clx } from "@medusajs/ui"
+import { clx, Divider } from "@medusajs/ui"
+import { motion, AnimatePresence } from "framer-motion"
+import { useFormStatus } from "react-dom"
 
 import useToggleState from "@lib/hooks/use-toggle-state"
 import CountrySelect from "@modules/checkout/components/country-select"
 import Input from "@modules/common/components/input"
 import Modal from "@modules/common/components/modal"
 import Spinner from "@modules/common/icons/spinner"
-import { SubmitButton } from "@modules/checkout/components/submit-button"
 import { HttpTypes } from "@medusajs/types"
 import {
   deleteCustomerAddress,
   updateCustomerAddress,
 } from "@lib/data/customer"
-import s from "./edit-address-modal.module.scss"
+import s from "./styles.module.scss"
 
 type EditAddressProps = {
   region: HttpTypes.StoreRegion
@@ -30,6 +31,7 @@ const EditAddress: React.FC<EditAddressProps> = ({
 }) => {
   const [removing, setRemoving] = useState(false)
   const [successState, setSuccessState] = useState(false)
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false)
   const { state, open, close: closeModal } = useToggleState(false)
 
   const [formState, formAction] = useActionState(updateCustomerAddress, {
@@ -63,7 +65,7 @@ const EditAddress: React.FC<EditAddressProps> = ({
   }
 
   return (
-    <>
+    <div className={s.editAddress}>
       <div
         className={clx(s.card, { [s.cardActive]: isActive })}
         data-testid="address-container"
@@ -92,33 +94,34 @@ const EditAddress: React.FC<EditAddressProps> = ({
           </p>
         </div>
         <div className={s.actions}>
-          <button
+          <ScrollButton
+            text="Upravit"
             className={s.linkBtn}
-            onClick={open}
+            onClickAction={open}
             data-testid="address-edit-button"
-          >
-            <Edit />
-            Upravit
-          </button>
-          <button
+            component={<Edit />}
+          />
+          <ScrollButton
+            text="Odstranit"
             className={s.linkBtn}
-            onClick={removeAddress}
+            onClickAction={() => setDeleteModalOpen(true)}
             data-testid="address-delete-button"
-          >
-            {removing ? <Spinner /> : <Trash />}
-            Odstranit
-          </button>
+            component={removing ? <Spinner /> : <Trash />}
+          />
         </div>
       </div>
 
       <Modal isOpen={state} close={close} data-testid="edit-address-modal">
         <Modal.Title>
-          <h2 className={s.modalTitle}>Upravit adresu</h2>
+          <div className={s.modalTitleContent}>
+            <h2 className={s.modalTitle}>Upravit adresu</h2>
+          < Divider />
+          </div>
         </Modal.Title>
         <form action={formAction}>
           <input type="hidden" name="addressId" value={address.id} />
           <Modal.Body>
-            <div className={s.form}>
+            <div className={s.addressForm}>
               <div className={s.rowTwo}>
                 <Input
                   label="Jméno"
@@ -143,6 +146,7 @@ const EditAddress: React.FC<EditAddressProps> = ({
                 autoComplete="organization"
                 defaultValue={address.company || undefined}
                 data-testid="company-input"
+                className={s.input}
               />
               <Input
                 label="Adresa"
@@ -206,22 +210,174 @@ const EditAddress: React.FC<EditAddressProps> = ({
           </Modal.Body>
           <Modal.Footer>
             <div className={s.actionsRow}>
-              <Button
-                type="reset"
-                variant="secondary"
-                onClick={close}
-                className={s.btnHeight}
+              <ClickButton
+                text="Zrušit"
+                type="button"
+                onClickAction={close}
+                className={s.cancelBtn}
                 data-testid="cancel-button"
-              >
-                Zrušit
-              </Button>
-              <SubmitButton data-testid="save-button">Uložit</SubmitButton>
+              />
+              <ClickButton
+                text="Uložit"
+                type="submit"
+                className={s.saveBtn}
+                data-testid="save-button"
+              />
             </div>
           </Modal.Footer>
         </form>
       </Modal>
-    </>
+
+      <AnimatePresence mode="wait">
+        {deleteModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className={s.deleteModal}
+            data-testid="delete-address-modal"
+          >
+            <div className={s.modal}>
+              <h2>Odstranit adresu</h2>
+              <p>Opravdu chcete odstranit tuto adresu? Tuto akci nelze vrátit zpět.</p>
+              <div className={s.modalActions}>
+                <ClickButton
+                  text="Zrušit"
+                  onClickAction={() => setDeleteModalOpen(false)}
+                  className={s.cancelBtn}
+                />
+                <ClickButton
+                  text="Odstranit"
+                  onClickAction={async () => {
+                    setDeleteModalOpen(false);
+                    await removeAddress();
+                  }}
+                  className={s.deleteBtn}
+                />
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   )
 }
 
 export default EditAddress
+
+
+
+function ScrollButton({
+  text,
+  className,
+  textColor,
+  "data-testid": dataTestId,
+  onClickAction,
+  component
+}: {
+  text: string;
+  className?: string;
+  textColor?: string;
+  "data-testid"?: string;
+  onClickAction?: () => void | Promise<void>;
+  component?: React.ReactNode;
+}) {
+  return (
+    <div className={`${className} ${s.ScrollLink}`} data-testid={dataTestId} onClick={onClickAction} style={{ cursor: 'pointer' }}>
+        <button
+          className={s.button}
+            style={{
+            textDecoration: "none",
+          }}
+        >
+            <div className={s.slider}>
+                <div className={s.el}>
+                    <PerspectiveText label={text} className={className} textColor={textColor} component={component}/>
+                </div>
+                <div className={s.el}>
+                    <PerspectiveText label={text} className={className} textColor={textColor} component={component}/>
+                </div>
+            </div>
+        </button>
+    </div>
+  );
+}
+
+function PerspectiveText({label, className, textColor, component}: {label: string; className?: string; textColor?: string, component?: React.ReactNode}) {
+  return (    
+    <div className={s.perspectiveText}>
+        <p 
+          className={className}
+          style={{
+            color: textColor,
+          }}
+        >
+          {label}
+          {component}
+        </p>
+        <p 
+          className={className}
+          style={{
+            color: textColor,
+          }}
+        >
+          {label}
+          {component}
+        </p>
+    </div>
+  )
+}
+
+type ClickButtonProps = {
+  text: string;
+  onClickAction?: () => void | Promise<void>;
+  ClickAction?: () => void | Promise<void>; // backward compatibility
+  disabled?: boolean;
+  type?: "button" | "submit";
+  className?: string;
+  "data-testid"?: string;
+}
+
+// Base animated button used across the site. Can act as a submit button in forms.
+function ClickButton({ onClickAction, ClickAction, disabled = false, text, type = "button", className, "data-testid": dataTestId }: ClickButtonProps) {
+  const [ isActive , setIsActive ] = useState<boolean>(false);
+  const { pending } = useFormStatus();
+  const isSubmitting = type === "submit" ? pending : false;
+  const isDisabled = disabled || isSubmitting;
+  const handleClick = onClickAction ?? ClickAction;
+
+  return (
+    <div className={className ? `${s.ClickButton} ${className}` : s.ClickButton}>
+      <button
+        type={type}
+        className={s.button}
+        onClick={handleClick}
+        disabled={isDisabled}
+        aria-busy={isDisabled || undefined}
+        onMouseEnter={() => setIsActive(true)}
+        onMouseLeave={() => setIsActive(false)}
+        data-testid={dataTestId}
+      >
+        <motion.div
+          className={s.slider}
+          animate={{top: isActive ? "-100%" : "0%"}}
+          transition={{ duration: 0.5, type: "tween", ease: [0.76, 0, 0.24, 1]}}
+        >
+          <div
+            className={s.el}
+            style={{ backgroundColor: "var(--OButton)" }}
+          >
+            <PerspectiveText label={text}/>
+          </div>
+          <div
+            className={s.el}
+            style={{ backgroundColor: "var(--CharcoalBg)" }}
+          >
+            <PerspectiveText label={text} />
+          </div>
+        </motion.div>
+      </button>
+    </div>
+  )
+}
