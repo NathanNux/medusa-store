@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
 import { cookies } from "next/headers"
-import { sdk } from "@lib/config"
 import { retrieveCustomer } from "@lib/data/customer"
 
 export async function POST(req: NextRequest) {
@@ -32,29 +31,20 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ message: "Nelze načíst uživatele" }, { status: 400 })
     }
 
-    // 1) Ověř staré heslo pokusem o přihlášení
-    try {
-      await sdk.auth.login("customer", "emailpass", { email, password: old_password })
-    } catch (e: any) {
-      return NextResponse.json({ message: "Staré heslo není správné" }, { status: 400 })
-    }
+    // 1) deleguj na backend: /store/customers/me/password
+    const res = await fetch(`${process.env.MEDUSA_BACKEND_URL || process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL || "http://localhost:9000"}/store/customers/me/password`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
+        ...(pk ? { "x-publishable-api-key": pk, "x-publishable-key": pk } : {}),
+      },
+      body: JSON.stringify({ old_password, new_password }),
+    })
 
-    // 2) Změň heslo – použij Medusa auth endpoint (pokud je k dispozici)
-    try {
-      await sdk.client.fetch(`/auth/customer/password`, {
-        method: "POST",
-        headers: {
-          authorization: `Bearer ${token}`,
-          ...(pk ? { "x-publishable-api-key": pk, "x-publishable-key": pk } : {}),
-        },
-        body: { password: new_password },
-      })
-    } catch (e: any) {
-      // Fallback: pokud by endpoint nebyl dostupný, vrať srozumitelnou zprávu
-      return NextResponse.json(
-        { message: "Změna hesla není aktuálně dostupná. Kontaktujte podporu." },
-        { status: 501 }
-      )
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({}))
+      return NextResponse.json({ message: data?.message || "Nepodařilo se změnit heslo" }, { status: res.status })
     }
 
     return NextResponse.json({ ok: true })

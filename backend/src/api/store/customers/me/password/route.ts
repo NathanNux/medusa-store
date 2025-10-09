@@ -41,21 +41,28 @@ export const POST = async (
     }
 
     // Update password: for emailpass provider, update the auth identity secret
+
+    // Najdi všechny identity pro emailpass a tento email
     const providerIdentities = await auth.listProviderIdentities({
       entity_id: customer.email,
+      provider: "emailpass",
     })
 
-    const pi = providerIdentities?.[0]
-    if (!pi?.auth_identity_id) {
+    if (!Array.isArray(providerIdentities) || providerIdentities.length === 0) {
       return res.status(404).json({ message: "Auth identity not found" })
     }
 
-    await (auth as any).updateAuthIdentities([
-      {
+    // Pro jistotu aktualizuj všechny identity tohoto typu (mělo by být max 1)
+    for (const pi of providerIdentities) {
+      if (!pi?.auth_identity_id) continue
+      await (auth as any).updateAuthIdentities({
         id: pi.auth_identity_id,
+        provider_id: "emailpass",
+        provider: "emailpass",
+        entity_id: customer.email,
         secrets: { password: new_password },
-      },
-    ])
+      })
+    }
 
     return res.json({ ok: true })
   } catch (e: any) {
