@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ message: "Nelze načíst uživatele" }, { status: 400 })
     }
 
-    // 1) deleguj na backend: /store/customers/me/password
+    // 1) deleguj na backend: /store/customers/me/password (nový flow)
     const res = await fetch(`${process.env.MEDUSA_BACKEND_URL || process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL || "http://localhost:9000"}/store/customers/me/password`, {
       method: "POST",
       headers: {

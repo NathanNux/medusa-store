@@ -1,11 +1,11 @@
 import type { AuthenticatedMedusaRequest, MedusaResponse } from "@medusajs/framework/http"
 import { Modules } from "@medusajs/framework/utils"
-import bcrypt from "bcryptjs"
 
 type Body = {
   old_password: string
   new_password: string
 }
+
 
 export const POST = async (
   req: AuthenticatedMedusaRequest<Body>,
@@ -25,13 +25,13 @@ export const POST = async (
     const auth = req.scope.resolve(Modules.AUTH)
     const customerModule = req.scope.resolve(Modules.CUSTOMER)
 
-    // Load customer for email (provider identity uses email for entity_id in emailpass)
+    // Load customer for email
     const [customer] = await customerModule.listCustomers({ id: customerId })
     if (!customer?.email) {
       return res.status(400).json({ message: "Customer email not found" })
     }
 
-    // Verify old password by authenticating
+    // 1. Ověř staré heslo
     try {
       await (auth as any).authenticate("customer.emailpass", {
         entity_id: customer.email,
@@ -41,32 +41,14 @@ export const POST = async (
       return res.status(400).json({ message: "Staré heslo není správné" })
     }
 
-    // Update password: for emailpass provider, update the auth identity secret
-
-    // Najdi všechny identity pro emailpass a tento email
-    const providerIdentities = await auth.listProviderIdentities({
-      entity_id: customer.email,
-      provider: "emailpass",
-    })
-
-    if (!Array.isArray(providerIdentities) || providerIdentities.length === 0) {
-      return res.status(404).json({ message: "Auth identity not found" })
+    // 2. Spusť resetPassword flow (vygeneruje token a pošle email)
+    const resetResult = await (auth as any).resetPassword("customer", "emailpass", { identifier: customer.email })
+    if (!resetResult?.token) {
+      return res.status(500).json({ message: "Nepodařilo se vygenerovat token pro změnu hesla." })
     }
 
-
-    // Zahashuj nové heslo před uložením
-    const hashedPassword = await bcrypt.hash(new_password, 10)
-
-    for (const pi of providerIdentities) {
-      if (!pi?.auth_identity_id) continue
-      await (auth as any).updateAuthIdentities({
-        id: pi.auth_identity_id,
-        provider_id: "emailpass",
-        provider: "emailpass",
-        entity_id: customer.email,
-        secrets: { password: hashedPassword },
-      })
-    }
+    // 3. Proveď updateProvider s tokenem (změna hesla)
+    await (auth as any).updateProvider("customer", "emailpass", { password: new_password }, resetResult.token)
 
     return res.json({ ok: true })
   } catch (e: any) {
