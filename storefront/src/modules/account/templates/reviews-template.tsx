@@ -109,7 +109,7 @@ export default function ReviewsTemplate({ reviews }: { reviews: any[]} ) {
                                     <div className={s.productName}>
                                         {review?.product?.handle ? (
                                             <ClickButton 
-                                                text={review?.product?.title || review?.product?.handle}
+                                                text={(review?.product?.title || review?.product?.handle).split(' ').slice(0, 2).join(' ')}
                                             />
                                         ) : (
                                             <span>{review?.product?.title || review?.product?.id || review?.product_id || "neznámý produkt"}</span>

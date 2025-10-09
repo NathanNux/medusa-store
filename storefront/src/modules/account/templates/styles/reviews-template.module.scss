@@ -135,7 +135,13 @@
 			scrollbar-width: thin;
 			scrollbar-color: var(--CreamDetails) transparent;
 
-			//WIP: finish here reponsive design.
+			@include respond-to-h(xxs){
+				padding: 1rem 0;
+			}
+
+			@include respond-to-v(md){
+				padding: 1rem 0;
+			}
 
 			&::-webkit-scrollbar {
 				width: 6px;
@@ -170,6 +176,20 @@
 					box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 				}
 
+				@include respond-to-v(md){
+					padding: 0;
+				}
+
+				@include respond-to-v(s){
+					min-height: 350px;
+				}
+				@include respond-to-v(sm){
+					min-height: 350px;
+				}
+				@include respond-to-v(xs){
+					min-height: 350px;
+				}
+
 				a{
 					width: 100%;
 					height: auto;
@@ -177,6 +197,26 @@
 					flex-direction: row;
 					align-items: flex-start;
 					justify-content: space-between;
+
+					@include respond-to-h(xxs){
+						gap: 0.5rem;
+					}
+
+					@include respond-to-v(s){
+						flex-direction: column;
+						align-items: center;
+						justify-content: center;
+					}
+					@include respond-to-v(sm){
+						flex-direction: column;
+						align-items: center;
+						justify-content: center;
+					}
+					@include respond-to-v(xs){
+						flex-direction: column;
+						align-items: center;
+						justify-content: center;
+					}
 					.reviewContent{
 						position: relative;
 						width: 70%;
@@ -185,6 +225,16 @@
 						flex-direction: column;
 						align-items: flex-start;
 						justify-content: flex-start;
+
+						@include respond-to-v(s){
+							width: 100%;
+						}
+						@include respond-to-v(sm){
+							width: 100%;
+						}
+						@include respond-to-v(xs){
+							width: 100%;
+						}
 
 						.reviewText{
 							width: auto;
@@ -208,6 +258,42 @@
 								font-weight: 300;
 								font-family: "Sansation-Light";
 								color: var(--ChText);
+								line-height: 1.25;
+
+								@include respond-to-h(lg){
+									font-size: 1.05rem;
+								}
+								@include respond-to-h(md){
+									font-size: 1.05rem;
+								}
+								@include respond-to-h(mdt){
+									font-size: 1.05rem;
+								}
+								@include respond-to-h(sm){
+									font-size: 1rem;
+								}
+								@include respond-to-h(xs){
+									font-size: 1rem;
+								}
+								@include respond-to-h(xxs){
+									font-size: 1rem;
+								}
+
+								@include respond-to-v(lg){
+									font-size: 1.05rem;
+								}
+								@include respond-to-v(md){
+									font-size: 1rem;
+								}
+								@include respond-to-v(s){
+									font-size: 1rem;
+								}
+								@include respond-to-v(sm){
+									font-size: 1rem;
+								}
+								@include respond-to-v(xs){
+									font-size: 1rem;
+								}
 							}
 						}
 
