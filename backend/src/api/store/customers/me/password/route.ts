@@ -1,5 +1,6 @@
 import type { AuthenticatedMedusaRequest, MedusaResponse } from "@medusajs/framework/http"
 import { Modules } from "@medusajs/framework/utils"
+import bcrypt from "bcryptjs"
 
 type Body = {
   old_password: string
@@ -52,7 +53,10 @@ export const POST = async (
       return res.status(404).json({ message: "Auth identity not found" })
     }
 
-    // Pro jistotu aktualizuj všechny identity tohoto typu (mělo by být max 1)
+
+    // Zahashuj nové heslo před uložením
+    const hashedPassword = await bcrypt.hash(new_password, 10)
+
     for (const pi of providerIdentities) {
       if (!pi?.auth_identity_id) continue
       await (auth as any).updateAuthIdentities({
@@ -60,7 +64,7 @@ export const POST = async (
         provider_id: "emailpass",
         provider: "emailpass",
         entity_id: customer.email,
-        secrets: { password: new_password },
+        secrets: { password: hashedPassword },
       })
     }
 
