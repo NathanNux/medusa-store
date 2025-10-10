@@ -9,6 +9,7 @@ import BgImage from "@modules/account/components/BgImage"
 import ReviewsTemplate from "@modules/account/templates/reviews-template"
 import { listRegions } from "@lib/data/regions"
 import { listProducts } from "@lib/data/products"
+import LocalizedClientLink from "@modules/common/components/localized-client-link"
 
 export const metadata: Metadata = {
   title: "My Reviews",
@@ -62,7 +63,7 @@ async function getCustomerReviews() {
         id: "prod_01K2JKVDCGDD9FD6YCRNSCN9CT",
         title: "Medusa T-Shirt",
         handle: "t-shirt",
-        thumbnail: "/assets/img/products/t-shirt.jpg",
+        thumbnail: "/assets/tee-black-front.webp",
         description: "Reimagine the feeling of a classic T-shirt. With our premium cotton blend...",
         variants: [
           {
@@ -82,7 +83,7 @@ async function getCustomerReviews() {
         id: "prod_01K2JKVDCGDD9FD6YCRNSCN9CT",
         title: "Medusa T-Shirt",
         handle: "t-shirt",
-        thumbnail: "/assets/img/products/t-shirt.jpg",
+        thumbnail: "/assets/img/img/1.jpg",
         description: "Reimagine the feeling of a classic T-shirt. With our premium cotton blend...",
         variants: [
           {
@@ -102,7 +103,7 @@ async function getCustomerReviews() {
         id: "prod_01K2JKVDCGDD9FD6YCRNSCN9CU",
         title: "Medusa Hoodie",
         handle: "hoodie",
-        thumbnail: "/assets/img/products/hoodie.jpg",
+        thumbnail: "/assets/img/img/2.jpg",
         description: "Stay warm and stylish with our premium hoodie featuring the Medusa logo.",
         variants: [
           {
@@ -122,7 +123,7 @@ async function getCustomerReviews() {
         id: "prod_01K2JKVDCGDD9FD6YCRNSCN9CU",
         title: "Medusa Hoodie",
         handle: "hoodie",
-        thumbnail: "/assets/img/products/hoodie.jpg",
+        thumbnail: "/assets/img/img/3.jpg",
         description: "Stay warm and stylish with our premium hoodie featuring the Medusa logo.",
         variants: [
           {
@@ -142,7 +143,7 @@ async function getCustomerReviews() {
         id: "prod_01K2JKVDCGDD9FD6YCRNSCN9CV",
         title: "Medusa Mug",
         handle: "mug",
-        thumbnail: "/assets/img/products/mug.jpg",
+        thumbnail: "/assets/img/img/4.jpg",
         description: "Start your day with our ceramic mug featuring the iconic Medusa design.",
         variants: [
           {
@@ -162,7 +163,7 @@ async function getCustomerReviews() {
         id: "prod_01K2JKVDCGDD9FD6YCRNSCN9CT",
         title: "Medusa T-Shirt",
         handle: "t-shirt",
-        thumbnail: "/assets/img/products/t-shirt.jpg",
+        thumbnail: "/assets/img/img/5.jpg",
         description: "Reimagine the feeling of a classic T-shirt. With our premium cotton blend...",
         variants: [
           {
@@ -193,7 +194,7 @@ export default async function ReviewsPage(props: PageProps) {
     return(
       <div>
         <p>Pro přístup k recenzím se prosím přihlaste</p>
-        <Link href={`/${countryCode}/account`}>Přihlásit se</Link>
+        <LocalizedClientLink href={`/account`}>Přihlásit se</LocalizedClientLink>
       </div>
     )
   }

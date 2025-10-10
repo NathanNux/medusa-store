@@ -3,7 +3,17 @@
 import { useRouter } from "next/navigation"
 import { useState, useTransition } from "react"
 
-export default function DeleteButton({ itemId }: { itemId: string }) {
+import s from "./delete-button.module.scss"
+import Trash from "@modules/common/icons/trash";
+
+
+export default function DeleteButton({
+  "data-testid": dataTestId,
+  itemId,
+}: {
+  "data-testid"?: string;
+  itemId?: string;
+}) {
   const router = useRouter()
   const [pending, startTransition] = useTransition()
   const [submitting, setSubmitting] = useState(false)
@@ -28,42 +38,17 @@ export default function DeleteButton({ itemId }: { itemId: string }) {
       startTransition(() => router.refresh())
     }
   }
-
   return (
-    <button
+    <button 
+      className={s.ScrollLink} 
+      data-testid={dataTestId}
       type="button"
-      className="wishlist-remove"
       onClick={onDelete}
       disabled={pending || submitting}
       aria-label="Odstranit z wishlistu"
       title="Odstranit z wishlistu"
     >
-      {pending || submitting ? "Odstraňuji…" : "Odstranit"}
-    </button>
-  )
-}
-
-
-function ScrollLink({
-  text,
-  textColor,
-  "data-testid": dataTestId,
-}: {
-  href: string;
-  text: string;
-  className?: string;
-  textColor?: string;
-  borderColor?: string;
-  borderR?: boolean;
-  borderL?: boolean;
-  "data-testid"?: string;
-}) {
-  return (
-    <div className={s.ScrollLink} data-testid={dataTestId}
-      style={{
-      }}
-    >
-        <button 
+        <div 
           className={s.button}
             style={{
             textDecoration: "none",
@@ -71,14 +56,14 @@ function ScrollLink({
         >
             <div className={s.slider}>
                 <div className={s.el}>
-                    <PerspectiveText label={text} textColor={textColor}/>
+                    <PerspectiveText label={pending ? "Odstraňuji..." : "Odstranit"}/>
                 </div>
                 <div className={s.el}>
-                    <PerspectiveText label={text} textColor={textColor}/>
+                    <PerspectiveText label={pending ? "Odstraňuji..." : "Odstranit"}/>
                 </div>
             </div>
-        </button>
-    </div>
+        </div>
+    </button>
   );
 }
 
@@ -91,7 +76,7 @@ function PerspectiveText({label, className, textColor}: {label: string; classNam
               color: textColor || "var(--ChText)",
             }}
           >
-            {label}
+            <Trash size={20}/>
           </p>
           <p 
             className={className}
@@ -99,7 +84,7 @@ function PerspectiveText({label, className, textColor}: {label: string; classNam
               color: textColor || "var(--ChText)",
             }}
           >
-            {label}
+            <Trash size={20}/>
           </p>
       </div>
   )

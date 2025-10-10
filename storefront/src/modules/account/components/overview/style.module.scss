@@ -314,7 +314,8 @@
 
 
 						&:hover {
-							box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+							box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+							transform: translateY(-1px);
 							background-color: #d3d4a7; // light gray background on hover
 						}
 
@@ -472,7 +473,8 @@
 							transition: all 0.5s cubic-bezier(0.76, 0, 0.24, 1);
 
 							&:hover {
-								box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+								box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      							transform: translateY(-1px);
 								background-color: #d3d4a7; // light gray background on hover
 							}
 							.stepButton {
@@ -671,7 +673,8 @@
 
 
 								&:hover {
-									box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+									box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      								transform: translateY(-1px);
 									background-color: #d3d4a7; // light gray background on hover
 
 									.orderOpenBtn{
