@@ -24,6 +24,7 @@ export const POST = async (
   try {
     const auth = req.scope.resolve(Modules.AUTH)
     const customerModule = req.scope.resolve(Modules.CUSTOMER)
+    const config = req.scope.resolve("configModule") as any
 
     // Load customer for email
     const [customer] = await customerModule.listCustomers({ id: customerId })
@@ -41,14 +42,32 @@ export const POST = async (
       return res.status(400).json({ message: "Staré heslo není správné" })
     }
 
-    // 2. Spusť resetPassword flow (vygeneruje token a pošle email)
-    const resetResult = await (auth as any).resetPassword("customer", "emailpass", { identifier: customer.email })
-    if (!resetResult?.token) {
-      return res.status(500).json({ message: "Nepodařilo se vygenerovat token pro změnu hesla." })
-    }
+    // 2. Získej token z naší token route (ta potlačí e-mail a token vrátí)
+    const backendBase = config?.admin?.backendUrl && config.admin.backendUrl !== "/"
+      ? config.admin.backendUrl
+      : process.env.BACKEND_URL || "http://localhost:9000"
 
-    // 3. Proveď updateProvider s tokenem (změna hesla)
-    await (auth as any).updateProvider("customer", "emailpass", { password: new_password }, resetResult.token)
+    const tokenRes = await fetch(`${backendBase}/store/customers/me/password/token`, {
+      method: "POST",
+      headers: { "content-type": "application/json", authorization: req.headers.authorization || "" },
+      body: JSON.stringify({ old_password }),
+    })
+    if (!tokenRes.ok) {
+      const data = await tokenRes.json().catch(() => ({} as any))
+      return res.status(tokenRes.status).json({ message: data?.message || "Nepodařilo se získat token." })
+    }
+    const { token } = await tokenRes.json()
+
+    // 3. Proveď update hesla přes veřejné API s tokenem
+    const updateRes = await fetch(`${backendBase}/auth/customer/emailpass/update`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ password: new_password, token }),
+    })
+    if (!updateRes.ok) {
+      const data = await updateRes.json().catch(() => ({} as any))
+      return res.status(updateRes.status).json({ message: data?.message || "Nepodařilo se změnit heslo." })
+    }
 
     return res.json({ ok: true })
   } catch (e: any) {

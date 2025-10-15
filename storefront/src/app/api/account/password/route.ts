@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
         authorization: `Bearer ${token}`,
         ...(pk ? { "x-publishable-api-key": pk, "x-publishable-key": pk } : {}),
       },
-      body: JSON.stringify({ old_password, new_password }),
+  body: JSON.stringify({ old_password, new_password }),
     })
 
     if (!res.ok) {
