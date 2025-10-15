@@ -1,6 +1,7 @@
 import type { AuthenticatedMedusaRequest, MedusaResponse } from "@medusajs/framework/http"
 import { Modules } from "@medusajs/framework/utils"
 import { setPasswordResetSilent, setPasswordResetToken, getPasswordResetToken } from "lib/password-reset-silencer"
+import Medusa from "@medusajs/js-sdk"
 
 type Body = {
   old_password?: string
@@ -43,7 +44,7 @@ export const POST = async (
     // Silence the subscriber to skip email sending
     setPasswordResetSilent(customer.email)
 
-    // Trigger reset through HTTP API so the event is emitted
+    // Trigger reset via JS SDK so the event is emitted
   const config = req.scope.resolve("configModule") as any
     const backendBase = config?.admin?.backendUrl && config.admin.backendUrl !== "/"
       ? config.admin.backendUrl
@@ -52,15 +53,8 @@ export const POST = async (
   const pkHeader = (req.headers["x-publishable-api-key"] || req.headers["x-publishable-key"]) as string | undefined
   const pk = pkHeader || process.env.MEDUSA_PUBLISHABLE_KEY || process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY
 
-    await fetch(`${backendBase}/auth/customer/emailpass/reset-password`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        accept: "text/plain",
-        ...(pk ? { "x-publishable-api-key": pk, "x-publishable-key": pk } : {}),
-      },
-      body: JSON.stringify({ identifier: customer.email }),
-    })
+    const sdk = new Medusa({ baseUrl: backendBase, publishableKey: pk })
+    await sdk.auth.resetPassword("customer", "emailpass", { identifier: customer.email })
 
     // Wait for token to be available from subscriber (max ~5s)
     const started = Date.now()
