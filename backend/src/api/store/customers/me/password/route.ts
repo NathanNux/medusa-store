@@ -47,9 +47,14 @@ export const POST = async (
       ? config.admin.backendUrl
       : process.env.BACKEND_URL || "http://localhost:9000"
 
+    const pkHeader = req.headers["x-publishable-api-key"] || req.headers["x-publishable-key"]
     const tokenRes = await fetch(`${backendBase}/store/customers/me/password/token`, {
       method: "POST",
-      headers: { "content-type": "application/json", authorization: req.headers.authorization || "" },
+      headers: {
+        "content-type": "application/json",
+        authorization: req.headers.authorization || "",
+        ...(pkHeader ? { "x-publishable-api-key": String(pkHeader), "x-publishable-key": String(pkHeader) } : {}),
+      },
       body: JSON.stringify({ old_password }),
     })
     if (!tokenRes.ok) {
@@ -59,9 +64,13 @@ export const POST = async (
     const { token } = await tokenRes.json()
 
     // 3. Proveď update hesla přes veřejné API s tokenem
+    const pk = process.env.MEDUSA_PUBLISHABLE_KEY || process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY || String(pkHeader || "")
     const updateRes = await fetch(`${backendBase}/auth/customer/emailpass/update`, {
       method: "POST",
-      headers: { "content-type": "application/json" },
+      headers: {
+        "content-type": "application/json",
+        ...(pk ? { "x-publishable-api-key": pk, "x-publishable-key": pk } : {}),
+      },
       body: JSON.stringify({ password: new_password, token }),
     })
     if (!updateRes.ok) {

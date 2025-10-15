@@ -49,9 +49,15 @@ export const POST = async (
       ? config.admin.backendUrl
       : process.env.BACKEND_URL || "http://localhost:9000"
 
+    const pk = process.env.MEDUSA_PUBLISHABLE_KEY || process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY
+
     await fetch(`${backendBase}/auth/customer/emailpass/reset-password`, {
       method: "POST",
-      headers: { "content-type": "application/json", accept: "text/plain" },
+      headers: {
+        "content-type": "application/json",
+        accept: "text/plain",
+        ...(pk ? { "x-publishable-api-key": pk, "x-publishable-key": pk } : {}),
+      },
       body: JSON.stringify({ identifier: customer.email }),
     })
 
