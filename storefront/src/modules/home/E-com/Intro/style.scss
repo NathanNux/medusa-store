@@ -288,6 +288,7 @@
 
         p{
             font-family: "Sentient-Light";
+            position: relative;
             width: 35%;
             display: flex;
             flex-wrap: wrap;
@@ -302,20 +303,75 @@
                 margin-top: 10dvh;
                 justify-content: flex-end;
 
+                span{
+                    text-align: right;
+                }
+
                 @include respond-to-h(sm){
                     width: 35%;
                 }
             }
 
             span{
+                width: 100%;
                 color: var(--Wtext);
                 font-size: 1.8rem;
                 opacity: 0.8;
                 line-height: 1.2;
+                display: flex;
+                align-items: center;
+                justify-content: center;
                 text-align: left;
-                display: inline-block;
-                white-space: nowrap;
-                margin-right: 0.25rem;
+
+                span {
+                    width: auto;
+                    color: var(--Wtext);
+                    font-size: 1.8rem;
+                    opacity: 0.8;
+                    line-height: 1.2;
+                    text-align: left;
+                    display: inline-block;
+                    
+                    @include respond-to-h(lg){
+                        font-size: 1.5rem;
+                    }
+
+                    @include respond-to-h(md){
+                        font-size: 1.3rem;
+                    }
+                    @include respond-to-h(mdt){
+                        font-size: 1.5rem;
+                    }
+                    @include respond-to-h(sm){
+                        font-size: 1.3rem;
+                    }
+                    @include respond-to-h(xs){
+                        font-size: 1.2rem;
+                    }
+                    @include respond-to-h(xxs){
+                        font-size: 1.2rem;
+                    }
+
+                    @include respond-to-v(lg){
+                        font-size: 1.5rem;
+                    }
+
+                    @include respond-to-v(md){
+                        font-size: 1.3rem;
+                    }
+
+
+                    @include respond-to-v(s){
+                        font-size: 1.3rem;
+                    }
+                    @include respond-to-v(sm){
+                        font-size: 1.2rem;
+                    }
+                    @include respond-to-v(xs){
+                        font-size: 1.1rem;
+                    }
+                }
+                
                 @include respond-to-h(lg){
                     font-size: 1.5rem;
                 }

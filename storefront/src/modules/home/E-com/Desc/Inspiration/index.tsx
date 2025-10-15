@@ -1,7 +1,9 @@
 "use client";
 import Image from "next/image";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Easing, motion, useInView, useScroll, useTransform } from "framer-motion";
+import { client } from "../../../../../sanity/lib/client";
+import { urlFor } from "../../../../../sanity/lib/image";
 
 const images = [
     {
@@ -20,7 +22,16 @@ const images = [
 
 export default function Inspiration() {
     const sectionRef = useRef<HTMLElement>(null);
+    const [data, setData] = useState<any>(null);
     const isInView = useInView(sectionRef, { once: true, margin: "-50px", amount: 0.05 });
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const ecomDescData = await client.fetch('*[_type == "ecomDesc"][0]');
+            setData(ecomDescData);
+        };
+        fetchData();
+    }, []);
 
     // Parallax for images
     const { scrollYProgress } = useScroll({
@@ -32,6 +43,21 @@ export default function Inspiration() {
     const parallax1 = useTransform(scrollYProgress, [0, 1], ["-5%", "12%"]);
     const parallax2 = useTransform(scrollYProgress, [0, 1], ["3%", "-8%"]);
     const parallax3 = useTransform(scrollYProgress, [0, 1], ["8%", "-5%"]);
+
+    const sanityImages = [
+        {
+            src: data?.inspiration?.images?.[0] ? urlFor(data.inspiration.images[0]).url() : images[0].src,
+            alt: "Inspiration Image 1",
+        },
+        {
+            src: data?.inspiration?.images?.[1] ? urlFor(data.inspiration.images[1]).url() : images[1].src,
+            alt: "Inspiration Image 2",
+        },
+        {
+            src: data?.inspiration?.images?.[2] ? urlFor(data.inspiration.images[2]).url() : images[2].src,
+            alt: "Inspiration Image 3",
+        }
+    ];
 
     return (
         <section className="Inspiration" ref={sectionRef}>
@@ -57,9 +83,11 @@ export default function Inspiration() {
                 </div>
             </div>
             <h3>
-            {
-                 wordSplit("Každý kousek, který zde najdete, prošel dlouhou cestou...", isInView)
-                }
+                {data?.maintitle?.title ? (
+                    textWithBreaks(data.maintitle.title, isInView)
+                ) : (
+                    wordSplit("Každý kousek, který zde najdete, prošel dlouhou cestou...", isInView)
+                )}
             </h3>
 
             <div className="Inspiration__content">
@@ -76,8 +104,8 @@ export default function Inspiration() {
                         }}
                     >
                         <Image 
-                            src={images[0].src}
-                            alt={images[0].alt}
+                            src={sanityImages[0].src}
+                            alt={sanityImages[0].alt}
                             sizes="50dvw"
                             className="Inspiration__content__item__img"
                             fill={true}
@@ -101,8 +129,8 @@ export default function Inspiration() {
                         }}
                     >
                         <Image 
-                            src={images[1].src}
-                            alt={images[1].alt}
+                            src={sanityImages[1].src}
+                            alt={sanityImages[1].alt}
                             sizes="50dvw"
                             className="Inspiration__content__item__img"
                             fill={true}
@@ -126,8 +154,8 @@ export default function Inspiration() {
                         }}
                     >
                         <Image 
-                            src={images[2].src}
-                            alt={images[2].alt}
+                            src={sanityImages[2].src}
+                            alt={sanityImages[2].alt}
                             sizes="50dvw"
                             className="Inspiration__content__item__img"
                             fill={true}
@@ -143,18 +171,22 @@ export default function Inspiration() {
             <div className="Inspiration__text">
                 <div className="Inspiration__text__container">
                     <div className="Inspiration__text__sub__container">
-                        <h4>Co tvořím a jak to dělám</h4>
+                        <h4>
+                            {data ? (data.inspiration?.title1 && data.inspiration.title1.trim() !== '' ? data.inspiration.title1 : '') : "Co tvořím a jak to dělám"}
+                        </h4>
                         <p>
-                            {wordSplit("Inspiraci hledám a nacházím v přírodě. Motiv, jednoduchost, čistota, klid, struktura materiálu, barvy, atd.", isInView)}
+                            {data?.inspiration?.content1 ? textWithBreaks(data.inspiration.content1, isInView) : wordSplit("Inspiraci hledám a nacházím v přírodě. Motiv, jednoduchost, čistota, klid, struktura materiálu, barvy, atd.", isInView)}
                         </p>
                     </div>
                 </div>
 
                 <div className="Inspiration__text__container">
                     <div className="Inspiration__text__sub__container">
-                        <h4>Co tvořím a jak to dělám</h4>
+                        <h4>
+                            {data ? (data.inspiration?.title2 && data.inspiration.title2.trim() !== '' ? data.inspiration.title2 : '') : "Co tvořím a jak to dělám"}
+                        </h4>
                         <p>
-                            {wordSplit("Po návrhu, samotném vymodelování a po pozvolném schnutí je čas na první výpal, tak zvaný přežah (950°C), výrobek následně ručně naglazuji, případně odekoruji a poté jej čeká finální - ostrý výpal na vysokou teplotu (1160°).", isInView)}
+                            {data?.inspiration?.content2 ? textWithBreaks(data.inspiration.content2, isInView) : wordSplit("Po návrhu, samotném vymodelování a po pozvolném schnutí je čas na první výpal, tak zvaný přežah (950°C), výrobek následně ručně naglazuji, případně odekoruji a poté jej čeká finální - ostrý výpal na vysokou teplotu (1160°).", isInView)}
                         </p>
                     </div>
                 </div>
@@ -186,9 +218,48 @@ const wordSplit = (text: string, isInView: boolean) => {
             animate={isInView ? "enter" : "start"}
             variants={PreloaderAnimText}
             custom={index}
-            style={{ display: "inline-block", whiteSpace: "pre" }}
+            style={{ display: "inline-block", whiteSpace: "pre", marginRight: "0.25em" }}
         >
-            {word + " "}
+            {word}
         </motion.span>
+    ));
+}
+
+const textWithBreaks = (text: string, isInView: boolean) => {
+    const PreloaderAnimText = {
+        start: {
+            opacity: 0,
+            y: 20,
+        },
+        enter: (i: number) => ({
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 0.5,
+                delay: 0.15 + (i * 0.05),
+                ease: [0.76, 0, 0.24, 1] as Easing,
+            }
+        })
+    }
+
+    // Split by line breaks first, then by spaces
+    return text.split('\n').map((line, lineIndex) => (
+        <span key={lineIndex} style={{ display: "inline" }}>
+            {line.split(' ').map((word, wordIndex) => {
+                const globalIndex = lineIndex * 100 + wordIndex; // Simple way to create unique indices
+                return (
+                    <motion.span
+                        key={wordIndex}
+                        animate={isInView ? "enter" : "start"}
+                        variants={PreloaderAnimText}
+                        custom={globalIndex}
+                        style={{ display: "inline-block", whiteSpace: "pre" }}
+                    >
+                        {word + " "}
+                    </motion.span>
+                );
+            })}
+            {lineIndex < text.split('\n').length - 1 && <br />}
+        </span>
     ));
 }

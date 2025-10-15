@@ -2,12 +2,23 @@
 import RotatingText from "@modules/common/components/RotatingText";
 import { useScroll, useTransform, motion, useInView, Easing } from "framer-motion";
 import Image from "next/image";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
+import { client } from "../../../../../sanity/lib/client";
+import { urlFor } from "../../../../../sanity/lib/image";
 
 export default function Shaping(){
     const sectionRef = useRef<HTMLElement>(null);
     const textRef = useRef<HTMLDivElement>(null);
+    const [data, setData] = useState<any>(null);
     const isInView = useInView(textRef, { once: true, margin: "-50px", amount: 0.05 });
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const ecomDescData = await client.fetch('*[_type == "ecomDesc"][0]');
+            setData(ecomDescData);
+        };
+        fetchData();
+    }, []);
 
     // Parallax for images
     const { scrollYProgress } = useScroll({
@@ -53,7 +64,7 @@ export default function Shaping(){
                         }}
                     >
                         <Image 
-                            src= "/assets/img/img/5.jpg"
+                            src={data?.shaping?.images?.[0] ? urlFor(data.shaping.images[0]).url() : "/assets/img/img/5.jpg"}
                             alt="Shaping Image"
                             fill={true}
                             sizes="50dvw"
@@ -63,16 +74,16 @@ export default function Shaping(){
                     </motion.div>
                 </div>
                 <div className="Shaping__image__text">
-                    <RotatingText text="mé - výrobky - mé výrobky - mé výrobky -" textColor="#fff"/>
+                    <RotatingText text={ data?.shaping?.content2 || "mé - výrobky - mé výrobky - mé výrobky -"} textColor="#fff"/>
                 </div>
             </div>
             <div className="Shaping__text">
                 <div className="Shaping__text__container" ref={textRef}>
                     <h4>
-                        Co tvořím a jak to dělám
+                        {data ? (data.shaping?.title && data.shaping.title.trim() !== '' ? `${data.shaping.title}` : null) : "Co tvořím a jak to dělám"}
                     </h4>
                     <p>
-                        {wordSplit("Dávám si záležet na každém kroku. Čas ani cena nesmí být na úkor kvality. Věřím, že právě dotek ruky, čas a energie do každého výrobku vložená v něm zůstává a vtiskává mu duši.", isInView)}
+                        {data?.shaping?.content1 ? textWithBreaks(data.shaping.content1, isInView) : wordSplit("Dávám si záležet na každém kroku. Čas ani cena nesmí být na úkor kvality. Věřím, že právě dotek ruky, čas a energie do každého výrobku vložená v něm zůstává a vtiskává mu duši.", isInView)}
                     </p>
                 </div>
             </div>
@@ -102,9 +113,48 @@ const wordSplit = (text: string, isInView: boolean) => {
             animate={isInView ? "enter" : "start"}
             variants={PreloaderAnimText}
             custom={index}
-            style={{ display: "inline-block", whiteSpace: "pre" }}
+            style={{ display: "inline-block", whiteSpace: "pre", marginRight: "0.25em" }}
         >
-            {word + " "}
+            {word}
         </motion.span>
+    ));
+}
+
+const textWithBreaks = (text: string, isInView: boolean) => {
+    const PreloaderAnimText = {
+        start: {
+            opacity: 0,
+            y: 20,
+        },
+        enter: (i: number) => ({
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 0.5,
+                delay: 0.15 + (i * 0.05),
+                ease: [0.76, 0, 0.24, 1] as Easing,
+            }
+        })
+    }
+
+    // Split by line breaks first, then by spaces
+    return text.split('\n').map((line, lineIndex) => (
+        <span key={lineIndex} style={{ display: "inline" }}>
+            {line.split(' ').map((word, wordIndex) => {
+                const globalIndex = lineIndex * 100 + wordIndex; // Simple way to create unique indices
+                return (
+                    <motion.span
+                        key={wordIndex}
+                        animate={isInView ? "enter" : "start"}
+                        variants={PreloaderAnimText}
+                        custom={globalIndex}
+                        style={{ display: "inline-block", whiteSpace: "pre" }}
+                    >
+                        {word + " "}
+                    </motion.span>
+                );
+            })}
+            {lineIndex < text.split('\n').length - 1 && <br />}
+        </span>
     ));
 }

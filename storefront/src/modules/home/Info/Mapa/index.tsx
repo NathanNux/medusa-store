@@ -1,8 +1,10 @@
 "use client";
 import Image from "next/image";
 import { Easing, motion, useInView, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import LinkButton from "@modules/common/components/Buttons/LinkButton";
+import { client } from "../../../../sanity/lib/client";
+import { urlFor } from "../../../../sanity/lib/image";
 
 const details = [
     {
@@ -22,6 +24,15 @@ export default function Mapa() {
     const isInView = useInView(ref, { once: true, margin: "-50px", amount: 0.05 });
     const ref2 = useRef<HTMLDivElement>(null);
     const isInView2 = useInView(ref2, { once: true, margin: "-50px", amount: 0.05 });
+    const [mapaData, setMapaData] = useState<any>(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const data = await client.fetch('*[_type == "mapa"][0]');
+            setMapaData(data);
+        };
+        fetchData();
+    }, []);
 
     const { scrollYProgress } = useScroll({
         target: scrollRef,
@@ -35,7 +46,7 @@ export default function Mapa() {
             <div className="mapa__background__overlay"/>
             <div className="mapa__title" ref={ref}>
                 <h2>
-                    {charSplit("Kde mě Najdete", isInView)}
+                    {charSplit(mapaData?.title || "Kde mě Najdete", isInView)}
                 </h2>
             </div>
 
@@ -43,10 +54,10 @@ export default function Mapa() {
                 <div className="mapa__content__address">
                     <div className="mapa__content__address__title">
                         <h3>Adresa</h3>
-                        <p>Putim 229, Písek 397 01</p>
+                        <p>{mapaData?.address || "Putim 229, Písek 397 01"}</p>
                     </div>
                     <div className="mapa__content__address__links">
-                        <LinkButton href="https://maps.app.goo.gl/SG3efEFzJcgSfik6A" text="Mapa Google" />
+                        <LinkButton href={mapaData?.mapLink || "https://maps.app.goo.gl/SG3efEFzJcgSfik6A"} text="Mapa Google" />
                     </div>
                 </div>
 
@@ -56,12 +67,12 @@ export default function Mapa() {
                             {charSplit("Lucie Polanská", isInView2)}
                         </h3>
                         <h4>
-                            {charSplit("Otevírací a hovorové hodiny", isInView2)}
+                            {charSplit(mapaData?.titleSection || "Otevírací a hovorové hodiny", isInView2)}
                         </h4>
                     </div>
                     <div className="mapa__content__details__text">
-                        {details.map((detail, index) => (
-                            <p key={index}>{wordSplit(detail.text, isInView2)}</p>
+                        {(mapaData?.openingHours || details).map((detail: any, index: number) => (
+                            <p key={index}>{wordSplit(typeof detail === 'string' ? detail : detail.text, isInView2)}</p>
                         ))}
                     </div>
                 </div>
@@ -72,7 +83,7 @@ export default function Mapa() {
                     style={{ translateY: y}}
                 >
                     <Image 
-                        src="/assets/img/img/1.jpg"
+                        src={mapaData?.backgroundImage ? urlFor(mapaData.backgroundImage).url() : "/assets/img/img/1.jpg"}
                         alt="Mapa background image"
                         fill={true}
                         quality={100}

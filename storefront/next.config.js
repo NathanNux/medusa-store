@@ -63,6 +63,10 @@ const nextConfig = {
         protocol: "https",
         hostname: process.env.NEXT_PUBLIC_MINIO_ENDPOINT,
       }] : []),
+      { // Sanity CDN for content images
+        protocol: "https",
+        hostname: "cdn.sanity.io",
+      },
     ],
   },
   serverRuntimeConfig: {

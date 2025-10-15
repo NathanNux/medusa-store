@@ -1,16 +1,29 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Easing, motion, useInView } from "framer-motion";
 import ClickButton from "@modules/common/components/Buttons/ClickButton";
 import HashtagButton from "@modules/common/components/Buttons/hashtagButton";
+import { client } from "../../../../sanity/lib/client";
+import { urlFor } from "../../../../sanity/lib/image";
+
+const defaultHashtags = ["Objednavka", "Kurzy", "E-shop", "Dotaz"];
 
 export default function Kontakt() {
     const [selectedHashtags, setSelectedHashtags] = useState<string[]>([]);
+    const [kontaktData, setKontaktData] = useState<any>(null);
 
     const ref = useRef<HTMLDivElement>(null);
     const isInView = useInView(ref, { once: true, margin: "-50px", amount: 0.05 });
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const data = await client.fetch('*[_type == "kontakt"][0]');
+            setKontaktData(data);
+        };
+        fetchData();
+    }, []);
 
     const handleHashtagClick = (hashtag: string) => {
         setSelectedHashtags(prev => {
@@ -30,7 +43,7 @@ export default function Kontakt() {
             <div className="kontakt__wraper">
                 <div className="kontakt__Newsletter" ref={ref}>
                     <h3>
-                        {wordSplit("Odebírejte mé novinky, abyste věděli, kdy budu mít nové produkty", isInView)}
+                        {wordSplit(kontaktData?.newsletterTitle || "Odebírejte mé novinky, abyste věděli, kdy budu mít nové produkty", isInView)}
                     </h3>
                     <div className="kontakt__Newsletter__Input">
                         <input type="email" placeholder="Zadejte zde svůj E-mail" required />
@@ -42,7 +55,7 @@ export default function Kontakt() {
                     <div className="kontakt__Contact__Title">
                         <div className="divider"/>
                         <h3>
-                            {charSplit("Máte nějaký dotaz?", isInView)}
+                            {charSplit(kontaktData?.contactTitle || "Máte nějaký dotaz?", isInView)}
                         </h3>
                         <div className="divider"/>
                     </div>
@@ -50,7 +63,7 @@ export default function Kontakt() {
                     <div className="kontakt__Contact__Form">
                         <div className="kontakt__Contact__Form__Pillar">
                             <Image 
-                                src="/assets/icons/pillar.svg"
+                                src={kontaktData?.pillarImage ? urlFor(kontaktData.pillarImage).url() : "/assets/icons/pillar.svg"}
                                 alt="Pillar icon image"
                                 fill={true}
                                 quality={100}
@@ -88,26 +101,14 @@ export default function Kontakt() {
                                     </div>
                                 </div>
                                 <div className="kontakt__Contact__Form__Message__HashTag">
-                                    <HashtagButton 
-                                        text="Objednavka" 
-                                        isActive={isHashtagActive("Objednavka")}
-                                        onClick={() => handleHashtagClick("Objednavka")}
-                                    />
-                                    <HashtagButton 
-                                        text="Kurzy" 
-                                        isActive={isHashtagActive("Kurzy")}
-                                        onClick={() => handleHashtagClick("Kurzy")}
-                                    />
-                                    <HashtagButton 
-                                        text="E-shop" 
-                                        isActive={isHashtagActive("E-shop")}
-                                        onClick={() => handleHashtagClick("E-shop")}
-                                    />
-                                    <HashtagButton 
-                                        text="Dotaz" 
-                                        isActive={isHashtagActive("Dotaz")}
-                                        onClick={() => handleHashtagClick("Dotaz")}
-                                    />
+                                    {(kontaktData?.hashtags || defaultHashtags).map((hashtag: string, index: number) => (
+                                        <HashtagButton 
+                                            key={index}
+                                            text={hashtag} 
+                                            isActive={isHashtagActive(hashtag)}
+                                            onClick={() => handleHashtagClick(hashtag)}
+                                        />
+                                    ))}
                                 </div>
                             </div>
                         </form>

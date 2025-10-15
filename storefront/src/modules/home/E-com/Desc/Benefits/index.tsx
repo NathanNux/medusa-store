@@ -1,12 +1,23 @@
 "use client";
 import Image from "next/image";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Easing, motion, useInView, useScroll, useTransform } from "framer-motion";
+import { client } from "../../../../../sanity/lib/client";
+import { urlFor } from "../../../../../sanity/lib/image";
 
 export default function Benefits() {
     const sectionRef = useRef<HTMLElement>(null);
     const textRef = useRef<HTMLDivElement>(null);
+    const [data, setData] = useState<any>(null);
     const isInView = useInView(textRef, { once: true, margin: "-50px", amount: 0.05 });
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const ecomDescData = await client.fetch('*[_type == "ecomDesc"][0]');
+            setData(ecomDescData);
+        };
+        fetchData();
+    }, []);
 
     // Parallax for images
     const { scrollYProgress } = useScroll({
@@ -42,16 +53,16 @@ export default function Benefits() {
             <div className="Benefits__content" ref={textRef}> 
                 <div className="Benefits__content__text">
                     <h4>
-                        Detaily k mým výrobkům
+                        {data ? (data.benefits?.title && data.benefits.title.trim() !== '' ? `${data.benefits.title}` : null) : "Detaily k mým výrobkům"}
                     </h4>
                     <p>
-                        {wordSplit("Všechny materiály (hlíny a glazury), které při výrobě používám, jsou zdravotně nezávadné. Výrobky určené pro přímý styk s potravinou mají certifikát o zdravotní nezávadnosti dělaný u Zdravotního ústavu v Ústí nad Labem.", isInView)}
+                        {data?.benefits?.content1 ? textWithBreaks(data.benefits.content1, isInView) : wordSplit("Všechny materiály (hlíny a glazury), které při výrobě používám, jsou zdravotně nezávadné. Výrobky určené pro přímý styk s potravinou mají certifikát o zdravotní nezávadnosti dělaný u Zdravotního ústavu v Ústí nad Labem.", isInView)}
                     </p>
                 </div>
 
                 <div className="Benefits__content__text">
                     <h4>
-                        {wordSplit("Většina mých výrobků jsou mrazuvzdorné a dvhodné tak k celoroční instalaci venku.", isInView)}
+                        {data?.benefits?.content2 ? textWithBreaks(data.benefits.content2, isInView) : wordSplit("Většina mých výrobků jsou mrazuvzdorné a dvhodné tak k celoroční instalaci venku.", isInView)}
                     </h4>
                 </div>
             </div>  
@@ -70,7 +81,7 @@ export default function Benefits() {
                         }}
                     >
                         <Image 
-                            src={"/assets/img/img/2.jpg"}
+                            src={data?.benefits?.images?.[0] ? urlFor(data.benefits.images[0]).url() : "/assets/img/img/2.jpg"}
                             alt="Benefits Image"
                             fill={true}
                             sizes="50dvw"
@@ -95,7 +106,7 @@ export default function Benefits() {
                         }}
                     >
                         <Image 
-                            src={"/assets/img/roller/3h.jpg"}
+                            src={data?.benefits?.images?.[1] ? urlFor(data.benefits.images[1]).url() : "/assets/img/roller/3h.jpg"}
                             alt="Benefits Image"
                             fill={true}
                             sizes="50dvw"
@@ -134,9 +145,48 @@ const wordSplit = (text: string, isInView: boolean) => {
             animate={isInView ? "enter" : "start"}
             variants={PreloaderAnimText}
             custom={index}
-            style={{ display: "inline-block", whiteSpace: "pre" }}
+            style={{ display: "inline-block", whiteSpace: "pre", marginRight: "0.25em" }}
         >
-            {word + " "}
+            {word}
         </motion.span>
+    ));
+}
+
+const textWithBreaks = (text: string, isInView: boolean) => {
+    const PreloaderAnimText = {
+        start: {
+            opacity: 0,
+            y: 20,
+        },
+        enter: (i: number) => ({
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 0.5,
+                delay: 0.15 + (i * 0.05),
+                ease: [0.76, 0, 0.24, 1] as Easing,
+            }
+        })
+    }
+
+    // Split by line breaks first, then by spaces
+    return text.split('\n').map((line, lineIndex) => (
+        <span key={lineIndex} style={{ display: "inline" }}>
+            {line.split(' ').map((word, wordIndex) => {
+                const globalIndex = lineIndex * 100 + wordIndex; // Simple way to create unique indices
+                return (
+                    <motion.span
+                        key={wordIndex}
+                        animate={isInView ? "enter" : "start"}
+                        variants={PreloaderAnimText}
+                        custom={globalIndex}
+                        style={{ display: "inline-block", whiteSpace: "pre" }}
+                    >
+                        {word + " "}
+                    </motion.span>
+                );
+            })}
+            {lineIndex < text.split('\n').length - 1 && <br />}
+        </span>
     ));
 }

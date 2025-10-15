@@ -3,27 +3,47 @@ import LinkButton from '@modules/common/components/Buttons/LinkButton';
 import { CTAImages } from 'constants/images';
 import { motion, useAnimationFrame, useMotionValue, useScroll, useSpring, useTransform, useVelocity } from 'framer-motion';
 import Image from 'next/image';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { client } from "../../../../sanity/lib/client";
+import { urlFor } from "../../../../sanity/lib/image";
 
 export default function CTA () {
+    const [ctaData, setCtaData] = useState<any>(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const data = await client.fetch('*[_type == "ecomCTA"][0]');
+            setCtaData(data);
+        };
+        fetchData();
+    }, []);
+
     return (
         <section className="cta">
             <div className='cta__content'>
-                <h2 className="cta__title">Keramika jako tiché<br/> spojení s přírodou.</h2>
+                {ctaData?.title ? (
+                    <h2 className='cta__title'>
+                        {titleWithBreaks(ctaData.title)}
+                    </h2>
+                ):(
+                    <h2 className='cta__title'>
+                        Keramika jako tiché <br /> spojení s přírodou.
+                    </h2>
+                    )}
                 <LinkButton 
                     href="/store"
-                    text="Navštívit E-shop"
+                    text={ctaData?.buttonText || "Navštívit E-shop"}
                 />
             </div>
 
             <div className='cta__image__bar'>
-                <RotatingBar />
+                <RotatingBar images={ctaData?.images || CTAImages} />
             </div>
         </section>
     );
 }
 
-const RotatingBar = () => {
+const RotatingBar = ({ images }: { images: any[] }) => {
     const {scrollY} = useScroll();
     const BaseVelocity = 100;
 
@@ -68,22 +88,26 @@ const RotatingBar = () => {
     return (
         <div className="cta__rotating__bar">
             <motion.div style={{ x, }} className="cta__rotating__bar__inner">
-                <ImageBar />
-                <ImageBar />
-                <ImageBar />
-                <ImageBar />
-                <ImageBar />
+                <ImageBar images={images} />
+                <ImageBar images={images} />
+                <ImageBar images={images} />
+                <ImageBar images={images} />
+                <ImageBar images={images} />
             </motion.div>
         </div>
     )
 }
 
-const ImageBar = () => {
+const ImageBar = ({ images }: { images: any[] }) => {
 
     return (
         <div className='cta__image__bar'>
-            {CTAImages.map((image, index) => {
-                const { src, alt } = image;
+            {images.map((image, index) => {
+                // Handle Sanity images (objects with asset property)
+                const isSanityImage = image && typeof image === 'object' && image.asset;
+                const src = isSanityImage ? urlFor(image).url() : image.src;
+                const alt = isSanityImage ? (image.alt || `CTA Image ${index + 1}`) : image.alt;
+                
                 return (
                     <div key={index} className="cta__image__bar__item__wrapper">
                         <Image 
@@ -99,4 +123,15 @@ const ImageBar = () => {
             })}
         </div>
     )
+}
+
+const titleWithBreaks = (text: string) => {
+    if (!text) return null;
+
+    return text.split('\n').map((line, index) => (
+        <span key={index}>
+            {line}
+            {index < text.split('\n').length - 1 && <br />}
+        </span>
+    ));
 }

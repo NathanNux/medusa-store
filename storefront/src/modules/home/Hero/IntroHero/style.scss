@@ -395,7 +395,6 @@
                 // Add these properties for word wrapping
                 display: flex;
                 flex-wrap: wrap;
-                word-spacing: 0.5rem; // Adjust space between words
 
 
                 @include respond-to-h(lg){
@@ -447,7 +446,6 @@
                     font-size: inherit;
                     line-height: inherit;
                     display: inline-block;
-                    margin-right: 0.25rem;
                 }
             }
 

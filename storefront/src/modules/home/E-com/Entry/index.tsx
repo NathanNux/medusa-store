@@ -4,11 +4,23 @@ import MouseAnim from "@modules/common/components/MouseAnim";
 import RotatingText from "@modules/common/components/RotatingText";
 import { useScroll, useTransform, motion } from "framer-motion";
 import Image from "next/image";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
+import { client } from "../../../../sanity/lib/client";
+import { urlFor } from "../../../../sanity/lib/image";
 
 
 export default function Entry () {
     const ref = useRef<HTMLDivElement>(null);
+    const [data, setData] = useState<any>(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const ecomEntryData = await client.fetch('*[_type == "ecomEntry"][0]');
+            setData(ecomEntryData);
+        };
+        fetchData();
+    }, []);
+
     const { scrollYProgress } = useScroll({
         target: ref,
         offset: ["start end", "end start"]
@@ -32,27 +44,27 @@ export default function Entry () {
 
     const images = [
         {
-            src: "/assets/img/roller/10v.jpg",
+            src: data?.images?.[0] ? urlFor(data.images[0]).url() : "/assets/img/roller/10v.jpg",
             alt: "Entry Image 1",
             transform: transforms.slow
         },
         {
-            src: "/assets/img/roller/5h.jpg",
+            src: data?.images?.[1] ? urlFor(data.images[1]).url() : "/assets/img/roller/5h.jpg",
             alt: "Entry Image 2",
             transform: transforms.medium
         },
         {
-            src: "/assets/img/roller/11v.jpg",
+            src: data?.images?.[2] ? urlFor(data.images[2]).url() : "/assets/img/roller/11v.jpg",
             alt: "Entry Image 3",
             transform: transforms.fast
         },
         {
-            src: "/assets/img/roller/6h.jpg",
+            src: data?.images?.[3] ? urlFor(data.images[3]).url() : "/assets/img/roller/6h.jpg",
             alt: "Entry Image 4",
             transform: transforms.medium
         },
         {
-            src: "/assets/img/roller/12h.jpg",
+            src: data?.images?.[4] ? urlFor(data.images[4]).url() : "/assets/img/roller/12h.jpg",
             alt: "Entry Image 5",
             transform: transforms.slow
         }
@@ -61,7 +73,7 @@ export default function Entry () {
     return (
         <section className="ECom__Entry" ref={ref}>
             <div className="ECom__Entry__title">
-                <h2>Vstoupit Dovnitř</h2>
+                <h2>{data?.title || "Vstoupit Dovnitř"}</h2>
                 <MouseAnim />
             </div>
 
@@ -120,7 +132,7 @@ export default function Entry () {
                 </div>
 
                 <div className="ECom__Entry__content__text">
-                    <RotatingText text="mé - výrobky - mé výrobky - mé výrobky -" textColor="var(--Wtext)"/>
+                    <RotatingText text={data?.rotatingText || "mé - výrobky - mé výrobky - mé výrobky -"} textColor="var(--Wtext)"/>
                 </div>
 
                 <div className="ECom__Entry__content__images__lower">

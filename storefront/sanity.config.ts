@@ -20,6 +20,10 @@ export default defineConfig({
   dataset,
   // Add and edit the content schema in the './sanity/schemaTypes' folder
   schema,
+  __experimental_i18n: {
+    locales: ['cs', 'en'],
+    defaultLocale: 'cs',
+  },
   plugins: [
     structureTool({structure}),
     // Vision is for querying with GROQ from inside the Studio

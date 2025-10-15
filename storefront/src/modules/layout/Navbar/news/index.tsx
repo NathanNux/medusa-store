@@ -1,20 +1,38 @@
 "use client";
 import { AnimatePresence, Easing, motion, useAnimationFrame, useMotionValue, useScroll, useSpring, useTransform, useVelocity } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
+import { client } from "../../../../sanity/lib/client";
 
 export default function NewsPopup ({firstLoad}: {firstLoad: boolean}) {
-    const [ isDisplayed, setIsDisplayed ] = useState(true);
+    const [popupData, setPopupData] = useState<{ enabled: boolean, text: string } | null>(null);
+    const [sanityLoaded, setSanityLoaded] = useState(false);
+    const [showPopup, setShowPopup] = useState(true);
 
     useEffect(() => {
-        const timeout = setTimeout(() => {
-            setIsDisplayed(false);
-        }, 10000);
-
-        return () => clearTimeout(timeout);
+        const fetchData = async () => {
+            try {
+                const popupData = await client.fetch('*[_type == "newsPopup"][0]');
+                setPopupData(popupData);
+            } catch (e) {
+                setPopupData(null);
+            } finally {
+                setSanityLoaded(true);
+            }
+        };
+        fetchData();
     }, []);
 
-    // WIP: create for this a handle and url and desc to fetch the news or if there is new product release or something => might be useful, 
-    // Only do that after the full webite is done and fully functional, so that it is not a priority right now
+    // Auto-hide popup after 15 seconds
+    useEffect(() => {
+        if (sanityLoaded && showPopup) {
+            const timer = setTimeout(() => {
+                setShowPopup(false);
+            }, 15000); // 15 seconds
+
+            return () => clearTimeout(timer);
+        }
+    }, [sanityLoaded, showPopup]);
+
     const PreloaderAnim = {
         initial: {
             y: "-100%",
@@ -38,10 +56,12 @@ export default function NewsPopup ({firstLoad}: {firstLoad: boolean}) {
             }
         },
     }
+
+
     return (
         <div className='Navbar__News'>
             <AnimatePresence>
-                {isDisplayed && (
+                {sanityLoaded && showPopup && (
                     <motion.div 
                         className="Navbar__News__RotatingBar"
                         initial="initial"
@@ -49,7 +69,7 @@ export default function NewsPopup ({firstLoad}: {firstLoad: boolean}) {
                         exit="exit"
                         variants={PreloaderAnim}
                     >
-                        <RotatingBar />
+                        <RotatingBar text={popupData?.enabled && popupData?.text ? popupData.text : "Dovolena | Novinky"} />
                     </motion.div>
                 )}
             </AnimatePresence>
@@ -57,7 +77,7 @@ export default function NewsPopup ({firstLoad}: {firstLoad: boolean}) {
     );
 }
 
-const RotatingBar = () => {
+const RotatingBar = ({ text }: { text: string }) => {
     const {scrollY} = useScroll();
     const BaseVelocity = 25;
 
@@ -104,7 +124,7 @@ const RotatingBar = () => {
             <motion.div style={{ x, }} className="NavbarNews__rotating__bar__inner">
                 {Array.from({ length: 25 }).map((_, index) => (
                     <p key={`news-${index}`}>
-                        Dovolena | Novinky
+                        {text}
                     </p>
                 ))}
             </motion.div>
