@@ -1,6 +1,6 @@
 import type { AuthenticatedMedusaRequest, MedusaResponse } from "@medusajs/framework/http"
 import { Modules } from "@medusajs/framework/utils"
-import { setPasswordResetSilent, setPasswordResetToken, getPasswordResetToken } from "../../../../../../lib/password-reset-silencer"
+import { setPasswordResetSilent, setPasswordResetToken, getPasswordResetToken } from "lib/password-reset-silencer"
 
 type Body = {
   old_password?: string
@@ -44,12 +44,13 @@ export const POST = async (
     setPasswordResetSilent(customer.email)
 
     // Trigger reset through HTTP API so the event is emitted
-    const config = req.scope.resolve("configModule") as any
+  const config = req.scope.resolve("configModule") as any
     const backendBase = config?.admin?.backendUrl && config.admin.backendUrl !== "/"
       ? config.admin.backendUrl
       : process.env.BACKEND_URL || "http://localhost:9000"
 
-    const pk = process.env.MEDUSA_PUBLISHABLE_KEY || process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY
+  const pkHeader = (req.headers["x-publishable-api-key"] || req.headers["x-publishable-key"]) as string | undefined
+  const pk = pkHeader || process.env.MEDUSA_PUBLISHABLE_KEY || process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY
 
     await fetch(`${backendBase}/auth/customer/emailpass/reset-password`, {
       method: "POST",
@@ -64,7 +65,7 @@ export const POST = async (
     // Wait for token to be available from subscriber (max ~5s)
     const started = Date.now()
     let token: string | undefined
-    while (Date.now() - started < 5000) {
+    while (Date.now() - started < 10000) {
       token = getPasswordResetToken(customer.email)
       if (token) break
       await new Promise((r) => setTimeout(r, 100))

@@ -1,5 +1,6 @@
 import type { AuthenticatedMedusaRequest, MedusaResponse } from "@medusajs/framework/http"
 import { Modules } from "@medusajs/framework/utils"
+import bcrypt from "bcryptjs"
 
 type Body = {
   old_password: string
@@ -22,9 +23,8 @@ export const POST = async (
   }
 
   try {
-    const auth = req.scope.resolve(Modules.AUTH)
-    const customerModule = req.scope.resolve(Modules.CUSTOMER)
-    const config = req.scope.resolve("configModule") as any
+  const auth = req.scope.resolve(Modules.AUTH)
+  const customerModule = req.scope.resolve(Modules.CUSTOMER)
 
     // Load customer for email
     const [customer] = await customerModule.listCustomers({ id: customerId })
@@ -42,40 +42,27 @@ export const POST = async (
       return res.status(400).json({ message: "Staré heslo není správné" })
     }
 
-    // 2. Získej token z naší token route (ta potlačí e-mail a token vrátí)
-    const backendBase = config?.admin?.backendUrl && config.admin.backendUrl !== "/"
-      ? config.admin.backendUrl
-      : process.env.BACKEND_URL || "http://localhost:9000"
-
-    const pkHeader = req.headers["x-publishable-api-key"] || req.headers["x-publishable-key"]
-    const tokenRes = await fetch(`${backendBase}/store/customers/me/password/token`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        authorization: req.headers.authorization || "",
-        ...(pkHeader ? { "x-publishable-api-key": String(pkHeader), "x-publishable-key": String(pkHeader) } : {}),
-      },
-      body: JSON.stringify({ old_password }),
+    // 2. Přímá bezpečná změna hesla bez e‑mailu: aktualizace auth identity
+    const providerIdentities = await (auth as any).listProviderIdentities?.({
+      entity_id: customer.email,
+      provider: "emailpass",
     })
-    if (!tokenRes.ok) {
-      const data = await tokenRes.json().catch(() => ({} as any))
-      return res.status(tokenRes.status).json({ message: data?.message || "Nepodařilo se získat token." })
+
+    if (!Array.isArray(providerIdentities) || providerIdentities.length === 0) {
+      return res.status(404).json({ message: "Auth identity not found" })
     }
-    const { token } = await tokenRes.json()
 
-    // 3. Proveď update hesla přes veřejné API s tokenem
-    const pk = process.env.MEDUSA_PUBLISHABLE_KEY || process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY || String(pkHeader || "")
-    const updateRes = await fetch(`${backendBase}/auth/customer/emailpass/update`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        ...(pk ? { "x-publishable-api-key": pk, "x-publishable-key": pk } : {}),
-      },
-      body: JSON.stringify({ password: new_password, token }),
-    })
-    if (!updateRes.ok) {
-      const data = await updateRes.json().catch(() => ({} as any))
-      return res.status(updateRes.status).json({ message: data?.message || "Nepodařilo se změnit heslo." })
+    const hashed = await bcrypt.hash(new_password, 10)
+
+    for (const pi of providerIdentities) {
+      if (!pi?.auth_identity_id) continue
+      await (auth as any).updateAuthIdentities({
+        id: pi.auth_identity_id,
+        provider_id: "emailpass",
+        provider: "emailpass",
+        entity_id: customer.email,
+        secrets: { password: hashed },
+      })
     }
 
     return res.json({ ok: true })

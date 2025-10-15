@@ -3,7 +3,7 @@ import {
   type SubscriberConfig,
 } from "@medusajs/medusa"
 import { Modules } from "@medusajs/framework/utils"
-import { isPasswordResetSilent } from "../lib/password-reset-silencer"
+import { isPasswordResetSilent, setPasswordResetToken } from "lib/password-reset-silencer"
 
 export default async function resetPasswordTokenHandler({
   event: { data: {
@@ -29,6 +29,11 @@ export default async function resetPasswordTokenHandler({
       "http://localhost:9000"
     const adminPath = config.admin.path
     urlPrefix = `${backendUrl}${adminPath}`
+  }
+
+  // Always store token so internal flows can consume it
+  if (token && email) {
+    setPasswordResetToken(email, token)
   }
 
   // If silent mode is enabled for this email, do not send email
