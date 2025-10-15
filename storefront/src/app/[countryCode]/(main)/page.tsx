@@ -9,7 +9,7 @@ import ECom from "@modules/home/E-com"
 import Kurzy from "@modules/home/Kurzy"
 import Info from "@modules/home/Info"
 import HeroSection from "@modules/home/Hero"
-
+import { client } from "../../../sanity/lib/client"
 
 export const metadata: Metadata = {
   title: "Medusa Next.js Starter Template",
@@ -31,17 +31,25 @@ export default async function Home(props: {
     fields: "id, handle, title",
   })
 
+  // Fetch main page settings from Sanity
+  const settings = await client.fetch('*[_type == "mainPageSettings"][0]')
+
   if (!collections || !region) {
     return null
   }
 
+  const heroEnabled = settings?.heroSection?.enabled !== false
+  const kurzyEnabled = settings?.kurzySection?.enabled !== false
+  const ecomEnabled = settings?.ecomSection?.enabled !== false
+  const infoEnabled = settings?.infoSection?.enabled !== false
+
   return (
     <>
       <ScrollToTopOnReload />
-      <HeroSection />
-      <ECom />
-      <Kurzy />
-      <Info />
+      {heroEnabled && <HeroSection />}
+      {ecomEnabled && <ECom />}
+      {kurzyEnabled && <Kurzy />}
+      {infoEnabled && <Info />}
       {/* <Hero />
       <div className="py-12">
         <ul className="flex flex-col gap-x-6">

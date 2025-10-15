@@ -2,12 +2,32 @@
 import Image from "next/image";
 import { Easing, motion, useMotionTemplate, useScroll, useTransform } from "framer-motion";
 import LinkButton from "@modules/common/components/Buttons/LinkButton";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useStateContext } from "@lib/context/StateContext";
+import { client } from "../../../../sanity/lib/client";
+import { urlFor } from "../../../../sanity/lib/image";
 
 export default function IntroHero() {
     const { firstLoad } = useStateContext();
     const ref = useRef<HTMLElement>(null);
+    const [data, setData] = useState<any>(null);
+    const [newsText, setNewsText] = useState<string>("Dovolená | Novinky");
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const introHeroData = await client.fetch('*[_type == "introHero"][0]');
+                const newsTextData = await client.fetch('*[_type == "newsText"][0]');
+                console.log('IntroHero data:', introHeroData);
+                console.log('News text data:', newsTextData);
+                setData(introHeroData);
+                if (newsTextData) setNewsText(newsTextData.text);
+            } catch (error) {
+                console.error('Error fetching IntroHero data:', error);
+            }
+        };
+        fetchData();
+    }, []);
     const { scrollYProgress } = useScroll({
         target: ref,
         offset: ["start start", "end start"]
@@ -130,19 +150,26 @@ export default function IntroHero() {
             </div>
             <div className="Hero__Intro__Header">
                 <div className="Hero__Intro__Header__Title">
-                    <PreciseBlendedText i={4} text="Lucie" delay={0} />
+                    <PreciseBlendedText i={4} text={data?.title1 || "Lucie"} delay={0} />
                 </div>
                 <div className="Hero__Intro__Header__Subtitle">
-                    <PreciseBlendedText i={0} text="Polanská" delay={0.5} />
+                    <PreciseBlendedText i={0} text={data?.title2 || "Polanská"} delay={0.5} />
                 </div>
             </div>
             <div className="Hero__Intro__Content">
                 <div className="Hero__Intro__Content__Text">
-                    <p>
-                        {wordSplit("..za každým mým výrobkem je příběh..", firstLoad)}<br /><br />
-
-                        {wordSplit("Každý výrobek tvořím ručně s respektem k materiálu, času i lidem.", firstLoad)}
-                    </p>
+                    {data?.content ? (
+                        // Sanity data loaded - use textWithBreaks for \n line breaks
+                        <p>
+                            {textWithBreaks(data.content, firstLoad)}
+                        </p>
+                    ) : (
+                        // Fallback - use wordSplit with manual <br /> breaks
+                        <p>
+                            {wordSplit("..za každým mým výrobkem je příběh..", firstLoad)}<br /><br />
+                            {wordSplit("Každý výrobek tvořím ručně s respektem k materiálu, času i lidem.", firstLoad)}
+                        </p>
+                    )}
                 </div>
                 <motion.div 
                     className="Hero__Intro__Content__Button"
@@ -173,7 +200,7 @@ export default function IntroHero() {
                         style={{ height: "100%", width: "100%", position: "relative", transformOrigin: "center center" }}
                     >
                         <Image 
-                            src={"/assets/img/img/2.jpg"}
+                            src={data?.images?.[0] ? urlFor(data.images[0]).url() : "/assets/img/img/2.jpg"}
                             alt="Intro Image"
                             sizes="100dvw"
                             fill={true}
@@ -193,7 +220,7 @@ export default function IntroHero() {
             >
                 <motion.p
                 >
-                    Dovolená | Novinky
+                    {newsText || "Dovolena | Novinky"}
                 </motion.p>
             </motion.div>
             <motion.div 
@@ -210,7 +237,7 @@ export default function IntroHero() {
                         WebkitMaskSize: "100% 100%",
                     }}
                 >
-                    Dovolena | Novinky
+                    {newsText || "Dovolena | Novinky"}
                 </motion.p>
             </motion.div>
         </section>
@@ -287,8 +314,50 @@ const wordSplit = (text: string, firstLoad: boolean) => {
             exit="exit"
             variants={PreloaderAnimText}
             custom={index}
+            style={{ display: "inline-block", whiteSpace: "pre", marginRight: "0.25rem" }}
         >
             {word}
         </motion.span>
+    ));
+}
+
+const textWithBreaks = (text: string, firstLoad: boolean) => {
+    const PreloaderAnimText = {
+        start: {
+            opacity: 0,
+            y: 20,
+        },
+        enter: (i: number) => ({
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 0.5,
+                delay: !firstLoad ? 3 + (i * 0.01) : 0.5 + (i * 0.01),
+                ease: [0.76, 0, 0.24, 1] as Easing,
+            }
+        })
+    }
+
+    // Split by line breaks first, then by spaces
+    return text.split('\n').map((line, lineIndex) => (
+        <span key={lineIndex} style={{ display: "flex", flexWrap: "wrap" }}>
+            {line.split(' ').map((word, wordIndex) => {
+                const globalIndex = lineIndex * 100 + wordIndex; // Simple way to create unique indices
+                return (
+                    <motion.span
+                        key={wordIndex}
+                        initial="start"
+                        animate="enter"
+                        exit="exit"
+                        variants={PreloaderAnimText}
+                        custom={globalIndex}
+                        style={{ display: "inline-block", whiteSpace: "pre" }}
+                    >
+                        {word + " "}
+                    </motion.span>
+                );
+            })}
+            {lineIndex < text.split('\n').length - 1 && <br />}
+        </span>
     ));
 }

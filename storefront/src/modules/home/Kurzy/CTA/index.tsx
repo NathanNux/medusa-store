@@ -4,14 +4,63 @@ import Image from "next/image";
 import { Easing, motion, useInView, useMotionValue, useScroll, useSpring, useTransform } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 import LinkButton from "@modules/common/components/Buttons/LinkButton";
+import { client } from "../../../../sanity/lib/client";
+import { urlFor } from "../../../../sanity/lib/image";
 
 
+const textWithBreaks = (text: string, isInView: boolean) => {
+    const PreloaderAnimText = {
+        start: {
+            opacity: 0,
+            y: 20,
+        },
+        enter: (i: number) => ({
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 0.5,
+                delay: 1.5 + (i * 0.05),
+                ease: [0.76, 0, 0.24, 1] as Easing,
+            }
+        })
+    }
+
+    // Split by line breaks first, then by spaces
+    return text.split('\n').map((line, lineIndex) => (
+        <span key={lineIndex} style={{ display: "inline" }}>
+            {line.split(' ').map((word, wordIndex) => {
+                const globalIndex = lineIndex * 100 + wordIndex; // Simple way to create unique indices
+                return (
+                    <motion.span
+                        key={wordIndex}
+                        animate={isInView ? "enter" : "start"}
+                        variants={PreloaderAnimText}
+                        custom={globalIndex}
+                        style={{ display: "inline-block", whiteSpace: "pre" }}
+                    >
+                        {word + " "}
+                    </motion.span>
+                );
+            })}
+            {lineIndex < text.split('\n').length - 1 && <br />}
+        </span>
+    ));
+};
 
 
 export default function CTA() {
     const ref = useRef<HTMLDivElement>(null);
     const isInView = useInView(ref, { once: true, margin: "-50px", amount: 0.05 });
     const containerRef = useRef<HTMLDivElement>(null);
+    const [data, setData] = useState<any>(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const kurzyCTAData = await client.fetch('*[_type == "kurzyCTA"][0]');
+            setData(kurzyCTAData);
+        };
+        fetchData();
+    }, []);
 
     const { scrollYProgress } = useScroll({
         target: containerRef,
@@ -82,7 +131,7 @@ export default function CTA() {
         if (requestId == null) requestId = requestAnimationFrame(animate);
     };
 
-    const images = [
+    const hardcodedImages = [
         { 
             src: "/assets/img/roller/12v.jpg", 
             alt: "Vertical Prop Image",
@@ -109,6 +158,14 @@ export default function CTA() {
             y: springYRight2
         }
     ];
+
+    // Create images array with Sanity fallback
+    const images = hardcodedImages.map((fallbackImage, index) => ({
+        src: data?.images?.[index] ? urlFor(data.images[index]).url() : fallbackImage.src,
+        alt: fallbackImage.alt,
+        x: fallbackImage.x,
+        y: fallbackImage.y
+    }));
 
     return (
         <section
@@ -154,9 +211,9 @@ export default function CTA() {
             </div>
             <div className="kurzy__cta__content">
                 <div className="kurzy__cta__content__title" ref={ref}>
-                    <h2>Zatím <br /> připravuji</h2>
+                    <h2 dangerouslySetInnerHTML={{ __html: data?.title || "Zatím <br /> připravuji" }} />
                     <p>
-                        {wordSplit(
+                        {data?.content ? textWithBreaks(data.content, isInView) : wordSplit(
                             "„Tvořit rukama znamená odpočívat hlavou.“Spouštím první běhy brzy - každý den v týdnu jiný kurz.  Počet míst je omezen na [X] osob na den. Přihlaste se předem – místa mizí rychle.",
                             isInView
                         )}
@@ -164,7 +221,7 @@ export default function CTA() {
                 </div>
                 <div className="kurzy__cta__content__CTA">
                     <div className="kurzy__cta__content__CTA__button">
-                        <LinkButton href="#Kurzy" text={"Zatím připravuji"} />
+                        <LinkButton href="#Kurzy" text={data?.title || "Zatím připravuji"} />
                     </div>
                     <div className="kurzy__cta__content__CTA__image">
                         <Image

@@ -44,12 +44,25 @@
         justify-content: flex-end;
         flex-direction: column;
         gap: 2.5dvh;
+        gap: 1dvh;
 
         .cta__title{
             font-family: "Sansation-Light";
             color: var(--Wtext);
             font-size: 5rem;
             text-align: center;
+            line-height: 1;
+            font-weight: 300;
+            margin-bottom: 2dvh;
+
+            span {
+                display: block;
+                font-size: inherit;
+                line-height: inherit;
+                color: inherit;
+                font-family: inherit;
+                text-align: inherit;
+            }
 
             @include respond-to-h(lg){
                 font-size: 3.5rem;
@@ -71,18 +84,23 @@
             }
             @include respond-to-v(lg){
                 font-size: 4rem;
+                margin-bottom: 1dvh;
             }
             @include respond-to-v(md){
                 font-size: 3rem;
+                margin-bottom: 1dvh;
             }
             @include respond-to-v(s){
                 font-size: 2.5rem;
+                margin-bottom: 1dvh;
             }
             @include respond-to-v(sm){
                 font-size: 2.5rem;
+                margin-bottom: 1dvh;
             }
             @include respond-to-v(xs){
                 font-size: 2rem;
+                margin-bottom: 1dvh;
             }
 
         }

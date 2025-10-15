@@ -1,7 +1,9 @@
 "use client";
 import { useInView, motion, Easing } from "framer-motion";
 import Image from "next/image";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
+import { client } from "../../../../sanity/lib/client";
+import { urlFor } from "../../../../sanity/lib/image";
 
 export default function Intro () {
     const ref = useRef<HTMLDivElement>(null);
@@ -10,6 +12,15 @@ export default function Intro () {
         margin: "-50px",    
         amount: 0.05,        
     });
+    const [data, setData] = useState<any>(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const ecomIntroData = await client.fetch('*[_type == "ecomIntro"][0]');
+            setData(ecomIntroData);
+        };
+        fetchData();
+    }, []);
 
     const imageAnim = {
         start: {
@@ -49,7 +60,7 @@ export default function Intro () {
             </div>
             <div className="ECom__Intro__Title">
                 <h2>
-                    {charSplit("Vítejte", isInView)}
+                    {charSplit(data?.title1 || "Vítejte", isInView)}
                 </h2>
                 <div className="Hero__Intro__Container">
                     <motion.div 
@@ -61,7 +72,7 @@ export default function Intro () {
                         <div
                             className="Hero__Intro__Img__Container">
                             <Image 
-                                src="/assets/img/img/3.jpg"
+                                src={data?.image ? urlFor(data.image).url() : "/assets/img/img/3.jpg"}
                                 alt="Intro Image"
                                 fill={true}
                                 sizes="40dvw"
@@ -71,19 +82,19 @@ export default function Intro () {
                         </div>
                     </motion.div>
                     <h2>
-                        {charSplit("v Keramické", isInView)}
+                        {charSplit(data?.title2 || "v Keramické", isInView)}
                     </h2>
                 </div>
                 <h2>
-                    {charSplit("Zahradě", isInView)}
+                    {charSplit(data?.title3 || "Zahradě", isInView)}
                 </h2>
             </div>
             <div className="ECom__Intro__Content">
                 <p>
-                    {wordSplit("Objevte svět ručně vyráběné keramiky, kde každý kousek nese osobní příběh, každý výrobek je originál.", isInView)}
+                    {data?.content1 ? textWithBreaks(data.content1, isInView) : wordSplit("Objevte svět ručně vyráběné keramiky, kde každý kousek nese osobní příběh, každý výrobek je originál.", isInView)}
                 </p>
                 <p>
-                    {wordSplit("Přiložené fotografie jsou tak pouze ilustrační...", isInView)}
+                    {data?.content2 ? textWithBreaks(data.content2, isInView) : wordSplit("Přiložené fotografie jsou tak pouze ilustrační...", isInView)}
                 </p>
             </div>
         </section>
@@ -102,9 +113,9 @@ const wordSplit = (text: string, isInView: boolean) => {
             y: 0,
             transition: {
                 duration: 0.5,
-                delay: 1.5 + (i * 0.05),
+                delay: 0.15 + (i * 0.05),
                 ease: [0.76, 0, 0.24, 1] as Easing,
-            } 
+            }
         })
     }
     return text.split(' ').map((word, index) => (
@@ -113,9 +124,49 @@ const wordSplit = (text: string, isInView: boolean) => {
             animate={isInView ? "enter" : "start"}
             variants={PreloaderAnimText}
             custom={index}
+            style={{ display: "inline-block", whiteSpace: "pre", marginRight: "0.25em" }}
         >
             {word}
         </motion.span>
+    ));
+}
+
+const textWithBreaks = (text: string, isInView: boolean) => {
+    const PreloaderAnimText = {
+        start: {
+            opacity: 0,
+            y: 20,
+        },
+        enter: (i: number) => ({
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 0.5,
+                delay: 0.15 + (i * 0.05),
+                ease: [0.76, 0, 0.24, 1] as Easing,
+            }
+        })
+    }
+
+    // Split by line breaks first, then by spaces
+    return text.split('\n').map((line, lineIndex) => (
+        <span key={lineIndex} style={{ display: "inline" }}>
+            {line.split(' ').map((word, wordIndex) => {
+                const globalIndex = lineIndex * 100 + wordIndex; // Simple way to create unique indices
+                return (
+                    <motion.span
+                        key={wordIndex}
+                        animate={isInView ? "enter" : "start"}
+                        variants={PreloaderAnimText}
+                        custom={globalIndex}
+                        style={{ display: "inline-block", whiteSpace: "pre",}}
+                    >
+                        {word + " "}
+                    </motion.span>
+                );
+            })}
+            {lineIndex < text.split('\n').length - 1 && <br />}
+        </span>
     ));
 }
 

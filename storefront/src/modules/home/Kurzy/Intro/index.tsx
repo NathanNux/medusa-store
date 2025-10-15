@@ -3,11 +3,22 @@
 import MouseAnim from "@modules/common/components/MouseAnim";
 import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
 import Image from "next/image";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
+import { client } from "../../../../sanity/lib/client";
+import { urlFor } from "../../../../sanity/lib/image";
 
 export default function Intro() {
     const textRef = useRef<HTMLDivElement>(null);
     const imageRef = useRef<HTMLDivElement>(null);
+    const [data, setData] = useState<any>(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const kurzyIntroData = await client.fetch('*[_type == "kurzyIntro"][0]');
+            setData(kurzyIntroData);
+        };
+        fetchData();
+    }, []);
 
     const { scrollYProgress } = useScroll({
         target: textRef,
@@ -74,7 +85,7 @@ export default function Intro() {
                         </div>
                         <motion.div className="kurzy__intro__title__details__img__inner" style={{ width: image1 }}>
                             <Image
-                                src="/assets/img/img/2.jpg" 
+                                src={data?.images?.[0] ? urlFor(data.images[0]).url() : "/assets/img/img/2.jpg"}
                                 alt="Intro Details"
                                 fill={true}
                                 sizes="50dvw"
@@ -95,7 +106,7 @@ export default function Intro() {
                         </div>
                         <motion.div className="kurzy__intro__title__details__img__inner" style={{ width: image2 }}>
                             <Image
-                                src="/assets/img/img/3.jpg" 
+                                src={data?.images?.[1] ? urlFor(data.images[1]).url() : "/assets/img/img/3.jpg"}
                                 alt="Intro Details"
                                 fill={true}
                                 sizes="50dvw"
@@ -116,7 +127,7 @@ export default function Intro() {
                         </div>
                         <motion.div className="kurzy__intro__title__details__img__inner" style={{ width: image3 }}>
                             <Image
-                                src="/assets/img/img/5.jpg" 
+                                src={data?.images?.[2] ? urlFor(data.images[2]).url() : "/assets/img/img/5.jpg"}
                                 alt="Intro Details"
                                 fill={true}
                                 sizes="50dvw"
@@ -133,7 +144,7 @@ export default function Intro() {
                 <div className="kurzy__intro__content">
                     <div className="kurzy__intro__content__text">
                         <p>
-                            <WordSplit text="Chcete si opravdu vyrobit to, co právě obdivujete v mém krámku? Nebo hledáte nový koníček, který vás přivede k tichu a radosti z vlastních rukou? V mých keramických kurzech vás provedu celým procesem – od výběru hlíny, přes modelaci a práci na kruhu až po glazování a výpal. Přidejte se k malým skupinám, vytvořte si originální kousek a odnesete si domů zážitek, nikoli jen výrobek." scrollYProgress={scrollYProgress} />
+                            <WordSplit text={data?.content || "Chcete si opravdu vyrobit to, co právě obdivujete v mém krámku? Nebo hledáte nový koníček, který vás přivede k tichu a radosti z vlastních rukou? V mých keramických kurzech vás provedu celým procesem – od výběru hlíny, přes modelaci a práci na kruhu až po glazování a výpal. Přidejte se k malým skupinám, vytvořte si originální kousek a odnesete si domů zážitek, nikoli jen výrobek."} scrollYProgress={scrollYProgress} />
                         </p>
                         <div className="kurzy__intro__content__mouse">
                             <MouseAnim />

@@ -3,6 +3,7 @@ import Image from "next/image"
 import { useRef, useEffect, useState } from 'react';
 import { Easing, motion, useInView, useMotionValue, useScroll, useSpring, useTransform } from 'framer-motion';
 import { images } from "constants/images";
+import { client } from "../../../../sanity/lib/client";
 
 export default function AboutHero() {
     const containerRef = useRef<HTMLElement>(null);
@@ -11,6 +12,7 @@ export default function AboutHero() {
     
     // Touch device detection
     const [isTouchDevice, setIsTouchDevice] = useState(false);
+    const [data, setData] = useState<any>(null);
     
     useEffect(() => {
         const checkTouchDevice = () => {
@@ -22,6 +24,14 @@ export default function AboutHero() {
         };
         
         setIsTouchDevice(checkTouchDevice());
+    }, []);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const aboutHeroData = await client.fetch('*[_type == "aboutHero"][0]');
+            setData(aboutHeroData);
+        };
+        fetchData();
     }, []);
 
     const { scrollYProgress } = useScroll({
@@ -213,12 +223,24 @@ export default function AboutHero() {
             >
                 <div className="About__Text__Header">
                     <p>
-                        {wordSplit("Jmenuji se Lucie Polanská, jsem Písecká rodačka, absolventka SPŠ Keramická v Bechyni a máma dvou úžasných dětí. Naplno se keramice věnuji od r.2014.", isInView)}
+                        {data?.content1 ? (
+                            // Sanity data loaded - use textWithBreaks for \n line breaks
+                            textWithBreaks(data.content1, isInView)
+                        ) : (
+                            // Fallback - use wordSplit with manual animation
+                            wordSplit("Jmenuji se Lucie Polanská, jsem Písecká rodačka, absolventka SPŠ Keramická v Bechyni a máma dvou úžasných dětí. Naplno se keramice věnuji od r.2014.", isInView)
+                        )}
                     </p>
                 </div> 
                 <div className="About__Text__Content">
                     <p>
-                        {wordSplit("Svou originální poetikou, přírodním designem a volbou vysoce kvalitních materiálů má keramika osloví každého, kdo hledá výtvarnou i řemeslnou kvalitu.", isInView)}
+                        {data?.content2 ? (
+                            // Sanity data loaded - use textWithBreaks for \n line breaks
+                            textWithBreaks(data.content2, isInView)
+                        ) : (
+                            // Fallback - use wordSplit with manual animation
+                            wordSplit("Svou originální poetikou, přírodním designem a volbou vysoce kvalitních materiálů má keramika osloví každého, kdo hledá výtvarnou i řemeslnou kvalitu.", isInView)
+                        )}
                     </p>
                 </div>
             </div>
@@ -251,5 +273,44 @@ const wordSplit = (text: string, isInView: boolean) => {
         >
             {word}
         </motion.span>
+    ));
+}
+
+const textWithBreaks = (text: string, isInView: boolean) => {
+    const PreloaderAnimText = {
+        start: {
+            opacity: 0,
+            y: 20,
+        },
+        enter: (i: number) => ({
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 0.5,
+                delay: 0.15 + (i * 0.05),
+                ease: [0.76, 0, 0.24, 1] as Easing,
+            }
+        })
+    }
+
+    // Split by line breaks first, then by spaces
+    return text.split('\n').map((line, lineIndex) => (
+        <span key={lineIndex} style={{ display: "inline" }}>
+            {line.split(' ').map((word, wordIndex) => {
+                const globalIndex = lineIndex * 100 + wordIndex; // Simple way to create unique indices
+                return (
+                    <motion.span
+                        key={wordIndex}
+                        animate={isInView ? "enter" : "start"}
+                        variants={PreloaderAnimText}
+                        custom={globalIndex}
+                        style={{ display: "inline-block", whiteSpace: "pre" }}
+                    >
+                        {word + " "}
+                    </motion.span>
+                );
+            })}
+            {lineIndex < text.split('\n').length - 1 && <br />}
+        </span>
     ));
 }

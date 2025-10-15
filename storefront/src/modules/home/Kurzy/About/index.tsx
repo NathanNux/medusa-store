@@ -1,7 +1,9 @@
 "use client";
 import { MotionValue, useScroll, useTransform, motion, useInView, Easing } from "framer-motion";
 import Image from "next/image";
-import { useRef } from "react";
+import {useRef, useState, useEffect } from "react";
+import { client } from "../../../../sanity/lib/client";
+import { urlFor } from "../../../../sanity/lib/image";
 
 export default function About() {
     const section1 = useRef<HTMLDivElement>(null);
@@ -11,6 +13,15 @@ export default function About() {
     const imageRef2 = useRef<HTMLDivElement>(null);
     const imageRef3 = useRef<HTMLDivElement>(null);
     const sectionRef = useRef<HTMLDivElement>(null);
+    const [data, setData] = useState<any>(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const kurzyAboutData = await client.fetch('*[_type == "kurzyAbout"][0]');
+            setData(kurzyAboutData);
+        };
+        fetchData();
+    }, []);
 
     const isInView1 = useInView(imageRef1, { once: true, margin: "-50px", amount: 0.25 });
     const isInView2 = useInView(imageRef2, { once: true, margin: "-50px", amount: 0.25 });
@@ -72,7 +83,7 @@ export default function About() {
                         >
                             <motion.div className="about__container__about__image__inner__img" style={{ y }}>
                                 <Image 
-                                    src={"/assets/img/roller/5h.jpg"}
+                                    src={data?.section1?.image ? urlFor(data.section1.image).url() : "/assets/img/roller/5h.jpg"}
                                     alt="About Image"
                                     fill={true}
                                     priority={true}
@@ -82,10 +93,10 @@ export default function About() {
                         </motion.div>
                     </div>
                     <div className="about__container__about__content">
-                        <h4>Co pro vás připravuji za kurzy</h4>
+                        <h4>{data?.section1?.title || "Co pro vás připravuji za kurzy"}</h4>
                         <p>
                             <WordSplit 
-                                text="Přesně proto jsem vytvořila kurz, kde vás provedu celým procesem – od výběru hlíny, přes modelování a točení na kruhu, až po glazování a výpal."
+                                text={data?.section1?.content || "Přesně proto jsem vytvořila kurz, kde vás provedu celým procesem – od výběru hlíny, přes modelování a točení na kruhu, až po glazování a výpal."}
                                 scrollYProgress={thirdScrollYProgress}
                             />
                         </p>
@@ -102,7 +113,7 @@ export default function About() {
                         >
                             <motion.div className="about__container__images__image__inner__img" style={{ y }}>
                                 <Image
-                                    src={"/assets/img/img/3.jpg"}
+                                    src={data?.section2?.image1 ? urlFor(data.section2.image1).url() : "/assets/img/img/3.jpg"}
                                     alt="About Image"
                                     fill={true}
                                     priority={true}
@@ -121,7 +132,7 @@ export default function About() {
                         >
                             <motion.div className="about__container__images__image__inner__img" style={{ y}}>
                                 <Image
-                                    src={"/assets/img/roller/1h.jpg"}
+                                    src={data?.section2?.image2 ? urlFor(data.section2.image2).url() : "/assets/img/roller/1h.jpg"}
                                     alt="About Image"
                                     fill={true}
                                     priority={true}
@@ -135,11 +146,10 @@ export default function About() {
                 <div className="about__container__text__container" ref={section2}>
                     <div className="about__container__text">
                         <div className="about__container__text__content">
-                            <h4>Co pro vás připravuji za kurzy</h4>
+                            <h4>{data?.section3?.title || "Co pro vás připravuji za kurzy"}</h4>
                             <p>
                                 <WordSplit 
-                                    text="Každý účastník si domů odnese svůj výtvor – hrnek, misku, nebo misku s pokličkou – podle tématu kurzu. Naučíte se nejen techniku, ale hlavně získáte pocit: „Tohle jsem zvládl/a já.“
-                                    Kurzy jsou vedené v malých skupinkách, abych se mohla každému věnovat. Můžete přijít sami, nebo s kamarádkou – u čaje a hlíny se tvoří nejen keramika, ale i nové přátelství."
+                                    text={data?.section3?.content || `Každý účastník si domů odnese svůj výtvor – hrnek, misku, nebo misku s pokličkou – podle tématu kurzu. Naučíte se nejen techniku, ale hlavně získáte pocit: „Tohle jsem zvládl/a já“. Kurzy jsou vedené v malých skupinkách, abych se mohla každému věnovat. Můžete přijít sami, nebo s kamarádkou – u čaje a hlíny se tvoří nejen keramika, ale i nové přátelství.`}
                                     scrollYProgress={secondScrollYProgress}
                                 />
                             </p>
@@ -152,8 +162,8 @@ export default function About() {
                                 className="about__container__text__image__inner"
                             >
                                 <motion.div className="about__container__text__image__inner__img" style={{ y }}>
-                                    <Image 
-                                        src={"/assets/img/roller/14h.jpg"}
+                                    <Image
+                                        src={data?.section3?.image ? urlFor(data.section3.image).url() : "/assets/img/roller/14h.jpg"}
                                         alt="About Image"
                                         fill={true}
                                         priority={true}
@@ -264,7 +274,7 @@ const Word = ({ scrollYProgress, children, range }: { scrollYProgress: MotionVal
 
     const opacity = useTransform(scrollYProgress, range, [0.25, 1]);
     return (
-        <motion.span style={{ display: "inline-block", whiteSpace: "pre", opacity }}>
+        <motion.span style={{ display: "inline-block", whiteSpace: "pre", opacity, height: "fit-content" }}>
             {children}
         </motion.span>
     );
