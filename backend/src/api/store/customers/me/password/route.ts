@@ -1,5 +1,6 @@
 import type { AuthenticatedMedusaRequest, MedusaResponse } from "@medusajs/framework/http"
 import { Modules } from "@medusajs/framework/utils"
+import Medusa from "@medusajs/js-sdk"
 
 type Body = {
   old_password: string
@@ -22,8 +23,9 @@ export const POST = async (
   }
 
   try {
-    const auth = req.scope.resolve(Modules.AUTH)
-    const customerModule = req.scope.resolve(Modules.CUSTOMER)
+  const auth = req.scope.resolve(Modules.AUTH)
+  const customerModule = req.scope.resolve(Modules.CUSTOMER)
+  const config = req.scope.resolve("configModule") as any
 
     // Load customer for email
     const [customer] = await customerModule.listCustomers({ id: customerId })
@@ -41,14 +43,44 @@ export const POST = async (
       return res.status(400).json({ message: "Staré heslo není správné" })
     }
 
-    // 2. Spusť resetPassword flow (vygeneruje token a pošle email)
-    const resetResult = await (auth as any).resetPassword("customer", "emailpass", { identifier: customer.email })
-    if (!resetResult?.token) {
-      return res.status(500).json({ message: "Nepodařilo se vygenerovat token pro změnu hesla." })
-    }
+    // 2. Získej reset token z interní token route (ta umlčí e‑mail a uloží token)
+    const backendBase = config?.admin?.backendUrl && config.admin.backendUrl !== "/"
+      ? config.admin.backendUrl
+      : process.env.BACKEND_URL || "http://localhost:9000"
 
-    // 3. Proveď updateProvider s tokenem (změna hesla)
-    await (auth as any).updateProvider("customer", "emailpass", { password: new_password }, resetResult.token)
+    const pkHeader = req.headers["x-publishable-api-key"] || req.headers["x-publishable-key"]
+
+    const tokenRes = await fetch(`${backendBase}/store/customers/me/password/token`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        authorization: req.headers.authorization || "",
+        ...(pkHeader ? { "x-publishable-api-key": String(pkHeader), "x-publishable-key": String(pkHeader) } : {}),
+      },
+      body: JSON.stringify({ old_password }),
+    })
+    if (!tokenRes.ok) {
+      const data = await tokenRes.json().catch(() => ({} as any))
+      return res.status(tokenRes.status).json({ message: data?.message || "Nepodařilo se získat token." })
+    }
+    const { token } = await tokenRes.json()
+
+    // 3. Aktualizuj heslo přes JS SDK: sdk.auth.updateProvider("customer", "emailpass", { email, password }, token)
+    const pk = (pkHeader as string) || process.env.MEDUSA_PUBLISHABLE_KEY || process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY || ""
+    const sdk = new Medusa({ baseUrl: backendBase, publishableKey: pk })
+
+    try {
+      await sdk.auth.updateProvider(
+        "customer",
+        "emailpass",
+        { email: customer.email, password: new_password },
+        token
+      )
+    } catch (e: any) {
+      const message = e?.message || "Nepodařilo se změnit heslo."
+      // 400 pro očekávané chyby, jinak 500
+      return res.status(e?.status || 400).json({ message })
+    }
 
     return res.json({ ok: true })
   } catch (e: any) {
